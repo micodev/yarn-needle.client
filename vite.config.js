@@ -12,6 +12,7 @@ export default defineConfig({
     vueJsx(),
     vueDevTools(),
   ],
+  base: '/yarn-needle.client/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
