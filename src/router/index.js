@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AppLayout from '@/layout/AppLayout.vue'
 import CourseView from '@/views/CourseView.vue'
@@ -6,7 +6,7 @@ import CourseView from '@/views/CourseView.vue'
 const base = '/yarn-needle.client';
 
 const router = createRouter({
-  history: createWebHistory(base),
+  history: createWebHashHistory(base),
   routes: [
     {
       path: '/',
