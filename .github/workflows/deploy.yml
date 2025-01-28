@@ -1,0 +1,38 @@
+# Create the deploy.yml file inside .github/workflows
+$workflowContent = @"
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js (if needed)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies (if needed)
+        run: npm install
+
+      - name: Build the project (if needed)
+        run: npm run build
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: \${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+"@
+
+# Save the content to the file
+$workflowContent | Out-File -FilePath ".github\workflows\deploy.yml" -Force
