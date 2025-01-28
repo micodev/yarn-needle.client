@@ -2,8 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AppLayout from '@/layout/AppLayout.vue'
 import CourseView from '@/views/CourseView.vue'
+
+const base = import.meta.env.MODE === 'production' ? '/yarn-needle.client/' : '/';
+
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(base),
   routes: [
     {
       path: '/',
