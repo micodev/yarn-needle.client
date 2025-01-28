@@ -1,0 +1,8 @@
+@import './assets/tailwind.css';
+@import './assets/base.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700&display=swap');
+/* use Almari font */
+body {
+  font-family: 'Almarai', sans-serif;
+}
