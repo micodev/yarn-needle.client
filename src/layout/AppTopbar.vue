@@ -34,8 +34,8 @@
         <div class="flex items-center gap-2">
 
           <Button :icon="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'" @click="toggleDarkMode" class="h-10" />
-          <Button label="تسجيل الدخول" class="h-10" />
-          <!-- <InputText placeholder="Search" type="text"  /> -->
+          <RegisterForm />
+
           <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
         </div>
       </template>
@@ -53,6 +53,7 @@ import { Button } from "primevue";
 import { Badge } from "primevue";
 import { InputGroup } from "primevue";
 import { InputGroupAddon } from "primevue";
+import RegisterForm from "@/components/RegisterForm.vue";
 const items = ref([
   {
     label: 'الدورات',
