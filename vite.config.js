@@ -43,7 +43,9 @@ export default defineConfig({
             minute: '2-digit',
             second: '2-digit'
           });
-          const gitCommand = `git add . && git commit -m "Auto commit - ${formattedDate}" && git push origin main`;
+          // Get relative file path for cleaner commit message
+          const relativePath = file.replace(process.cwd(), '').replace(/\\/g, '/');
+          const gitCommand = `git add . && git commit -m "Modified ${relativePath} - ${formattedDate}" && git push origin main`;
           exec(gitCommand, { maxBuffer: 1024 * 1024 }, (err, stdout, stderr) => {
             if (err) {
               console.error(`Git operation failed: ${stderr}`);
