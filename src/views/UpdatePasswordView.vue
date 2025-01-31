@@ -5,7 +5,3 @@
 <script setup>
 import NewOldPassword from '@/components/NewOldPassword.vue';
 </script>
-
-<style scoped>
-
-</style>
