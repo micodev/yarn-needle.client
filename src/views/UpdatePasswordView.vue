@@ -7,5 +7,5 @@ import NewOldPassword from '@/components/NewOldPassword.vue';
 </script>
 
 <style scoped>
-/* No custom CSS needed */
+
 </style>

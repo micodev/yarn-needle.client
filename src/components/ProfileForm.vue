@@ -11,12 +11,12 @@
         { 'hover:scale-105': !isSubscriptionExpanded }
       ]">
         <!-- Header with collapse button -->
-        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700"
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center cursor-pointer hover: bg-white dark:hover:bg-gray-700"
              @click="toggleCollapse">
           <h2 class="text-xl font-bold text-gray-900 dark:text-white">معلومات العضوية</h2>
           <i :class="[
             'pi transition-transform duration-300',
-            isSubscriptionExpanded ? 'pi-chevron-up rotate-0' : 'pi-chevron-down rotate-180'
+            isSubscriptionExpanded ? 'pi-chevron-up rotate-0' : 'pi-chevron-up rotate-180'
           ]"></i>
         </div>
 
