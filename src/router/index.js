@@ -4,6 +4,7 @@ import AppLayout from '@/layout/AppLayout.vue'
 import CourseView from '@/views/CourseView.vue'
 import UpdatePasswordView from '@/views/UpdatePasswordView.vue'
 import ProfileView from '@/views/ProfileView.vue'
+import RoutesList from '@/components/RoutesList.vue'
 
 const base = '/yarn-needle.client';
 
@@ -33,6 +34,11 @@ const router = createRouter({
           path: '/profile',
           name: 'Profile',
           component: ProfileView
+        },
+        {
+          path: '/routes',
+          name: 'RoutesList',
+          component: RoutesList
         }
       ],
     },

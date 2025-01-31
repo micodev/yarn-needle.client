@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build-and-push": "git add . && git commit -m \"Auto commit\" && git push origin main",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
