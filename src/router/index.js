@@ -2,6 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AppLayout from '@/layout/AppLayout.vue'
 import CourseView from '@/views/CourseView.vue'
+import UpdatePasswordView from '@/views/UpdatePasswordView.vue'
+import ProfileView from '@/views/ProfileView.vue'
 
 const base = '/yarn-needle.client';
 
@@ -21,6 +23,16 @@ const router = createRouter({
           path: '/course/:id',
           name: 'course',
           component: CourseView,
+        },
+        {
+          path: '/update-password',
+          name: 'UpdatePassword',
+          component: UpdatePasswordView
+        },
+        {
+          path: '/profile',
+          name: 'Profile',
+          component: ProfileView
         }
       ],
     },
