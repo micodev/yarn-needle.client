@@ -1,5 +1,7 @@
 import { fileURLToPath, URL } from 'node:url'
 import { exec } from 'node:child_process'
+import { existsSync, unlinkSync } from 'node:fs'
+import { join } from 'node:path'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -18,8 +20,29 @@ export default defineConfig({
       configureServer(server) {
         server.watcher.on('change', (file) => {
           console.log(`File changed: ${file}`);
-          const timestamp = new Date().toISOString();
-          const gitCommand = `git add . && git commit -m "Auto commit - ${timestamp}" && git push origin main`;
+
+          // Check and remove git lock if exists
+          const gitLockPath = join(process.cwd(), '.git', 'index.lock');
+          if (existsSync(gitLockPath)) {
+            try {
+              unlinkSync(gitLockPath);
+              console.log('Removed existing git lock file');
+            } catch (error) {
+              console.error('Failed to remove git lock file:', error);
+              return;
+            }
+          }
+
+          const date = new Date();
+          const formattedDate = date.toLocaleString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+          });
+          const gitCommand = `git add . && git commit -m "Auto commit - ${formattedDate}" && git push origin main`;
           exec(gitCommand, { maxBuffer: 1024 * 1024 }, (err, stdout, stderr) => {
             if (err) {
               console.error(`Git operation failed: ${stderr}`);
