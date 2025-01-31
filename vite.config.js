@@ -18,7 +18,8 @@ export default defineConfig({
       configureServer(server) {
         server.watcher.on('change', (file) => {
           console.log(`File changed: ${file}`);
-          const gitCommand = 'git add . && git commit -m "Auto commit" && git push origin main';
+          const timestamp = new Date().toISOString();
+          const gitCommand = `git add . && git commit -m "Auto commit - ${timestamp}" && git push origin main`;
           exec(gitCommand, { maxBuffer: 1024 * 1024 }, (err, stdout, stderr) => {
             if (err) {
               console.error(`Git operation failed: ${stderr}`);
