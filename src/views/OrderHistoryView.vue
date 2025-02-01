@@ -4,20 +4,9 @@
       <h1 class="text-2xl font-bold">تاريخ الطلبات</h1>
     </div>
 
-    <div :class="[
-      'grid gap-4',
-      {
-        'grid-cols-1': filteredOrders.length === 1 || filteredOrders.length > 4,
-        'grid-cols-2': filteredOrders.length === 2 || filteredOrders.length === 4,
-        'grid-cols-3': filteredOrders.length === 3
-      },
-      {
-        'md:grid-cols-2': filteredOrders.length > 2,
-        'lg:grid-cols-3': filteredOrders.length > 3
-      }
-    ]">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <Card
-        v-for="order in filteredOrders"
+        v-for="order in orders"
         :key="order.id"
         class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700"
       >
@@ -80,7 +69,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { Card, Button } from 'primevue'
 
 const orders = ref([
@@ -115,12 +104,6 @@ const orders = ref([
     price: 299.99
   }
 ])
-
-// Custom computed property for filtered orders
-const filteredOrders = computed(() => {
-  return orders.value.slice(0, 9) // Example: limit to 6 orders
-  // You can add more filtering logic here
-})
 
 const formatDate = (date) => {
   return new Intl.DateTimeFormat('ar', {
