@@ -23,10 +23,10 @@
             </InputGroupAddon>
           </InputGroup>
         </div>
-        <div class="flex gap-2">
+        <!-- <div class="flex gap-2">
           <Button label="تصفية" icon="pi pi-filter" />
           <Button label="ترتيب" icon="pi pi-sort" severity="secondary" />
-        </div>
+        </div> -->
       </div>
 
       <!-- Course Cards Grid -->
