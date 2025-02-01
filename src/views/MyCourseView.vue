@@ -60,7 +60,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { Button, Tag } from 'primevue';
+import { Button } from 'primevue';
 
 // Sample data for purchased courses
 const myCourses = ref([
@@ -89,11 +89,7 @@ const myCourses = ref([
   // Add more courses as needed
 ]);
 
-const getProgressSeverity = (progress) => {
-  if (progress < 30) return 'warning';
-  if (progress < 70) return 'info';
-  return 'success';
-};
+
 </script>
 
 <style scoped>
