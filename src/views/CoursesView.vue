@@ -23,7 +23,7 @@
             </InputGroupAddon>
           </InputGroup>
         </div>
-        <div class="flex gap-2 overflow-x-auto pb-2 sm:pb-0 w-full md:w-1/2">
+        <div class="flex gap-2 overflow-x-auto pb-2 sm:pb-0 w-full md:w-1/2 justify-end">
           <Button label="فرز" icon="pi pi-filter" @click="toggleLevel"
                   :class="{ 'p-button-info': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration }"
                   class="whitespace-nowrap" />
