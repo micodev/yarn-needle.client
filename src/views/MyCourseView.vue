@@ -96,7 +96,7 @@ const generateCourses = (count) => {
   return courses;
 };
 
-const myCourses = ref(generateCourses(6)); // Generate 6 courses initially
+const myCourses = ref(generateCourses(10)); // Generate 6 courses initially
 
 
 </script>
