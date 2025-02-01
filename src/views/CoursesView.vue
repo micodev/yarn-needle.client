@@ -24,6 +24,20 @@
           </InputGroup>
         </div>
         <div class="flex gap-2">
+          <Button label="المستوى" icon="pi pi-filter" @click="toggleLevel"
+                  :class="{ 'p-button-info': levelFilter }" />
+          <Popover ref="levelPopover" appendTo="body">
+            <div class="flex flex-col gap-2 p-3 min-w-[250px]">
+              <span class="font-medium block mb-2">اختر المستوى</span>
+              <Select v-model="levelFilter"
+                      :options="levelOptions"
+                      optionLabel="name"
+                      optionValue="value"
+                      placeholder="جميع المستويات"
+                      class="w-full" />
+            </div>
+          </Popover>
+
           <Button label="ترتيب" :icon="selectedSort?.icon || 'pi pi-sort'" @click="toggleSort"
                   severity="secondary" :class="{ 'p-button-info': selectedSort }" />
           <Popover ref="sortPopover" appendTo="body">
@@ -96,7 +110,7 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { Button, Popover } from "primevue";
+import { Button, Popover, Select } from "primevue";
 import { InputText, InputGroup, InputGroupAddon } from "primevue";
 
 const searchQuery = ref("");
@@ -119,6 +133,20 @@ const selectSort = (option) => {
   sortPopover.value.hide();
 };
 
+const levelFilter = ref(null);
+const levelPopover = ref();
+
+const levelOptions = ref([
+  { name: 'جميع المستويات', value: null },
+  { name: 'مبتدئ', value: 'beginner' },
+  { name: 'متوسط', value: 'intermediate' },
+  { name: 'متقدم', value: 'advanced' }
+]);
+
+const toggleLevel = (event) => {
+  levelPopover.value.toggle(event);
+};
+
 const courses = ref([
   {
     id: 1,
@@ -128,6 +156,7 @@ const courses = ref([
     originalPrice: "299",
     rating: 4.8,
     students: 1234,
+    level: 'beginner',
     currency: "ريال سعودي"
   },
   {
@@ -140,6 +169,7 @@ const courses = ref([
     discount: 25,
     rating: 4.9,
     students: 856,
+    level: 'advanced',
     currency: "ريال سعودي"
   },
   {
@@ -150,6 +180,7 @@ const courses = ref([
     originalPrice: "499",
     rating: 4.7,
     students: 2156,
+    level: 'intermediate',
     currency: "ريال سعودي"
   },
   {
@@ -162,6 +193,7 @@ const courses = ref([
     discount: 20,
     rating: 4.6,
     students: 1567,
+    level: 'advanced',
     currency: "ريال سعودي"
   },
   {
@@ -172,6 +204,7 @@ const courses = ref([
     originalPrice: "199",
     rating: 4.5,
     students: 989,
+    level: 'beginner',
     currency: "ريال سعودي"
   }
 ]);
@@ -181,8 +214,9 @@ for (let i = 0; i < 3; i++) {
 }
 const filteredCourses = computed(() => {
   let result = courses.value.filter(course =>
-    course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    course.description.toLowerCase().includes(searchQuery.value.toLowerCase())
+    (course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    course.description.toLowerCase().includes(searchQuery.value.toLowerCase())) &&
+    (!levelFilter.value || course.level === levelFilter.value)
   );
 
   if (selectedSort.value) {
@@ -226,5 +260,14 @@ const filteredCourses = computed(() => {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+:deep(.p-dropdown) {
+  width: 100%;
+  direction: rtl;
+}
+
+:deep(.p-dropdown-panel) {
+  direction: rtl;
 }
 </style>
