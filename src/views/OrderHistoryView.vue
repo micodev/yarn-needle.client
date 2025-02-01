@@ -16,7 +16,7 @@
             <span class="text-primary font-bold">{{ formatPrice(order.price) }} SAR</span>
           </div>
         </template>
-        <div class="space-y-3">
+        <template #title>
           <div class="flex items-start">
             <span class="mr-2">🛒</span>
             <div>
@@ -24,28 +24,31 @@
               <span class="ml-1">{{ order.title }}</span>
             </div>
           </div>
+        </template>
+        <template #content>
+          <div class="space-y-3">
+            <div class="flex items-center">
+              <span class="mr-2">📅</span>
+              <span>{{ formatDate(order.date) }}</span>
+            </div>
 
-          <div class="flex items-center">
-            <span class="mr-2">📅</span>
-            <span>{{ formatDate(order.date) }}</span>
-          </div>
+            <div class="flex items-center">
+              <span class="mr-2">{{ getOrderStateEmoji(order.orderState) }}</span>
+              <span class="font-medium">Order State:</span>
+              <span :class="getOrderStateClass(order.orderState)" class="ml-2">
+                {{ order.orderState }}
+              </span>
+            </div>
 
-          <div class="flex items-center">
-            <span class="mr-2">{{ getOrderStateEmoji(order.orderState) }}</span>
-            <span class="font-medium">Order State:</span>
-            <span :class="getOrderStateClass(order.orderState)" class="ml-2">
-              {{ order.orderState }}
-            </span>
+            <div class="flex items-center">
+              <span class="mr-2">💳</span>
+              <span class="font-medium">Payment State:</span>
+              <span :class="getPaymentStateClass(order.paymentState)" class="ml-2">
+                {{ order.paymentState }}
+              </span>
+            </div>
           </div>
-
-          <div class="flex items-center">
-            <span class="mr-2">💳</span>
-            <span class="font-medium">Payment State:</span>
-            <span :class="getPaymentStateClass(order.paymentState)" class="ml-2">
-              {{ order.paymentState }}
-            </span>
-          </div>
-        </div>
+        </template>
       </Card>
     </div>
   </div>
