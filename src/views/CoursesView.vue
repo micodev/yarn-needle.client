@@ -19,7 +19,7 @@
           <InputGroup >
             <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..."  type="text" size="small" />
             <InputGroupAddon>
-              <Button  icon="pi pi-search"  severity="secondary" variant="text" />
+              <Button  icon="pi pi-search" size="small" severity="secondary" variant="text" />
             </InputGroupAddon>
           </InputGroup>
         </div>
