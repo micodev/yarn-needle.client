@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white dark:bg-gray-900">
     <!-- Banner Section -->
-    <div class="relative h-[200px] w-full">
+    <div class="relative h-[150px] sm:h-[200px] w-full">
       <img src="https://images.unsplash.com/photo-1584992236310-6edddc08acff?q=80&w=1200&h=300&fit=crop" alt="Banner" class="w-full h-full object-cover" />
       <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <div class="text-center text-white p-6 max-w-2xl">
@@ -12,10 +12,10 @@
     </div>
 
     <!-- Filters and Search Section -->
-    <div class="container mx-auto px-4 py-8">
-      <div class="flex flex-col md:flex-row gap-4 mb-8 justify-between ">
+    <div class="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
+      <div class="flex flex-col gap-3 mb-4 sm:mb-8">
 
-        <div class="flex-1 md:max-w-md">
+        <div class="w-full">
           <InputGroup >
             <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..."  type="text" size="small" />
             <InputGroupAddon class="h-9">
@@ -23,11 +23,12 @@
             </InputGroupAddon>
           </InputGroup>
         </div>
-        <div class="flex gap-2">
+        <div class="flex gap-2 overflow-x-auto pb-2 sm:pb-0">
           <Button label="فرز" icon="pi pi-filter" @click="toggleLevel"
-                  :class="{ 'p-button-info': levelFilter }" />
-          <Popover ref="FilterPopOver" appendTo="body">
-            <div class="flex flex-col gap-4 p-3 min-w-[300px]">
+                  :class="{ 'p-button-info': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration }"
+                  class="whitespace-nowrap" />
+          <Popover ref="FilterPopOver" appendTo="body" class="w-full sm:w-auto">
+            <div class="flex flex-col gap-4 p-4 min-w-[300px] max-h-[80vh] overflow-y-auto">
               <div>
                 <span class="font-medium block mb-2">المجال</span>
                 <Select v-model="categoryFilter"
@@ -125,7 +126,8 @@
           </Popover>
 
           <Button label="ترتيب" :icon="selectedSort?.icon || 'pi pi-sort'" @click="toggleSort"
-                  severity="secondary" :class="{ 'p-button-info': selectedSort }" />
+                  severity="secondary" :class="{ 'p-button-info': selectedSort }"
+                  class="whitespace-nowrap" />
           <Popover ref="sortPopover" appendTo="body">
             <div class="flex flex-col gap-2">
               <ul class="list-none p-0 m-0 flex flex-col justify-start">
@@ -151,11 +153,11 @@
 
       <!-- Course Cards Grid -->
       <div v-if="filteredCourses.length > 0"
-           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8 relative">
+           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 mb-4 sm:mb-8 relative">
         <div v-for="(course) in filteredCourses" :key="course.id"
           class="card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full bg-white dark:bg-gray-800 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
           <div class="relative">
-            <img :src="course.image" :alt="course.title" class="w-full h-48 object-cover rounded" />
+            <img :src="course.image" :alt="course.title" class="w-full h-36 sm:h-48 object-cover rounded" />
             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/60 via-100% to-surface-0 to-80% opacity-100 dark:via-gray-100/[0.2] dark:to-gray-800">
             </div>
             <div class="relative w-full flex flex-col justify-center items-center rounded-md p-1">
@@ -175,7 +177,7 @@
               </div>
             </div>
           </div>
-          <div class="flex justify-between p-4 flex-col mt-auto">
+          <div class="flex justify-between p-3 sm:p-4 flex-col mt-auto">
             <div class="flex flex-col items-center mb-2">
               <p class="text-gray-500 dark:text-gray-400 line-through text-xs mb-1" v-if="course.discount">
                 {{ course.originalPrice }} ريال سعودي
@@ -193,7 +195,7 @@
       </div>
 
       <!-- No Results Message -->
-      <div v-else class="flex flex-col items-center justify-center py-16 px-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+      <div v-else class="flex flex-col items-center justify-center py-8 sm:py-16 px-3 sm:px-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
         <i class="pi pi-search-minus text-4xl mb-4 text-gray-400"></i>
         <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">لا توجد نتائج</h3>
         <p class="text-gray-600 dark:text-gray-400 text-center mb-4">
@@ -457,5 +459,21 @@ const filteredCourses = computed(() => {
 
 :deep(.p-slider .p-slider-range) {
   background: var(--primary-color);
+}
+
+/* Mobile-specific styles */
+@media (max-width: 640px) {
+  :deep(.p-popover) {
+    max-width: calc(100vw - 2rem) !important;
+    margin: 0 1rem;
+  }
+
+  :deep(.p-popover .p-popover-content) {
+    padding: 1rem;
+  }
+
+  .card {
+    max-width: 100%;
+  }
 }
 </style>
