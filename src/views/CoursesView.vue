@@ -151,7 +151,7 @@
               </div>
             </div>
           </div>
-          <div class="flex justify-between p-3 sm:p-4 flex-col mt-auto bg-white dark:bg-gray-800 rounded-b-lg">
+          <div class="flex justify-between p-3 sm:p-4 flex-col mt-auto bg-white dark:bg-slate-800 rounded-b-lg">
             <div class="flex flex-col items-center mb-2">
               <p class="text-gray-500 dark:text-gray-400 line-through text-xs mb-1" v-if="course.discount"
                 v-tooltip="'ريال سعودي'">
