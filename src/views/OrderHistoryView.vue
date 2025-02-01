@@ -118,7 +118,7 @@ const orders = ref([
 
 // Custom computed property for filtered orders
 const filteredOrders = computed(() => {
-  return orders.value.slice(0, 6) // Example: limit to 6 orders
+  return orders.value.slice(0, 9) // Example: limit to 6 orders
   // You can add more filtering logic here
 })
 
