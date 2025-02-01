@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white dark:bg-gray-900">
     <!-- Banner Section -->
-    <div class="relative h-[150px] sm:h-[200px] w-full"></div>
+    <div class="relative h-[150px] sm:h-[200px] w-full">
       <img src="https://images.unsplash.com/photo-1584992236310-6edddc08acff?q=80&w=1200&h=300&fit=crop" alt="Banner" class="w-full h-full object-cover" />
       <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <div class="text-center text-white p-6 max-w-2xl">
