@@ -7,6 +7,7 @@ import ProfileView from '@/views/ProfileView.vue'
 import RoutesList from '@/components/RoutesList.vue'
 import CoursesView from '../views/CoursesView.vue'
 import OrderHistoryView from '../views/OrderHistoryView.vue'
+import MyCourseView from '../views/MyCourseView.vue'
 
 const base = '/yarn-needle.client';
 
@@ -51,6 +52,15 @@ const router = createRouter({
           path: '/order-history',
           name: 'OrderHistory',
           component: OrderHistoryView
+        },
+        {
+          path: '/my-courses',
+          name: 'my-courses',
+          component: MyCourseView,
+          meta: {
+            requiresAuth: true,
+            title: 'My Courses'
+          }
         }
       ],
     },
@@ -63,6 +73,15 @@ const router = createRouter({
     //   component: () => import('../views/AboutView.vue'),
     // },
   ],
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    // Add your authentication check logic here
+    // Example: const isAuthenticated = checkAuthStatus()
+    // if (!isAuthenticated) return next('/login')
+  }
+  next()
 })
 
 export default router
