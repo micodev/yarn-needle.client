@@ -1,5 +1,5 @@
 <template>
-  <div class="hero-section flex flex-col md:flex-row items-center py-16 px-4 md:px-16">
+  <div class="hero-section flex flex-col md:flex-row items-center py-16 px-4 md:px-16 bg-white dark:bg-gray-900">
     <div class="md:w-1/2 p-4">
       <img src="https://placehold.co/600x400" alt="Illustrative placeholder" class="w-full" />
     </div>
@@ -13,7 +13,7 @@
       </div>
     </div>
   </div>
-  <div class="features-section py-1 px-4 md:px-16">
+  <div class="features-section py-1 px-4 md:px-16 bg-white dark:bg-gray-900">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       <div class="feature text-center p-4">
         <i class="pi pi-search text-4xl mb-4 text-primary"></i>
@@ -37,19 +37,19 @@
       </div>
     </div>
   </div>
-  <div class="latest-courses-section py-16 px-4 md:px-16">
+  <div class="latest-courses-section py-16 px-4 md:px-16 bg-white dark:bg-gray-900">
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">أحدث الدورات التدريبية</h2>
       <p class="text-lg text-gray-600 dark:text-gray-400">دورات مصممة لتطوير مهاراتك في مجالات متعددة</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 relative">
       <div v-for="(course, index) in paddedCourses" :key="course.title"
-        :class="['card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full', 'bg-surface-card dark:bg-surface-card']">
+        :class="['card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full', 'bg-white dark:bg-gray-800' ]">
         <div class="relative">
           <img :src="course.image" alt="Course Image" class="w-full rounded" />
           <!-- gradient-->
           <div
-            class="absolute inset-0 bg-gradient-to-b from-transparent via-surface-card/[0.5] via-20% to-surface-card to-70% opacity-100">
+            class="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.5] via-20% to-surface-0 to-70% opacity-100 dark:via-gray-100/[0.2] dark:to-gray-800">
           </div>
           <div
             class="relative w-full flex flex-col justify-center items-center rounded-md p-2">
@@ -85,7 +85,7 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
       <div v-for="plan in plans" :key="plan.title"
-        class="plan-card p-6 rounded-lg shadow-md bg-surface-card dark:bg-surface-card flex flex-col justify-between h-full">
+        class="plan-card p-6 rounded-lg shadow-md bg-white dark:bg-gray-800 flex flex-col justify-between h-full">
         <div>
           <div class="flex items-center mb-4">
             <i :class="plan.iconClass" class="text-lg ml-3"></i>
@@ -197,50 +197,3 @@ const plans = ref([
   }
 ]);
 </script>
-
-<style scoped>
-.hero-section,
-.features-section,
-.latest-courses-section {
-  background-color: var(--p-background-color);
-  color: var(--p-text-color);
-}
-
-.hero-section {
-  background-color: var(--p-surface-0);
-  color: var(--p-text-color);
-}
-
-.features-section, .latest-courses-section {
-  background-color: var(--p-surface-0);
-  color: var(--p-text-color);
-}
-
-:deep(.text-gray-900) {
-  color: var(--p-text-color);
-}
-
-:deep(.text-gray-700) {
-  color: var(--p-text-muted-color);
-}
-
-:deep(.text-gray-600) {
-  color: var(--p-text-muted-color);
-}
-
-:deep(.bg-surface-card) {
-  background-color: var(--p-card-background);
-}
-
-:deep(.dark\:bg-surface-card) {
-  background-color: var(--p-card-background);
-}
-
-:deep(.dark\:text-gray-100) {
-  color: var(--p-text-color);
-}
-
-:deep(.dark\:text-gray-300) {
-  color: var(--p-text-muted-color);
-}
-</style>
