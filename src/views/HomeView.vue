@@ -1,5 +1,5 @@
 <template>
-  <div class="hero-section flex flex-col md:flex-row items-center py-16 px-4 md:px-16 bg-white dark:bg-gray-900">
+  <div class="hero-section flex flex-col md:flex-row items-center py-16 px-4 md:px-16">
     <div class="md:w-1/2 p-4">
       <img src="https://placehold.co/600x400" alt="Illustrative placeholder" class="w-full" />
     </div>
@@ -13,7 +13,7 @@
       </div>
     </div>
   </div>
-  <div class="features-section py-1 px-4 md:px-16 bg-white dark:bg-gray-900">
+  <div class="features-section py-1 px-4 md:px-16">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       <div class="feature text-center p-4">
         <i class="pi pi-search text-4xl mb-4 text-primary"></i>
@@ -37,7 +37,7 @@
       </div>
     </div>
   </div>
-  <div class="latest-courses-section py-16 px-4 md:px-16 bg-white dark:bg-gray-900">
+  <div class="latest-courses-section py-16 px-4 md:px-16">
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">أحدث الدورات التدريبية</h2>
       <p class="text-lg text-gray-600 dark:text-gray-400">دورات مصممة لتطوير مهاراتك في مجالات متعددة</p>
@@ -199,6 +199,13 @@ const plans = ref([
 </script>
 
 <style scoped>
+.hero-section,
+.features-section,
+.latest-courses-section {
+  background-color: var(--p-background-color);
+  color: var(--p-text-color);
+}
+
 .hero-section {
   background-color: var(--p-surface-0);
   color: var(--p-text-color);
