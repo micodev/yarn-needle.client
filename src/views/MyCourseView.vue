@@ -62,33 +62,46 @@
 import { ref } from 'vue';
 import { Button } from 'primevue';
 
-// Sample data for purchased courses
-const myCourses = ref([
-  {
-    id: 1,
-    title: "الجوانب الأربع لجودة الحياة",
-    description: "تعلم كيفية تحسين جودة حياتك من خلال فهم الجوانب الأربعة الرئيسية",
-    image: "https://placehold.co/600x400",
-    progress: 75,
-    completedLessons: 12,
-    totalLessons: 18,
-    duration: 6,
-    instructor: "عبدالله الخليفة",
-  },
-  {
-    id: 2,
-    title: "التطريز اليدوي للمبتدئين",
-    description: "تعلم أساسيات التطريز اليدوي خطوة بخطوة",
-    image: "https://images.unsplash.com/photo-1738230077816-fbab6232c545?w=500&h=300&fit=crop",
-    progress: 30,
-    completedLessons: 3,
-    totalLessons: 10,
-    duration: 8,
-    instructor: "سارة أحمد",
-  },
-  // Add more courses as needed
-]);
+const generateCourses = (count) => {
+  const courses = [];
+  const titles = [
+    "الجوانب الأربع لجودة الحياة",
+    "التطريز اليدوي للمبتدئين",
+    "أساسيات الخياطة",
+    "فن النسيج التقليدي",
+    "تصميم الأزياء المعاصرة"
+  ];
+  const descriptions = [
+    "تعلم كيفية تحسين جودة حياتك من خلال فهم الجوانب الأربعة الرئيسية",
+    "تعلم أساسيات التطريز اليدوي خطوة بخطوة",
+    "دورة شاملة في أساسيات الخياطة",
+    "اكتشف فنون النسيج التقليدي",
+    "تعلم أحدث تقنيات تصميم الأزياء"
+  ];
+  const instructors = ["عبدالله الخليفة", "سارة أحمد", "نورة السعيد", "محمد العلي", "فاطمة الزهراء"];
 
+  for (let i = 0; i < count; i++) {
+    courses.push({
+      id: i + 1,
+      title: titles[i % titles.length],
+      description: descriptions[i % descriptions.length],
+      image: `https://placehold.co/600x400/png?text=Course${i + 1}`,
+      progress: Math.floor(Math.random() * 100),
+      completedLessons: Math.floor(Math.random() * 15) + 1,
+      totalLessons: 15,
+      duration: Math.floor(Math.random() * 8) + 2,
+      instructor: instructors[i % instructors.length],
+    });
+  }
+  return courses;
+};
+
+const myCourses = ref(generateCourses(6)); // Generate 6 courses initially
+
+// Optional: Function to update number of courses
+const updateCourseCount = (newCount) => {
+  myCourses.value = generateCourses(newCount);
+};
 
 </script>
 
