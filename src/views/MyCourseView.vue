@@ -11,23 +11,11 @@
       </div>
     </div>
 
-    <!-- Search and Filter Section -->
+    <!-- Course Cards Grid -->
     <div class="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
-      <div class="flex flex-col gap-3 mb-4 sm:mb-8">
-        <div class="w-full">
-          <InputGroup>
-            <InputText v-model="searchQuery" placeholder="ابحث في دوراتي..." type="text" size="small" />
-            <InputGroupAddon class="h-9">
-              <Button icon="pi pi-search" size="small" severity="secondary" variant="text" />
-            </InputGroupAddon>
-          </InputGroup>
-        </div>
-      </div>
-
-      <!-- Course Cards Grid -->
-      <div v-if="filteredCourses.length > 0"
+      <div v-if="myCourses.length > 0"
            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-8">
-        <div v-for="course in filteredCourses" :key="course.id"
+        <div v-for="course in myCourses" :key="course.id"
              class="card p-0 rounded-lg shadow-md relative flex flex-col bg-white dark:bg-gray-800 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
           <div class="relative">
             <img :src="course.image" :alt="course.title" class="w-full h-36 sm:h-48 object-cover rounded-t-lg" />
@@ -43,7 +31,6 @@
             <p class="text-sm text-gray-700 dark:text-gray-300 mb-4">{{ course.description }}</p>
 
             <div class="mt-auto">
-              <ProgressBar :value="course.progress" class="mb-3" />
               <div class="flex justify-between items-center mb-3">
                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.completedLessons }}/{{ course.totalLessons }} درس</span>
                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.duration }} ساعات</span>
@@ -72,11 +59,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { Button, ProgressBar, Tag } from 'primevue';
-import { InputText, InputGroup, InputGroupAddon } from 'primevue';
-
-const searchQuery = ref('');
+import { ref } from 'vue';
+import { Button, Tag } from 'primevue';
 
 // Sample data for purchased courses
 const myCourses = ref([
@@ -105,13 +89,6 @@ const myCourses = ref([
   // Add more courses as needed
 ]);
 
-const filteredCourses = computed(() => {
-  return myCourses.value.filter(course =>
-    course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    course.description.toLowerCase().includes(searchQuery.value.toLowerCase())
-  );
-});
-
 const getProgressSeverity = (progress) => {
   if (progress < 30) return 'warning';
   if (progress < 70) return 'info';
@@ -127,14 +104,6 @@ const getProgressSeverity = (progress) => {
 
 .card:hover {
   transform: translateY(-5px);
-}
-
-:deep(.p-inputgroup) {
-  direction: rtl;
-}
-
-:deep(.p-progressbar) {
-  height: 0.5rem;
 }
 
 /* Mobile-specific styles */
