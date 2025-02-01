@@ -25,16 +25,16 @@
       </div>
 
       <!-- Course Cards Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 relative">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8 relative">
         <div v-for="(course) in paddedCourses" :key="course.title"
           class="card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full bg-white dark:bg-gray-800">
           <div class="relative">
             <img :src="course.image" alt="Course Image" class="w-full rounded" />
             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.5] via-20% to-surface-0 to-70% opacity-100 dark:via-gray-100/[0.2] dark:to-gray-800">
             </div>
-            <div class="relative w-full flex flex-col justify-center items-center rounded-md p-2">
-              <p class="text-xl font-bold mb-2 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
-              <p class="text-gray-700 dark:text-gray-300 mb-4">{{ course.description }}</p>
+            <div class="relative w-full flex flex-col justify-center items-center rounded-md p-1">
+              <p class="text-lg font-bold mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
+              <p class="text-sm text-gray-700 dark:text-gray-300 mb-2">{{ course.description }}</p>
             </div>
             <div class="absolute top-2 px-2 w-full">
               <div class="flex justify-between">
