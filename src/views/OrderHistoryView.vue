@@ -91,7 +91,7 @@ const generateOrders = (count) => {
 }
 
 // Initialize with 5 orders (you can change this number)
-const orders = ref(generateOrders(5))
+const orders = ref(generateOrders(15))
 
 const formatDate = (date) => {
   return new Intl.DateTimeFormat('ar', {
