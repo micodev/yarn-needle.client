@@ -85,7 +85,7 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
       <div v-for="plan in plans" :key="plan.title"
-        class="plan-card p-6 rounded-lg shadow-md bg-slate-50 dark:bg-gray-800 flex flex-col justify-between h-full">
+        class="plan-card p-6 rounded-lg shadow-md bg-slate-100 dark:bg-gray-800 flex flex-col justify-between h-full">
         <div>
           <div class="flex items-center mb-4">
             <i :class="plan.iconClass" class="text-lg ml-3"></i>
