@@ -41,9 +41,7 @@
                             placeholder="اختر المجال"
                             class="w-full" />
                   </div>
-              </div>
-
-              <div>
+                  <div>
                 <span class="font-medium block mb-2">اختر المستوى</span>
                 <Select v-model="levelFilter"
                         :options="levelOptions"
@@ -52,6 +50,9 @@
                         placeholder="جميع المستويات"
                         class="w-full" />
               </div>
+
+              </div>
+
 
               <div>
                 <span class="font-medium block mb-2">عدد الدروس</span>
