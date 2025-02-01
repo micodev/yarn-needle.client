@@ -53,7 +53,6 @@
             </div>
 
             <div class="mt-4 p-2 bg-gray-100 dark:bg-gray-700 rounded">
-              <span class="font-medium">معرف الطلب:</span>
               <span class="text-sm text-gray-600 dark:text-gray-400">{{ order.key }}</span>
             </div>
           </div>
