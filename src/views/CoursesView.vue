@@ -18,7 +18,7 @@
           <Button label="تصفية" icon="pi pi-filter" />
           <Button label="ترتيب" icon="pi pi-sort" severity="secondary" />
         </div>
-        <div class="flex-1 md:max-w-md">
+        <div class="flex-1 md:max-w-md max-h-4">
           <InputGroup class="w-full">
             <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..." class="w-full" />
             <InputGroupAddon>
