@@ -9,8 +9,10 @@ import ToastService from 'primevue/toastservice'
 import Toast from 'primevue/toast'
 import Ripple from 'primevue/ripple';
 
+import Tooltip from 'primevue/tooltip';
 const app = createApp(App)
 
+app.directive('tooltip', Tooltip);
 app.directive('ripple', Ripple);
 app.use(createPinia())
 app.use(router)
