@@ -132,7 +132,7 @@
           <div class="relative">
             <img :src="course.image" :alt="course.title" class="w-full h-36 sm:h-48 object-cover rounded" />
             <div
-              class="absolute inset-0 bg-gradient-to-b from-transparent  via-70% to-surface-0 to-80% opacity-100 dark:to-gray ">
+              class="absolute inset-0 bg-gradient-to-b from-transparent  via-70% to-surface-0 to-80% opacity-100 dark:to-gray-900">
             </div>
             <div class="relative w-full flex flex-col justify-center items-center rounded-md p-1">
               <p class="text-lg font-bold mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
