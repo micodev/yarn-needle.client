@@ -80,6 +80,15 @@ const orders = ref([
     orderState: 'ملغى',
     paymentState: 'مرفوض',
     price: 449.99
+  },
+  {
+    id: '1026',
+    type: 'دورة',
+    title: 'تصميم الجرافيك',
+    date: new Date('2025-01-23'),
+    orderState: 'قيد الانتظار',
+    paymentState: 'قيد الانتظار',
+    price: 299.99
   }
 ])
 
