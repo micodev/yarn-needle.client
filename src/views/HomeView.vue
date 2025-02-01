@@ -44,12 +44,12 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 relative">
       <div v-for="(course, index) in paddedCourses" :key="course.title"
-        :class="['card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full', 'bg-white dark:bg-gray-800' ]">
+        :class="['card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full', 'bg-surface-card dark:bg-surface-card']">
         <div class="relative">
           <img :src="course.image" alt="Course Image" class="w-full rounded" />
           <!-- gradient-->
           <div
-            class="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.5] via-20% to-surface-0 to-70% opacity-100 dark:via-gray-100/[0.2] dark:to-gray-800">
+            class="absolute inset-0 bg-gradient-to-b from-transparent via-surface-card/[0.5] via-20% to-surface-card to-70% opacity-100">
           </div>
           <div
             class="relative w-full flex flex-col justify-center items-center rounded-md p-2">
@@ -85,7 +85,7 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
       <div v-for="plan in plans" :key="plan.title"
-        class="plan-card p-6 rounded-lg shadow-md bg-white dark:bg-gray-800 flex flex-col justify-between h-full">
+        class="plan-card p-6 rounded-lg shadow-md bg-surface-card dark:bg-surface-card flex flex-col justify-between h-full">
         <div>
           <div class="flex items-center mb-4">
             <i :class="plan.iconClass" class="text-lg ml-3"></i>
@@ -221,12 +221,12 @@ const plans = ref([
   color: var(--p-text-muted-color);
 }
 
-:deep(.bg-white) {
-  background-color: var(--p-surface-0);
+:deep(.bg-surface-card) {
+  background-color: var(--p-card-background);
 }
 
-:deep(.dark\:bg-gray-800) {
-  background-color: var(--p-surface-800);
+:deep(.dark\:bg-surface-card) {
+  background-color: var(--p-card-background);
 }
 
 :deep(.dark\:text-gray-100) {
