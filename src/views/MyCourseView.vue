@@ -35,7 +35,10 @@
                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.completedLessons }}/{{ course.totalLessons }} درس</span>
                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.duration }} ساعات</span>
               </div>
-              <Button label="متابعة التعلم" icon="pi pi-play" class="w-full" />
+              <div class="flex gap-2">
+                <Button label="عرض التفاصيل" icon="pi pi-eye" class="flex-1" severity="primary" />
+                <Button label="معلومات إضافية" icon="pi pi-info-circle" class="flex-1" severity="secondary" />
+              </div>
             </div>
           </div>
         </div>
