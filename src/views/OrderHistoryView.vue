@@ -8,7 +8,7 @@
       <Card
         v-for="order in orders"
         :key="order.id"
-        class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700"
+        class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700 flex flex-col justify-between"
       >
         <template #header>
           <div class="flex justify-between items-start mb-4">
@@ -51,10 +51,9 @@
             <div v-if="order.orderState === 'قيد الانتظار'" class="flex justify-end mt-4">
               <Button label="اكمال الدفع" class="p-button-primary" />
             </div>
-
-            <div class="mt-4 p-2 bg-gray-100 dark:bg-gray-700 rounded">
-              <span class="text-sm text-gray-600 dark:text-gray-400">{{ order.key }}</span>
-            </div>
+          </div>
+          <div class="mt-4 p-2 bg-gray-100 dark:bg-gray-700 rounded self-end">
+            <span class="text-sm text-gray-600 dark:text-gray-400">{{ order.key }}</span>
           </div>
         </template>
       </Card>
