@@ -197,3 +197,43 @@ const plans = ref([
   }
 ]);
 </script>
+
+<style scoped>
+.hero-section {
+  background-color: var(--p-surface-0);
+  color: var(--p-text-color);
+}
+
+.features-section, .latest-courses-section {
+  background-color: var(--p-surface-0);
+  color: var(--p-text-color);
+}
+
+:deep(.text-gray-900) {
+  color: var(--p-text-color);
+}
+
+:deep(.text-gray-700) {
+  color: var(--p-text-muted-color);
+}
+
+:deep(.text-gray-600) {
+  color: var(--p-text-muted-color);
+}
+
+:deep(.bg-white) {
+  background-color: var(--p-surface-0);
+}
+
+:deep(.dark\:bg-gray-800) {
+  background-color: var(--p-surface-800);
+}
+
+:deep(.dark\:text-gray-100) {
+  color: var(--p-text-color);
+}
+
+:deep(.dark\:text-gray-300) {
+  color: var(--p-text-muted-color);
+}
+</style>

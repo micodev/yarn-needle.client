@@ -462,6 +462,43 @@ const filteredCourses = computed(() => {
   background: var(--primary-color);
 }
 
+.card {
+  background-color: var(--p-surface-0);
+  border: 1px solid var(--p-content-border-color);
+}
+
+:deep(.text-gray-900) {
+  color: var(--p-text-color);
+}
+
+:deep(.text-gray-700) {
+  color: var(--p-text-muted-color);
+}
+
+:deep(.text-gray-600) {
+  color: var(--p-text-muted-color);
+}
+
+:deep(.bg-gray-100) {
+  background-color: var(--p-surface-100);
+}
+
+:deep(.dark\:bg-gray-800) {
+  background-color: var(--p-surface-800);
+}
+
+:deep(.hover\:bg-gray-200) {
+  &:hover {
+    background-color: var(--p-content-hover-background);
+  }
+}
+
+:deep(.dark\:hover\:bg-gray-700) {
+  &:hover {
+    background-color: var(--p-content-hover-background);
+  }
+}
+
 /* Mobile-specific styles */
 @media (max-width: 640px) {
   :deep(.p-popover) {

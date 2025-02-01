@@ -187,7 +187,32 @@ const copyOrderKey = async (key) => {
 }
 </script>
 
-<style>
+<style scoped>
+.card {
+  background-color: var(--p-surface-0);
+  border: 1px solid var(--p-content-border-color);
+}
+
+:deep(.text-gray-900) {
+  color: var(--p-text-color);
+}
+
+:deep(.text-gray-600) {
+  color: var(--p-text-muted-color);
+}
+
+:deep(.bg-gray-100) {
+  background-color: var(--p-surface-100);
+}
+
+:deep(.dark\:bg-gray-800) {
+  background-color: var(--p-surface-800);
+}
+
+:deep(.border-gray-200) {
+  border-color: var(--p-content-border-color);
+}
+
 .p-tooltip {
   direction: rtl;
 }
