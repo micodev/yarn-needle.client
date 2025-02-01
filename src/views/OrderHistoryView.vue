@@ -51,6 +51,11 @@
             <div v-if="order.orderState === 'قيد الانتظار'" class="flex justify-end mt-4">
               <Button label="اكمال الدفع" class="p-button-primary" />
             </div>
+
+            <div class="mt-4">
+              <span class="font-medium">معرف الطلب:</span>
+              <span>{{ order.key }}</span>
+            </div>
           </div>
         </template>
       </Card>
@@ -65,6 +70,7 @@ import { Card, Button } from 'primevue'
 const orders = ref([
   {
     id: '1024',
+    key: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
     type: 'دورة',
     title: 'تطوير الويب',
     date: new Date('2025-01-25'),
@@ -74,6 +80,7 @@ const orders = ref([
   },
   {
     id: '1025',
+    key: 'b2c3d4e5-f678-90ab-cdef-1234567890ab',
     type: 'عضوية',
     title: 'الخطة الذهبية',
     date: new Date('2025-01-24'),
@@ -83,6 +90,7 @@ const orders = ref([
   },
   {
     id: '1026',
+    key: 'c3d4e5f6-7890-abcd-ef12-34567890abcd',
     type: 'دورة',
     title: 'تصميم الجرافيك',
     date: new Date('2025-01-23'),
