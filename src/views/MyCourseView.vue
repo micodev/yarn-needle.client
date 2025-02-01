@@ -14,27 +14,29 @@
     <!-- Course Cards Grid -->
     <div class="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
       <div v-if="myCourses.length > 0"
-           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-8">
+           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         <div v-for="course in myCourses" :key="course.id"
-             class="card p-0 rounded-lg shadow-md relative flex flex-col bg-white dark:bg-gray-800 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-          <div class="relative">
-            <img :src="course.image" :alt="course.title" class="w-full h-36 sm:h-48 object-cover rounded-t-lg" />
+             class="card p-0 rounded-lg shadow-md relative flex flex-col bg-white dark:bg-gray-800">
+          <div class="relative aspect-video">
+            <img :src="course.image" :alt="course.title"
+                 class="w-full h-full object-cover rounded-t-lg"
+                 loading="lazy" />
             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/60 via-100% to-surface-0 to-80% opacity-100 dark:via-gray-100/[0.2] dark:to-gray-800">
             </div>
           </div>
 
-          <div class="p-4 flex flex-col flex-grow">
-            <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-gray-100">{{ course.title }}</h3>
-            <p class="text-sm text-gray-700 dark:text-gray-300 mb-4">{{ course.description }}</p>
+          <div class="p-3 sm:p-4 flex flex-col flex-grow">
+            <h3 class="text-base sm:text-lg font-bold mb-2 text-gray-900 dark:text-gray-100">{{ course.title }}</h3>
+            <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 mb-4">{{ course.description }}</p>
 
             <div class="mt-auto">
-              <div class="flex justify-between items-center mb-3">
+              <div class="flex justify-between items-center mb-3 text-xs sm:text-sm">
                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.completedLessons }}/{{ course.totalLessons }} درس</span>
                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.duration }} ساعات</span>
               </div>
-              <div class="flex gap-2">
-                <Button label="عرض التفاصيل" icon="pi pi-eye" class="flex-1" severity="primary" />
-                <Button label="معلومات إضافية" icon="pi pi-info-circle" class="flex-1" severity="secondary" />
+              <div class="flex gap-2 flex-col sm:flex-row">
+                <Button label="عرض التفاصيل" icon="pi pi-eye" class="w-full sm:flex-1" severity="primary" />
+                <Button label="معلومات إضافية" icon="pi pi-info-circle" class="w-full sm:flex-1" severity="secondary" />
               </div>
             </div>
           </div>
@@ -111,16 +113,20 @@ const myCourses = ref(generateCourses(10)); // Generate 6 courses initially
 .card {
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+  width: 100%;
 }
 
 .card:hover {
   transform: translateY(-5px);
 }
 
-/* Mobile-specific styles */
 @media (max-width: 640px) {
-  .card {
-    max-width: 100%;
+  .card:hover {
+    transform: none;
+  }
+
+  .aspect-video {
+    aspect-ratio: 16 / 9;
   }
 }
 </style>
