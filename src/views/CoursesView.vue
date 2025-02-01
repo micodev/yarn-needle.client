@@ -55,6 +55,20 @@
             </div>
           </div>
         </div>
+        <div class="flex flex-col md:flex-row gap-4 mb-8 justify-between ">
+        <div class="flex gap-2">
+          <Button label="تصفية" icon="pi pi-filter" />
+          <Button label="ترتيب" icon="pi pi-sort" severity="secondary" />
+        </div>
+        <div class="flex-1 md:max-w-md">
+          <InputGroup >
+            <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..."  />
+            <InputGroupAddon>
+              <Button  icon="pi pi-search"  severity="secondary" variant="text" />
+            </InputGroupAddon>
+          </InputGroup>
+        </div>
+      </div>
       </div>
     </div>
   </div>
