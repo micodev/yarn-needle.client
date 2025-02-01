@@ -14,19 +14,19 @@
     <!-- Filters and Search Section -->
     <div class="container mx-auto px-4 py-8">
       <div class="flex flex-col md:flex-row gap-4 mb-8 justify-between ">
-        <InputGroup >
+
+        <div class="flex-1 md:max-w-md">
+          <InputGroup >
             <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..."  type="text" size="small" />
             <InputGroupAddon>
               <Button  icon="pi pi-search"  severity="secondary" variant="text" />
             </InputGroupAddon>
           </InputGroup>
-        <div class="flex-1 md:max-w-md">
-
         </div>
-        <!-- <div class="flex gap-2">
+        <div class="flex gap-2">
           <Button label="تصفية" icon="pi pi-filter" />
           <Button label="ترتيب" icon="pi pi-sort" severity="secondary" />
-        </div> -->
+        </div>
       </div>
 
       <!-- Course Cards Grid -->
