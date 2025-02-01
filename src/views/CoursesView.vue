@@ -28,21 +28,22 @@
                   severity="secondary" :class="{ 'p-button-info': selectedSort }" />
           <Popover ref="sortPopover" appendTo="body">
             <div class="flex flex-col gap-2 p-3 min-w-[250px]">
-              <span class="font-medium block mb-2">خيارات الترتيب</span>
+              <div class="font-medium px-3 py-2 bg-gray-50 dark:bg-gray-800 rounded-lg mb-1">خيارات الترتيب</div>
               <ul class="list-none p-0 m-0 flex flex-col">
                 <li v-for="option in sortOptions" :key="option.value"
-                    class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-lg"
-                    :class="{ 'bg-gray-100 dark:bg-gray-700': selectedSort?.value === option.value }"
+                    class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-lg transition-colors"
+                    :class="{ 'bg-primary-50 text-primary-700 dark:bg-primary-900/20 dark:text-primary-400': selectedSort?.value === option.value }"
                     @click="selectSort(option)">
-                  <i :class="option.icon"></i>
+                  <i :class="[option.icon, selectedSort?.value === option.value ? 'text-primary-500' : '']"></i>
                   <span>{{ option.name }}</span>
                 </li>
               </ul>
               <Button v-if="selectedSort"
                       label="مسح الترتيب"
+                      icon="pi pi-times"
                       severity="secondary"
                       text
-                      class="mt-2"
+                      class="mt-2 w-full justify-center"
                       @click="selectedSort = null" />
             </div>
           </Popover>
@@ -219,5 +220,12 @@ const filteredCourses = computed(() => {
 
 :deep(.p-popover .p-popover-content) {
   direction: rtl;
+}
+
+:deep(.p-popover) {
+  direction: rtl;
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 </style>
