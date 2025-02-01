@@ -13,7 +13,7 @@
 
     <!-- Filters and Search Section -->
     <div class="container mx-auto px-4 py-8">
-      <div class="flex flex-col md:flex-row gap-4 mb-8 justify-between">
+      <div class="flex flex-col md:flex-row gap-4 mb-8 justify-between  max-h-2">
         <div class="flex gap-2">
           <Button label="تصفية" icon="pi pi-filter" />
           <Button label="ترتيب" icon="pi pi-sort" severity="secondary" />
