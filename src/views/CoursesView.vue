@@ -63,7 +63,17 @@
                 </div>
               </div>
 
-              <Button v-if="levelFilter || lessonRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration"
+              <div>
+                <span class="font-medium block mb-2">نطاق السعر</span>
+                <Dropdown v-model="priceRangeFilter"
+                         :options="priceRangeOptions"
+                         optionLabel="name"
+                         optionValue="value"
+                         placeholder="اختر نطاق السعر"
+                         class="w-full" />
+              </div>
+
+              <Button v-if="levelFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration"
                       label="مسح التصفية"
                       icon="pi pi-times"
                       severity="secondary"
@@ -72,6 +82,7 @@
                       @click="() => {
                         levelFilter = null;
                         lessonRangeFilter = null;
+                        priceRangeFilter = null;
                         durationRange = [0, maxDuration];
                       }" />
             </div>
@@ -199,6 +210,15 @@ const lessonRangeOptions = ref([
   { name: 'أكثر من 15 درس', value: 'range4', min: 16, max: Infinity }
 ]);
 
+const priceRangeFilter = ref(null);
+const priceRangeOptions = ref([
+  { name: 'جميع الأسعار', value: null },
+  { name: 'مجاني', value: 'free', min: 0, max: 0 },
+  { name: 'أقل من 75 ريال', value: 'under75', min: 1, max: 75 },
+  { name: '75-200 ريال', value: 'mid', min: 75, max: 200 },
+  { name: 'أكثر من 200 ريال', value: 'above200', min: 200, max: Infinity }
+]);
+
 const courses = ref([
   {
     id: 1,
@@ -275,15 +295,20 @@ for (let i = 0; i < 3; i++) {
   courses.value.push(...courses.value);
 }
 const filteredCourses = computed(() => {
-  let result = courses.value.filter(course =>
-    (course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    course.description.toLowerCase().includes(searchQuery.value.toLowerCase())) &&
-    (!levelFilter.value || course.level === levelFilter.value) &&
-    (course.duration >= durationRange.value[0] && course.duration <= durationRange.value[1]) &&
-    (!lessonRangeFilter.value ||
-      (course.lessonCount >= lessonRangeOptions.value.find(r => r.value === lessonRangeFilter.value)?.min &&
-       course.lessonCount <= lessonRangeOptions.value.find(r => r.value === lessonRangeFilter.value)?.max))
-  );
+  let result = courses.value.filter(course => {
+    const coursePrice = Number(course.discountedPrice || course.originalPrice);
+    const selectedPriceRange = priceRangeOptions.value.find(r => r.value === priceRangeFilter.value);
+
+    return (course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      course.description.toLowerCase().includes(searchQuery.value.toLowerCase())) &&
+      (!levelFilter.value || course.level === levelFilter.value) &&
+      (course.duration >= durationRange.value[0] && course.duration <= durationRange.value[1]) &&
+      (!lessonRangeFilter.value ||
+        (course.lessonCount >= lessonRangeOptions.value.find(r => r.value === lessonRangeFilter.value)?.min &&
+         course.lessonCount <= lessonRangeOptions.value.find(r => r.value === lessonRangeFilter.value)?.max)) &&
+      (!priceRangeFilter.value ||
+        (coursePrice >= selectedPriceRange?.min && coursePrice <= selectedPriceRange?.max));
+  });
 
   if (selectedSort.value) {
     switch (selectedSort.value.value) {
