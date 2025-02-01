@@ -29,6 +29,16 @@
           <Popover ref="FilterPopOver" appendTo="body">
             <div class="flex flex-col gap-4 p-3 min-w-[300px]">
               <div>
+                <span class="font-medium block mb-2">المجال</span>
+                <Dropdown v-model="categoryFilter"
+                         :options="categoryOptions"
+                         optionLabel="name"
+                         optionValue="value"
+                         placeholder="اختر المجال"
+                         class="w-full" />
+              </div>
+
+              <div>
                 <span class="font-medium block mb-2">اختر المستوى</span>
                 <Select v-model="levelFilter"
                         :options="levelOptions"
@@ -73,7 +83,7 @@
                          class="w-full" />
               </div>
 
-              <Button v-if="levelFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration"
+              <Button v-if="levelFilter || categoryFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration"
                       label="مسح التصفية"
                       icon="pi pi-times"
                       severity="secondary"
@@ -81,6 +91,7 @@
                       class="mt-2 w-full justify-center"
                       @click="() => {
                         levelFilter = null;
+                        categoryFilter = null;
                         lessonRangeFilter = null;
                         priceRangeFilter = null;
                         durationRange = [0, maxDuration];
@@ -219,6 +230,16 @@ const priceRangeOptions = ref([
   { name: 'أكثر من 200 ريال', value: 'above200', min: 200, max: Infinity }
 ]);
 
+const categoryFilter = ref(null);
+const categoryOptions = ref([
+  { id: 1, name: 'جميع المجالات', value: null, code: 'ALL' },
+  { id: 2, name: 'كتابة سيناريو', value: 'scenario', code: 'SCEN' },
+  { id: 3, name: 'كتابة شعر', value: 'poetry', code: 'POET' },
+  { id: 4, name: 'تصميم صور', value: 'design', code: 'DSGN' },
+  { id: 5, name: 'رسم', value: 'drawing', code: 'DRAW' },
+  { id: 6, name: 'تعليق صوتي', value: 'voice', code: 'VOIC' }
+]);
+
 const courses = ref([
   {
     id: 1,
@@ -231,7 +252,8 @@ const courses = ref([
     duration: 10, // Duration in hours
     level: 'beginner',
     currency: "ريال سعودي",
-    lessonCount: 4
+    lessonCount: 4,
+    category: 'drawing',
   },
   {
     id: 2,
@@ -246,7 +268,8 @@ const courses = ref([
     duration: 25,
     level: 'advanced',
     currency: "ريال سعودي",
-    lessonCount: 12
+    lessonCount: 12,
+    category: 'design',
   },
   {
     id: 3,
@@ -259,7 +282,8 @@ const courses = ref([
     duration: 15,
     level: 'intermediate',
     currency: "ريال سعودي",
-    lessonCount: 8
+    lessonCount: 8,
+    category: 'design',
   },
   {
     id: 4,
@@ -274,7 +298,8 @@ const courses = ref([
     duration: 30,
     level: 'advanced',
     currency: "ريال سعودي",
-    lessonCount: 16
+    lessonCount: 16,
+    category: 'drawing',
   },
   {
     id: 5,
@@ -287,7 +312,8 @@ const courses = ref([
     duration: 5,
     level: 'beginner',
     currency: "ريال سعودي",
-    lessonCount: 3
+    lessonCount: 3,
+    category: 'drawing',
   }
 ]);
 // re add same courses to test the search functionality with iterator in loop
@@ -302,6 +328,7 @@ const filteredCourses = computed(() => {
     return (course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       course.description.toLowerCase().includes(searchQuery.value.toLowerCase())) &&
       (!levelFilter.value || course.level === levelFilter.value) &&
+      (!categoryFilter.value || course.category === categoryFilter.value) &&  // Add category filter
       (course.duration >= durationRange.value[0] && course.duration <= durationRange.value[1]) &&
       (!lessonRangeFilter.value ||
         (course.lessonCount >= lessonRangeOptions.value.find(r => r.value === lessonRangeFilter.value)?.min &&
