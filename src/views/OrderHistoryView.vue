@@ -53,7 +53,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { Card } from 'primevue/card'
+import { Card } from 'primevue'
 
 const orders = ref([
   {
