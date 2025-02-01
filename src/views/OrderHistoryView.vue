@@ -72,38 +72,26 @@
 import { ref } from 'vue'
 import { Card, Button } from 'primevue'
 
-const orders = ref([
-  {
-    id: '1024',
-    key: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-    type: 'دورة',
-    title: 'تطوير الويب',
-    date: new Date('2025-01-25'),
-    orderState: 'مكتمل',
-    paymentState: 'مصرح',
-    price: 199.99
-  },
-  {
-    id: '1025',
-    key: 'b2c3d4e5-f678-90ab-cdef-1234567890ab',
-    type: 'عضوية',
-    title: 'الخطة الذهبية',
-    date: new Date('2025-01-24'),
-    orderState: 'ملغى',
-    paymentState: 'مرفوض',
-    price: 449.99
-  },
-  {
-    id: '1026',
-    key: 'c3d4e5f6-7890-abcd-ef12-34567890abcd',
-    type: 'دورة',
-    title: 'تصميم الجرافيك',
-    date: new Date('2025-01-23'),
-    orderState: 'قيد الانتظار',
-    paymentState: 'قيد الانتظار',
-    price: 299.99
-  }
-])
+const generateOrders = (count) => {
+  const orderTypes = ['دورة', 'عضوية']
+  const titles = ['تطوير الويب', 'تصميم الجرافيك', 'التسويق الرقمي', 'الذكاء الاصطناعي', 'علوم البيانات']
+  const states = ['مكتمل', 'قيد الانتظار', 'ملغى']
+  const paymentStates = ['مصرح', 'قيد الانتظار', 'مرفوض']
+
+  return Array.from({ length: count }, (_, index) => ({
+    id: (1020 + index).toString(),
+    key: `order-${crypto.randomUUID()}`,
+    type: orderTypes[Math.floor(Math.random() * orderTypes.length)],
+    title: titles[Math.floor(Math.random() * titles.length)],
+    date: new Date(2025, 0, 25 - index),
+    orderState: states[Math.floor(Math.random() * states.length)],
+    paymentState: paymentStates[Math.floor(Math.random() * paymentStates.length)],
+    price: Math.floor(Math.random() * 500 + 100)
+  }))
+}
+
+// Initialize with 5 orders (you can change this number)
+const orders = ref(generateOrders(5))
 
 const formatDate = (date) => {
   return new Intl.DateTimeFormat('ar', {
