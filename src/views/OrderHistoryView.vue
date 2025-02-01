@@ -7,17 +7,17 @@
     <div :class="[
       'grid gap-4',
       {
-        'grid-cols-1': orders.length === 1 || orders.length > 4,
-        'grid-cols-2': orders.length === 2 || orders.length === 4,
-        'grid-cols-3': orders.length === 3
+        'grid-cols-1': filteredOrders.length === 1 || filteredOrders.length > 4,
+        'grid-cols-2': filteredOrders.length === 2 || filteredOrders.length === 4,
+        'grid-cols-3': filteredOrders.length === 3
       },
       {
-        'md:grid-cols-2': orders.length > 2,
-        'lg:grid-cols-3': orders.length > 3
+        'md:grid-cols-2': filteredOrders.length > 2,
+        'lg:grid-cols-3': filteredOrders.length > 3
       }
     ]">
       <Card
-        v-for="order in orders"
+        v-for="order in filteredOrders"
         :key="order.id"
         class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700"
       >
@@ -116,18 +116,11 @@ const orders = ref([
   }
 ])
 
-// Optional: Helper function to add orders
-const addOrder = (order) => {
-  orders.value.push(order)
-}
-
-// Optional: Helper function to remove orders
-const removeOrder = (orderId) => {
-  const index = orders.value.findIndex(o => o.id === orderId)
-  if (index !== -1) {
-    orders.value.splice(index, 1)
-  }
-}
+// Custom computed property for filtered orders
+const filteredOrders = computed(() => {
+  return orders.value.slice(0, 6) // Example: limit to 6 orders
+  // You can add more filtering logic here
+})
 
 const formatDate = (date) => {
   return new Intl.DateTimeFormat('ar', {
