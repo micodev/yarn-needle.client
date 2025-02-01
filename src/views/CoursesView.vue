@@ -32,13 +32,15 @@
           <Popover ref="FilterPopOver">
             <div class="flex flex-col gap-4 p-4 min-w-[300px] max-h-[80vh] overflow-y-auto">
               <div>
-                <span class="font-medium block mb-2">المجال</span>
+                  <div class="flex-row">
+                    <span class="font-medium block mb-2">المجال</span>
                 <Select v-model="categoryFilter"
                          :options="categoryOptions"
                          optionLabel="name"
                          optionValue="value"
                          placeholder="اختر المجال"
                          class="w-full" />
+                  </div>
               </div>
 
               <div>
