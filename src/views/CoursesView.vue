@@ -76,7 +76,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { Button } from "primevue";
-import { InputText, InputGroup } from "primevue";
+import { InputText, InputGroup,InputGroupAddon } from "primevue";
 
 const searchQuery = ref("");
 
