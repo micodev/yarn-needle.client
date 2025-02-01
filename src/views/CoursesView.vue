@@ -30,7 +30,7 @@
             <div class="flex flex-col gap-4 p-3 min-w-[300px]">
               <div>
                 <span class="font-medium block mb-2">المجال</span>
-                <Dropdown v-model="categoryFilter"
+                <Select v-model="categoryFilter"
                          :options="categoryOptions"
                          optionLabel="name"
                          optionValue="value"
@@ -50,7 +50,7 @@
 
               <div>
                 <span class="font-medium block mb-2">عدد الدروس</span>
-                <Dropdown v-model="lessonRangeFilter"
+                <Select v-model="lessonRangeFilter"
                          :options="lessonRangeOptions"
                          optionLabel="name"
                          optionValue="value"
@@ -75,7 +75,7 @@
 
               <div>
                 <span class="font-medium block mb-2">نطاق السعر</span>
-                <Dropdown v-model="priceRangeFilter"
+                <Select v-model="priceRangeFilter"
                          :options="priceRangeOptions"
                          optionLabel="name"
                          optionValue="value"
@@ -83,7 +83,31 @@
                          class="w-full" />
               </div>
 
-              <Button v-if="levelFilter || categoryFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration"
+              <div>
+                <span class="font-medium block mb-2">نوع الدورة</span>
+                <Select v-model="courseTypeFilter"
+                         :options="courseTypeOptions"
+                         optionLabel="name"
+                         optionValue="value"
+                         placeholder="اختر نوع الدورة"
+                         class="w-full">
+                  <template #value="slotProps">
+                    <div class="flex items-center gap-2" v-if="slotProps.value">
+                      <span>{{ courseTypeOptions.find(opt => opt.value === slotProps.value)?.icon }}</span>
+                      <span>{{ courseTypeOptions.find(opt => opt.value === slotProps.value)?.name }}</span>
+                    </div>
+                    <span v-else>اختر نوع الدورة</span>
+                  </template>
+                  <template #option="slotProps">
+                    <div class="flex items-center gap-2">
+                      <span>{{ slotProps.option.icon }}</span>
+                      <span>{{ slotProps.option.name }}</span>
+                    </div>
+                  </template>
+                </Select>
+              </div>
+
+              <Button v-if="levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration"
                       label="مسح التصفية"
                       icon="pi pi-times"
                       severity="secondary"
@@ -92,6 +116,7 @@
                       @click="() => {
                         levelFilter = null;
                         categoryFilter = null;
+                        courseTypeFilter = null;
                         lessonRangeFilter = null;
                         priceRangeFilter = null;
                         durationRange = [0, maxDuration];
@@ -194,7 +219,7 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { Button, Popover, Select, Slider, Dropdown } from "primevue";
+import { Button, Popover, Select, Slider } from "primevue";
 import { InputText, InputGroup, InputGroupAddon } from "primevue";
 
 const searchQuery = ref("");
@@ -263,6 +288,14 @@ const categoryOptions = ref([
   { id: 6, name: 'تعليق صوتي', value: 'voice', code: 'VOIC' }
 ]);
 
+const courseTypeFilter = ref(null);
+const courseTypeOptions = ref([
+  { name: 'جميع الأنواع', value: null, icon: 'pi pi-globe' },
+  { name: 'حضوري', value: 'onsite', icon: '📍' },
+  { name: 'عن بعد - مسجل', value: 'recorded', icon: '🌐' },
+  { name: 'عن بعد - مباشر', value: 'live', icon: '🔴' }
+]);
+
 const courses = ref([
   {
     id: 1,
@@ -277,6 +310,7 @@ const courses = ref([
     currency: "ريال سعودي",
     lessonCount: 4,
     category: 'drawing',
+    type: 'onsite',
   },
   {
     id: 2,
@@ -293,6 +327,7 @@ const courses = ref([
     currency: "ريال سعودي",
     lessonCount: 12,
     category: 'design',
+    type: 'recorded',
   },
   {
     id: 3,
@@ -307,6 +342,7 @@ const courses = ref([
     currency: "ريال سعودي",
     lessonCount: 8,
     category: 'design',
+    type: 'live',
   },
   {
     id: 4,
@@ -323,6 +359,7 @@ const courses = ref([
     currency: "ريال سعودي",
     lessonCount: 16,
     category: 'drawing',
+    type: 'onsite',
   },
   {
     id: 5,
@@ -337,6 +374,7 @@ const courses = ref([
     currency: "ريال سعودي",
     lessonCount: 3,
     category: 'drawing',
+    type: 'recorded',
   }
 ]);
 // re add same courses to test the search functionality with iterator in loop
@@ -352,6 +390,7 @@ const filteredCourses = computed(() => {
       course.description.toLowerCase().includes(searchQuery.value.toLowerCase())) &&
       (!levelFilter.value || course.level === levelFilter.value) &&
       (!categoryFilter.value || course.category === categoryFilter.value) &&  // Add category filter
+      (!courseTypeFilter.value || course.type === courseTypeFilter.value) && // Add type filter
       (course.duration >= durationRange.value[0] && course.duration <= durationRange.value[1]) &&
       (!lessonRangeFilter.value ||
         (course.lessonCount >= lessonRangeOptions.value.find(r => r.value === lessonRangeFilter.value)?.min &&
@@ -403,12 +442,12 @@ const filteredCourses = computed(() => {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-:deep(.p-dropdown) {
+:deep(.p-select) {
   width: 100%;
   direction: rtl;
 }
 
-:deep(.p-dropdown-panel) {
+:deep(.p-select-panel) {
   direction: rtl;
 }
 
