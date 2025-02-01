@@ -18,10 +18,14 @@
           <Button label="تصفية" icon="pi pi-filter" />
           <Button label="ترتيب" icon="pi pi-sort" severity="secondary" />
         </div>
-        <span class="p-input-icon-left flex-1 md:max-w-md">
-          <i class="pi pi-search" />
-          <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..." class="w-full" />
-        </span>
+        <div class="flex-1 md:max-w-md">
+          <InputGroup class="w-full">
+            <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..." class="w-full" />
+            <template #append>
+              <Button icon="pi pi-search" severity="secondary" variant="text" />
+            </template>
+          </InputGroup>
+        </div>
       </div>
 
       <!-- Course Cards Grid -->
@@ -72,7 +76,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { Button } from "primevue";
-import { InputText } from "primevue";
+import { InputText, InputGroup } from "primevue";
 
 const searchQuery = ref("");
 
@@ -152,5 +156,9 @@ const filteredCourses = computed(() => {
 
 .card:hover {
   transform: translateY(-5px);
+}
+
+:deep(.p-inputgroup) {
+  direction: rtl;
 }
 </style>
