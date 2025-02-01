@@ -49,7 +49,7 @@
             </div>
 
             <div v-if="order.orderState === 'قيد الانتظار'" class="flex justify-end mt-4">
-              <button class="bg-blue-500 text-white px-4 py-2 rounded">شراء</button>
+              <button class="bg-blue-500 text-white px-4 py-2 rounded">اكمال الدفع</button>
             </div>
           </div>
         </template>
