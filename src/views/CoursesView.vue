@@ -24,8 +24,51 @@
           </InputGroup>
         </div>
         <div class="flex gap-2">
-          <Button label="تصفية" icon="pi pi-filter" />
-          <Button label="ترتيب" icon="pi pi-sort" severity="secondary" />
+          <Button label="تصفية" :icon="selectedFilter?.icon || 'pi pi-filter'" @click="toggleFilter"
+                  :class="{ 'p-button-info': selectedFilter }" />
+          <Popover ref="filterPopover" appendTo="body">
+            <div class="flex flex-col gap-2 p-3 min-w-[250px]">
+              <span class="font-medium block mb-2">خيارات التصفية</span>
+              <ul class="list-none p-0 m-0 flex flex-col">
+                <li v-for="option in filterOptions" :key="option.value"
+                    class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-lg"
+                    :class="{ 'bg-gray-100 dark:bg-gray-700': selectedFilter?.value === option.value }"
+                    @click="selectFilter(option)">
+                  <i :class="option.icon"></i>
+                  <span>{{ option.name }}</span>
+                </li>
+              </ul>
+              <Button v-if="selectedFilter"
+                      label="مسح التصفية"
+                      severity="secondary"
+                      text
+                      class="mt-2"
+                      @click="selectedFilter = null" />
+            </div>
+          </Popover>
+
+          <Button label="ترتيب" :icon="selectedSort?.icon || 'pi pi-sort'" @click="toggleSort"
+                  severity="secondary" :class="{ 'p-button-info': selectedSort }" />
+          <Popover ref="sortPopover" appendTo="body">
+            <div class="flex flex-col gap-2 p-3 min-w-[250px]">
+              <span class="font-medium block mb-2">خيارات الترتيب</span>
+              <ul class="list-none p-0 m-0 flex flex-col">
+                <li v-for="option in sortOptions" :key="option.value"
+                    class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-lg"
+                    :class="{ 'bg-gray-100 dark:bg-gray-700': selectedSort?.value === option.value }"
+                    @click="selectSort(option)">
+                  <i :class="option.icon"></i>
+                  <span>{{ option.name }}</span>
+                </li>
+              </ul>
+              <Button v-if="selectedSort"
+                      label="مسح الترتيب"
+                      severity="secondary"
+                      text
+                      class="mt-2"
+                      @click="selectedSort = null" />
+            </div>
+          </Popover>
         </div>
       </div>
 
@@ -76,10 +119,46 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { Button } from "primevue";
-import { InputText, InputGroup,InputGroupAddon } from "primevue";
+import { Button, Popover } from "primevue";
+import { InputText, InputGroup, InputGroupAddon } from "primevue";
 
 const searchQuery = ref("");
+const filterPopover = ref();
+const sortPopover = ref();
+
+const filterOptions = ref([
+  { name: 'السعر: من الأعلى إلى الأقل', value: 'price-desc', icon: 'pi pi-sort-amount-down' },
+  { name: 'السعر: من الأقل إلى الأعلى', value: 'price-asc', icon: 'pi pi-sort-amount-up' },
+  { name: 'التقييم: الأعلى', value: 'rating-desc', icon: 'pi pi-star' },
+  { name: 'عدد الطلاب: الأكثر', value: 'students-desc', icon: 'pi pi-users' }
+]);
+
+const sortOptions = ref([
+  { name: 'الأحدث', value: 'newest', icon: 'pi pi-clock' },
+  { name: 'الأكثر شعبية', value: 'popular', icon: 'pi pi-fire' },
+  { name: 'الأعلى تقييماً', value: 'top-rated', icon: 'pi pi-star' }
+]);
+
+const selectedFilter = ref(null);
+const selectedSort = ref(null);
+
+const toggleFilter = (event) => {
+  filterPopover.value.toggle(event);
+};
+
+const toggleSort = (event) => {
+  sortPopover.value.toggle(event);
+};
+
+const selectFilter = (option) => {
+  selectedFilter.value = option;
+  filterPopover.value.hide();
+};
+
+const selectSort = (option) => {
+  selectedSort.value = option;
+  sortPopover.value.hide();
+};
 
 const courses = ref([
   {
@@ -142,10 +221,43 @@ for (let i = 0; i < 3; i++) {
   courses.value.push(...courses.value);
 }
 const filteredCourses = computed(() => {
-  return courses.value.filter(course =>
+  let result = courses.value.filter(course =>
     course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
     course.description.toLowerCase().includes(searchQuery.value.toLowerCase())
   );
+
+  if (selectedSort.value) {
+    switch (selectedSort.value.value) {
+      case 'newest':
+        result = [...result].sort((a, b) => b.id - a.id);
+        break;
+      case 'popular':
+        result = [...result].sort((a, b) => b.students - a.students);
+        break;
+      case 'top-rated':
+        result = [...result].sort((a, b) => b.rating - a.rating);
+        break;
+    }
+  }
+
+  if (selectedFilter.value) {
+    switch (selectedFilter.value.value) {
+      case 'price-desc':
+        result = [...result].sort((a, b) => Number(b.originalPrice) - Number(a.originalPrice));
+        break;
+      case 'price-asc':
+        result = [...result].sort((a, b) => Number(a.originalPrice) - Number(b.originalPrice));
+        break;
+      case 'rating-desc':
+        result = [...result].sort((a, b) => b.rating - a.rating);
+        break;
+      case 'students-desc':
+        result = [...result].sort((a, b) => b.students - a.students);
+        break;
+    }
+  }
+
+  return result;
 });
 </script>
 
@@ -160,6 +272,10 @@ const filteredCourses = computed(() => {
 }
 
 :deep(.p-inputgroup) {
+  direction: rtl;
+}
+
+:deep(.p-popover .p-popover-content) {
   direction: rtl;
 }
 </style>
