@@ -16,7 +16,7 @@
       <div v-if="myCourses.length > 0"
            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         <div v-for="course in myCourses" :key="course.id"
-             class="card p-0 rounded-lg shadow-md relative flex flex-col bg-white dark:bg-gray-800">
+             class="w-full rounded-lg shadow-md relative flex flex-col bg-white dark:bg-gray-800 transition-all duration-300 ease-in-out hover:shadow-xl sm:hover:-translate-y-1">
           <div class="relative aspect-video">
             <img :src="course.image" :alt="course.title"
                  class="w-full h-full object-cover rounded-t-lg"
@@ -108,25 +108,3 @@ const myCourses = ref(generateCourses(10)); // Generate 6 courses initially
 
 
 </script>
-
-<style scoped>
-.card {
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  width: 100%;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-@media (max-width: 640px) {
-  .card:hover {
-    transform: none;
-  }
-
-  .aspect-video {
-    aspect-ratio: 16 / 9;
-  }
-}
-</style>
