@@ -19,8 +19,8 @@
           <Button label="ترتيب" icon="pi pi-sort" severity="secondary" />
         </div>
         <div class="flex-1 md:max-w-md">
-          <InputGroup class="w-full">
-            <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..." class="w-full" />
+          <InputGroup >
+            <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..."  />
             <InputGroupAddon>
               <Button  icon="pi pi-search"  severity="secondary" variant="text" />
             </InputGroupAddon>
