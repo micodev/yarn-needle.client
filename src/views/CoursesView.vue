@@ -179,11 +179,12 @@
           </div>
           <div class="flex justify-between p-3 sm:p-4 flex-col mt-auto">
             <div class="flex flex-col items-center mb-2">
-              <p class="text-gray-500 dark:text-gray-400 line-through text-xs mb-1" v-if="course.discount">
-                {{ course.originalPrice }} ريال سعودي
+              <p class="text-gray-500 dark:text-gray-400 line-through text-xs mb-1" v-if="course.discount"
+                 v-tooltip="'ريال سعودي'">
+                {{ course.originalPrice }} SAR
               </p>
-              <p class="text-black dark:text-white font-bold text-sm">
-                {{ course.discountedPrice || course.originalPrice }} ريال سعودي
+              <p class="text-black dark:text-white font-bold text-sm" v-tooltip="'ريال سعودي'">
+                {{ course.discountedPrice || course.originalPrice }} SAR
               </p>
             </div>
             <div class="flex flex-row gap-1">
