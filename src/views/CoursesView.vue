@@ -133,7 +133,7 @@ const courses = ref([
   }
 ]);
 // re add same courses to test the search functionality with iterator in loop
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 3; i++) {
   courses.value.push(...courses.value);
 }
 const filteredCourses = computed(() => {
