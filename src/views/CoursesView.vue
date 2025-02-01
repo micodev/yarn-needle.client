@@ -24,7 +24,7 @@
           </InputGroup>
         </div>
         <div class="flex gap-2">
-          <Button label="المستوى" icon="pi pi-filter" @click="toggleLevel"
+          <Button label="فرز" icon="pi pi-filter" @click="toggleLevel"
                   :class="{ 'p-button-info': levelFilter }" />
           <Popover ref="levelPopover" appendTo="body">
             <div class="flex flex-col gap-2 p-3 min-w-[250px]">
