@@ -49,14 +49,14 @@
                     {{ order.paymentState }}
                   </span>
                 </div>
+              </div>
 
-                <div v-if="order.orderState === 'قيد الانتظار'" class="flex justify-end mt-4">
-                  <Button label="اكمال الدفع" class="p-button-primary" />
-                </div>
+              <div v-if="order.orderState === 'قيد الانتظار'" class="mt-4 mb-2">
+                <Button label="اكمال الدفع" class="p-button-primary w-full" />
               </div>
             </div>
 
-            <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
               <div class="p-2 bg-gray-100 dark:bg-gray-700 rounded text-center">
                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ order.key }}</span>
               </div>
