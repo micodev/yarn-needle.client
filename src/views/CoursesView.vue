@@ -128,7 +128,7 @@
       <div v-if="filteredCourses.length > 0"
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 mb-4 sm:mb-8 relative">
         <div v-for="(course) in filteredCourses" :key="course.id"
-          class="card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full bg-white dark:bg-gray-800 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          class="card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full  transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
           <div class="relative">
             <img :src="course.image" :alt="course.title" class="w-full h-36 sm:h-48 object-cover rounded" />
             <div
