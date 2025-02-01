@@ -21,9 +21,9 @@
         <div class="flex-1 md:max-w-md">
           <InputGroup class="w-full">
             <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..." class="w-full" />
-            <template #append>
+            <InputGroupAddon>
               <Button  icon="pi pi-search"  severity="secondary" variant="text" />
-            </template>
+            </InputGroupAddon>
           </InputGroup>
         </div>
       </div>
