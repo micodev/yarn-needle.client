@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white dark:bg-gray-900">
     <!-- Banner Section -->
-    <div class="relative h-[200px] w-full"></div>
+    <div class="relative h-[200px] w-full">
       <img src="https://placehold.co/1200x300" alt="Banner" class="w-full h-full object-cover" />
       <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <div class="text-center text-white p-6 max-w-2xl">
@@ -26,7 +26,7 @@
 
       <!-- Course Cards Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 relative">
-        <div v-for="(course, index) in paddedCourses" :key="course.title"
+        <div v-for="(course) in paddedCourses" :key="course.title"
           class="card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full bg-white dark:bg-gray-800">
           <div class="relative">
             <img :src="course.image" alt="Course Image" class="w-full rounded" />
