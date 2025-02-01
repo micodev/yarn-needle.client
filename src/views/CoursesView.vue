@@ -125,7 +125,7 @@ const courses = ref([
     id: 5,
     title: "تصميم الأنماط والنقوش",
     description: "إنشاء نقوش وأنماط مميزة للأقمشة",
-    image: "https://images.unsplash.com/photo-1528578577235-b931fa7fa6d1?w=500&h=300&fit=crop",
+    image: "https://plus.unsplash.com/premium_photo-1700346339061-9755dcc26bd9?w=500&h=300&fit=crop",
     originalPrice: "199",
     rating: 4.5,
     students: 989,
