@@ -51,7 +51,7 @@
           </div>
           <div class="flex justify-between p-4 flex-col mt-auto">
             <div class="flex flex-col items-center mb-2">
-              <p class="text-gray-500 dark:text-gray-400 line-through text-sm mb-1" v-if="course.discount">
+              <p class="text-gray-500 dark:text-gray-400 line-through text-xs mb-1" v-if="course.discount">
                 {{ course.originalPrice }} ريال سعودي
               </p>
               <p class="text-black dark:text-white font-bold text-base">
