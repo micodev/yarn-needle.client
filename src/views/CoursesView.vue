@@ -132,8 +132,10 @@ const courses = ref([
     currency: "ريال سعودي"
   }
 ]);
-// re add same courses to test the search functionality with iterator
-courses.value = [...courses.value, ...courses.value];
+// re add same courses to test the search functionality with iterator in loop
+for (let i = 0; i < 5; i++) {
+  courses.value.push(...courses.value);
+}
 const filteredCourses = computed(() => {
   return courses.value.filter(course =>
     course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
