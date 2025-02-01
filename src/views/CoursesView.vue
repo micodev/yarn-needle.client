@@ -28,7 +28,7 @@
                   severity="secondary" :class="{ 'p-button-info': selectedSort }" />
           <Popover ref="sortPopover" appendTo="body">
             <div class="flex flex-col gap-2">
-              <ul class="list-none p-0 m-0 flex flex-col">
+              <ul class="list-none p-0 m-0 flex flex-col justify-start">
                 <li v-for="option in sortOptions" :key="option.value"
                     class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-lg transition-colors"
                     :class="{ 'bg-primary-50 text-primary-700 dark:bg-primary-900/20 dark:text-primary-400': selectedSort?.value === option.value }"
