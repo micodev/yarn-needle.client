@@ -434,7 +434,7 @@ const filteredCourses = computed(() => {
 }
 
 .card {
-  background-color: var(--p-surface-0);
+
   border: 1px solid var(--p-content-border-color);
 }
 
