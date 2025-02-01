@@ -22,7 +22,7 @@
           <InputGroup class="w-full">
             <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..." class="w-full" />
             <template #append>
-              <Button icon="pi pi-search" severity="secondary" variant="text" />
+              <Button  icon="pi pi-search"  severity="secondary" variant="text" />
             </template>
           </InputGroup>
         </div>
