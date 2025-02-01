@@ -13,7 +13,7 @@
       </div>
     </div>
   </div>
-  <div class="features-section py-1 px-4 md:px-16 bg-white dark:bg-gray-900">
+  <div class="features-section py-1 px-4 md:px-16 bg-slate-50 dark:bg-gray-900">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       <div class="feature text-center p-4">
         <i class="pi pi-search text-4xl mb-4 text-primary"></i>
@@ -37,14 +37,14 @@
       </div>
     </div>
   </div>
-  <div class="latest-courses-section py-16 px-4 md:px-16 bg-white dark:bg-gray-900">
+  <div class="latest-courses-section py-16 px-4 md:px-16 bg-slate-50 dark:bg-gray-900">
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">أحدث الدورات التدريبية</h2>
       <p class="text-lg text-gray-600 dark:text-gray-400">دورات مصممة لتطوير مهاراتك في مجالات متعددة</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 relative">
       <div v-for="(course, index) in paddedCourses" :key="course.title"
-        :class="['card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full', 'bg-white dark:bg-gray-800' ]">
+        :class="['card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full', 'bg-slate-50 dark:bg-gray-800' ]">
         <div class="relative">
           <img :src="course.image" alt="Course Image" class="w-full rounded" />
           <!-- gradient-->
@@ -85,7 +85,7 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
       <div v-for="plan in plans" :key="plan.title"
-        class="plan-card p-6 rounded-lg shadow-md bg-white dark:bg-gray-800 flex flex-col justify-between h-full">
+        class="plan-card p-6 rounded-lg shadow-md bg-slate-50 dark:bg-gray-800 flex flex-col justify-between h-full">
         <div>
           <div class="flex items-center mb-4">
             <i :class="plan.iconClass" class="text-lg ml-3"></i>
