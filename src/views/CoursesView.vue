@@ -26,7 +26,7 @@
         <div class="flex gap-2">
           <Button label="فرز" icon="pi pi-filter" @click="toggleLevel"
                   :class="{ 'p-button-info': levelFilter }" />
-          <Popover ref="levelPopover" appendTo="body">
+          <Popover ref="FilterPopOver" appendTo="body">
             <div class="flex flex-col gap-2 p-3 min-w-[250px]">
               <span class="font-medium block mb-2">اختر المستوى</span>
               <Select v-model="levelFilter"
@@ -134,7 +134,7 @@ const selectSort = (option) => {
 };
 
 const levelFilter = ref(null);
-const levelPopover = ref();
+const FilterPopOver = ref();
 
 const levelOptions = ref([
   { name: 'جميع المستويات', value: null },
@@ -144,7 +144,7 @@ const levelOptions = ref([
 ]);
 
 const toggleLevel = (event) => {
-  levelPopover.value.toggle(event);
+  FilterPopOver.value.toggle(event);
 };
 
 const courses = ref([
