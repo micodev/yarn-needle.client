@@ -39,6 +39,16 @@
               </div>
 
               <div>
+                <span class="font-medium block mb-2">عدد الدروس</span>
+                <Dropdown v-model="lessonRangeFilter"
+                         :options="lessonRangeOptions"
+                         optionLabel="name"
+                         optionValue="value"
+                         placeholder="اختر عدد الدروس"
+                         class="w-full" />
+              </div>
+
+              <div>
                 <span class="font-medium block mb-2">مدة الدورة (بالساعات)</span>
                 <div class="flex flex-col gap-2">
                   <Slider v-model="durationRange"
@@ -53,7 +63,7 @@
                 </div>
               </div>
 
-              <Button v-if="levelFilter || durationRange[0] > 0 || durationRange[1] < maxDuration"
+              <Button v-if="levelFilter || lessonRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration"
                       label="مسح التصفية"
                       icon="pi pi-times"
                       severity="secondary"
@@ -61,6 +71,7 @@
                       class="mt-2 w-full justify-center"
                       @click="() => {
                         levelFilter = null;
+                        lessonRangeFilter = null;
                         durationRange = [0, maxDuration];
                       }" />
             </div>
@@ -138,7 +149,7 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { Button, Popover, Select, Slider } from "primevue";
+import { Button, Popover, Select, Slider, Dropdown } from "primevue";
 import { InputText, InputGroup, InputGroupAddon } from "primevue";
 
 const searchQuery = ref("");
@@ -179,6 +190,15 @@ const toggleLevel = (event) => {
 const durationRange = ref([0, 50]);
 const maxDuration = 50; // Maximum course duration in hours
 
+const lessonRangeFilter = ref(null);
+const lessonRangeOptions = ref([
+  { name: 'جميع الدروس', value: null },
+  { name: '1-5 دروس', value: 'range1', min: 1, max: 5 },
+  { name: '6-10 دروس', value: 'range2', min: 6, max: 10 },
+  { name: '11-15 درس', value: 'range3', min: 11, max: 15 },
+  { name: 'أكثر من 15 درس', value: 'range4', min: 16, max: Infinity }
+]);
+
 const courses = ref([
   {
     id: 1,
@@ -190,7 +210,8 @@ const courses = ref([
     students: 1234,
     duration: 10, // Duration in hours
     level: 'beginner',
-    currency: "ريال سعودي"
+    currency: "ريال سعودي",
+    lessonCount: 4
   },
   {
     id: 2,
@@ -204,7 +225,8 @@ const courses = ref([
     students: 856,
     duration: 25,
     level: 'advanced',
-    currency: "ريال سعودي"
+    currency: "ريال سعودي",
+    lessonCount: 12
   },
   {
     id: 3,
@@ -216,7 +238,8 @@ const courses = ref([
     students: 2156,
     duration: 15,
     level: 'intermediate',
-    currency: "ريال سعودي"
+    currency: "ريال سعودي",
+    lessonCount: 8
   },
   {
     id: 4,
@@ -230,7 +253,8 @@ const courses = ref([
     students: 1567,
     duration: 30,
     level: 'advanced',
-    currency: "ريال سعودي"
+    currency: "ريال سعودي",
+    lessonCount: 16
   },
   {
     id: 5,
@@ -242,7 +266,8 @@ const courses = ref([
     students: 989,
     duration: 5,
     level: 'beginner',
-    currency: "ريال سعودي"
+    currency: "ريال سعودي",
+    lessonCount: 3
   }
 ]);
 // re add same courses to test the search functionality with iterator in loop
@@ -254,7 +279,10 @@ const filteredCourses = computed(() => {
     (course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
     course.description.toLowerCase().includes(searchQuery.value.toLowerCase())) &&
     (!levelFilter.value || course.level === levelFilter.value) &&
-    (course.duration >= durationRange.value[0] && course.duration <= durationRange.value[1])
+    (course.duration >= durationRange.value[0] && course.duration <= durationRange.value[1]) &&
+    (!lessonRangeFilter.value ||
+      (course.lessonCount >= lessonRangeOptions.value.find(r => r.value === lessonRangeFilter.value)?.min &&
+       course.lessonCount <= lessonRangeOptions.value.find(r => r.value === lessonRangeFilter.value)?.max))
   );
 
   if (selectedSort.value) {
