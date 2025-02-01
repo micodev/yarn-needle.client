@@ -13,7 +13,7 @@
 
     <!-- Filters and Search Section -->
     <div class="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
-      <div class="flex flex-col gap-3 mb-4 sm:mb-8">
+      <div class="flex flex-col md:flex-row gap-3 mb-4 sm:mb-8">
 
         <div class="w-full md:w-1/2">
           <InputGroup >
