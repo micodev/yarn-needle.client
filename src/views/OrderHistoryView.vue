@@ -4,9 +4,24 @@
       <h1 class="text-2xl font-bold">تاريخ الطلبات</h1>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div v-if="isLoading" class="flex justify-center items-center py-8">
+      <ProgressSpinner />
+    </div>
+
+    <div v-else :class="[
+      'grid gap-4',
+      {
+        'grid-cols-1': sortedOrders.length === 1 || sortedOrders.length > 4,
+        'grid-cols-2': sortedOrders.length === 2 || sortedOrders.length === 4,
+        'grid-cols-3': sortedOrders.length === 3
+      },
+      {
+        'md:grid-cols-2': sortedOrders.length > 2,
+        'lg:grid-cols-3': sortedOrders.length > 3
+      }
+    ]">
       <Card
-        v-for="order in orders"
+        v-for="order in sortedOrders"
         :key="order.id"
         class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700"
       >
@@ -69,8 +84,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { Card, Button } from 'primevue'
+import { ref, computed, onMounted } from 'vue'
+import { Card, Button, ProgressSpinner } from 'primevue'
+
+const orders = ref([])
+const isLoading = ref(true)
 
 const generateOrders = (count) => {
   const orderTypes = ['دورة', 'عضوية']
@@ -90,8 +108,26 @@ const generateOrders = (count) => {
   }))
 }
 
-// Initialize with 5 orders (you can change this number)
-const orders = ref(generateOrders(15))
+// Sort orders to show pending first
+const sortedOrders = computed(() => {
+  return [...orders.value].sort((a, b) => {
+    if (a.orderState === 'قيد الانتظار' && b.orderState !== 'قيد الانتظار') return -1
+    if (b.orderState === 'قيد الانتظار' && a.orderState !== 'قيد الانتظار') return 1
+    return new Date(b.date) - new Date(a.date) // Secondary sort by date
+  })
+})
+
+// Initialize orders with loading state
+onMounted(async () => {
+  isLoading.value = true
+  try {
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    orders.value = generateOrders(15)
+  } finally {
+    isLoading.value = false
+  }
+})
 
 const formatDate = (date) => {
   return new Intl.DateTimeFormat('ar', {
