@@ -49,7 +49,7 @@
             </div>
 
             <div v-if="order.orderState === 'قيد الانتظار'" class="flex justify-end mt-4">
-              <button class="bg-blue-500 text-white px-4 py-2 rounded">اكمال الدفع</button>
+              <Button label="اكمال الدفع" class="p-button-primary" />
             </div>
           </div>
         </template>
@@ -60,7 +60,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { Card } from 'primevue'
+import { Card, Button } from 'primevue'
 
 const orders = ref([
   {
