@@ -6,6 +6,7 @@ import UpdatePasswordView from '@/views/UpdatePasswordView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import RoutesList from '@/components/RoutesList.vue'
 import CoursesView from '../views/CoursesView.vue'
+import OrderHistoryView from '../views/OrderHistoryView.vue'
 
 const base = '/yarn-needle.client';
 
@@ -45,6 +46,11 @@ const router = createRouter({
           path: '/courses',
           name: 'courses',
           component: CoursesView
+        },
+        {
+          path: '/order-history',
+          name: 'OrderHistory',
+          component: OrderHistoryView
         }
       ],
     },
