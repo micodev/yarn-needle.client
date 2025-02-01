@@ -75,7 +75,7 @@
               <div
                 class="p-2 bg-gray-100 dark:bg-gray-700 rounded text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600"
                 @click="copyOrderKey(order.key)"
-                v-tooltip="tooltipContent"
+                v-tooltip.click.top="'تم النسخ'"
               >
                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ order.key }}</span>
               </div>
@@ -176,20 +176,11 @@ const getPaymentStateClass = (state) => {
   }
 }
 
-const tooltipContent = ref('')
-
 const copyOrderKey = async (key) => {
   try {
     await navigator.clipboard.writeText(key)
-    tooltipContent.value = 'تم النسخ!'
-    setTimeout(() => {
-      tooltipContent.value = ''
-    }, 2000)
   } catch (err) {
-    tooltipContent.value = 'فشل النسخ'
-    setTimeout(() => {
-      tooltipContent.value = ''
-    }, 2000)
+    console.error('Failed to copy:', err)
   }
 }
 </script>
