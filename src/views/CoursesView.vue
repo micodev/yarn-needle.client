@@ -24,8 +24,41 @@
           </InputGroup>
         </div>
         <div class="flex gap-2">
-          <Button label="تصفية" icon="pi pi-filter" />
-          <Button label="ترتيب" icon="pi pi-sort" severity="secondary" />
+          <Button label="تصفية" icon="pi pi-filter" v-popover.right="'filterPopover'" />
+          <Popover id="filterPopover" :showCloseIcon="true">
+            <div class="flex flex-col gap-2 p-2 min-w-[200px]">
+              <h3 class="font-bold mb-2">خيارات التصفية</h3>
+              <div v-for="option in filterOptions" :key="option.value"
+                   class="p-2 hover:bg-gray-100 cursor-pointer rounded"
+                   :class="{ 'bg-gray-100': selectedFilter === option.value }"
+                   @click="selectedFilter = option.value">
+                {{ option.label }}
+              </div>
+              <Button v-if="selectedFilter"
+                      label="مسح التصفية"
+                      severity="secondary"
+                      text
+                      @click="selectedFilter = null" />
+            </div>
+          </Popover>
+
+          <Button label="ترتيب" icon="pi pi-sort" v-popover.right="'sortPopover'" severity="secondary" />
+          <Popover id="sortPopover" :showCloseIcon="true">
+            <div class="flex flex-col gap-2 p-2 min-w-[200px]">
+              <h3 class="font-bold mb-2">خيارات الترتيب</h3>
+              <div v-for="option in sortOptions" :key="option.value"
+                   class="p-2 hover:bg-gray-100 cursor-pointer rounded"
+                   :class="{ 'bg-gray-100': selectedSort === option.value }"
+                   @click="selectedSort = option.value">
+                {{ option.label }}
+              </div>
+              <Button v-if="selectedSort"
+                      label="مسح الترتيب"
+                      severity="secondary"
+                      text
+                      @click="selectedSort = null" />
+            </div>
+          </Popover>
         </div>
       </div>
 
@@ -76,8 +109,8 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { Button } from "primevue";
-import { InputText, InputGroup,InputGroupAddon } from "primevue";
+import { Button, Popover } from "primevue";
+import { InputText, InputGroup, InputGroupAddon } from "primevue";
 
 const searchQuery = ref("");
 
@@ -141,11 +174,64 @@ const courses = ref([
 for (let i = 0; i < 3; i++) {
   courses.value.push(...courses.value);
 }
+
+// Add new refs for filter and sort
+const filterOptions = ref([
+  { label: 'السعر: من الأعلى إلى الأقل', value: 'price-desc' },
+  { label: 'السعر: من الأقل إلى الأعلى', value: 'price-asc' },
+  { label: 'التقييم: من الأعلى إلى الأقل', value: 'rating-desc' },
+  { label: 'عدد الطلاب: من الأعلى إلى الأقل', value: 'students-desc' },
+]);
+
+const selectedFilter = ref(null);
+const selectedSort = ref(null);
+
+const sortOptions = ref([
+  { label: 'الأحدث', value: 'newest' },
+  { label: 'الأقدم', value: 'oldest' },
+  { label: 'الأكثر شعبية', value: 'popular' },
+]);
+
 const filteredCourses = computed(() => {
-  return courses.value.filter(course =>
+  let result = courses.value.filter(course =>
     course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
     course.description.toLowerCase().includes(searchQuery.value.toLowerCase())
   );
+
+  // Apply sorting
+  if (selectedSort.value) {
+    switch (selectedSort.value) {
+      case 'newest':
+        result = [...result].sort((a, b) => b.id - a.id);
+        break;
+      case 'oldest':
+        result = [...result].sort((a, b) => a.id - b.id);
+        break;
+      case 'popular':
+        result = [...result].sort((a, b) => b.students - a.students);
+        break;
+    }
+  }
+
+  // Apply filtering
+  if (selectedFilter.value) {
+    switch (selectedFilter.value) {
+      case 'price-desc':
+        result = [...result].sort((a, b) => Number(b.originalPrice) - Number(a.originalPrice));
+        break;
+      case 'price-asc':
+        result = [...result].sort((a, b) => Number(a.originalPrice) - Number(b.originalPrice));
+        break;
+      case 'rating-desc':
+        result = [...result].sort((a, b) => b.rating - a.rating);
+        break;
+      case 'students-desc':
+        result = [...result].sort((a, b) => b.students - a.students);
+        break;
+    }
+  }
+
+  return result;
 });
 </script>
 
@@ -160,6 +246,10 @@ const filteredCourses = computed(() => {
 }
 
 :deep(.p-inputgroup) {
+  direction: rtl;
+}
+
+:deep(.p-popover) {
   direction: rtl;
 }
 </style>
