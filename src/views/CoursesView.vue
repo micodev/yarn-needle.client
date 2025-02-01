@@ -25,7 +25,7 @@
         </div>
         <div class="flex gap-2 overflow-x-auto pb-2 sm:pb-0 w-full md:w-1/2 justify-end">
           <Button label="فرز" icon="pi pi-filter" @click="toggleLevel"
-                  :class="{ 'p-button-info': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration }"
+                  :class="{ 'p-button-secondary': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration }"
                   class="whitespace-nowrap" />
           <Popover ref="FilterPopOver" appendTo="body" class="w-full sm:w-auto">
             <div class="flex flex-col gap-4 p-4 min-w-[300px] max-h-[80vh] overflow-y-auto">
