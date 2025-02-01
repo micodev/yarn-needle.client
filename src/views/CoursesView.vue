@@ -91,7 +91,7 @@ const courses = ref([
     id: 2,
     title: "الخياطة المتقدمة",
     description: "تقنيات احترافية في الخياطة والتفصيل",
-    image: "https://images.unsplash.com/photo-1738273473785-99c1fc498c14??w=500&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1738273473785-99c1fc498c14?w=500&h=300&fit=crop",
     originalPrice: "399",
     discountedPrice: "299",
     discount: 25,
