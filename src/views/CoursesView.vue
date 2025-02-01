@@ -13,7 +13,7 @@
 
     <!-- Filters and Search Section -->
     <div class="container mx-auto px-4 py-8">
-      <div class="flex flex-col md:flex-row gap-4 mb-8 justify-between ">
+      <!-- <div class="flex flex-col md:flex-row gap-4 mb-8 justify-between "> -->
         <!-- <div class="flex gap-2">
           <Button label="تصفية" icon="pi pi-filter" />
           <Button label="ترتيب" icon="pi pi-sort" severity="secondary" />
@@ -26,7 +26,7 @@
             </InputGroupAddon>
           </InputGroup>
         <!-- </div> -->
-      </div>
+      <!-- </div> -->
 
       <!-- Course Cards Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8 relative">
