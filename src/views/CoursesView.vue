@@ -27,14 +27,42 @@
           <Button label="فرز" icon="pi pi-filter" @click="toggleLevel"
                   :class="{ 'p-button-info': levelFilter }" />
           <Popover ref="FilterPopOver" appendTo="body">
-            <div class="flex flex-col gap-2 p-3 min-w-[250px]">
-              <span class="font-medium block mb-2">اختر المستوى</span>
-              <Select v-model="levelFilter"
-                      :options="levelOptions"
-                      optionLabel="name"
-                      optionValue="value"
-                      placeholder="جميع المستويات"
-                      class="w-full" />
+            <div class="flex flex-col gap-4 p-3 min-w-[300px]">
+              <div>
+                <span class="font-medium block mb-2">اختر المستوى</span>
+                <Select v-model="levelFilter"
+                        :options="levelOptions"
+                        optionLabel="name"
+                        optionValue="value"
+                        placeholder="جميع المستويات"
+                        class="w-full" />
+              </div>
+
+              <div>
+                <span class="font-medium block mb-2">مدة الدورة (بالساعات)</span>
+                <div class="flex flex-col gap-2">
+                  <Slider v-model="durationRange"
+                          range
+                          :min="0"
+                          :max="maxDuration"
+                          class="mt-2" />
+                  <div class="flex justify-between text-sm text-gray-600">
+                    <span>{{ durationRange[0] }} ساعة</span>
+                    <span>{{ durationRange[1] }} ساعة</span>
+                  </div>
+                </div>
+              </div>
+
+              <Button v-if="levelFilter || durationRange[0] > 0 || durationRange[1] < maxDuration"
+                      label="مسح التصفية"
+                      icon="pi pi-times"
+                      severity="secondary"
+                      text
+                      class="mt-2 w-full justify-center"
+                      @click="() => {
+                        levelFilter = null;
+                        durationRange = [0, maxDuration];
+                      }" />
             </div>
           </Popover>
 
@@ -110,7 +138,7 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { Button, Popover, Select } from "primevue";
+import { Button, Popover, Select, Slider } from "primevue";
 import { InputText, InputGroup, InputGroupAddon } from "primevue";
 
 const searchQuery = ref("");
@@ -147,6 +175,10 @@ const toggleLevel = (event) => {
   FilterPopOver.value.toggle(event);
 };
 
+// Add duration filter state
+const durationRange = ref([0, 50]);
+const maxDuration = 50; // Maximum course duration in hours
+
 const courses = ref([
   {
     id: 1,
@@ -156,6 +188,7 @@ const courses = ref([
     originalPrice: "299",
     rating: 4.8,
     students: 1234,
+    duration: 10, // Duration in hours
     level: 'beginner',
     currency: "ريال سعودي"
   },
@@ -169,6 +202,7 @@ const courses = ref([
     discount: 25,
     rating: 4.9,
     students: 856,
+    duration: 25,
     level: 'advanced',
     currency: "ريال سعودي"
   },
@@ -180,6 +214,7 @@ const courses = ref([
     originalPrice: "499",
     rating: 4.7,
     students: 2156,
+    duration: 15,
     level: 'intermediate',
     currency: "ريال سعودي"
   },
@@ -193,6 +228,7 @@ const courses = ref([
     discount: 20,
     rating: 4.6,
     students: 1567,
+    duration: 30,
     level: 'advanced',
     currency: "ريال سعودي"
   },
@@ -204,6 +240,7 @@ const courses = ref([
     originalPrice: "199",
     rating: 4.5,
     students: 989,
+    duration: 5,
     level: 'beginner',
     currency: "ريال سعودي"
   }
@@ -216,7 +253,8 @@ const filteredCourses = computed(() => {
   let result = courses.value.filter(course =>
     (course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
     course.description.toLowerCase().includes(searchQuery.value.toLowerCase())) &&
-    (!levelFilter.value || course.level === levelFilter.value)
+    (!levelFilter.value || course.level === levelFilter.value) &&
+    (course.duration >= durationRange.value[0] && course.duration <= durationRange.value[1])
   );
 
   if (selectedSort.value) {
@@ -269,5 +307,13 @@ const filteredCourses = computed(() => {
 
 :deep(.p-dropdown-panel) {
   direction: rtl;
+}
+
+:deep(.p-slider) {
+  direction: ltr; /* Keep slider direction ltr for better UX */
+}
+
+:deep(.p-slider .p-slider-range) {
+  background: var(--primary-color);
 }
 </style>
