@@ -18,14 +18,14 @@
           <Button label="تصفية" icon="pi pi-filter" />
           <Button label="ترتيب" icon="pi pi-sort" severity="secondary" />
         </div> -->
-        <div class="flex-1 md:max-w-md">
+        <!-- <div class="flex-1 md:max-w-md"> -->
           <InputGroup >
             <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..."  />
             <InputGroupAddon>
               <Button  icon="pi pi-search"  severity="secondary" variant="text" />
             </InputGroupAddon>
           </InputGroup>
-        </div>
+        <!-- </div> -->
       </div>
 
       <!-- Course Cards Grid -->
