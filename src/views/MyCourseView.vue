@@ -79,14 +79,20 @@ const generateCourses = (count) => {
     "تعلم أحدث تقنيات تصميم الأزياء"
   ];
   const instructors = ["عبدالله الخليفة", "سارة أحمد", "نورة السعيد", "محمد العلي", "فاطمة الزهراء"];
+  const images = [
+    "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=500&h=300&fit=crop",
+    "https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=500&h=300&fit=crop",
+    "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&h=300&fit=crop",
+    "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?w=500&h=300&fit=crop",
+    "https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=500&h=300&fit=crop"
+  ];
 
   for (let i = 0; i < count; i++) {
     courses.push({
       id: i + 1,
       title: titles[i % titles.length],
       description: descriptions[i % descriptions.length],
-      image: `https://placehold.co/600x400/png?text=Course${i + 1}`,
-      progress: Math.floor(Math.random() * 100),
+      image: images[i % images.length], // Use real images instead of placehold.co
       completedLessons: Math.floor(Math.random() * 15) + 1,
       totalLessons: 15,
       duration: Math.floor(Math.random() * 8) + 2,
