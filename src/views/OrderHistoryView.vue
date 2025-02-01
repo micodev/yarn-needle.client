@@ -51,8 +51,8 @@
                 </div>
               </div>
 
-              <div v-if="order.orderState === 'قيد الانتظار'" class="mt-4 mb-2">
-                <Button label="اكمال الدفع" class="p-button-primary w-full" />
+              <div class="mt-4 mb-2 min-h-[40px]">
+                <Button v-if="order.orderState === 'قيد الانتظار'" label="اكمال الدفع" class="p-button-primary w-full" />
               </div>
             </div>
 
