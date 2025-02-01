@@ -30,7 +30,7 @@
           class="card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full bg-white dark:bg-gray-800 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
           <div class="relative">
             <img :src="course.image" :alt="course.title" class="w-full h-48 object-cover rounded" />
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.5] via-70% to-surface-0 to-50% opacity-100 dark:via-gray-100/[0.2] dark:to-gray-800">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.5] via-70% to-surface-0 to-19% opacity-100 dark:via-gray-100/[0.2] dark:to-gray-800">
             </div>
             <div class="relative w-full flex flex-col justify-center items-center rounded-md p-1">
               <p class="text-lg font-bold mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
