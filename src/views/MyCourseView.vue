@@ -21,9 +21,6 @@
             <img :src="course.image" :alt="course.title" class="w-full h-36 sm:h-48 object-cover rounded-t-lg" />
             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/60 via-100% to-surface-0 to-80% opacity-100 dark:via-gray-100/[0.2] dark:to-gray-800">
             </div>
-            <div class="absolute top-2 right-2">
-              <Tag :severity="getProgressSeverity(course.progress)" :value="course.progress + '%'" />
-            </div>
           </div>
 
           <div class="p-4 flex flex-col flex-grow">
