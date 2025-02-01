@@ -81,7 +81,7 @@ const courses = ref([
     id: 1,
     title: "التطريز اليدوي للمبتدئين",
     description: "تعلم أساسيات التطريز اليدوي خطوة بخطوة",
-    image: "https://images.unsplash.com/photo-1738230077816-fbab6232c545?q=80&w=500&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1738230077816-fbab6232c545?w=500&h=300&fit=crop",
     originalPrice: "299",
     rating: 4.8,
     students: 1234,
