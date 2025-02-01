@@ -2,7 +2,7 @@
   <div class="bg-white dark:bg-gray-900">
     <!-- Banner Section -->
     <div class="relative h-[200px] w-full">
-      <img src="https://placehold.co/1200x300" alt="Banner" class="w-full h-full object-cover" />
+      <img src="https://images.unsplash.com/photo-1584992236310-6edddc08acff?q=80&w=1200&h=300&fit=crop" alt="Banner" class="w-full h-full object-cover" />
       <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <div class="text-center text-white p-6 max-w-2xl">
           <h1 class="text-3xl font-bold mb-2">دورات خيط وإبرة</h1>
@@ -81,7 +81,7 @@ const courses = ref([
     id: 1,
     title: "التطريز اليدوي للمبتدئين",
     description: "تعلم أساسيات التطريز اليدوي خطوة بخطوة",
-    image: "https://images.unsplash.com/photo-1528578577235-b931fa7fa6d1",
+    image: "https://images.unsplash.com/photo-1590244843043-404819d97d0d?w=500&h=300&fit=crop",
     originalPrice: "299",
     rating: 4.8,
     students: 1234,
@@ -91,7 +91,7 @@ const courses = ref([
     id: 2,
     title: "الخياطة المتقدمة",
     description: "تقنيات احترافية في الخياطة والتفصيل",
-    image: "https://images.unsplash.com/photo-1605289355680-75fb41239154",
+    image: "https://images.unsplash.com/photo-1622811869246-05d2a83f05d5?w=500&h=300&fit=crop",
     originalPrice: "399",
     discountedPrice: "299",
     discount: 25,
@@ -103,7 +103,7 @@ const courses = ref([
     id: 3,
     title: "تصميم الأزياء الرقمي",
     description: "ابتكار تصاميم رقمية احترافية",
-    image: "https://images.unsplash.com/photo-1537511446984-935f663eb1f4",
+    image: "https://images.unsplash.com/photo-1483412033650-1015ddeb83d1?w=500&h=300&fit=crop",
     originalPrice: "499",
     rating: 4.7,
     students: 2156,
@@ -113,7 +113,7 @@ const courses = ref([
     id: 4,
     title: "الكروشيه للمحترفين",
     description: "تعلم تقنيات الكروشيه المتقدمة",
-    image: "https://images.unsplash.com/photo-1584992236310-6edddc08acff",
+    image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500&h=300&fit=crop",
     originalPrice: "349",
     discountedPrice: "279",
     discount: 20,
@@ -125,7 +125,7 @@ const courses = ref([
     id: 5,
     title: "تصميم الأنماط والنقوش",
     description: "إنشاء نقوش وأنماط مميزة للأقمشة",
-    image: "https://images.unsplash.com/photo-1577083552431-6e5fd01988ec",
+    image: "https://images.unsplash.com/photo-1528578577235-b931fa7fa6d1?w=500&h=300&fit=crop",
     originalPrice: "199",
     rating: 4.5,
     students: 989,
