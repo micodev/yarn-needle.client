@@ -27,7 +27,7 @@
           <Button label="ترتيب" :icon="selectedSort?.icon || 'pi pi-sort'" @click="toggleSort"
                   severity="secondary" :class="{ 'p-button-info': selectedSort }" />
           <Popover ref="sortPopover" appendTo="body">
-            <div class="flex flex-col gap-2 min-w-[250px]">
+            <div class="flex flex-col gap-2">
               <div class="font-medium px-3 py-2 bg-gray-50 dark:bg-gray-800 rounded-lg mb-1">خيارات الترتيب</div>
               <ul class="list-none p-0 m-0 flex flex-col">
                 <li v-for="option in sortOptions" :key="option.value"
