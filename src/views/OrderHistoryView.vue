@@ -17,8 +17,8 @@
           </div>
         </template>
         <template #title>
-          <div class="flex items-start">
-            <span class="mr-2">🛒</span>
+          <div class="flex items-start space-x-2">
+            <span>🛒</span>
             <div>
               <span class="font-medium">{{ order.type }}:</span>
               <span class="ml-1">{{ order.title }}</span>
@@ -27,21 +27,21 @@
         </template>
         <template #content>
           <div class="space-y-3">
-            <div class="flex items-center">
-              <span class="mr-2">📅</span>
+            <div class="flex items-center space-x-2">
+              <span>📅</span>
               <span>{{ formatDate(order.date) }}</span>
             </div>
 
-            <div class="flex items-center">
-              <span class="mr-2">{{ getOrderStateEmoji(order.orderState) }}</span>
+            <div class="flex items-center space-x-2">
+              <span>{{ getOrderStateEmoji(order.orderState) }}</span>
               <span class="font-medium">حالة الطلب:</span>
               <span :class="getOrderStateClass(order.orderState)" class="ml-2">
                 {{ order.orderState }}
               </span>
             </div>
 
-            <div class="flex items-center">
-              <span class="mr-2">💳</span>
+            <div class="flex items-center space-x-2">
+              <span>💳</span>
               <span class="font-medium">حالة الدفع:</span>
               <span :class="getPaymentStateClass(order.paymentState)" class="ml-2">
                 {{ order.paymentState }}
