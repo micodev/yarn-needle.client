@@ -72,7 +72,11 @@
             </div>
 
             <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
-              <div class="p-2 bg-gray-100 dark:bg-gray-700 rounded text-center">
+              <div
+                class="p-2 bg-gray-100 dark:bg-gray-700 rounded text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600"
+                @click="copyOrderKey(order.key)"
+                v-tooltip="tooltipContent"
+              >
                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ order.key }}</span>
               </div>
             </div>
@@ -171,5 +175,28 @@ const getPaymentStateClass = (state) => {
     default: return 'text-gray-500'
   }
 }
+
+const tooltipContent = ref('')
+
+const copyOrderKey = async (key) => {
+  try {
+    await navigator.clipboard.writeText(key)
+    tooltipContent.value = 'تم النسخ!'
+    setTimeout(() => {
+      tooltipContent.value = ''
+    }, 2000)
+  } catch (err) {
+    tooltipContent.value = 'فشل النسخ'
+    setTimeout(() => {
+      tooltipContent.value = ''
+    }, 2000)
+  }
+}
 </script>
+
+<style>
+.p-tooltip {
+  direction: rtl;
+}
+</style>
 
