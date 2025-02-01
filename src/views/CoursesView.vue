@@ -26,15 +26,19 @@
 
       <!-- Course Cards Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8 relative">
-        <div v-for="(course) in paddedCourses" :key="course.title"
-          class="card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full bg-white dark:bg-gray-800">
+        <div v-for="(course) in filteredCourses" :key="course.id"
+          class="card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full bg-white dark:bg-gray-800 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
           <div class="relative">
-            <img :src="course.image" alt="Course Image" class="w-full rounded" />
+            <img :src="course.image" :alt="course.title" class="w-full h-48 object-cover rounded" />
             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.5] via-20% to-surface-0 to-70% opacity-100 dark:via-gray-100/[0.2] dark:to-gray-800">
             </div>
             <div class="relative w-full flex flex-col justify-center items-center rounded-md p-1">
               <p class="text-lg font-bold mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
               <p class="text-sm text-gray-700 dark:text-gray-300 mb-2">{{ course.description }}</p>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-yellow-500">{{ course.rating }}⭐</span>
+                <span class="text-sm text-gray-600 dark:text-gray-400">({{ course.students }} طالب)</span>
+              </div>
             </div>
             <div class="absolute top-2 px-2 w-full">
               <div class="flex justify-between">
@@ -74,43 +78,76 @@ const searchQuery = ref("");
 
 const courses = ref([
   {
-    title: "دورة المونتاج المتقدم",
-    description: "تعلم أدوات و تقنيات المونتاج الحديثة",
-    image: "https://placehold.co/300x200",
-    originalPrice: "200",
+    id: 1,
+    title: "التطريز اليدوي للمبتدئين",
+    description: "تعلم أساسيات التطريز اليدوي خطوة بخطوة",
+    image: "https://images.unsplash.com/photo-1528578577235-b931fa7fa6d1",
+    originalPrice: "299",
+    rating: 4.8,
+    students: 1234,
     currency: "ريال سعودي"
   },
   {
-    title: "دورة التصوير الفوتوغرافي",
-    description: "اكتشف أسرار التصوير باحترافية",
-    image: "https://placehold.co/300x200",
-    originalPrice: "150",
-    discountedPrice: "105",
-    discount: 30,
+    id: 2,
+    title: "الخياطة المتقدمة",
+    description: "تقنيات احترافية في الخياطة والتفصيل",
+    image: "https://images.unsplash.com/photo-1605289355680-75fb41239154",
+    originalPrice: "399",
+    discountedPrice: "299",
+    discount: 25,
+    rating: 4.9,
+    students: 856,
     currency: "ريال سعودي"
   },
   {
-    title: "دورة كتابة المحتوى",
-    description: "تعلم كتابة المحتوى بشكل احترافي",
-    image: "https://placehold.co/300x200",
-    originalPrice: "100",
-    discountedPrice: "70",
-    discount: 30,
+    id: 3,
+    title: "تصميم الأزياء الرقمي",
+    description: "ابتكار تصاميم رقمية احترافية",
+    image: "https://images.unsplash.com/photo-1537511446984-935f663eb1f4",
+    originalPrice: "499",
+    rating: 4.7,
+    students: 2156,
+    currency: "ريال سعودي"
+  },
+  {
+    id: 4,
+    title: "الكروشيه للمحترفين",
+    description: "تعلم تقنيات الكروشيه المتقدمة",
+    image: "https://images.unsplash.com/photo-1584992236310-6edddc08acff",
+    originalPrice: "349",
+    discountedPrice: "279",
+    discount: 20,
+    rating: 4.6,
+    students: 1567,
+    currency: "ريال سعودي"
+  },
+  {
+    id: 5,
+    title: "تصميم الأنماط والنقوش",
+    description: "إنشاء نقوش وأنماط مميزة للأقمشة",
+    image: "https://images.unsplash.com/photo-1577083552431-6e5fd01988ec",
+    originalPrice: "199",
+    rating: 4.5,
+    students: 989,
     currency: "ريال سعودي"
   }
 ]);
 
-const longestDescriptionLength = computed(() => {
-  return Math.max(...courses.value.map(course => course.description.length));
-});
-
-const paddedCourses = computed(() => {
-  return courses.value.map(course => {
-    const paddingLength = longestDescriptionLength.value - course.description.length;
-    return {
-      ...course,
-      description: course.description + ' '.repeat(paddingLength)
-    };
-  });
+const filteredCourses = computed(() => {
+  return courses.value.filter(course =>
+    course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    course.description.toLowerCase().includes(searchQuery.value.toLowerCase())
+  );
 });
 </script>
+
+<style scoped>
+.card {
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+</style>
