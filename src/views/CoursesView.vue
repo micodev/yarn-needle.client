@@ -29,7 +29,7 @@
                     'p-button-secondary': !(levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration),
                     'p-button-primary': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration }"
                   class="whitespace-nowrap" />
-          <Popover ref="FilterPopOver" appendTo="self" class="w-full sm:w-auto">
+          <Popover ref="FilterPopOver"  class="w-full sm:w-auto">
             <div class="flex flex-col gap-4 p-4 min-w-[300px] max-h-[80vh] overflow-y-auto">
               <div>
                 <span class="font-medium block mb-2">المجال</span>
