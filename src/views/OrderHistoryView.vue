@@ -73,10 +73,11 @@
 
             <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
               <div
-                class="p-2 bg-gray-100 dark:bg-gray-700 rounded text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600"
+                class="p-2 bg-gray-100 dark:bg-gray-700 rounded text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center gap-2"
                 @click="copyOrderKey(order.key)"
-                v-tooltip.click.top="'تم النسخ'"
+                v-tooltip.focus.top="'تم النسخ'"
               >
+                <i class="pi pi-copy text-gray-600 dark:text-gray-400"></i>
                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ order.key }}</span>
               </div>
             </div>
@@ -188,6 +189,10 @@ const copyOrderKey = async (key) => {
 <style>
 .p-tooltip {
   direction: rtl;
+}
+
+.pi-copy {
+  font-size: 0.875rem;
 }
 </style>
 
