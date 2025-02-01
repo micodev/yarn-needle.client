@@ -125,7 +125,8 @@
       </div>
 
       <!-- Course Cards Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8 relative">
+      <div v-if="filteredCourses.length > 0"
+           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8 relative">
         <div v-for="(course) in filteredCourses" :key="course.id"
           class="card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full bg-white dark:bg-gray-800 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
           <div class="relative">
@@ -164,6 +165,28 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- No Results Message -->
+      <div v-else class="flex flex-col items-center justify-center py-16 px-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+        <i class="pi pi-search-minus text-4xl mb-4 text-gray-400"></i>
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">لا توجد نتائج</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-center mb-4">
+          لم نتمكن من العثور على أي دورات تطابق معايير البحث الخاصة بك
+        </p>
+        <Button
+          label="مسح جميع الفلاتر"
+          icon="pi pi-filter-slash"
+          severity="secondary"
+          @click="() => {
+            levelFilter = null;
+            categoryFilter = null;
+            lessonRangeFilter = null;
+            priceRangeFilter = null;
+            durationRange = [0, maxDuration];
+            searchQuery = '';
+          }"
+        />
       </div>
     </div>
   </div>
