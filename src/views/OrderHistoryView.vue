@@ -4,7 +4,18 @@
       <h1 class="text-2xl font-bold">تاريخ الطلبات</h1>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div :class="[
+      'grid gap-4',
+      {
+        'grid-cols-1': orders.length === 1 || orders.length > 4,
+        'grid-cols-2': orders.length === 2 || orders.length === 4,
+        'grid-cols-3': orders.length === 3
+      },
+      {
+        'md:grid-cols-2': orders.length > 2,
+        'lg:grid-cols-3': orders.length > 3
+      }
+    ]">
       <Card
         v-for="order in orders"
         :key="order.id"
@@ -69,7 +80,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { Card, Button } from 'primevue'
 
 const orders = ref([
@@ -104,6 +115,19 @@ const orders = ref([
     price: 299.99
   }
 ])
+
+// Optional: Helper function to add orders
+const addOrder = (order) => {
+  orders.value.push(order)
+}
+
+// Optional: Helper function to remove orders
+const removeOrder = (orderId) => {
+  const index = orders.value.findIndex(o => o.id === orderId)
+  if (index !== -1) {
+    orders.value.splice(index, 1)
+  }
+}
 
 const formatDate = (date) => {
   return new Intl.DateTimeFormat('ar', {
