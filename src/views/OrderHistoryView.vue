@@ -8,54 +8,58 @@
       <Card
         v-for="order in orders"
         :key="order.id"
-        class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700 flex flex-col justify-between"
+        class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700 flex flex-col"
       >
-        <template #header>
-          <div class="flex justify-between items-start mb-4">
-            <span class="text-lg font-semibold">📌 طلب #{{ order.id }}</span>
-            <span class="text-primary font-bold">{{ formatPrice(order.price) }} ريال</span>
-          </div>
-        </template>
-        <template #title>
-          <div class="flex items-start space-x-2">
-            <span class="ml-2">🛒</span>
-            <div>
-              <span class="font-medium">{{ order.type }}:</span>
-              <span class="ml-1">{{ order.title }}</span>
+        <div class="flex-1">
+          <template #header>
+            <div class="flex justify-between items-start mb-4">
+              <span class="text-lg font-semibold">📌 طلب #{{ order.id }}</span>
+              <span class="text-primary font-bold">{{ formatPrice(order.price) }} ريال</span>
             </div>
-          </div>
-        </template>
-        <template #content>
-          <div class="space-y-3">
-            <div class="flex items-center space-x-2">
-              <span class="ml-2">📅</span>
-              <span>{{ formatDate(order.date) }}</span>
+          </template>
+          <template #title>
+            <div class="flex items-start space-x-2">
+              <span class="ml-2">🛒</span>
+              <div>
+                <span class="font-medium">{{ order.type }}:</span>
+                <span class="ml-1">{{ order.title }}</span>
+              </div>
             </div>
+          </template>
+          <template #content>
+            <div class="space-y-3">
+              <div class="flex items-center space-x-2">
+                <span class="ml-2">📅</span>
+                <span>{{ formatDate(order.date) }}</span>
+              </div>
 
-            <div class="flex items-center space-x-2">
-              <span class="ml-2">{{ getOrderStateEmoji(order.orderState) }}</span>
-              <span class="font-medium">حالة الطلب:</span>
-              <span :class="getOrderStateClass(order.orderState)" class="ml-2">
-                {{ order.orderState }}
-              </span>
-            </div>
+              <div class="flex items-center space-x-2">
+                <span class="ml-2">{{ getOrderStateEmoji(order.orderState) }}</span>
+                <span class="font-medium">حالة الطلب:</span>
+                <span :class="getOrderStateClass(order.orderState)" class="ml-2">
+                  {{ order.orderState }}
+                </span>
+              </div>
 
-            <div class="flex items-center space-x-2">
-              <span class="ml-2">💳</span>
-              <span class="font-medium">حالة الدفع:</span>
-              <span :class="getPaymentStateClass(order.paymentState)" class="ml-2">
-                {{ order.paymentState }}
-              </span>
-            </div>
+              <div class="flex items-center space-x-2">
+                <span class="ml-2">💳</span>
+                <span class="font-medium">حالة الدفع:</span>
+                <span :class="getPaymentStateClass(order.paymentState)" class="ml-2">
+                  {{ order.paymentState }}
+                </span>
+              </div>
 
-            <div v-if="order.orderState === 'قيد الانتظار'" class="flex justify-end mt-4">
-              <Button label="اكمال الدفع" class="p-button-primary" />
+              <div v-if="order.orderState === 'قيد الانتظار'" class="flex justify-end mt-4">
+                <Button label="اكمال الدفع" class="p-button-primary" />
+              </div>
             </div>
-          </div>
-          <div class="mt-4 p-2 bg-gray-100 dark:bg-gray-700 rounded self-end">
+          </template>
+        </div>
+        <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div class="p-2 bg-gray-100 dark:bg-gray-700 rounded text-center">
             <span class="text-sm text-gray-600 dark:text-gray-400">{{ order.key }}</span>
           </div>
-        </template>
+        </div>
       </Card>
     </div>
   </div>
