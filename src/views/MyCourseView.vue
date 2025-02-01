@@ -98,10 +98,6 @@ const generateCourses = (count) => {
 
 const myCourses = ref(generateCourses(6)); // Generate 6 courses initially
 
-// Optional: Function to update number of courses
-const updateCourseCount = (newCount) => {
-  myCourses.value = generateCourses(newCount);
-};
 
 </script>
 
