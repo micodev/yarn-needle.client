@@ -104,7 +104,7 @@ const sortPopover = ref();
 
 const sortOptions = ref([
   { name: 'الأحدث', value: 'newest', icon: 'pi pi-clock' },
-  { name: 'الأكثر شعبية', value: 'popular', icon: 'pi-hashtag' },
+  { name: 'الأكثر شعبية', value: 'popular', icon: 'pi pi-hashtag' },
   { name: 'الأعلى تقييماً', value: 'top-rated', icon: 'pi pi-star' }
 ]);
 
