@@ -80,10 +80,11 @@ const orders = ref([
 ])
 
 const formatDate = (date) => {
-  return new Intl.DateTimeFormat('ar-SA', {
+  return new Intl.DateTimeFormat('ar', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
+    calendar: 'gregory'
   }).format(date)
 }
 
