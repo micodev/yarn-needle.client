@@ -290,7 +290,7 @@ const categoryOptions = ref([
 
 const courseTypeFilter = ref(null);
 const courseTypeOptions = ref([
-  { name: 'جميع الأنواع', value: null, icon: 'pi pi-globe' },
+  { name: 'جميع الأنواع', value: null, icon: '' },
   { name: 'حضوري', value: 'onsite', icon: '📍' },
   { name: 'عن بعد - مسجل', value: 'recorded', icon: '🌐' },
   { name: 'عن بعد - مباشر', value: 'live', icon: '🔴' }
