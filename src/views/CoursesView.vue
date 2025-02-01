@@ -67,8 +67,8 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { Button } from "primevue/button";
-import { InputText } from "primevue/inputtext";
+import { Button } from "primevue";
+import { InputText } from "primevue";
 
 const searchQuery = ref("");
 
