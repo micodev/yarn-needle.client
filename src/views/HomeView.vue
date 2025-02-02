@@ -43,7 +43,13 @@
       <p class="text-lg text-gray-600 dark:text-gray-400">دورات مصممة لتطوير مهاراتك في مجالات متعددة</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 relative">
-      <div v-for="(course, index) in paddedCourses" :key="course.title"
+      <div v-if="courseStore.loading" class="col-span-3 text-center">
+        <i class="pi pi-spin pi-spinner text-4xl"></i>
+      </div>
+      <div v-else-if="courseStore.error" class="col-span-3 text-center text-red-500">
+        {{ courseStore.error }}
+      </div>
+      <div v-else v-for="(course, index) in courseStore.paddedCourses" :key="course.title"
         :class="['card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full', 'bg-slate-50 dark:bg-gray-800' ]">
         <div class="relative">
           <img :src="course.image" alt="Course Image" class="w-full rounded" />
@@ -84,7 +90,13 @@
       <p class="text-lg text-gray-600 dark:text-gray-400">إشترك بعضويتك الآن وأحصل على وصول غير محدود</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-      <div v-for="plan in plans" :key="plan.title"
+      <div v-if="courseStore.loading" class="col-span-4 text-center">
+        <i class="pi pi-spin pi-spinner text-4xl"></i>
+      </div>
+      <div v-else-if="courseStore.error" class="col-span-4 text-center text-red-500">
+        {{ courseStore.error }}
+      </div>
+      <div v-else v-for="plan in courseStore.plans" :key="plan.title"
         class="plan-card p-6 rounded-lg  shadow-inner bg-slate-100 dark:bg-gray-800 flex flex-col justify-between h-full">
         <div>
           <div class="flex items-center mb-4">
@@ -109,91 +121,14 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { onMounted } from "vue";
 import { Button } from "primevue";
+import { useCourseStore } from '../stores/course';
 
-const courses = ref([
-  {
-    title: "دورة المونتاج المتقدم",
-    description: "تعلم أدوات و تقنيات تعلم أدوات و تقنيات  تعلم أدوات و تقنيات تعلم أدوات و تقنيات تعلم أدوات و تقنيات تعلم أدوات و تقنيات المونتاج الحديثة",
-    image: "https://placehold.co/300x200",
-    originalPrice: "200",
-    currency: "ريال سعودي"
-  },
-  {
-    title: "دورة التصوير الفوتوغرافي",
-    description: "اكتشف أسرار التصوير باحترافية",
-    image: "https://placehold.co/300x200",
-    originalPrice: "150",
-    discountedPrice: "105",
-    discount: 30,
-    currency: "ريال سعودي"
-  },
-  {
-    title: "دورة كتابة المحتوى",
-    description: "تعلم كتابة المحتوى بشكل احترافي",
-    image: "https://placehold.co/300x200",
-    originalPrice: "100",
-    discountedPrice: "70",
-    discount: 30,
-    currency: "ريال سعودي"
-  }
-]);
+const courseStore = useCourseStore();
 
-const longestDescriptionLength = computed(() => {
-  return Math.max(...courses.value.map(course => course.description.length));
+onMounted(async () => {
+  await courseStore.fetchCourses();
+  await courseStore.fetchPlans();
 });
-
-const paddedCourses = computed(() => {
-  return courses.value.map(course => {
-    const paddingLength = longestDescriptionLength.value - course.description.length;
-    return {
-      ...course,
-      description: course.description + ' '.repeat(paddingLength)
-    };
-  });
-});
-
-const plans = ref([
-  {
-    title: "العضوية التجريبية",
-    description: [
-      "تقدم فترة تجريبية مجانية أو بخصم كبير لجذب العملاء الجدد.",
-      "تشجيعهم على تجربة الخدمة.",
-      "تسليط الضوء على الميزات الأساسية خلال هذه الفترة."
-    ],
-    price: "0",
-    iconClass: "pi pi-user text-gray-500"
-  },
-  {
-    title: "العضوية الفضية",
-    description: [
-      "هي الخطوة التالية بعد التجربة.",
-      "تقدم ميزات أساسية بأسعار معقولة.",
-      "التركيز على قيمة مقابل المال."
-    ],
-    price: "50",
-    iconClass: "pi pi-star text-gray-500"
-  },
-  {
-    title: "العضوية الذهبية",
-    description: [
-      "تقدم مجموعة أوسع من الميزات مقارنة بالعضوية الفضية.",
-      "تناسب المستخدمين الذين يحتاجون إلى المزيد من الميزات والمرونة.",
-      "التركيز على الميزات المميزة."
-    ],
-    price: "100",
-    iconClass: "pi pi-star text-yellow-600"
-  },
-  {
-    title: "العضوية البلاتينية",
-    description: [
-      "هي الخطة الأكثر شمولاً.",
-      "تقدم أعلى مستوى من الميزات والخدمات.",
-      "تسليط الضوء على الميزات الحصرية مثل الدعم المخصص أو الوصول إلى ميزات إضافية."
-    ],
-    price: "200",
-    iconClass: "pi pi-star text-blue-500"
-  }
-]);
 </script>
