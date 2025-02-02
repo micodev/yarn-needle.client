@@ -75,7 +75,38 @@ const useCourseStore = defineStore('course', {
             price: "0",
             iconClass: "pi pi-user text-gray-500"
           },
-          // ... rest of the plans data
+          {
+            title: "العضوية الفضية",
+            description: [
+              "الوصول إلى 5 دورات شهرياً",
+              "دعم فني عبر البريد الإلكتروني",
+              "شهادات إتمام معتمدة"
+            ],
+            price: "50",
+            iconClass: "pi pi-star text-gray-500"
+          },
+          {
+            title: "العضوية الذهبية",
+            description: [
+              "الوصول غير المحدود للدورات",
+              "دعم فني على مدار الساعة",
+              "شهادات احترافية معتمدة",
+              "جلسات تدريب خاصة شهرياً"
+            ],
+            price: "100",
+            iconClass: "pi pi-star text-yellow-600"
+          },
+          {
+            title: "العضوية البلاتينية",
+            description: [
+              "جميع مميزات العضوية الذهبية",
+              "جلسات تدريب فردية أسبوعية",
+              "أولوية الوصول للدورات الجديدة",
+              "محتوى حصري للأعضاء المميزين"
+            ],
+            price: "200",
+            iconClass: "pi pi-star text-blue-500"
+          }
         ];
       } catch (err) {
         this.error = 'Failed to fetch plans';
