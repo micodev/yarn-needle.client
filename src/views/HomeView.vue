@@ -123,7 +123,7 @@
 <script setup>
 import { onMounted } from "vue";
 import { Button } from "primevue";
-import { useCourseStore } from '../stores';
+import { useCourseStore } from '../stores/course';
 
 const courseStore = useCourseStore();
 
