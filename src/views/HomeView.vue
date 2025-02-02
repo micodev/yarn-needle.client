@@ -125,10 +125,10 @@ import { onMounted } from "vue";
 import { Button } from "primevue";
 import { useHomeStore } from '@/stores/home';  // This should now work
 
-const courseStore = useHomeStore();
+const homeStore = useHomeStore();
 
 onMounted(async () => {
-  await courseStore.fetchCourses();
-  await courseStore.fetchPlans();
+  await homeStore.fetchCourses();
+  await homeStore.fetchPlans();
 });
 </script>
