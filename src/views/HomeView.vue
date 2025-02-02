@@ -123,9 +123,9 @@
 <script setup>
 import { onMounted } from "vue";
 import { Button } from "primevue";
-import { useCourseStore } from '@/stores/home';  // This should now work
+import { useHomeStore } from '@/stores/home';  // This should now work
 
-const courseStore = useCourseStore();
+const courseStore = useHomeStore();
 
 onMounted(async () => {
   await courseStore.fetchCourses();
