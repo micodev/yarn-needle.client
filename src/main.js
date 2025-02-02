@@ -10,10 +10,11 @@ import Ripple from 'primevue/ripple';
 
 import Tooltip from 'primevue/tooltip';
 const app = createApp(App)
+const pinia = createPinia();
 
 app.directive('tooltip', Tooltip);
 app.directive('ripple', Ripple);
-app.use(createPinia())
+app.use(pinia);  // Make sure this line exists
 app.use(router)
 // eslint-disable-next-line vue/multi-word-component-names
 app.component('Toast', Toast)

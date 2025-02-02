@@ -52,7 +52,7 @@ const useCourseStore = defineStore('course', {
             currency: "ريال سعودي"
           }
         ];
-      } catch (err) {
+      } catch {
         this.error = 'Failed to fetch courses';
       } finally {
         this.loading = false;
@@ -108,7 +108,7 @@ const useCourseStore = defineStore('course', {
             iconClass: "pi pi-star text-blue-500"
           }
         ];
-      } catch (err) {
+      } catch {
         this.error = 'Failed to fetch plans';
       } finally {
         this.loading = false;
