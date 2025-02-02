@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 
 // Change to explicit named export
-const useCourseStore = defineStore('course', {
+const useHomeStore = defineStore('course', {
   state: () => ({
     courses: [],
     plans: [],
@@ -117,4 +117,4 @@ const useCourseStore = defineStore('course', {
   }
 });
 
-export { useCourseStore };  // Add explicit export
+export { useHomeStore };  // Add explicit export
