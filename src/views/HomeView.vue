@@ -43,13 +43,13 @@
       <p class="text-lg text-gray-600 dark:text-gray-400">دورات مصممة لتطوير مهاراتك في مجالات متعددة</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 relative">
-      <div v-if="courseStore.loading" class="col-span-3 text-center">
+      <div v-if="homeStore.loading" class="col-span-3 text-center">
         <i class="pi pi-spin pi-spinner text-4xl"></i>
       </div>
-      <div v-else-if="courseStore.error" class="col-span-3 text-center text-red-500">
-        {{ courseStore.error }}
+      <div v-else-if="homeStore.error" class="col-span-3 text-center text-red-500">
+        {{ homeStore.error }}
       </div>
-      <div v-else v-for="(course, index) in courseStore.paddedCourses" :key="course.title"
+      <div v-else v-for="(course, index) in homeStore.paddedCourses" :key="course.title"
         :class="['card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full', 'bg-slate-50 dark:bg-gray-800' ]">
         <div class="relative">
           <img :src="course.image" alt="Course Image" class="w-full rounded" />
@@ -90,13 +90,13 @@
       <p class="text-lg text-gray-600 dark:text-gray-400">إشترك بعضويتك الآن وأحصل على وصول غير محدود</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-      <div v-if="courseStore.loading" class="col-span-4 text-center">
+      <div v-if="homeStore.loading" class="col-span-4 text-center">
         <i class="pi pi-spin pi-spinner text-4xl"></i>
       </div>
-      <div v-else-if="courseStore.error" class="col-span-4 text-center text-red-500">
-        {{ courseStore.error }}
+      <div v-else-if="homeStore.error" class="col-span-4 text-center text-red-500">
+        {{ homeStore.error }}
       </div>
-      <div v-else v-for="plan in courseStore.plans" :key="plan.title"
+      <div v-else v-for="plan in homeStore.plans" :key="plan.title"
         class="plan-card p-6 rounded-lg  shadow-inner bg-slate-100 dark:bg-gray-800 flex flex-col justify-between h-full">
         <div>
           <div class="flex items-center mb-4">
