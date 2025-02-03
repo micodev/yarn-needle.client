@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col md:flex-row bg-white dark:bg-gray-900 text-black dark:text-white p-8 h-full">
-    <div class="flex-1 flex justify-center items-center ml-2 h-3/4 w-3/4">
-      <div class="relative rounded overflow-hidden">
+  <div class="flex flex-col md:flex-row bg-white dark:bg-gray-900 text-black dark:text-white p-4 md:p-8 h-full">
+    <div class="w-full md:flex-1 flex justify-center items-center md:ml-2 h-auto">
+      <div class="relative rounded overflow-hidden w-full">
         <img :src="course.image" alt="Course Thumbnail" class="w-full h-full object-cover rounded">
         <div class="absolute inset-0 right-2 top-2">
           <span class=" bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-300 py-1 px-2 rounded">{{
@@ -12,7 +12,7 @@
         </div> -->
       </div>
     </div>
-    <div class="flex-1 flex flex-col justify-center h-3/4 w-3/4 overflow-hidden">
+    <div class="w-full md:flex-1 flex flex-col justify-center mt-4 md:mt-0">
       <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">{{ course.title }}</h1>
       <div class="text-gray-700 dark:text-gray-300 mb-4 flex flex-row space-x-4 gap-x-4">
         <div class="flex items-center">
@@ -43,8 +43,8 @@
         :icon="course.purchased ? 'pi pi-arrow-left' : ''" />
     </div>
   </div>
-  <div class="flex flex-col md:flex-row bg-white dark:bg-gray-900 text-black dark:text-white p-8 h-full mt-8">
-    <div class="w-3/4 p-4">
+  <div class="flex flex-col md:flex-row bg-white dark:bg-gray-900 text-black dark:text-white p-4 md:p-8 h-full mt-8">
+    <div class="w-full md:w-3/4 p-4">
       <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">محتوى الدورة</h2>
       <p class="text-gray-700 dark:text-gray-300">{{ course.content }}</p>
       <Fieldset legend="محاور الدورة" :toggleable="true" :collapsed="true">
@@ -75,7 +75,8 @@
         </div>
         <div class="flex justify-center my-4 relative">
           <hr class="w-full border-t border-gray-300 dark:border-gray-700 absolute top-1/2">
-          <Button v-if="showMoreButton" label="عرض المزيد" severity="primary" size="small" class="w-1/4" @click="showMoreComments" />
+          <Button v-if="showMoreButton" label="عرض المزيد" severity="primary" size="small" class="w-1/4"
+            @click="showMoreComments" />
         </div>
         <div class="mt-4 flex flex-col space-y-4 justify-center">
           <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">أضف تقييمك وتعليقك</h3>
@@ -85,7 +86,7 @@
         </div>
       </Fieldset>
     </div>
-    <div class="w-1/4 p-4">
+    <div class="w-full md:w-1/4 p-4 mt-4 md:mt-0">
       <div class="mb-4">
         <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">الجهة الراعية</h3>
         <div class="flex space-x-2 gap-2">
@@ -109,7 +110,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { Button, Fieldset, Rating ,Textarea} from 'primevue';
+import { Button, Fieldset, Rating, Textarea } from 'primevue';
 
 const course = ref({
   title: "الجوانب الأربع لجودة الحياة",
@@ -244,5 +245,3 @@ const updateDisplayedComments = () => {
   border-color: var(--p-content-border-color);
 }
 </style>
-
-
