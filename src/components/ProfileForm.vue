@@ -11,8 +11,9 @@
         { 'hover:scale-105': !isSubscriptionExpanded }
       ]">
         <!-- Header with collapse button -->
-        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center cursor-pointer hover:bg-white dark:hover:bg-gray-700"
-             @click="toggleCollapse">
+        <div
+          class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center cursor-pointer hover:bg-white dark:hover:bg-gray-700"
+          @click="toggleCollapse">
           <h2 class="text-xl font-bold text-gray-900 dark:text-white">معلومات العضوية</h2>
           <i :class="[
             'pi transition-transform duration-300',
@@ -21,18 +22,20 @@
         </div>
 
         <!-- Animated collapsable content -->
-        <div ref="collapseContent"
-             :style="collapseStyle"
-             class="transition-all duration-300 ease-in-out overflow-hidden">
+        <div ref="collapseContent" :style="collapseStyle"
+          class="transition-all duration-300 ease-in-out overflow-hidden">
           <div ref="innerContent">
             <!-- User Profile Header -->
             <div class="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
-              <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 sm:space-x-reverse">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
+              <div
+                class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 sm:space-x-reverse">
+                <div
+                  class="w-20 h-20 sm:w-24 sm:h-24 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
                   <i class="pi pi-user text-3xl sm:text-4xl text-gray-600 dark:text-gray-300"></i>
                 </div>
                 <div class="text-center sm:text-right">
-                  <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">{{ form.firstName }} {{ form.secondName }}</h2>
+                  <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">{{ form.firstName }} {{
+                    form.secondName }}</h2>
                   <p class="text-gray-600 dark:text-gray-400">{{ form.civilianId }}</p>
                   <div class="mt-2 flex items-center justify-center sm:justify-start">
                     <i class="pi pi-clock text-green-500 ml-2"></i>
@@ -59,7 +62,8 @@
                   <span class="text-base sm:text-lg font-bold text-gray-900 dark:text-white">
                     {{ currentPlan.price }} ريال سعودي / الشهر
                   </span>
-                  <button class="w-full sm:w-auto px-4 py-2 rounded-lg border border-gray-300 hover:border-gray-400 transition-colors flex items-center justify-center">
+                  <button
+                    class="w-full sm:w-auto px-4 py-2 rounded-lg border border-gray-300 hover:border-gray-400 transition-colors flex items-center justify-center">
                     <i class="pi pi-refresh ml-2"></i>
                     تجديد العضوية
                   </button>
@@ -72,7 +76,7 @@
               <h3 class="text-lg sm:text-xl font-semibold mb-4 text-gray-900 dark:text-white">الترقية إلى</h3>
               <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <div v-for="plan in availablePlans" :key="plan.title"
-                     class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 sm:p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                  class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 sm:p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                   <div class="flex items-center mb-4">
                     <i :class="plan.iconClass" class="text-lg ml-3"></i>
                     <h4 class="text-lg font-bold text-gray-900 dark:text-white">{{ plan.title }}</h4>
@@ -82,7 +86,8 @@
                     <p class="text-lg font-bold mb-4 text-gray-900 dark:text-white">
                       {{ plan.price }} ريال سعودي / الشهر
                     </p>
-                    <button class="w-full px-4 py-2 text-white border border-blue-600 rounded-lg hover:border-blue-700 transition-colors flex items-center justify-center">
+                    <button
+                      class="w-full px-4 py-2 text-white border border-blue-600 rounded-lg hover:border-blue-700 transition-colors flex items-center justify-center">
                       <i class="pi pi-arrow-up ml-2"></i>
                       ترقية
                     </button>
@@ -115,21 +120,22 @@
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
-            <MultiSelect :options="nationalities" filter v-model="form.nationality" :maxitems="1" :selectionLimit="1" optionLabel="name" placeholder="اختر الجنسية" class="w-full" required>
+            <MultiSelect :options="nationalities" filter v-model="form.nationality" :maxitems="1" :selectionLimit="1"
+              optionLabel="name" placeholder="اختر الجنسية" class="w-full" required>
               <template #option="slotProps">
-                  <div>
-                     <div>{{ slotProps.option.name }}</div>
-                  </div>
+                <div>
+                  <div>{{ slotProps.option.name }}</div>
+                </div>
               </template>
 
               <template #dropdownicon>
-                  <i class="pi pi-globe" />
+                <i class="pi pi-globe" />
               </template>
               <template #filtericon>
-                  <i class="pi pi-search" />
+                <i class="pi pi-search" />
               </template>
               <template #header>
-                  <div class="px-4">الجنسيات المتاحة</div>
+                <div class="px-4">الجنسيات المتاحة</div>
               </template>
             </MultiSelect>
             <label>الجنسية <span class="text-red-500">*</span></label>
@@ -143,7 +149,8 @@
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
-            <MultiSelect :options="countries" v-model="form.country" :selectionLimit="1" optionLabel="name" filter placeholder="اختر البلد" class="w-full" required>
+            <MultiSelect :options="countries" v-model="form.country" :selectionLimit="1" optionLabel="name" filter
+              placeholder="اختر البلد" class="w-full" required>
             </MultiSelect>
             <label>البلد <span class="text-red-500">*</span></label>
           </IftaLabel>
@@ -174,37 +181,25 @@
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
-            <InputText
-              type="text"
-              id="civilianId"
-              v-model="form.civilianId"
-              class="w-full"
-              required
-              pattern="^[A-Za-z0-9]+$"
-              maxlength="20"
-              @input="validateCivilianId"
-            />
+            <InputText type="text" id="civilianId" v-model="form.civilianId" class="w-full" required
+              pattern="^[A-Za-z0-9]+$" maxlength="20" @input="validateCivilianId" />
             <label>الرقم المدني <span class="text-red-500">*</span></label>
           </IftaLabel>
           <small v-if="civilianIdError" class="text-red-500 block mt-1">{{ civilianIdError }}</small>
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
-            <InputText
-              type="password"
-              id="password"
-              v-model="form.password"
-              class="w-full"
+            <InputText type="password" id="password" v-model="form.password" class="w-full"
               :placeholder="profileExists ? 'اترك فارغاً للاحتفاظ بكلمة المرور الحالية' : 'أدخل كلمة المرور'"
-              :required="!profileExists"
-            />
+              :required="!profileExists" />
             <label>كلمة المرور <span v-if="!profileExists" class="text-red-500">*</span></label>
           </IftaLabel>
           <small v-if="passwordHint" class="text-gray-500 block mt-1">{{ passwordHint }}</small>
         </div>
         <div class="w-full px-2 mb-4">
           <IftaLabel>
-            <FileUpload name="identity"  severity="secondary" class="p-button-outlined w-full"  url="./upload" accept="image/*" mode="basic" auto chooseLabel="إرفاق الهوية الوطنية" required />
+            <FileUpload name="identity" severity="secondary" class="p-button-outlined w-full" url="./upload"
+              accept="image/*" mode="basic" auto chooseLabel="إرفاق الهوية الوطنية" required />
             <label>الهوية الوطنية <span class="text-red-500">*</span></label>
           </IftaLabel>
         </div>
@@ -330,16 +325,16 @@ const nationalities = ref([
 ]);
 
 const countries = ref([
-    { name: 'أستراليا', code: 'AU' },
-    { name: 'البرازيل', code: 'BR' },
-    { name: 'الصين', code: 'CN' },
-    { name: 'مصر', code: 'EG' },
-    { name: 'فرنسا', code: 'FR' },
-    { name: 'ألمانيا', code: 'DE' },
-    { name: 'الهند', code: 'IN' },
-    { name: 'اليابان', code: 'JP' },
-    { name: 'إسبانيا', code: 'ES' },
-    { name: 'الولايات المتحدة', code: 'US' }
+  { name: 'أستراليا', code: 'AU' },
+  { name: 'البرازيل', code: 'BR' },
+  { name: 'الصين', code: 'CN' },
+  { name: 'مصر', code: 'EG' },
+  { name: 'فرنسا', code: 'FR' },
+  { name: 'ألمانيا', code: 'DE' },
+  { name: 'الهند', code: 'IN' },
+  { name: 'اليابان', code: 'JP' },
+  { name: 'إسبانيا', code: 'ES' },
+  { name: 'الولايات المتحدة', code: 'US' }
 ]);
 
 const civilianIdError = ref('');
@@ -355,17 +350,17 @@ const validateCivilianId = (event) => {
 
 const handleSubmit = async () => {
   if (!form.value.firstName ||
-      !form.value.secondName ||
-      !form.value.thirdName ||
-      !form.value.nationality ||
-      !form.value.phoneNumber ||
-      !form.value.country ||
-      !form.value.birthDate ||
-      !form.value.degree ||
-      !form.value.fieldOfStudy ||
-      !form.value.jobTitle ||
-      !form.value.civilianId ||
-      (!profileExists.value && !form.value.password)) {
+    !form.value.secondName ||
+    !form.value.thirdName ||
+    !form.value.nationality ||
+    !form.value.phoneNumber ||
+    !form.value.country ||
+    !form.value.birthDate ||
+    !form.value.degree ||
+    !form.value.fieldOfStudy ||
+    !form.value.jobTitle ||
+    !form.value.civilianId ||
+    (!profileExists.value && !form.value.password)) {
     alert('الرجاء ملء جميع الحقول المطلوبة');
     return;
   }
