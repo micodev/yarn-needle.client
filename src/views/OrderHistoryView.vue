@@ -20,7 +20,7 @@
         'lg:grid-cols-3': sortedOrders.length > 3
       }
     ]">
-      <Card v-for="order in sortedOrders" :key="order.id" class="bg-white dark:bg-gray-800 rounded-lg shadow-inner p-5">
+      <Card v-for="order in sortedOrders" :key="order.id" class="bg-white dark:bg-gray-800 rounded-lg card-shadow p-5">
         <template #header>
           <div class="flex justify-between items-start mb-4">
             <span class="text-lg font-semibold">📌 طلب #{{ order.id }}</span>
@@ -70,7 +70,7 @@
 
             <div class="mt-auto pt-4">
               <div
-                class="p-2 bg-gray-100 dark:bg-gray-700 rounded text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center gap-2 shadow-inner"
+                class="p-2 bg-gray-100 dark:bg-gray-700 rounded text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center gap-2 copy-button-shadow"
                 @click="copyOrderKey(order.key)" tabindex="0" v-tooltip.focus.top="'تم النسخ'">
                 <i class="pi pi-copy text-gray-600 dark:text-gray-400"></i>
                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ order.key }}</span>
@@ -212,5 +212,24 @@ const copyOrderKey = async (key) => {
 
 :deep(.p-card) {
   box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.card-shadow {
+  box-shadow: inset 0 2px 8px -2px rgba(0, 0, 0, 0.1),
+    inset 0 -2px 8px -2px rgba(0, 0, 0, 0.05);
+}
+
+:deep(.dark) .card-shadow {
+  box-shadow: inset 0 2px 8px -2px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 8px -2px rgba(0, 0, 0, 0.25);
+}
+
+.copy-button-shadow {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+:deep(.dark) .copy-button-shadow {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 </style>
