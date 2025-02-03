@@ -2,7 +2,8 @@
   <div class="bg-white dark:bg-gray-900">
     <!-- Banner Section -->
     <div class="relative h-[150px] sm:h-[200px] w-full">
-      <img src="https://images.unsplash.com/photo-1584992236310-6edddc08acff?q=80&w=1200&h=300&fit=crop" alt="Banner" class="w-full h-full object-cover" />
+      <img src="https://images.unsplash.com/photo-1584992236310-6edddc08acff?q=80&w=1200&h=300&fit=crop" alt="Banner"
+        class="w-full h-full object-cover" />
       <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <div class="text-center text-white p-6 max-w-2xl">
           <h1 class="text-3xl font-bold mb-2">دوراتي</h1>
@@ -14,14 +15,14 @@
     <!-- Course Cards Grid -->
     <div class="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
       <div v-if="myCourses.length > 0"
-           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         <div v-for="course in myCourses" :key="course.id"
-             class="w-full rounded-lg shadow-md relative flex flex-col bg-white dark:bg-gray-800 transition-all duration-300 ease-in-out hover:shadow-xl sm:hover:-translate-y-1">
+          class="w-full rounded-lg shadow-md relative flex flex-col bg-white dark:bg-gray-800 transition-all duration-300 ease-in-out hover:shadow-xl sm:hover:-translate-y-1">
           <div class="relative aspect-video">
-            <img :src="course.image" :alt="course.title"
-                 class="w-full h-full object-cover rounded-t-lg"
-                 loading="lazy" />
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/60 via-100% to-surface-0 to-80% opacity-100 dark:via-gray-100/[0.2] dark:to-gray-800">
+            <img :src="course.image" :alt="course.title" class="w-full h-full object-cover rounded-t-lg"
+              loading="lazy" />
+            <div
+              class="absolute inset-0 bg-gradient-to-b from-transparent via-white/60 via-100% to-surface-0 to-80% opacity-100 dark:via-gray-100/[0.2] dark:to-gray-800">
             </div>
           </div>
 
@@ -31,7 +32,8 @@
 
             <div class="mt-auto">
               <div class="flex justify-between items-center mb-3 text-xs sm:text-sm">
-                <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.completedLessons }}/{{ course.totalLessons }} درس</span>
+                <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.completedLessons }}/{{
+                  course.totalLessons }} درس</span>
                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.duration }} ساعات</span>
               </div>
               <div class="flex gap-2 flex-col sm:flex-row">
@@ -44,17 +46,14 @@
       </div>
 
       <!-- No Courses Message -->
-      <div v-else class="flex flex-col items-center justify-center py-8 sm:py-16 px-3 sm:px-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+      <div v-else
+        class="flex flex-col items-center justify-center py-8 sm:py-16 px-3 sm:px-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
         <i class="pi pi-book text-4xl mb-4 text-gray-400"></i>
         <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">لا توجد دورات</h3>
         <p class="text-gray-600 dark:text-gray-400 text-center mb-4">
           لم يتم العثور على أي دورات مسجلة
         </p>
-        <Button
-          label="استكشف الدورات"
-          icon="pi pi-search"
-          @click="$router.push('/courses')"
-        />
+        <Button label="استكشف الدورات" icon="pi pi-search" @click="$router.push('/courses')" />
       </div>
     </div>
   </div>
@@ -111,7 +110,7 @@ const myCourses = ref(generateCourses(10)); // Generate 6 courses initially
 
 <style scoped>
 .card {
-  background-color: var(--p-surface-0);
+  /* background-color: var(--p-surface-0); */
   border: 1px solid var(--p-content-border-color);
 }
 
