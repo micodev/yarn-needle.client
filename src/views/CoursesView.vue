@@ -105,18 +105,19 @@
           <Button label="ترتيب" :icon="selectedSort?.icon || 'pi pi-sort'" @click="toggleSort" severity="secondary"
             :class="{ 'p-button-info': selectedSort }" class="whitespace-nowrap" />
           <Popover ref="sortPopover" appendTo="body">
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-2 w-[240px]">
               <ul class="list-none p-0 m-0 flex flex-col justify-start">
                 <li v-for="option in sortOptions" :key="option.value"
-                  class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-lg transition-colors"
+                  class="flex items-center gap-2 h-[48px] px-4 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-lg transition-colors"
                   :class="{ 'bg-primary-50 text-primary-700 dark:bg-primary-900/20 dark:text-primary-400': selectedSort?.value === option.value }"
                   @click="selectSort(option)">
-                  <i :class="[option.icon, selectedSort?.value === option.value ? 'text-primary-500' : '']"></i>
-                  <span>{{ option.name }}</span>
+                  <i
+                    :class="[option.icon, 'text-lg', selectedSort?.value === option.value ? 'text-primary-500' : '']"></i>
+                  <span class="text-[14px]">{{ option.name }}</span>
                 </li>
               </ul>
               <Button v-if="selectedSort" label="مسح الترتيب" icon="pi pi-times" severity="secondary" text
-                class="mt-2 w-full justify-center" @click="selectedSort = null" />
+                class="mt-1 w-full justify-center h-[40px]" @click="selectedSort = null" />
             </div>
           </Popover>
         </div>
