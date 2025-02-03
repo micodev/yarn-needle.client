@@ -30,14 +30,14 @@
             'p-button-primary': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration
           }" class="whitespace-nowrap" />
           <Popover ref="FilterPopOver">
-            <div class="flex flex-col gap-4 p-4 min-w-[300px] max-h-[80vh] overflow-y-auto">
+            <div class="flex flex-col gap-4 p-4 w-[320px] h-[600px] overflow-y-auto">
               <div class="flex flex-row gap-2">
-                <div>
+                <div class="w-[150px]">
                   <span class="font-medium block mb-2">المجال</span>
                   <Select v-model="categoryFilter" :options="categoryOptions" optionLabel="name" optionValue="value"
                     placeholder="اختر المجال" class="w-full" />
                 </div>
-                <div>
+                <div class="w-[150px]">
                   <span class="font-medium block mb-2">اختر المستوى</span>
                   <Select v-model="levelFilter" :options="levelOptions" optionLabel="name" optionValue="value"
                     placeholder="جميع المستويات" class="w-full" />
