@@ -11,7 +11,11 @@ import axiosInstance from '../plugins/axios.plugin'
 import Tooltip from 'primevue/tooltip';
 const app = createApp(App)
 const pinia = createPinia();
-
+app.use(axiosInstance)
+app.config.globalProperties.$axios = axiosInstance
+pinia.use(({ store }) => {
+  store.$http = app.config.globalProperties.$axios;
+});
 app.directive('tooltip', Tooltip);
 app.directive('ripple', Ripple);
 app.use(pinia);  // Make sure this line exists
@@ -25,4 +29,3 @@ app.use(PrimeVue, {
 })
 
 app.mount('#app')
-app.config.globalProperties.$axios = axiosInstance
