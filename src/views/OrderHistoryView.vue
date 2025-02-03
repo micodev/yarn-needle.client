@@ -183,16 +183,6 @@ const copyOrderKey = async (key) => {
 </script>
 
 <style scoped>
-.card {
-  background-color: var(--surface-card);
-  border: 1px solid var(--surface-border);
-}
-
-:deep(.p-card) {
-  background-color: var(--surface-card);
-  color: var(--text-color);
-}
-
 :deep(.text-gray-900) {
   color: var(--text-color);
 }
