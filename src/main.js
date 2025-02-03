@@ -14,7 +14,7 @@ const pinia = createPinia();
 
 app.config.globalProperties.$axios = axiosInstance
 pinia.use(({ store }) => {
-  store.$http = app.config.globalProperties.$axios;
+  store.$axios = app.config.globalProperties.$axios;
 });
 app.directive('tooltip', Tooltip);
 app.directive('ripple', Ripple);
