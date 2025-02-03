@@ -16,10 +16,10 @@ function* generateCourses(count) {
                    i === 1 ? "أساليب مبتكرة لتطوير مهارات تصميم الأزياء" :
                    i === 2 ? "تعلم الأنماط المعقدة والراقية في حياكة الدانتيل" :
                    `Description for custom course ${i + 1}`,
-      image: i === 0 ? "https://source.unsplash.com/featured/?embroidery" :
-             i === 1 ? "https://source.unsplash.com/featured/?fashion" :
-             i === 2 ? "https://source.unsplash.com/featured/?crochet" :
-             "https://via.placeholder.com/150",
+      image: i === 0 ? "https://source.unsplash.com/800x600/?embroidery" :
+             i === 1 ? "https://source.unsplash.com/800x600/?fashion-model" :
+             i === 2 ? "https://source.unsplash.com/800x600/?crochet" :
+             "https://via.placeholder.com/800x600?text=Custom+Course",
       originalPrice: i === 0 ? "299" : i === 1 ? "499" : i === 2 ? "350" : "100",
       rating: i === 0 ? 4.8 : i === 1 ? 4.6 : i === 2 ? 4.9 : 4.5,
       students: i === 0 ? 1234 : i === 1 ? 765 : i === 2 ? 412 : 100,
