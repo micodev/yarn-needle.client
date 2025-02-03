@@ -221,9 +221,9 @@ const copyOrderKey = async (key) => {
 }
 
 :deep(.dark) .card-shadow {
-  box-shadow: inset 0 2px 8px -2px rgba(255, 255, 255, 0.08),
-    inset 0 -2px 8px -2px rgba(255, 255, 255, 0.05);
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, transparent 100%);
+  box-shadow: inset 0 1px 12px -2px rgba(255, 255, 255, 0.12),
+    inset 0 -1px 12px -2px rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
 }
 
 .copy-button-shadow {
@@ -231,7 +231,7 @@ const copyOrderKey = async (key) => {
 }
 
 :deep(.dark) .copy-button-shadow {
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.05);
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, transparent 100%);
+  box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
 }
 </style>
