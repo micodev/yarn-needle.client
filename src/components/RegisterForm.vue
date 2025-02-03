@@ -122,7 +122,8 @@ const handleRegister = async () => {
     if (result.success) {
       toast.add({ severity: 'success', summary: 'نجاح', detail: 'تم إنشاء الحساب بنجاح' });
       showRegisterForm.value = false;
-
+      email.value = registerEmail.value;
+      password.value = registerPassword.value;
       // Automatically login after successful registration
       await handleSubmit();
     } else {
