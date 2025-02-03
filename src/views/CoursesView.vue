@@ -25,12 +25,10 @@
           </InputGroup>
         </div>
         <div class="flex gap-2 overflow-x-auto pb-2 sm:pb-0 w-full md:w-1/2 justify-end">
-          <Button label="فرز" icon="pi pi-filter" @click="toggleLevel"
-            :class="{
-              'p-button-secondary': !(levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration),
-              'p-button-primary': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration
-            }"
-            class="whitespace-nowrap" />
+          <Button label="فرز" icon="pi pi-filter" @click="toggleLevel" :class="{
+            'p-button-secondary': !(levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration),
+            'p-button-primary': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration
+          }" class="whitespace-nowrap" />
           <Popover ref="FilterPopOver">
             <div class="flex flex-col gap-4 p-4 min-w-[300px] max-h-[80vh] overflow-y-auto">
               <div class="flex flex-row gap-2">
@@ -125,7 +123,8 @@
       </div>
 
       <!-- Course Cards Grid -->
-      <div v-if="filteredCourses.length > 0"
+      <div v-if="isLoading" class="text-center p-8">جاري التحميل...</div>
+      <div v-else-if="filteredCourses.length > 0"
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-8 relative">
         <div v-for="(course) in filteredCourses" :key="course.id"
           class="card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl dark:bg-slate-900">
@@ -191,9 +190,10 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { Button, Popover, Select, Slider } from "primevue";
 import { InputText, InputGroup, InputGroupAddon } from "primevue";
+import { useCoursesStore } from '../stores/courses.js';
 
 const searchQuery = ref("");
 const sortPopover = ref();
@@ -269,91 +269,12 @@ const courseTypeOptions = ref([
   { name: 'عن بعد - مباشر', value: 'live', icon: '🔴' }
 ]);
 
-const courses = ref([
-  {
-    id: 1,
-    title: "التطريز اليدوي للمبتدئين",
-    description: "تعلم أساسيات التطريز اليدوي خطوة بخطوة",
-    image: "https://images.unsplash.com/photo-1738230077816-fbab6232c545?w=500&h=300&fit=crop",
-    originalPrice: "299",
-    rating: 4.8,
-    students: 1234,
-    duration: 10, // Duration in hours
-    level: 'beginner',
-    currency: "ريال سعودي",
-    lessonCount: 4,
-    category: 'drawing',
-    type: 'onsite',
-  },
-  {
-    id: 2,
-    title: "الخياطة المتقدمة",
-    description: "تقنيات احترافية في الخياطة والتفصيل",
-    image: "https://images.unsplash.com/photo-1738273473785-99c1fc498c14?w=500&h=300&fit=crop",
-    originalPrice: "399",
-    discountedPrice: "299",
-    discount: 25,
-    rating: 4.9,
-    students: 856,
-    duration: 25,
-    level: 'advanced',
-    currency: "ريال سعودي",
-    lessonCount: 12,
-    category: 'design',
-    type: 'recorded',
-  },
-  {
-    id: 3,
-    title: "تصميم الأزياء الرقمي",
-    description: "ابتكار تصاميم رقمية احترافية",
-    image: "https://images.unsplash.com/photo-1483412033650-1015ddeb83d1?w=500&h=300&fit=crop",
-    originalPrice: "499",
-    rating: 4.7,
-    students: 2156,
-    duration: 15,
-    level: 'intermediate',
-    currency: "ريال سعودي",
-    lessonCount: 8,
-    category: 'design',
-    type: 'live',
-  },
-  {
-    id: 4,
-    title: "الكروشيه للمحترفين",
-    description: "تعلم تقنيات الكروشيه المتقدمة",
-    image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500&h=300&fit=crop",
-    originalPrice: "349",
-    discountedPrice: "279",
-    discount: 20,
-    rating: 4.6,
-    students: 1567,
-    duration: 30,
-    level: 'advanced',
-    currency: "ريال سعودي",
-    lessonCount: 16,
-    category: 'drawing',
-    type: 'onsite',
-  },
-  {
-    id: 5,
-    title: "تصميم الأنماط والنقوش",
-    description: "إنشاء نقوش وأنماط مميزة للأقمشة",
-    image: "https://plus.unsplash.com/premium_photo-1700346339061-9755dcc26bd9?w=500&h=300&fit=crop",
-    originalPrice: "199",
-    rating: 4.5,
-    students: 989,
-    duration: 5,
-    level: 'beginner',
-    currency: "ريال سعودي",
-    lessonCount: 3,
-    category: 'drawing',
-    type: 'recorded',
-  }
-]);
-// re add same courses to test the search functionality with iterator in loop
-for (let i = 0; i < 3; i++) {
-  courses.value.push(...courses.value);
-}
+const { courses, isLoading, fetchCourses } = useCoursesStore();
+
+onMounted(async () => {
+  await fetchCourses();
+});
+
 const filteredCourses = computed(() => {
   let result = courses.value.filter(course => {
     const coursePrice = Number(course.discountedPrice || course.originalPrice);
