@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Button label="تسجيل الدخول" class="h-10" @click="showDialog = true" />
+    <Button v-if="!authStore.isAuthenticated" label="تسجيل الدخول" class="h-10" @click="showDialog = true" />
     <Dialog header="مرحبًا بك!" modal v-model:visible="showDialog" class="w-full md:w-1/3">
       <form @submit.prevent="handleSubmit" class="flex flex-col w-full p-4">
         <p class="text-center mb-4">تسجيل الدخول للمتابعة</p>
