@@ -7,7 +7,7 @@ import router from './router'
 import ToastService from 'primevue/toastservice'
 import Toast from 'primevue/toast'
 import Ripple from 'primevue/ripple';
-import axios from '@/plugins/axios.plugin'
+import axios from '../plugins/axios.plugin'
 import Tooltip from 'primevue/tooltip';
 const app = createApp(App)
 const pinia = createPinia();
