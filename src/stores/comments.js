@@ -29,4 +29,10 @@ export function showMoreComments() {
   displayedCount.value += 2;
 }
 
+export function updateDisplayedComments() {
+  if (displayedCount.value > course.value.comments.length) {
+    displayedCount.value = course.value.comments.length;
+  }
+}
+
 // ...existing code if any...
