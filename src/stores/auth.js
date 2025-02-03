@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { getCurrentInstance } from 'vue'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -11,9 +10,8 @@ export const useAuthStore = defineStore('auth', {
 
   actions: {
     async register(credentials) {
-      const { proxy } = getCurrentInstance()
       try {
-        const response = await proxy.$axios.post('/api/Auth/register', credentials)
+        const response = await this.$axios.post('/api/Auth/register', credentials)
         return { success: true, message: response.data.message }
       } catch (error) {
         return { success: false, errors: error.response.data }
@@ -21,9 +19,8 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async login(credentials) {
-      const { proxy } = getCurrentInstance()
       try {
-        const response = await proxy.$axios.post('/api/Auth/login', credentials)
+        const response = await this.$axios.post('/api/Auth/login', credentials)
         this.token = response.data.token
         this.refreshToken = response.data.refreshToken
         this.isAuthenticated = true
@@ -35,9 +32,8 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async getMe() {
-      const { proxy } = getCurrentInstance()
       try {
-        const response = await proxy.$axios.post('/api/Auth/me', {}, {
+        const response = await this.$axios.post('/api/Auth/me', {}, {
           headers: { Authorization: `Bearer ${this.token}` }
         })
         this.user = response.data.data
@@ -48,9 +44,8 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async refreshToken() {
-      const { proxy } = getCurrentInstance()
       try {
-        const response = await proxy.$axios.post('/api/Auth/refresh-token', {
+        const response = await this.$axios.post('/api/Auth/refresh-token', {
           token: this.token,
           refreshToken: this.refreshToken
         })
@@ -64,9 +59,8 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async forgotPassword(email) {
-      const { proxy } = getCurrentInstance()
       try {
-        const response = await proxy.$axios.post('/api/Auth/forgot-password', email)
+        const response = await this.$axios.post('/api/Auth/forgot-password', email)
         return { success: true, message: response.data.message }
       } catch (error) {
         return { success: false, errors: error.response.data }
@@ -74,9 +68,8 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async resetPassword(token, newPassword) {
-      const { proxy } = getCurrentInstance()
       try {
-        const response = await proxy.$axios.post('/api/Auth/reset-password', {
+        const response = await this.$axios.post('/api/Auth/reset-password', {
           token,
           newPassword
         })
