@@ -2,7 +2,7 @@ import { fileURLToPath, URL } from 'node:url'
 import { exec } from 'node:child_process'
 import { existsSync, unlinkSync } from 'node:fs'
 import { join } from 'node:path'
-
+import mkcert from 'vite-plugin-mkcert'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -12,6 +12,7 @@ import process from 'process';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
+    mkcert(),
     vue(),
     vueJsx(),
     vueDevTools(),

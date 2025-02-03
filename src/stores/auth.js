@@ -27,8 +27,22 @@ export const useAuthStore = defineStore('auth', {
         await this.getMe() // Fetch user data after successful login
         return { success: true }
       } catch (error) {
-        console.log(error)
-        return { success: false, errors: error.response.data }
+        const errorData = error.response?.data
+        let errors = {}
+
+        if (errorData?.errors) {
+          // Convert validation errors to flat array of messages
+          errors = Object.entries(errorData.errors).reduce((acc, [field, messages]) => {
+            acc[field] = Array.isArray(messages) ? messages[0] : messages
+            return acc
+          }, {})
+        }
+
+        return {
+          success: false,
+          errors,
+          message: errorData?.title || 'Login failed'
+        }
       }
     },
 
