@@ -216,20 +216,22 @@ const copyOrderKey = async (key) => {
 }
 
 .card-shadow {
-  box-shadow: inset 0 2px 8px -2px rgba(0, 0, 0, 0.1),
-    inset 0 -2px 8px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 2px 8px -2px rgba(0, 0, 0, 0.15),
+    inset 0 -2px 8px -2px rgba(0, 0, 0, 0.1);
 }
 
 :deep(.dark) .card-shadow {
-  box-shadow: inset 0 2px 8px -2px rgba(0, 0, 0, 0.3),
-    inset 0 -2px 8px -2px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 2px 8px -2px rgba(255, 255, 255, 0.08),
+    inset 0 -2px 8px -2px rgba(255, 255, 255, 0.05);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, transparent 100%);
 }
 
 .copy-button-shadow {
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12);
 }
 
 :deep(.dark) .copy-button-shadow {
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.05);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, transparent 100%);
 }
 </style>
