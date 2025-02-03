@@ -2,7 +2,12 @@ import { defineStore } from 'pinia'
 
 export const useLevelOptionsStore = defineStore('levelOptions', {
   state: () => ({
-    levels: [],
+    levels: [
+      { name: 'جميع المستويات', value: null },
+      { name: 'مبتدئ', value: 'beginner' },
+      { name: 'متوسط', value: 'intermediate' },
+      { name: 'متقدم', value: 'advanced' }
+    ],
     loading: false,
     error: null
   }),
@@ -14,7 +19,12 @@ export const useLevelOptionsStore = defineStore('levelOptions', {
         // Simulate API call
         const response = await new Promise((resolve) => {
           setTimeout(() => {
-            resolve(['Beginner', 'Intermediate', 'Advanced', 'Expert'])
+            resolve([
+              { name: 'جميع المستويات', value: null },
+              { name: 'مبتدئ', value: 'beginner' },
+              { name: 'متوسط', value: 'intermediate' },
+              { name: 'متقدم', value: 'advanced' }
+            ])
           }, 1000)
         })
         this.levels = response
