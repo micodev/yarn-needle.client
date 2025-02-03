@@ -30,7 +30,7 @@
             'p-button-primary': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration
           }" class="whitespace-nowrap" />
           <Popover ref="FilterPopOver">
-            <div class="flex flex-col gap-4 p-4 w-[320px] h-[600px] overflow-y-auto">
+            <div class="flex flex-col gap-4 p-4 w-[480px] h-[600px] overflow-y-auto">
               <div class="flex flex-row gap-2">
                 <div class="w-1/2">
                   <span class="font-medium block mb-2">المجال</span>
