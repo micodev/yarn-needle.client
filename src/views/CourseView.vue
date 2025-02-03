@@ -82,7 +82,10 @@
           <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">أضف تقييمك وتعليقك</h3>
           <Rating v-model="newComment.rating" :stars="5" cancel="false" />
           <Textarea v-model="newComment.text" class="w-full mt-2 p-2 border rounded" placeholder="اكتب تعليقك هنا..." />
-          <Button label="إرسال" class="mt-2 w-1/2" @click="addComment" />
+          <div>
+            <Button v-if="!loading" label="إرسال" class="mt-2 w-1/2" @click="addComment" />
+            <ProgressSpinner v-else class="mt-2" />
+          </div>
         </div>
       </Fieldset>
     </div>
@@ -110,9 +113,9 @@
 
 <script setup>
 import { computed, watch } from 'vue';
-import { Button, Fieldset, Rating, Textarea } from 'primevue';
+import { Button, Fieldset, Rating, Textarea, ProgressSpinner } from 'primevue';
 import { useCourseStore } from '@/stores/course';
-import { newComment, displayedComments, showMoreButton, addComment, showMoreComments, updateDisplayedComments } from '@/stores/comments';
+import { newComment, displayedComments, showMoreButton, addComment, showMoreComments, updateDisplayedComments, loading } from '@/stores/comments';
 
 const courseStore = useCourseStore();
 const course = computed(() => courseStore.course);
