@@ -214,6 +214,7 @@
 <script setup>
 import { ref, onMounted, computed, nextTick } from 'vue';
 import { DatePicker, MultiSelect, InputText, Button, IftaLabel, FileUpload } from 'primevue';
+import { fetchProfileData } from '@/stores/profile.js';
 
 const collapseContent = ref(null);
 const innerContent = ref(null);
@@ -282,29 +283,10 @@ const passwordHint = computed(() => {
   return '';
 });
 
-// Simulate API call to fetch profile data
-const fetchProfileData = async () => {
+const fetchData = async () => {
+  isLoading.value = true;
   try {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    // Simulate profile data - replace with actual API call
-    const data = {
-      firstName: 'سارة',
-      secondName: 'أحمد',
-      thirdName: 'العمري',
-      nationality: { name: 'سعودي', value: 'saudi' },
-      phoneNumber: '0501234567',
-      country: { name: 'السعودية', code: 'SA' },
-      birthDate: new Date('1990-01-01'),
-      degree: 'بكالوريوس',
-      fieldOfStudy: 'علوم حاسب',
-      jobTitle: 'مطور برمجيات',
-      civilianId: '1234567890',
-      expiryDate: 'Jan 20, 2024',
-      password: ''
-    };
-
+    const data = await fetchProfileData();
     profileData.value = data;
     form.value = { ...form.value, ...data };
   } catch (error) {
@@ -315,7 +297,7 @@ const fetchProfileData = async () => {
 };
 
 onMounted(() => {
-  fetchProfileData();
+  fetchData();
 });
 
 const nationalities = ref([
