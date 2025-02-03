@@ -51,16 +51,16 @@
               <div class="bg-white dark:bg-gray-700 rounded-lg p-3 sm:p-4 shadow-sm">
                 <div class="flex items-center mb-4">
                   <i class="pi pi-star text-yellow-600 text-xl ml-3"></i>
-                  <h4 class="text-lg font-bold text-gray-900 dark:text-white">{{ currentPlan.title }}</h4>
+                  <h4 class="text-lg font-bold text-gray-900 dark:text-white">{{ profileData.currentPlan?.title }}</h4>
                 </div>
                 <ul class="text-gray-700 dark:text-gray-300 mb-4 list-disc list-inside">
-                  <li v-for="(feature, index) in currentPlan.features" :key="index" class="mb-2">
+                  <li v-for="(feature, index) in profileData.currentPlan?.features" :key="index" class="mb-2">
                     {{ feature }}
                   </li>
                 </ul>
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4">
                   <span class="text-base sm:text-lg font-bold text-gray-900 dark:text-white">
-                    {{ currentPlan.price }} ريال سعودي / الشهر
+                    {{ profileData.currentPlan?.price }} ريال سعودي / الشهر
                   </span>
                   <button
                     class="w-full sm:w-auto px-4 py-2 rounded-lg border border-gray-300 hover:border-gray-400 transition-colors flex items-center justify-center">
@@ -214,7 +214,7 @@
 <script setup>
 import { ref, onMounted, computed, nextTick } from 'vue';
 import { DatePicker, MultiSelect, InputText, Button, IftaLabel, FileUpload } from 'primevue';
-import { fetchProfileData, currentPlan, availablePlans } from '@/stores/profile.js';
+import { fetchProfileData, availablePlans } from '@/stores/profile.js';
 
 const collapseContent = ref(null);
 const innerContent = ref(null);
