@@ -109,7 +109,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { Button, Fieldset, Rating, Textarea } from 'primevue';
 import { useCourseStore } from '@/stores/course';
 import { newComment, displayedComments, showMoreButton, addComment, showMoreComments, updateDisplayedComments } from '@/stores/comments';
