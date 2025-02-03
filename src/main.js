@@ -9,14 +9,8 @@ import Toast from 'primevue/toast'
 import Ripple from 'primevue/ripple';
 import axiosInstance from '../plugins/axios.plugin'
 import Tooltip from 'primevue/tooltip';
-
 const app = createApp(App)
-const pinia = createPinia()
-
-// Inject axios into pinia stores
-pinia.use(({ store }) => {
-    store.axios = axiosInstance
-})
+const pinia = createPinia();
 
 app.config.globalProperties.$axios = axiosInstance
 pinia.use(({ store }) => {
@@ -34,4 +28,4 @@ app.use(PrimeVue, {
   ripple: true,
 })
 
-app.mount('#app'
+app.mount('#app')
