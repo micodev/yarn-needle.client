@@ -91,12 +91,19 @@ const registerPassword = ref('');
 const handleSubmit = async () => {
   loading.value = true;
   try {
-    await authStore.login({
+    const result = await authStore.login({
       email: email.value,
       password: password.value
     });
 
-
+    if (result.success) {
+      // toast.add({ severity: 'success', summary: 'نجاح', detail: 'تم تسجيل الدخول بنجاح' });
+      showDialog.value = false;
+    } else {
+      toast.add({ severity: 'error', summary: 'خطأ', detail: result.errors || 'فشل تسجيل الدخول' });
+    }
+  } catch  {
+    toast.add({ severity: 'error', summary: 'خطأ', detail: 'حدث خطأ غير متوقع' });
   } finally {
     loading.value = false;
   }
