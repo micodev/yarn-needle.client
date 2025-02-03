@@ -214,7 +214,7 @@
 <script setup>
 import { ref, onMounted, computed, nextTick } from 'vue';
 import { DatePicker, MultiSelect, InputText, Button, IftaLabel, FileUpload } from 'primevue';
-import { fetchProfileData } from '@/stores/profile.js';
+import { fetchProfileData, currentPlan, availablePlans } from '@/stores/profile.js';
 
 const collapseContent = ref(null);
 const innerContent = ref(null);
@@ -376,40 +376,6 @@ const handleSubmit = async () => {
     alert('حدث خطأ أثناء حفظ البيانات');
   }
 };
-
-// Add new refs for subscription plans
-const currentPlan = ref({
-  title: "العضوية الذهبية",
-  features: [
-    "وصول كامل إلى جميع الدورات",
-    "دعم فني متميز",
-    "شهادات معتمدة",
-    "محتوى حصري"
-  ],
-  price: "100",
-  iconClass: "pi pi-star text-yellow-600"
-});
-
-const availablePlans = ref([
-  {
-    title: "العضوية البلاتينية",
-    description: "أعلى مستوى من الميزات والخدمات مع دعم مخصص",
-    price: "200",
-    iconClass: "pi pi-star text-blue-500"
-  },
-  {
-    title: "العضوية المهنية",
-    description: "مثالية للمحترفين مع ميزات متقدمة",
-    price: "150",
-    iconClass: "pi pi-star text-purple-500"
-  },
-  {
-    title: "عضوية الشركات",
-    description: "حلول مخصصة للفرق والشركات",
-    price: "300",
-    iconClass: "pi pi-users text-green-500"
-  }
-]);
 </script>
 
 <style scoped>
