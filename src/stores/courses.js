@@ -56,7 +56,7 @@ async function fetchCourses() {
     }
   ];
   const dynamicCourses = [];
-  for (const course of [generatedCourses]) {
+  for (const course of generatedCourses) {
     dynamicCourses.push(course);
   }
   courses.value = dynamicCourses;
