@@ -45,12 +45,12 @@
               </div>
 
               <div class="flex flex-row gap-2">
-                <div>
+                <div class="w-1/2">
                   <span class="font-medium block mb-2">عدد الدروس</span>
                   <Select v-model="lessonRangeFilter" :options="lessonRangeOptions" optionLabel="name"
                     optionValue="value" placeholder="اختر عدد الدروس" class="w-full" />
                 </div>
-                <div>
+                <div class="w-1/2">
                   <span class="font-medium block mb-2">نوع الدورة</span>
                   <Select v-model="courseTypeFilter" :options="courseTypeOptions" optionLabel="name" optionValue="value"
                     placeholder="اختر نوع الدورة" class="w-full">
