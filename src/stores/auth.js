@@ -38,7 +38,7 @@ export const useAuthStore = defineStore('auth', {
             return acc
           }, {})
         }
-
+        console.log(errors)
         return {
           success: false,
           errors,
