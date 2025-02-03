@@ -44,12 +44,33 @@
                 </div>
               </div>
 
-
-              <div>
-                <span class="font-medium block mb-2">عدد الدروس</span>
-                <Select v-model="lessonRangeFilter" :options="lessonRangeOptions" optionLabel="name" optionValue="value"
-                  placeholder="اختر عدد الدروس" class="w-full" />
+              <div class="flex flex-row gap-2">
+                <div>
+                  <span class="font-medium block mb-2">عدد الدروس</span>
+                  <Select v-model="lessonRangeFilter" :options="lessonRangeOptions" optionLabel="name"
+                    optionValue="value" placeholder="اختر عدد الدروس" class="w-full" />
+                </div>
+                <div>
+                  <span class="font-medium block mb-2">نوع الدورة</span>
+                  <Select v-model="courseTypeFilter" :options="courseTypeOptions" optionLabel="name" optionValue="value"
+                    placeholder="اختر نوع الدورة" class="w-full">
+                    <template #value="slotProps">
+                      <div class="flex items-center gap-2" v-if="slotProps.value">
+                        <span>{{ courseTypeOptions.find(opt => opt.value === slotProps.value)?.icon }}</span>
+                        <span>{{ courseTypeOptions.find(opt => opt.value === slotProps.value)?.name }}</span>
+                      </div>
+                      <span v-else>اختر نوع الدورة</span>
+                    </template>
+                    <template #option="slotProps">
+                      <div class="flex items-center gap-2">
+                        <span>{{ slotProps.option.icon }}</span>
+                        <span>{{ slotProps.option.name }}</span>
+                      </div>
+                    </template>
+                  </Select>
+                </div>
               </div>
+
 
               <div>
                 <span class="font-medium block mb-2">مدة الدورة (بالساعات)</span>
@@ -68,25 +89,7 @@
                   placeholder="اختر نطاق السعر" class="w-full" />
               </div>
 
-              <div>
-                <span class="font-medium block mb-2">نوع الدورة</span>
-                <Select v-model="courseTypeFilter" :options="courseTypeOptions" optionLabel="name" optionValue="value"
-                  placeholder="اختر نوع الدورة" class="w-full">
-                  <template #value="slotProps">
-                    <div class="flex items-center gap-2" v-if="slotProps.value">
-                      <span>{{ courseTypeOptions.find(opt => opt.value === slotProps.value)?.icon }}</span>
-                      <span>{{ courseTypeOptions.find(opt => opt.value === slotProps.value)?.name }}</span>
-                    </div>
-                    <span v-else>اختر نوع الدورة</span>
-                  </template>
-                  <template #option="slotProps">
-                    <div class="flex items-center gap-2">
-                      <span>{{ slotProps.option.icon }}</span>
-                      <span>{{ slotProps.option.name }}</span>
-                    </div>
-                  </template>
-                </Select>
-              </div>
+
 
               <Button
                 v-if="levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration"
