@@ -27,6 +27,7 @@ export const useAuthStore = defineStore('auth', {
         await this.getMe() // Fetch user data after successful login
         return { success: true }
       } catch (error) {
+        console.log(error)
         return { success: false, errors: error.response.data }
       }
     },
