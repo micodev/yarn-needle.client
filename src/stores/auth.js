@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import axiosInstance from '../../plugins/axios.plugin'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -12,7 +11,7 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async register(credentials) {
       try {
-        const response = await axiosInstance.post('/api/Auth/register', credentials)
+        const response = await axios.post('/api/Auth/register', credentials)
         return { success: true, message: response.data.message }
       } catch (error) {
         return { success: false, errors: error.response.data }
@@ -21,7 +20,7 @@ export const useAuthStore = defineStore('auth', {
 
     async login(credentials) {
       try {
-        const response = await axiosInstance.post('/api/Auth/login', credentials)
+        const response = await axios.post('/api/Auth/login', credentials)
         this.token = response.data.token
         this.refreshToken = response.data.refreshToken
         this.isAuthenticated = true
@@ -34,7 +33,7 @@ export const useAuthStore = defineStore('auth', {
 
     async getMe() {
       try {
-        const response = await axiosInstance.post('/api/Auth/me', {}, {
+        const response = await axios.post('/api/Auth/me', {}, {
           headers: { Authorization: `Bearer ${this.token}` }
         })
         this.user = response.data.data
@@ -46,7 +45,7 @@ export const useAuthStore = defineStore('auth', {
 
     async refreshToken() {
       try {
-        const response = await axiosInstance.post('/api/Auth/refresh-token', {
+        const response = await axios.post('/api/Auth/refresh-token', {
           token: this.token,
           refreshToken: this.refreshToken
         })
@@ -61,7 +60,7 @@ export const useAuthStore = defineStore('auth', {
 
     async forgotPassword(email) {
       try {
-        const response = await axiosInstance.post('/api/Auth/forgot-password', email)
+        const response = await axios.post('/api/Auth/forgot-password', email)
         return { success: true, message: response.data.message }
       } catch (error) {
         return { success: false, errors: error.response.data }
@@ -70,7 +69,7 @@ export const useAuthStore = defineStore('auth', {
 
     async resetPassword(token, newPassword) {
       try {
-        const response = await axiosInstance.post('/api/Auth/reset-password', {
+        const response = await axios.post('/api/Auth/reset-password', {
           token,
           newPassword
         })
