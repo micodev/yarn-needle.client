@@ -7,7 +7,7 @@ async function fetchCourses() {
   isLoading.value = true;
   // Mimic fetch delay
   await new Promise(resolve => setTimeout(resolve, 1200));
-  courses.value = [
+  const generatedCourses = [
     {
       id: 1,
       title: "التطريز اليدوي للمبتدئين",
@@ -55,6 +55,11 @@ async function fetchCourses() {
       type: 'onsite',
     }
   ];
+  const dynamicCourses = [];
+  for (const course of generatedCourses) {
+    dynamicCourses.push(course);
+  }
+  courses.value = dynamicCourses;
   isLoading.value = false;
 }
 
