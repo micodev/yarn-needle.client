@@ -194,6 +194,9 @@ import { ref, computed, onMounted } from "vue";
 import { Button, Popover, Select, Slider } from "primevue";
 import { InputText, InputGroup, InputGroupAddon } from "primevue";
 import { useCoursesStore } from '../stores/courses.js';
+import { useLevelOptionsStore } from '../stores/levelOptions.js';
+import { useCategoryOptionsStore } from '../stores/categoryOptions.js';
+import { useCourseTypeOptionsStore } from '../stores/courseTypeOptions.js';
 
 const searchQuery = ref("");
 const sortPopover = ref();
@@ -218,12 +221,15 @@ const selectSort = (option) => {
 const levelFilter = ref(null);
 const FilterPopOver = ref();
 
-const levelOptions = ref([
-  { name: 'جميع المستويات', value: null },
-  { name: 'مبتدئ', value: 'beginner' },
-  { name: 'متوسط', value: 'intermediate' },
-  { name: 'متقدم', value: 'advanced' }
-]);
+// Initialize stores
+const levelOptionsStore = useLevelOptionsStore();
+const categoryOptionsStore = useCategoryOptionsStore();
+const courseTypeOptionsStore = useCourseTypeOptionsStore();
+
+// Replace static options with computed properties
+const levelOptions = computed(() => levelOptionsStore.getLevels);
+const categoryOptions = computed(() => categoryOptionsStore.getCategories);
+const courseTypeOptions = computed(() => courseTypeOptionsStore.getCourseTypes);
 
 const toggleLevel = (event) => {
   FilterPopOver.value.toggle(event);
@@ -252,27 +258,17 @@ const priceRangeOptions = ref([
 ]);
 
 const categoryFilter = ref(null);
-const categoryOptions = ref([
-  { id: 1, name: 'جميع المجالات', value: null, code: 'ALL' },
-  { id: 2, name: 'كتابة سيناريو', value: 'scenario', code: 'SCEN' },
-  { id: 3, name: 'كتابة شعر', value: 'poetry', code: 'POET' },
-  { id: 4, name: 'تصميم صور', value: 'design', code: 'DSGN' },
-  { id: 5, name: 'رسم', value: 'drawing', code: 'DRAW' },
-  { id: 6, name: 'تعليق صوتي', value: 'voice', code: 'VOIC' }
-]);
-
 const courseTypeFilter = ref(null);
-const courseTypeOptions = ref([
-  { name: 'جميع الأنواع', value: null, icon: '' },
-  { name: 'حضوري', value: 'onsite', icon: '📍' },
-  { name: 'عن بعد - مسجل', value: 'recorded', icon: '🌐' },
-  { name: 'عن بعد - مباشر', value: 'live', icon: '🔴' }
-]);
 
 const { courses, isLoading, fetchCourses } = useCoursesStore();
 
 onMounted(async () => {
-  await fetchCourses();
+  await Promise.all([
+    fetchCourses(),
+    levelOptionsStore.fetchLevels(),
+    categoryOptionsStore.fetchCategories(),
+    courseTypeOptionsStore.fetchCourseTypes()
+  ]);
 });
 
 const filteredCourses = computed(() => {
