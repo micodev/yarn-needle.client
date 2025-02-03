@@ -375,7 +375,7 @@ const filteredCourses = computed(() => {
   background-color: var(--p-surface-100);
 }
 
-:deep(.dark\:bg-gray-800) {
+:deep(.dark) {
   background-color: var(--p-surface-800);
 }
 
