@@ -4,23 +4,24 @@
       <h1 class="text-2xl font-bold">تاريخ الطلبات</h1>
     </div>
 
-    <div v-if="isLoading" class="flex justify-center items-center py-8">
+    <div v-if="ordersStore.isLoading" class="flex justify-center items-center py-8">
       <ProgressSpinner />
     </div>
 
     <div v-else :class="[
       'grid gap-4',
       {
-        'grid-cols-1': sortedOrders.length === 1 || sortedOrders.length > 4,
-        'grid-cols-2': sortedOrders.length === 2 || sortedOrders.length === 4,
-        'grid-cols-3': sortedOrders.length === 3
+        'grid-cols-1': ordersStore.sortedOrders.length === 1 || ordersStore.sortedOrders.length > 4,
+        'grid-cols-2': ordersStore.sortedOrders.length === 2 || ordersStore.sortedOrders.length === 4,
+        'grid-cols-3': ordersStore.sortedOrders.length === 3
       },
       {
-        'md:grid-cols-2': sortedOrders.length > 2,
-        'lg:grid-cols-3': sortedOrders.length > 3
+        'md:grid-cols-2': ordersStore.sortedOrders.length > 2,
+        'lg:grid-cols-3': ordersStore.sortedOrders.length > 3
       }
     ]">
-      <Card v-for="order in sortedOrders" :key="order.id" class="bg-white dark:bg-gray-800 rounded-lg card-shadow p-5">
+      <Card v-for="order in ordersStore.sortedOrders" :key="order.id"
+        class="bg-white dark:bg-gray-800 rounded-lg card-shadow p-5">
         <template #header>
           <div class="flex justify-between items-start mb-4">
             <span class="text-lg font-semibold">📌 طلب #{{ order.id }}</span>
@@ -84,51 +85,17 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { Card, Button, ProgressSpinner } from 'primevue'
+import { useOrdersStore } from '@/stores/orders'
 
-const orders = ref([])
-const isLoading = ref(true)
+const ordersStore = useOrdersStore()
 
-const generateOrders = (count) => {
-  const orderTypes = ['دورة', 'عضوية']
-  const titles = ['تطوير الويب', 'تصميم الجرافيك', 'التسويق الرقمي', 'الذكاء الاصطناعي', 'علوم البيانات']
-  const states = ['مكتمل', 'قيد الانتظار', 'ملغى']
-  const paymentStates = ['مصرح', 'قيد الانتظار', 'مرفوض']
-
-  return Array.from({ length: count }, (_, index) => ({
-    id: (1020 + index).toString(),
-    key: `order-${crypto.randomUUID()}`,
-    type: orderTypes[Math.floor(Math.random() * orderTypes.length)],
-    title: titles[Math.floor(Math.random() * titles.length)],
-    date: new Date(2025, 0, 25 - index),
-    orderState: states[Math.floor(Math.random() * states.length)],
-    paymentState: paymentStates[Math.floor(Math.random() * paymentStates.length)],
-    price: Math.floor(Math.random() * 500 + 100)
-  }))
-}
-
-// Sort orders to show pending first
-const sortedOrders = computed(() => {
-  return [...orders.value].sort((a, b) => {
-    if (a.orderState === 'قيد الانتظار' && b.orderState !== 'قيد الانتظار') return -1
-    if (b.orderState === 'قيد الانتظار' && a.orderState !== 'قيد الانتظار') return 1
-    return new Date(b.date) - new Date(a.date) // Secondary sort by date
-  })
+onMounted(() => {
+  ordersStore.fetchOrders()
 })
 
-// Initialize orders with loading state
-onMounted(async () => {
-  isLoading.value = true
-  try {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    orders.value = generateOrders(15)
-  } finally {
-    isLoading.value = false
-  }
-})
-
+// Keep utility functions
 const formatDate = (date) => {
   return new Intl.DateTimeFormat('ar', {
     year: 'numeric',
