@@ -93,6 +93,7 @@ const handleSubmit = async () => {
   try {
     const result = await authStore.login({
       email: email.value,
+      username: email.value,
       password: password.value
     });
 
