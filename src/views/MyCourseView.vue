@@ -124,8 +124,4 @@ const myCourses = ref(generateCourses(10)); // Generate 6 courses initially
 :deep(.bg-white) {
   background-color: var(--p-surface-0);
 }
-
-:deep(.dark\:bg-gray-800) {
-  background-color: var(--p-surface-800);
-}
 </style>
