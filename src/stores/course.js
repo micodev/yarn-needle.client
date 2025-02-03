@@ -48,40 +48,9 @@ export const useCourseStore = defineStore('course', {
       ],
       targetAudience: [
         "كل شخص بالغ يسعى الى تطوير من جودة حياته وصحته"
-      ],
-      comments: [
-        {
-          id: 1,
-          name: "محمد أحمد",
-          avatar: "https://placehold.co/40x40",
-          rating: 4,
-          text: "دورة ممتازة ومفيدة جداً."
-        },
-        {
-          id: 2,
-          name: "سارة علي",
-          avatar: "https://placehold.co/40x40",
-          rating: 5,
-          text: "استفدت كثيراً من هذه الدورة."
-        },
-        {
-          id: 3,
-          name: "سارة علي",
-          avatar: "https://placehold.co/40x40",
-          rating: 5,
-          text: "استفدت كثيراً من هذه الدورة."
-        }
       ]
     }
   }),
   actions: {
-    addComment(commentData) {
-      this.course.comments.push({
-        id: this.course.comments.length + 1,
-        name: "مستخدم جديد",
-        avatar: "https://placehold.co/40x40",
-        ...commentData
-      })
-    }
   }
 })
