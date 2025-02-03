@@ -38,7 +38,7 @@ async function fetchCourses() {
   isLoading.value = true;
   // Mimic fetch delay
   await new Promise(resolve => setTimeout(resolve, 1200));
-  const itemCount = 5; // Customize desired items length here
+  const itemCount = 10; // Customize desired items length here
   courses.value = [];
   for (const course of generateCourses(itemCount)) {
     courses.value.push(course);
