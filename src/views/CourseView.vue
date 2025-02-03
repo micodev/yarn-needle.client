@@ -112,41 +112,11 @@
 import { ref, computed } from 'vue';
 import { Button, Fieldset, Rating, Textarea } from 'primevue';
 import { useCourseStore } from '@/stores/course';
+import { newComment, displayedComments, showMoreButton, addComment, showMoreComments, updateDisplayedComments } from '@/stores/comments';
 
 const courseStore = useCourseStore();
 const course = computed(() => courseStore.course);
 
-const newComment = ref({
-  rating: 0,
-  text: ""
-});
-
-const displayedComments = ref(course.value.comments.slice(0, 2));
-const showMoreButton = ref(course.value.comments.length > 2);
-
-const addComment = () => {
-  if (newComment.value.rating && newComment.value.text) {
-    courseStore.addComment({
-      rating: newComment.value.rating,
-      text: newComment.value.text
-    });
-    newComment.value.rating = 0;
-    newComment.value.text = "";
-    updateDisplayedComments();
-  }
-};
-
-const showMoreComments = () => {
-  const currentLength = displayedComments.value.length;
-  const newLength = currentLength + 2;
-  displayedComments.value = course.value.comments.slice(0, newLength);
-  showMoreButton.value = newLength < course.value.comments.length;
-};
-
-const updateDisplayedComments = () => {
-  displayedComments.value = course.value.comments.slice(0, displayedComments.value.length);
-  showMoreButton.value = displayedComments.value.length < course.value.comments.length;
-};
 </script>
 
 <style scoped>
