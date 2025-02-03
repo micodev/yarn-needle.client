@@ -16,9 +16,9 @@ function* generateCourses(count) {
                    i === 1 ? "أساليب مبتكرة لتطوير مهارات تصميم الأزياء" :
                    i === 2 ? "تعلم الأنماط المعقدة والراقية في حياكة الدانتيل" :
                    `Description for custom course ${i + 1}`,
-      image: i === 0 ? "https://images.unsplash.com/photo-1738230077816-fbab6232c545" :
-             i === 1 ? "https://images.unsplash.com/photo-1575936123452-5451252c0fdf" :
-             i === 2 ? "https://images.unsplash.com/photo-1542156822-6924c91bd78c" :
+      image: i === 0 ? "https://source.unsplash.com/featured/?embroidery" :
+             i === 1 ? "https://source.unsplash.com/featured/?fashion" :
+             i === 2 ? "https://source.unsplash.com/featured/?crochet" :
              "https://via.placeholder.com/150",
       originalPrice: i === 0 ? "299" : i === 1 ? "499" : i === 2 ? "350" : "100",
       rating: i === 0 ? 4.8 : i === 1 ? 4.6 : i === 2 ? 4.9 : 4.5,
