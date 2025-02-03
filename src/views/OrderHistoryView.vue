@@ -20,11 +20,8 @@
         'lg:grid-cols-3': sortedOrders.length > 3
       }
     ]">
-      <Card
-        v-for="order in sortedOrders"
-        :key="order.id"
-        class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700"
-      >
+      <Card v-for="order in sortedOrders" :key="order.id"
+        class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700">
         <template #header>
           <div class="flex justify-between items-start mb-4">
             <span class="text-lg font-semibold">📌 طلب #{{ order.id }}</span>
@@ -67,17 +64,15 @@
               </div>
 
               <div class="mt-4 mb-2 min-h-[40px]">
-                <Button v-if="order.orderState === 'قيد الانتظار'" label="اكمال الدفع" class="p-button-primary w-full" />
+                <Button v-if="order.orderState === 'قيد الانتظار'" label="اكمال الدفع"
+                  class="p-button-primary w-full" />
               </div>
             </div>
 
             <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
               <div
                 class="p-2 bg-gray-100 dark:bg-gray-700 rounded text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center gap-2"
-                @click="copyOrderKey(order.key)"
-                tabindex="0"
-                v-tooltip.focus.top="'تم النسخ'"
-              >
+                @click="copyOrderKey(order.key)" tabindex="0" v-tooltip.focus.top="'تم النسخ'">
                 <i class="pi pi-copy text-gray-600 dark:text-gray-400"></i>
                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ order.key }}</span>
               </div>
@@ -189,28 +184,33 @@ const copyOrderKey = async (key) => {
 
 <style scoped>
 .card {
-  background-color: var(--p-surface-0);
-  border: 1px solid var(--p-content-border-color);
+  background-color: var(--surface-card);
+  border: 1px solid var(--surface-border);
+}
+
+:deep(.p-card) {
+  background-color: var(--surface-card);
+  color: var(--text-color);
 }
 
 :deep(.text-gray-900) {
-  color: var(--p-text-color);
+  color: var(--text-color);
 }
 
 :deep(.text-gray-600) {
-  color: var(--p-text-muted-color);
+  color: var(--text-secondary-color);
 }
 
 :deep(.bg-gray-100) {
-  background-color: var(--p-surface-100);
+  background-color: var(--surface-100);
 }
 
 :deep(.dark\:bg-gray-800) {
-  background-color: var(--p-surface-800);
+  background-color: var(--surface-card);
 }
 
 :deep(.border-gray-200) {
-  border-color: var(--p-content-border-color);
+  border-color: var(--surface-border);
 }
 
 .p-tooltip {
@@ -221,4 +221,3 @@ const copyOrderKey = async (key) => {
   font-size: 0.875rem;
 }
 </style>
-
