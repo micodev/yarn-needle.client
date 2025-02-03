@@ -109,11 +109,6 @@ const myCourses = ref(generateCourses(10)); // Generate 6 courses initially
 </script>
 
 <style scoped>
-.card {
-  /* background-color: var(--p-surface-0); */
-  border: 1px solid var(--p-content-border-color);
-}
-
 :deep(.text-gray-900) {
   color: var(--p-text-color);
 }
