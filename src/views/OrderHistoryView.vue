@@ -20,8 +20,7 @@
         'lg:grid-cols-3': sortedOrders.length > 3
       }
     ]">
-      <Card v-for="order in sortedOrders" :key="order.id"
-        class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 border border-gray-200 dark:border-gray-700">
+      <Card v-for="order in sortedOrders" :key="order.id" class="bg-white dark:bg-gray-800 rounded-lg shadow-inner p-5">
         <template #header>
           <div class="flex justify-between items-start mb-4">
             <span class="text-lg font-semibold">📌 طلب #{{ order.id }}</span>
@@ -69,9 +68,9 @@
               </div>
             </div>
 
-            <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+            <div class="mt-auto pt-4">
               <div
-                class="p-2 bg-gray-100 dark:bg-gray-700 rounded text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center gap-2"
+                class="p-2 bg-gray-100 dark:bg-gray-700 rounded text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center gap-2 shadow-inner"
                 @click="copyOrderKey(order.key)" tabindex="0" v-tooltip.focus.top="'تم النسخ'">
                 <i class="pi pi-copy text-gray-600 dark:text-gray-400"></i>
                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ order.key }}</span>
@@ -209,5 +208,9 @@ const copyOrderKey = async (key) => {
 
 .pi-copy {
   font-size: 0.875rem;
+}
+
+:deep(.p-card) {
+  box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
 }
 </style>
