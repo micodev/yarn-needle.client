@@ -19,7 +19,7 @@ function* generateCourses(count) {
       image: i === 0 ? "https://images.unsplash.com/photo-1600185365953-3d7b5c8f8b3d" :
              i === 1 ? "https://images.unsplash.com/photo-1514996937319-344454492b37" :
              i === 2 ? "https://images.unsplash.com/photo-1522337660859-02fbefca4702" :
-             "https://via.placeholder.com/800x600?text=Custom+Course",
+             "https://images.unsplash.com/photo-1501594907352-04cda38ebc29",
       originalPrice: i === 0 ? "299" : i === 1 ? "499" : i === 2 ? "350" : "100",
       rating: i === 0 ? 4.8 : i === 1 ? 4.6 : i === 2 ? 4.9 : 4.5,
       students: i === 0 ? 1234 : i === 1 ? 765 : i === 2 ? 412 : 100,
