@@ -109,13 +109,18 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import { Button, Fieldset, Rating, Textarea } from 'primevue';
 import { useCourseStore } from '@/stores/course';
 import { newComment, displayedComments, showMoreButton, addComment, showMoreComments, updateDisplayedComments } from '@/stores/comments';
 
 const courseStore = useCourseStore();
 const course = computed(() => courseStore.course);
+
+// Watch for changes in comments and update the displayed count accordingly.
+watch(() => course.value.comments, () => {
+  updateDisplayedComments();
+});
 
 </script>
 
