@@ -2,7 +2,12 @@ import { defineStore } from 'pinia'
 
 export const useCourseTypeOptionsStore = defineStore('courseTypeOptions', {
   state: () => ({
-    courseTypes: [],
+    courseTypes: [
+      { name: 'جميع الأنواع', value: null, icon: '' },
+      { name: 'حضوري', value: 'onsite', icon: '📍' },
+      { name: 'عن بعد - مسجل', value: 'recorded', icon: '🌐' },
+      { name: 'عن بعد - مباشر', value: 'live', icon: '🔴' }
+    ],
     loading: false,
     error: null
   }),
@@ -14,7 +19,12 @@ export const useCourseTypeOptionsStore = defineStore('courseTypeOptions', {
         // Simulate API call
         const response = await new Promise((resolve) => {
           setTimeout(() => {
-            resolve(['Video', 'Live Session', 'Workshop', 'Self-Paced'])
+            resolve([
+              { name: 'جميع الأنواع', value: null, icon: '' },
+              { name: 'حضوري', value: 'onsite', icon: '📍' },
+              { name: 'عن بعد - مسجل', value: 'recorded', icon: '🌐' },
+              { name: 'عن بعد - مباشر', value: 'live', icon: '🔴' }
+            ])
           }, 1000)
         })
         this.courseTypes = response
