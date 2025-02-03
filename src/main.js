@@ -11,7 +11,7 @@ import axiosInstance from '../plugins/axios.plugin'
 import Tooltip from 'primevue/tooltip';
 const app = createApp(App)
 const pinia = createPinia();
-app.use(axiosInstance)
+
 app.config.globalProperties.$axios = axiosInstance
 pinia.use(({ store }) => {
   store.$http = app.config.globalProperties.$axios;
