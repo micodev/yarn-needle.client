@@ -39,7 +39,7 @@ export const useAuthStore = defineStore('auth', {
           }, {})
         }
         //make error is readable string
-        errors = Object.values(errors).join(', ')
+        errors = Object.values(errors).join(',')
         return {
           success: false,
           errors,
