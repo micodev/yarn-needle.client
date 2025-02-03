@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-    baseURL: 'https://localhost:44350/api',
+    baseURL: 'https://localhost:44350/yarn-needle.client/api',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json'
