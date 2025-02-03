@@ -22,6 +22,7 @@ export const useAuthStore = defineStore('auth', {
       try {
         const response = await this.$axios.post('/api/Auth/login', credentials)
         this.token = response.data.token
+        localStorage.setItem('token', response.data.token)
         this.refreshToken = response.data.refreshToken
         this.isAuthenticated = true
         await this.getMe() // Fetch user data after successful login
@@ -67,6 +68,7 @@ export const useAuthStore = defineStore('auth', {
           refreshToken: this.refreshToken
         })
         this.token = response.data.Token
+        localStorage.setItem('token', response.data.Token)
         this.refreshToken = response.data.RefreshToken
         return { success: true }
       } catch (error) {
@@ -99,6 +101,7 @@ export const useAuthStore = defineStore('auth', {
     logout() {
       this.user = null
       this.token = null
+      localStorage.removeItem('token')
       this.refreshToken = null
       this.isAuthenticated = false
     }
