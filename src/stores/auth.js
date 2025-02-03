@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useToast } from 'primevue/usetoast'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -10,21 +11,26 @@ export const useAuthStore = defineStore('auth', {
 
   actions: {
     async register(credentials) {
+      const toast = useToast()
       try {
         const response = await this.$axios.post('/api/Auth/register', credentials)
+        toast.add({ severity: 'success', summary: 'نجاح', detail: response.data.message })
         return { success: true, message: response.data.message }
       } catch (error) {
+        toast.add({ severity: 'error', summary: 'خطأ', detail: error.response.data })
         return { success: false, errors: error.response.data }
       }
     },
 
     async login(credentials) {
+      const toast = useToast()
       try {
         const response = await this.$axios.post('/api/Auth/login', credentials)
         this.token = response.data.token
         this.refreshToken = response.data.refreshToken
         this.isAuthenticated = true
         await this.getMe() // Fetch user data after successful login
+        toast.add({ severity: 'success', summary: 'نجاح', detail: 'تم تسجيل الدخول بنجاح' })
         return { success: true }
       } catch (error) {
         console.log(error.response)
@@ -40,6 +46,7 @@ export const useAuthStore = defineStore('auth', {
         }
         //make error is readable string
         errors = Object.values(errors).join(',')
+        toast.add({ severity: 'error', summary: 'خطأ', detail: errors || 'فشل تسجيل الدخول' })
         return {
           success: false,
           errors,
@@ -76,22 +83,28 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async forgotPassword(email) {
+      const toast = useToast()
       try {
         const response = await this.$axios.post('/api/Auth/forgot-password', email)
+        toast.add({ severity: 'success', summary: 'نجاح', detail: response.data.message })
         return { success: true, message: response.data.message }
       } catch (error) {
+        toast.add({ severity: 'error', summary: 'خطأ', detail: error.response.data })
         return { success: false, errors: error.response.data }
       }
     },
 
     async resetPassword(token, newPassword) {
+      const toast = useToast()
       try {
         const response = await this.$axios.post('/api/Auth/reset-password', {
           token,
           newPassword
         })
+        toast.add({ severity: 'success', summary: 'نجاح', detail: response.data.message })
         return { success: true, message: response.data.message }
       } catch (error) {
+        toast.add({ severity: 'error', summary: 'خطأ', detail: error.response.data })
         return { success: false, errors: error.response.data }
       }
     },
