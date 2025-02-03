@@ -1,5 +1,28 @@
 import { defineStore } from 'pinia'
 
+const categoryTemplates = [
+  { name: 'جميع المجالات', value: null, code: 'ALL' },
+  { name: 'كتابة سيناريو', value: 'scenario', code: 'SCEN' },
+  { name: 'كتابة شعر', value: 'poetry', code: 'POET' },
+  { name: 'تصميم صور', value: 'design', code: 'DSGN' },
+  { name: 'رسم', value: 'drawing', code: 'DRAW' },
+  { name: 'تعليق صوتي', value: 'voice', code: 'VOIC' }
+]
+
+function generateCategories(count = 6) {
+  const categories = []
+  for (let i = 0; i < count; i++) {
+    const template = categoryTemplates[i % categoryTemplates.length]
+    categories.push({
+      id: i + 1,
+      name: template.name,
+      value: template.value,
+      code: template.code
+    })
+  }
+  return categories
+}
+
 export const useCategoryOptionsStore = defineStore('categoryOptions', {
   state: () => ({
     categories: [],
@@ -8,13 +31,13 @@ export const useCategoryOptionsStore = defineStore('categoryOptions', {
   }),
 
   actions: {
-    async fetchCategories() {
+    async fetchCategories(count = 6) {
       this.loading = true
       try {
         // Simulate API call
         const response = await new Promise((resolve) => {
           setTimeout(() => {
-            resolve(['Programming', 'Design', 'Business', 'Marketing'])
+            resolve(generateCategories(count))
           }, 1000)
         })
         this.categories = response
@@ -30,7 +53,8 @@ export const useCategoryOptionsStore = defineStore('categoryOptions', {
       try {
         // Simulate API call
         await new Promise((resolve) => setTimeout(resolve, 1000))
-        this.categories.push(category)
+        const newId = Math.max(...this.categories.map(c => c.id)) + 1
+        this.categories.push({ ...category, id: newId })
       } catch (err) {
         this.error = err.message
       } finally {
@@ -38,12 +62,15 @@ export const useCategoryOptionsStore = defineStore('categoryOptions', {
       }
     },
 
-    async updateCategory(index, newCategory) {
+    async updateCategory(id, newCategory) {
       this.loading = true
       try {
         // Simulate API call
         await new Promise((resolve) => setTimeout(resolve, 1000))
-        this.categories[index] = newCategory
+        const index = this.categories.findIndex(c => c.id === id)
+        if (index !== -1) {
+          this.categories[index] = { ...newCategory, id }
+        }
       } catch (err) {
         this.error = err.message
       } finally {
