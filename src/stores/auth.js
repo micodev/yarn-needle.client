@@ -9,6 +9,14 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
+    async init() {
+      const token = localStorage.getItem('token')
+      if (token) {
+        this.token = token
+        this.isAuthenticated = true
+        await this.getMe()
+      }
+    },
     async register(credentials) {
       try {
         const response = await this.$axios.post('/api/Auth/register', credentials)
