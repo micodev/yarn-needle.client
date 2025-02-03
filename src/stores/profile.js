@@ -16,21 +16,23 @@ export async function fetchProfileData() {
     jobTitle: 'مطور برمجيات',
     civilianId: '1234567890',
     expiryDate: 'Jan 20, 2024',
-    password: ''
+    password: '',
+    currentPlan: {
+      title: "العضوية الذهبية",
+      features: [
+        "وصول كامل إلى جميع الدورات",
+        "دعم فني متميز",
+        "شهادات معتمدة",
+        "محتوى حصري"
+      ],
+      price: "100",
+      iconClass: "pi pi-star text-yellow-600"
+    }
   };
 }
 
-export const currentPlan = {
-  title: "العضوية الذهبية",
-  features: [
-    "وصول كامل إلى جميع الدورات",
-    "دعم فني متميز",
-    "شهادات معتمدة",
-    "محتوى حصري"
-  ],
-  price: "100",
-  iconClass: "pi pi-star text-yellow-600"
-};
+// Remove the standalone currentPlan export
+// export const currentPlan = { ... };
 
 export const availablePlans = [
   {
