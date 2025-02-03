@@ -25,7 +25,7 @@
           </IftaLabel>
         </div>
         <p class="text-center text-primary mb-4 cursor-pointer" @click="showForgetPassword">هل نسيت كلمة المرور؟</p>
-        <Button label="تسجيل الدخول" type="submit" class="w-full text-white rounded" />
+        <Button label="تسجيل الدخول" type="submit" class="w-full text-white rounded" :loading="loading" />
         <p class="text-center mt-4">ليس لديك حساب؟ <Button variant="text" class="cursor-pointer" @click="openRegisterDialog">حساب جديد</Button></p>
       </form>
     </Dialog>
@@ -62,7 +62,7 @@
             <label for="registerPassword">كلمة السر هنا</label>
           </IftaLabel>
         </div>
-        <Button label="إنشاء حساب" type="submit" class="w-full text-white rounded" />
+        <Button label="إنشاء حساب" type="submit" class="w-full text-white rounded" :loading="loading" />
       </form>
     </Dialog>
     <ForgetPassword ref="forgetPasswordRef" />
@@ -73,6 +73,13 @@
 import { ref } from 'vue';
 import { Button, Dialog, InputText, Password, IftaLabel } from 'primevue';
 import ForgetPassword from './ForgetPassword.vue';
+import { useAuthStore } from '@/stores/auth';
+import { useToast } from 'primevue/usetoast';
+
+const authStore = useAuthStore();
+const toast = useToast();
+const loading = ref(false);
+
 const showDialog = ref(false);
 const showRegisterForm = ref(false);
 const email = ref('');
@@ -81,17 +88,50 @@ const registerUsername = ref('');
 const registerEmail = ref('');
 const registerPassword = ref('');
 
-const handleSubmit = () => {
-  console.log('Email:', email.value);
-  console.log('Password:', password.value);
-  showDialog.value = false;
+const handleSubmit = async () => {
+  loading.value = true;
+  try {
+    const result = await authStore.login({
+      email: email.value,
+      password: password.value
+    });
+
+    if (result.success) {
+      toast.add({ severity: 'success', summary: 'نجاح', detail: 'تم تسجيل الدخول بنجاح' });
+      showDialog.value = false;
+    } else {
+      toast.add({ severity: 'error', summary: 'خطأ', detail: result.errors || 'فشل تسجيل الدخول' });
+    }
+  } catch (error) {
+    toast.add({ severity: 'error', summary: 'خطأ', detail: 'حدث خطأ غير متوقع' });
+  } finally {
+    loading.value = false;
+  }
 };
 
-const handleRegister = () => {
-  console.log('Register Username:', registerUsername.value);
-  console.log('Register Email:', registerEmail.value);
-  console.log('Register Password:', registerPassword.value);
-  showRegisterForm.value = false;
+const handleRegister = async () => {
+  loading.value = true;
+  try {
+    const result = await authStore.register({
+      username: registerUsername.value,
+      email: registerEmail.value,
+      password: registerPassword.value
+    });
+
+    if (result.success) {
+      toast.add({ severity: 'success', summary: 'نجاح', detail: 'تم إنشاء الحساب بنجاح' });
+      showRegisterForm.value = false;
+
+      // Automatically login after successful registration
+      await handleSubmit();
+    } else {
+      toast.add({ severity: 'error', summary: 'خطأ', detail: result.errors || 'فشل إنشاء الحساب' });
+    }
+  } catch (error) {
+    toast.add({ severity: 'error', summary: 'خطأ', detail: 'حدث خطأ غير متوقع' });
+  } finally {
+    loading.value = false;
+  }
 };
 
 const openRegisterDialog = () => {
@@ -99,12 +139,22 @@ const openRegisterDialog = () => {
   showRegisterForm.value = true;
 };
 
-
-
 const forgetPasswordRef = ref(null);
 
-const showForgetPassword = () => {
+const showForgetPassword = async () => {
   showDialog.value = false;
+  if (email.value) {
+    try {
+      const result = await authStore.forgotPassword(email.value);
+      if (result.success) {
+        toast.add({ severity: 'success', summary: 'نجاح', detail: 'تم إرسال رابط إعادة تعيين كلمة المرور' });
+      } else {
+        toast.add({ severity: 'error', summary: 'خطأ', detail: result.errors || 'فشل إرسال رابط إعادة تعيين كلمة المرور' });
+      }
+    } catch (error) {
+      toast.add({ severity: 'error', summary: 'خطأ', detail: 'حدث خطأ غير متوقع' });
+    }
+  }
   forgetPasswordRef.value.showForgetPassword();
 };
 
