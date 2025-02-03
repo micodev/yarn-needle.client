@@ -194,9 +194,7 @@ const copyOrderKey = async (key) => {
   background-color: var(--surface-100);
 }
 
-:deep(.dark\:bg-gray-800) {
-  background-color: var(--surface-card);
-}
+
 
 :deep(.border-gray-200) {
   border-color: var(--surface-border);
