@@ -19,3 +19,36 @@ export async function fetchProfileData() {
     password: ''
   };
 }
+
+export const currentPlan = {
+  title: "العضوية الذهبية",
+  features: [
+    "وصول كامل إلى جميع الدورات",
+    "دعم فني متميز",
+    "شهادات معتمدة",
+    "محتوى حصري"
+  ],
+  price: "100",
+  iconClass: "pi pi-star text-yellow-600"
+};
+
+export const availablePlans = [
+  {
+    title: "العضوية البلاتينية",
+    description: "أعلى مستوى من الميزات والخدمات مع دعم مخصص",
+    price: "200",
+    iconClass: "pi pi-star text-blue-500"
+  },
+  {
+    title: "العضوية المهنية",
+    description: "مثالية للمحترفين مع ميزات متقدمة",
+    price: "150",
+    iconClass: "pi pi-star text-purple-500"
+  },
+  {
+    title: "عضوية الشركات",
+    description: "حلول مخصصة للفرق والشركات",
+    price: "300",
+    iconClass: "pi pi-users text-green-500"
+  }
+];
