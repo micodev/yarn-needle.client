@@ -102,7 +102,7 @@ const handleSubmit = async () => {
     } else {
       toast.add({ severity: 'error', summary: 'خطأ', detail: result.errors || 'فشل تسجيل الدخول' });
     }
-  } catch (error) {
+  } catch  {
     toast.add({ severity: 'error', summary: 'خطأ', detail: 'حدث خطأ غير متوقع' });
   } finally {
     loading.value = false;
@@ -127,7 +127,7 @@ const handleRegister = async () => {
     } else {
       toast.add({ severity: 'error', summary: 'خطأ', detail: result.errors || 'فشل إنشاء الحساب' });
     }
-  } catch (error) {
+  } catch  {
     toast.add({ severity: 'error', summary: 'خطأ', detail: 'حدث خطأ غير متوقع' });
   } finally {
     loading.value = false;
@@ -151,7 +151,7 @@ const showForgetPassword = async () => {
       } else {
         toast.add({ severity: 'error', summary: 'خطأ', detail: result.errors || 'فشل إرسال رابط إعادة تعيين كلمة المرور' });
       }
-    } catch (error) {
+    } catch  {
       toast.add({ severity: 'error', summary: 'خطأ', detail: 'حدث خطأ غير متوقع' });
     }
   }
