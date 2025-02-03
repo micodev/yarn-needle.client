@@ -17,7 +17,7 @@
       <div v-if="myCourses.length > 0"
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         <div v-for="course in myCourses" :key="course.id"
-          class="w-full rounded-lg shadow-md relative flex flex-col bg-white dark:bg-gray-800 transition-all duration-300 ease-in-out hover:shadow-xl sm:hover:-translate-y-1">
+          class="w-full rounded-lg shadow-md relative flex flex-col bg-surface-0 dark:bg-surface-900 transition-all duration-300 ease-in-out hover:shadow-xl sm:hover:-translate-y-1">
           <div class="relative aspect-video">
             <img :src="course.image" :alt="course.title" class="w-full h-full object-cover rounded-t-lg"
               loading="lazy" />
