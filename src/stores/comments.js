@@ -29,20 +29,25 @@ export const newComment = ref({ rating: 0, text: "" });
 export const displayedCount = ref(2);
 export const displayedComments = computed(() => comments.value.slice(0, displayedCount.value));
 export const showMoreButton = computed(() => displayedCount.value < comments.value.length);
+export const loading = ref(false);
 
 export function addComment() {
   if (newComment.value.rating && newComment.value.text) {
-    comments.value.push({
-      id: comments.value.length + 1,
-      name: "مستخدم جديد",
-      avatar: "https://placehold.co/40x40",
-      ...newComment.value
-    });
-    newComment.value.rating = 0;
-    newComment.value.text = "";
-    if (displayedCount.value < comments.value.length) {
-      displayedCount.value = comments.value.length;
-    }
+    loading.value = true;
+    setTimeout(() => {
+      comments.value.push({
+        id: comments.value.length + 1,
+        name: "مستخدم جديد",
+        avatar: "https://placehold.co/40x40",
+        ...newComment.value
+      });
+      newComment.value.rating = 0;
+      newComment.value.text = "";
+      if (displayedCount.value < comments.value.length) {
+        displayedCount.value = comments.value.length;
+      }
+      loading.value = false;
+    }, 1000); // mimic API delay
   }
 }
 
