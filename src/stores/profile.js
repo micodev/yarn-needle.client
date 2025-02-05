@@ -32,17 +32,17 @@ export const useProfileStore = defineStore('profile', {
       }
     },
 
-    async updateProfile(profileData) {
+    async submitProfile(profileData) {
       this.isLoading = true
       this.error = null
 
       try {
-        const response = await this.$axios.put('/auth/profile', profileData)
+        const response = await this.$axios.post('/api/auth/profile', profileData)
         this.profile = response.data
         return this.profile
       } catch (error) {
-        this.error = error.message || 'Failed to update profile'
-        console.error('Error updating profile:', error)
+        this.error = error.message || 'Failed to submit profile'
+        console.error('Error submitting profile:', error)
         throw error
       } finally {
         this.isLoading = false
