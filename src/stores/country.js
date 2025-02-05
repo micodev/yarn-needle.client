@@ -17,7 +17,7 @@ export const useCountryStore = defineStore('country', {
     async fetchCountries() {
       this.isLoading = true
       this.error = null
-      
+
       try {
         const response = await this.$axios.get('/api/meta/countries')
         this.countries = response.data.map(country => ({
@@ -25,6 +25,7 @@ export const useCountryStore = defineStore('country', {
           code: country.code,
           name: country.name,
           dialCode: country.dialCode
+
         }))
       } catch (error) {
         this.error = error.message || 'Failed to fetch countries'
