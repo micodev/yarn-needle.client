@@ -294,16 +294,6 @@ const passwordHint = computed(() => {
   return '';
 });
 
-const fetchData = async () => {
-  try {
-    await profileStore.fetchProfile();
-    // Update form with profile data, using optional chaining
-    Object.assign(form, profileStore.getProfile || {});
-  } catch (error) {
-    console.error('Error fetching profile:', error);
-  }
-};
-
 const countryStore = useCountryStore();
 const countries = computed(() => countryStore.getCountries);
 
@@ -319,7 +309,6 @@ onMounted(async () => {
   await countryStore.fetchCountries();
   await nationalityStore.fetchNationalities();
   await membershipStore.fetchMemberships();
-  await fetchData();
 });
 
 const civilianIdError = ref('');
