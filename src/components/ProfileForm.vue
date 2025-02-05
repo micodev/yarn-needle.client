@@ -209,7 +209,16 @@
               accept="image/*"
               chooseLabel="إرفاق البطاقة الحكومية"
               @select="onGovernmentCardUpload"
-            />
+            >
+             <!-- scope for empty-->
+              <template #empty>
+                <i class="pi pi-upload" style="font-size: 2rem"></i>
+              </template>
+              <!-- scope for file-->
+              <template #file>
+                <img :src="form.governmentCardFile" alt="government-card" class="w-full h-40 object-cover rounded-lg" />
+              </template>
+            </FileUpload>
             <label>البطاقة الحكومية </label>
           </IftaLabel>
         </div>
