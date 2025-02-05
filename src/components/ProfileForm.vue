@@ -242,6 +242,19 @@ import { useToast } from 'primevue/usetoast';
 
 const toast = useToast();
 
+const src = ref(null);
+
+function onFileSelect(event) {
+    const file = event.files[0];
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+        src.value = e.target.result;
+    };
+
+    reader.readAsDataURL(file);
+}
+
 const collapseContent = ref(null);
 const innerContent = ref(null);
 const contentHeight = ref('0px');
