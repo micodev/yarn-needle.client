@@ -450,6 +450,4 @@ const onGovernmentCardUpload = (event) => {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-
-
 </style>
