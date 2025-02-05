@@ -261,7 +261,7 @@ const updateHeight = () => {
 };
 
 const profileStore = useProfileStore();
-const isLoading = computed(() => profileStore.isLoading);
+const isLoading = computed(() => profileStore.isLoading || countryStore.isLoading || nationalityStore.isLoading);
 // Change profileData to computed to always reflect store state
 const profileData = computed(() => profileStore.getProfile || {});
 
