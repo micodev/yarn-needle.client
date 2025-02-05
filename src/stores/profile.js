@@ -1,56 +1,37 @@
-export async function fetchProfileData() {
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
+import { defineStore } from 'pinia'
 
-  // Simulate profile data - replace with actual API call
-  return {
-    firstName: 'سارة',
-    secondName: 'أحمد',
-    thirdName: 'العمري',
-    nationality: { name: 'سعودي', value: 'saudi' },
-    phoneNumber: '0501234567',
-    country: { name: 'السعودية', code: 'SA' },
-    birthDate: new Date('1990-01-01'),
-    degree: 'بكالوريوس',
-    fieldOfStudy: 'علوم حاسب',
-    jobTitle: 'مطور برمجيات',
-    civilianId: '1234567890',
-    expiryDate: 'Jan 20, 2024',
-    password: '',
-    currentPlan: {
-      title: "العضوية الذهبية",
-      features: [
-        "وصول كامل إلى جميع الدورات",
-        "دعم فني متميز",
-        "شهادات معتمدة",
-        "محتوى حصري"
-      ],
-      price: "100",
-      iconClass: "pi pi-star text-yellow-600"
+export const useProfileStore = defineStore('profile', {
+  state: () => ({
+    profile: null,
+    isLoading: false,
+    error: null
+  }),
+
+  getters: {
+    getProfile: (state) => state.profile,
+    isProfileLoading: (state) => state.isLoading
+  },
+
+  actions: {
+    async fetchProfile() {
+      this.isLoading = true
+      this.error = null
+      
+      try {
+        const response = await this.$axios.get('/auth/profile')
+        this.profile = response.data
+      } catch (error) {
+        this.error = error.message || 'Failed to fetch profile'
+        console.error('Error fetching profile:', error)
+      } finally {
+        this.isLoading = false
+      }
+    },
+
+    reset() {
+      this.profile = null
+      this.error = null
+      this.isLoading = false
     }
-  };
-}
-
-// Remove the standalone currentPlan export
-// export const currentPlan = { ... };
-
-export const availablePlans = [
-  {
-    title: "العضوية البلاتينية",
-    description: "أعلى مستوى من الميزات والخدمات مع دعم مخصص",
-    price: "200",
-    iconClass: "pi pi-star text-blue-500"
-  },
-  {
-    title: "العضوية المهنية",
-    description: "مثالية للمحترفين مع ميزات متقدمة",
-    price: "150",
-    iconClass: "pi pi-star text-purple-500"
-  },
-  {
-    title: "عضوية الشركات",
-    description: "حلول مخصصة للفرق والشركات",
-    price: "300",
-    iconClass: "pi pi-users text-green-500"
   }
-];
+})
