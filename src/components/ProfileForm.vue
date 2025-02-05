@@ -318,7 +318,11 @@ const nationalityStore = useNationalityStore(); // Add this line
 const nationalities = computed(() => nationalityStore.getNationalities); // Add this line
 
 const membershipStore = useMembershipStore();
-const availablePlans = computed(() => membershipStore.getMemberships);
+const availablePlans = computed(() => {
+  return membershipStore.getMemberships.filter(
+    plan => plan.code !== currentPlan.value?.code
+  );
+});
 
 onMounted(async () => {
   await countryStore.fetchCountries();
