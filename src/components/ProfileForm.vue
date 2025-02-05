@@ -215,7 +215,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, nextTick } from 'vue';
+import { ref, onMounted, computed, nextTick, reactive } from 'vue';
 import { DatePicker, MultiSelect, InputText, Button, IftaLabel, FileUpload } from 'primevue';
 import { fetchProfileData, availablePlans } from '@/stores/profile.js';
 
@@ -260,7 +260,7 @@ const updateHeight = () => {
 
 const isLoading = ref(true);
 const profileData = ref(null);
-const form = ref({
+const form = reactive({
   firstName: '',
   secondName: '',
   thirdName: '',
