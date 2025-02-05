@@ -204,6 +204,7 @@
             <FileUpload mode="basic"
               name="governmentCard"
               severity="secondary"
+              :multiple="true"
               class="p-button-outlined w-full"
               accept="image/*"
               chooseLabel="إرفاق البطاقة الحكومية"
