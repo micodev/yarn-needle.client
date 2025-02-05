@@ -185,7 +185,7 @@
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
-            <InputText type="text" id="civilianId"  autocomplete="off" v-model="form.civilianId" class="w-full" required
+            <InputText type="text" id="civilianId"  autocomplete="_" v-model="form.civilianId" class="w-full" required
               pattern="^[A-Za-z0-9]+$" maxlength="20" @input="validateCivilianId" />
             <label>الرقم المدني <span class="text-red-500">*</span></label>
           </IftaLabel>
