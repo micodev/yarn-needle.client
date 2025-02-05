@@ -309,6 +309,7 @@ onMounted(async () => {
   await countryStore.fetchCountries();
   await nationalityStore.fetchNationalities();
   await membershipStore.fetchMemberships();
+  form.nationalities.push({ name: "test", code: "test" })
   //await profileStore.fetchProfile();
   // Object.assign(form, profileStore.getProfile || {});
   // //assign nationalities to form.nationalities
