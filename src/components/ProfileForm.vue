@@ -217,6 +217,7 @@ import { ref, onMounted, computed, nextTick, reactive } from 'vue';
 import { DatePicker, MultiSelect, InputText, Button, IftaLabel, FileUpload } from 'primevue';
 import { fetchProfileData, availablePlans } from '@/stores/profile.js';
 import { useCountryStore } from '@/stores/country'; // Add this import
+import { useNationalityStore } from '@/stores/nationality'; // Add this import
 
 const collapseContent = ref(null);
 const innerContent = ref(null);
@@ -300,17 +301,18 @@ const fetchData = async () => {
 const countryStore = useCountryStore();
 const countries = computed(() => countryStore.getCountries);
 
+const nationalityStore = useNationalityStore(); // Add this line
+
+// Replace the static nationalities with computed property
+const nationalities = computed(() => nationalityStore.getNationalities); // Add this line
+
 onMounted(async () => {
   await Promise.all([
     fetchData(),
-    countryStore.fetchCountries()
+    countryStore.fetchCountries(),
+    nationalityStore.fetchNationalities() // Add this line
   ]);
 });
-
-const nationalities = ref([
-  { name: 'أمريكي', code: 'american' },
-  { name: 'كندي', code: 'canadian' },
-]);
 
 const civilianIdError = ref('');
 
