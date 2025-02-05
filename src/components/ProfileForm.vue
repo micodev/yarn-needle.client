@@ -208,7 +208,6 @@
               class="p-button-outlined w-full"
               accept="image/*,application/pdf"
               mode="basic"
-              auto
               chooseLabel="إرفاق البطاقة الحكومية"
               required
               @upload="onGovernmentCardUpload"
