@@ -153,7 +153,7 @@
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
-            <MultiSelect :options="countries" v-model="form.country" :selectionLimit="1" optionLabel="name" filter
+            <MultiSelect :options="countries" v-model="form.countries" :selectionLimit="1" optionLabel="name" filter
               :loading="countryStore.isLoading" placeholder="اختر البلد" class="w-full" required>
             </MultiSelect>
             <label>البلد <span class="text-red-500">*</span></label>
@@ -300,7 +300,6 @@ const form = reactive({
   thirdName: '',
   nationalities: [],
   phoneNumber: '',
-  country: '',
   birthDate: null,
   degree: '',
   fieldOfStudy: '',
@@ -368,7 +367,7 @@ const handleSubmit = async () => {
   if (!form.thirdName) missingFields.push('الاسم الثالث');
   if (!form.nationalities.length) missingFields.push('الجنسية');
   if (!form.phoneNumber) missingFields.push('رقم الهاتف');
-  if (!form.country) missingFields.push('البلد');
+  if (!form.countries.length) missingFields.push('البلد');
   if (!form.birthDate) missingFields.push('تاريخ الميلاد');
   if (!form.degree) missingFields.push('الدرجة العلمية');
   if (!form.fieldOfStudy) missingFields.push('مجال الدراسة');
