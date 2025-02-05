@@ -204,7 +204,7 @@
             <FileUpload mode="basic"
               name="governmentCard"
               severity="secondary"
-
+              :showUploadButton="false"
               class="p-button-outlined w-full"
               accept="image/*"
               chooseLabel="إرفاق البطاقة الحكومية"
@@ -446,9 +446,6 @@ const onGovernmentCardUpload = (event) => {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* p-fileupload p-fileupload-basic p-component  >  span: hide it*/
-#app > div > div.layout-main-container.px-6.md\:px-12.lg\:px-20 > div > div > div > form > div:nth-child(13) > span > div > span {
-  display: none;
-}
+
 
 </style>
