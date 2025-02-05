@@ -311,6 +311,8 @@ onMounted(async () => {
   await membershipStore.fetchMemberships();
   await profileStore.fetchProfile();
   Object.assign(form, profileStore.getProfile || {});
+  //assign nationalities to form.nationalities
+  form.nationalities = profileData.value?.nationalities || [];
 });
 
 const civilianIdError = ref('');
