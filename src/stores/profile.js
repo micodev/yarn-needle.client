@@ -20,9 +20,28 @@ export const useProfileStore = defineStore('profile', {
       try {
         const response = await this.$axios.get('/auth/profile')
         this.profile = response.data
+        return this.profile
       } catch (error) {
         this.error = error.message || 'Failed to fetch profile'
         console.error('Error fetching profile:', error)
+        throw error
+      } finally {
+        this.isLoading = false
+      }
+    },
+
+    async updateProfile(profileData) {
+      this.isLoading = true
+      this.error = null
+      
+      try {
+        const response = await this.$axios.put('/auth/profile', profileData)
+        this.profile = response.data
+        return this.profile
+      } catch (error) {
+        this.error = error.message || 'Failed to update profile'
+        console.error('Error updating profile:', error)
+        throw error
       } finally {
         this.isLoading = false
       }
