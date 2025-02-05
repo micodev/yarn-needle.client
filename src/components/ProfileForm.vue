@@ -120,9 +120,7 @@
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
-            <MultiSelect v-model="form.nationality" :options="nationalities" optionLabel="name" filter
-              placeholder="Select Cities" :maxSelectedLabels="3" class="w-full md:w-80" />
-            <!-- <MultiSelect v-model="form.nationality" :options="nationalities" :loading="isLoading" :maxItems="1"
+            <MultiSelect v-model="form.nationality" :options="nationalities" :loading="isLoading" :maxItems="1"
               :selectionLimit="1" :filter="true" optionLabel="name" class="w-full nationality-select"
               :class="{ 'p-invalid': validationError }" placeholder="اختر الجنسية" aria-label="اختيار الجنسية" required>
               <template #option="slotProps">
@@ -131,16 +129,16 @@
                 </div>
               </template>
 
-<template #dropdownicon>
+              <template #dropdownicon>
                 <i class="pi pi-globe" />
               </template>
-<template #filtericon>
+              <template #filtericon>
                 <i class="pi pi-search" />
               </template>
-<template #header>
+              <template #header>
                 <div class="px-4">الجنسيات المتاحة</div>
               </template>
-</MultiSelect>-->
+            </MultiSelect>
             <label>الجنسية <span class="text-red-500">*</span></label>
           </IftaLabel>
         </div>
@@ -151,12 +149,12 @@
           </IftaLabel>
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
-          <!-- <IftaLabel>
+          <IftaLabel>
             <MultiSelect :options="countries" v-model="form.country" :selectionLimit="1" optionLabel="name" filter
               placeholder="اختر البلد" class="w-full" required>
             </MultiSelect>
             <label>البلد <span class="text-red-500">*</span></label>
-          </IftaLabel> -->
+          </IftaLabel>
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
