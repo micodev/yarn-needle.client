@@ -39,7 +39,8 @@
                   <p class="text-gray-600 dark:text-gray-400">{{ form.civilianId }}</p>
                   <div class="mt-2 flex items-center justify-center sm:justify-start">
                     <i class="pi pi-clock text-green-500 ml-2"></i>
-                    <span class="text-sm text-gray-500 dark:text-gray-400">تنتهي العضوية في: {{ expiryDate }}</span>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">تنتهي العضوية في: {{
+                      form.currentPlan.expiredAt }}</span>
                   </div>
                 </div>
               </div>
