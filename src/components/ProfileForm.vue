@@ -151,7 +151,7 @@
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
             <MultiSelect :options="countries" v-model="form.country" :selectionLimit="1" optionLabel="name" filter
-              placeholder="اختر البلد" class="w-full" required>
+              :loading="countryStore.isLoading" placeholder="اختر البلد" class="w-full" required>
             </MultiSelect>
             <label>البلد <span class="text-red-500">*</span></label>
           </IftaLabel>
