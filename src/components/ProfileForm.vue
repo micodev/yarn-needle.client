@@ -215,9 +215,10 @@
 <script setup>
 import { ref, onMounted, computed, nextTick, reactive } from 'vue';
 import { DatePicker, MultiSelect, InputText, Button, IftaLabel, FileUpload } from 'primevue';
-import { fetchProfileData, availablePlans } from '@/stores/profile.js';
+import { fetchProfileData } from '@/stores/profile.js';
 import { useCountryStore } from '@/stores/country'; // Add this import
 import { useNationalityStore } from '@/stores/nationality'; // Add this import
+import { useMembershipStore } from '@/stores/membership'; // Add this import
 
 const collapseContent = ref(null);
 const innerContent = ref(null);
@@ -306,11 +307,15 @@ const nationalityStore = useNationalityStore(); // Add this line
 // Replace the static nationalities with computed property
 const nationalities = computed(() => nationalityStore.getNationalities); // Add this line
 
+const membershipStore = useMembershipStore();
+const availablePlans = computed(() => membershipStore.getMemberships);
+
 onMounted(async () => {
   await Promise.all([
     fetchData(),
     countryStore.fetchCountries(),
-    nationalityStore.fetchNationalities() // Add this line
+    nationalityStore.fetchNationalities(),
+    membershipStore.fetchMemberships() // Add this line
   ]);
 });
 
