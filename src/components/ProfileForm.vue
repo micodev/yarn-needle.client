@@ -201,12 +201,7 @@
           </IftaLabel>
           <small v-if="passwordHint" class="text-gray-500 block mt-1">{{ passwordHint }}</small>
         </div>
-        <div class="w-full sm:w-1/2 px-2 mb-4">
-          <IftaLabel>
-            <InputText type="text" id="governmentId" v-model="form.governmentId" class="w-full" required />
-            <label>رقم الهوية الحكومية <span class="text-red-500">*</span></label>
-          </IftaLabel>
-        </div>
+
         <div class="w-full px-2 mb-4">
           <IftaLabel>
             <FileUpload
