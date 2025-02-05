@@ -2,7 +2,9 @@ import { defineStore } from 'pinia'
 
 export const useProfileStore = defineStore('profile', {
   state: () => ({
-    profile: null,
+    profile: {
+
+    },
     isLoading: false,
     error: null
   }),
@@ -16,7 +18,7 @@ export const useProfileStore = defineStore('profile', {
     async fetchProfile() {
       this.isLoading = true
       this.error = null
-      
+
       try {
         const response = await this.$axios.get('/api/auth/profile')
         this.profile = response.data
@@ -33,7 +35,7 @@ export const useProfileStore = defineStore('profile', {
     async updateProfile(profileData) {
       this.isLoading = true
       this.error = null
-      
+
       try {
         const response = await this.$axios.put('/auth/profile', profileData)
         this.profile = response.data
