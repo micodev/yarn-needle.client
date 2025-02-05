@@ -316,12 +316,10 @@ const membershipStore = useMembershipStore();
 const availablePlans = computed(() => membershipStore.getMemberships);
 
 onMounted(async () => {
-  await Promise.all([
-    fetchData(),
-    countryStore.fetchCountries(),
-    nationalityStore.fetchNationalities(),
-    membershipStore.fetchMemberships() // Add this line
-  ]);
+  await countryStore.fetchCountries();
+  await nationalityStore.fetchNationalities();
+  await membershipStore.fetchMemberships();
+  await fetchData();
 });
 
 const civilianIdError = ref('');
