@@ -194,7 +194,7 @@
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
             <InputText type="password" id="password" v-model="form.password" class="w-full"
-              autocomplete="off"
+              autocomplete="_"
               :placeholder="profileExists ? 'اترك فارغاً للاحتفاظ بكلمة المرور الحالية' : 'أدخل كلمة المرور'"
               :required="!profileExists" />
             <label>كلمة المرور <span v-if="!profileExists" class="text-red-500">*</span></label>
