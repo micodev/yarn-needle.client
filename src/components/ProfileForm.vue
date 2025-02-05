@@ -304,8 +304,8 @@ onMounted(() => {
 });
 
 const nationalities = ref([
-  { name: 'أمريكي', value: 'american' },
-  { name: 'كندي', value: 'canadian' },
+  { name: 'أمريكي', code: 'american' },
+  { name: 'كندي', code: 'canadian' },
 ]);
 
 const countries = ref([
