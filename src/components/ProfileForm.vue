@@ -209,11 +209,7 @@
               accept="image/*"
               chooseLabel="إرفاق البطاقة الحكومية"
               @select="onGovernmentCardUpload"
-            >
-            <template #empty>
-                <span>Drag and drop files to here to upload.</span>
-            </template>
-            </FileUpload>
+           />
             <label>البطاقة الحكومية </label>
           </IftaLabel>
         </div>
