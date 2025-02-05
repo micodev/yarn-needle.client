@@ -120,7 +120,7 @@
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
-            <MultiSelect v-model="form.nationality" :options="nationalities" :loading="nationalityStore.loading"
+            <MultiSelect v-model="form.nationality" :options="nationalities" :loading="nationalityStore.isLoading"
               :maxItems="1" :selectionLimit="1" :filter="true" optionLabel="name" class="w-full nationality-select"
               :class="{ 'p-invalid': validationError }" placeholder="اختر الجنسية" aria-label="اختيار الجنسية" required>
               <template #option="slotProps">
