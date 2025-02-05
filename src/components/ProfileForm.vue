@@ -344,7 +344,7 @@ onMounted(async () => {
   await nationalityStore.fetchNationalities();
   await membershipStore.fetchMemberships();
   await profileStore.fetchProfile();
-  // Object.assign(form, profileStore.getProfile || {});
+  Object.assign(form, profileStore.getProfile || {});
 
 });
 
