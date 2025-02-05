@@ -260,7 +260,7 @@ const updateHeight = () => {
 
 const isLoading = ref(true);
 const profileData = ref(null);
-const nationality = ref(null);
+const nationality = ref();
 const form = ref({
   firstName: '',
   secondName: '',
