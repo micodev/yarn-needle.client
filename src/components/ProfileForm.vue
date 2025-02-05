@@ -51,16 +51,17 @@
               <div class="bg-white dark:bg-gray-700 rounded-lg p-3 sm:p-4 shadow-sm">
                 <div class="flex items-center mb-4">
                   <i class="pi pi-star text-yellow-600 text-xl ml-3"></i>
-                  <h4 class="text-lg font-bold text-gray-900 dark:text-white">{{ profileData.currentPlan?.title }}</h4>
+                  <h4 class="text-lg font-bold text-gray-900 dark:text-white">{{ currentPlan.title || 'لا توجد خطة
+                    حالية' }}</h4>
                 </div>
                 <ul class="text-gray-700 dark:text-gray-300 mb-4 list-disc list-inside">
-                  <li v-for="(feature, index) in profileData.currentPlan?.features" :key="index" class="mb-2">
+                  <li v-for="(feature, index) in currentPlanFeatures" :key="index" class="mb-2">
                     {{ feature }}
                   </li>
                 </ul>
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4">
                   <span class="text-base sm:text-lg font-bold text-gray-900 dark:text-white">
-                    {{ profileData.currentPlan?.price }} ريال سعودي / الشهر
+                    {{ currentPlan.price ? `${currentPlan.price} ريال سعودي / الشهر` : '' }}
                   </span>
                   <button
                     class="w-full sm:w-auto px-4 py-2 rounded-lg border border-gray-300 hover:border-gray-400 transition-colors flex items-center justify-center">
@@ -261,7 +262,13 @@ const updateHeight = () => {
 
 const profileStore = useProfileStore();
 const isLoading = computed(() => profileStore.isLoading);
-const profileData = ref(null);
+// Change profileData to computed to always reflect store state
+const profileData = computed(() => profileStore.getProfile || {});
+
+// Add computed properties for current plan data with null checks
+const currentPlan = computed(() => profileData.value?.currentPlan || {});
+const currentPlanFeatures = computed(() => currentPlan.value?.features || []);
+
 const form = reactive({
   firstName: '',
   secondName: '',
@@ -289,9 +296,9 @@ const passwordHint = computed(() => {
 
 const fetchData = async () => {
   try {
-    const data = await profileStore.fetchProfile();
-    profileData.value = data;
-    Object.assign(form, data);
+    await profileStore.fetchProfile();
+    // Update form with profile data, using optional chaining
+    Object.assign(form, profileStore.getProfile || {});
   } catch (error) {
     console.error('Error fetching profile:', error);
   }
