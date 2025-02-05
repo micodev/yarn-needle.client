@@ -412,8 +412,7 @@ const onGovernmentCardUpload = (event) => {
   var fileBinary = event.files[0];
   var reader = new FileReader();
   reader.onload = function () {
-    var base64String = reader.result.split(',')[1];
-    form.governmentCardFile = base64String;
+    form.governmentCardFile = reader.result;
   };
   reader.readAsDataURL(fileBinary);
 };
