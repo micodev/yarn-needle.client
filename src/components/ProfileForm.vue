@@ -230,6 +230,9 @@ import { useProfileStore } from '@/stores/profile';
 import { useCountryStore } from '@/stores/country'; // Add this import
 import { useNationalityStore } from '@/stores/nationality'; // Add this import
 import { useMembershipStore } from '@/stores/membership'; // Add this import
+import { useToast } from 'primevue/usetoast';
+
+const toast = useToast();
 
 const collapseContent = ref(null);
 const innerContent = ref(null);
@@ -395,7 +398,11 @@ const handleSubmit = async () => {
     const updatedProfile = await profileStore.submitProfile(dataToSave);
     profileData.value = updatedProfile;
     form.password = ''; // Clear password input
-    alert('تم حفظ البيانات بنجاح');
+    toast.add({
+      severity: 'success',
+      summary: 'تم التحديث',
+      detail: 'تم حفظ البيانات بنجاح'
+    });
   } catch (error) {
     console.error('Error saving profile:', error);
     alert('حدث خطأ أثناء حفظ البيانات');
