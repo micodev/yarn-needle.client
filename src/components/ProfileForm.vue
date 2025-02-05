@@ -209,7 +209,7 @@
               chooseLabel="إرفاق البطاقة الحكومية"
               @select="onGovernmentCardUpload"
             />
-            <label>البطاقة الحكومية <span class="text-red-500">*</span></label>
+            <label>البطاقة الحكومية </label>
           </IftaLabel>
         </div>
 
