@@ -329,7 +329,16 @@ const validateCivilianId = (event) => {
   }
 };
 
+const validationError = ref(false);
+
 const handleSubmit = async () => {
+  // Validate nationality
+  if (!form.value.nationality) {
+    validationError.value = true;
+    return;
+  }
+  validationError.value = false;
+
   if (!form.value.firstName ||
     !form.value.secondName ||
     !form.value.thirdName ||
