@@ -321,8 +321,8 @@ onMounted(async () => {
     await countryStore.fetchCountries()
     await nationalityStore.fetchNationalities()
     await membershipStore.fetchMemberships()
-    const data = await profileStore.fetchProfile()
-    Object.assign(form, data || {})
+    // const data = await profileStore.fetchProfile()
+    // Object.assign(form, data || {})
   } catch (error) {
     console.error('Error in onMounted:', error)
   } finally {
