@@ -204,21 +204,14 @@
             <FileUpload mode="basic"
               name="governmentCard"
               severity="secondary"
-              :showUploadButton="false"
               class="p-button-outlined w-full"
               accept="image/*"
-              :custom-upload="true"
               chooseLabel="إرفاق البطاقة الحكومية"
               @select="onGovernmentCardUpload"
             >
-             <!-- scope for empty-->
-              <template #empty>
-                <i class="pi pi-upload" style="font-size: 2rem"></i>
-              </template>
-              <!-- scope for file-->
-              <template #file>
-                <img :src="form.governmentCardFile" alt="government-card" class="w-full h-40 object-cover rounded-lg" />
-              </template>
+            <template #empty>
+                <span>Drag and drop files to here to upload.</span>
+            </template>
             </FileUpload>
             <label>البطاقة الحكومية </label>
           </IftaLabel>
