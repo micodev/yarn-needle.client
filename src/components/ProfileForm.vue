@@ -119,8 +119,10 @@
           </IftaLabel>
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
-          <!-- <IftaLabel>
-            <MultiSelect v-model="form.nationality" :options="nationalities" :loading="isLoading" :maxItems="1"
+          <IftaLabel>
+            <MultiSelect v-model="form.nationality" :options="nationalities" optionLabel="name" filter
+              placeholder="Select Cities" :maxSelectedLabels="3" class="w-full md:w-80" />
+            <!-- <MultiSelect v-model="form.nationality" :options="nationalities" :loading="isLoading" :maxItems="1"
               :selectionLimit="1" :filter="true" optionLabel="name" class="w-full nationality-select"
               :class="{ 'p-invalid': validationError }" placeholder="اختر الجنسية" aria-label="اختيار الجنسية" required>
               <template #option="slotProps">
@@ -138,9 +140,9 @@
 <template #header>
                 <div class="px-4">الجنسيات المتاحة</div>
               </template>
-</MultiSelect>
-<label>الجنسية <span class="text-red-500">*</span></label>
-</IftaLabel> -->
+</MultiSelect>-->
+            <label>الجنسية <span class="text-red-500">*</span></label>
+          </IftaLabel>
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
