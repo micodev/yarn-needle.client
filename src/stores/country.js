@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import axios from 'axios'
 
 export const useCountryStore = defineStore('country', {
   state: () => ({
@@ -20,7 +19,7 @@ export const useCountryStore = defineStore('country', {
       this.error = null
       
       try {
-        const response = await axios.get('/api/countries')
+        const response = await this.$axios.get('/api/countries')
         this.countries = response.data.map(country => ({
           id: country.id,
           code: country.code,
