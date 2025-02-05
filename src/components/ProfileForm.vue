@@ -36,7 +36,6 @@
                 <div class="text-center sm:text-right">
                   <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">{{ form.firstName }} {{
                     form.secondName }}</h2>
-                  <p class="text-gray-600 dark:text-gray-400">{{ form.civilianId }}</p>
                   <div class="mt-2 flex items-center justify-center sm:justify-start">
                     <i class="pi pi-clock text-green-500 ml-2"></i>
                     <span class="text-sm text-gray-500 dark:text-gray-400">
@@ -305,7 +304,6 @@ const form = reactive({
   degree: '',
   fieldOfStudy: '',
   jobTitle: '',
-  civilianId: '',
   expiryDate: '',
   password: '',
   governmentId: '',
@@ -373,7 +371,7 @@ const handleSubmit = async () => {
   if (!form.degree) missingFields.push('الدرجة العلمية');
   if (!form.fieldOfStudy) missingFields.push('مجال الدراسة');
   if (!form.jobTitle) missingFields.push('المسمى الوظيفي');
-  if (!form.civilianId) missingFields.push('رقم الهوية');
+  if (!form.governmentId) missingFields.push('رقم الهوية الحكومية');
   if (!profileExists.value && !form.password) missingFields.push('كلمة المرور');
 
   if (missingFields.length > 0) {
