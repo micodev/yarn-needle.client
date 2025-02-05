@@ -205,7 +205,7 @@
               name="governmentCard"
               severity="secondary"
               :multiple="true"
-              class="p-button-outlined w-full"
+              class="p-button-outlined w-full government-card-upload"
               accept="image/*"
               chooseLabel="إرفاق البطاقة الحكومية"
               @select="onGovernmentCardUpload"
@@ -235,18 +235,7 @@ import { useToast } from 'primevue/usetoast';
 
 const toast = useToast();
 
-const src = ref(null);
 
-function onFileSelect(event) {
-    const file = event.files[0];
-    const reader = new FileReader();
-
-    reader.onload = async (e) => {
-        src.value = e.target.result;
-    };
-
-    reader.readAsDataURL(file);
-}
 
 const collapseContent = ref(null);
 const innerContent = ref(null);
@@ -459,6 +448,9 @@ const onGovernmentCardUpload = (event) => {
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+.government-card-upload .p-fileupload-choose span {
+  display: none; /* Hide the "No file chosen" text */
 }
 
 </style>
