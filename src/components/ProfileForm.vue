@@ -75,11 +75,11 @@
             <div class="p-4 sm:p-6 bg-white dark:bg-gray-800">
               <h3 class="text-lg sm:text-xl font-semibold mb-4 text-gray-900 dark:text-white">الترقية إلى</h3>
               <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                <div v-for="plan in availablePlans" :key="plan.name"
+                <div v-for="plan in availablePlans" :key="plan."
                   class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 sm:p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                   <div class="flex items-center mb-4">
                     <i :class="plan.iconClass" class="text-lg ml-3"></i>
-                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">{{ plan.name }}</h4>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">{{ plan. }}</h4>
                   </div>
                   <p class="text-gray-600 dark:text-gray-400 mb-4">{{ plan.description }}</p>
                   <div class="mt-auto">
@@ -215,7 +215,7 @@
 <script setup>
 import { ref, onMounted, computed, nextTick, reactive } from 'vue';
 import { DatePicker, MultiSelect, InputText, Button, IftaLabel, FileUpload } from 'primevue';
-import { useProfileStore } from '@/stores/profile';
+import { fetchProfileData } from '@/stores/profile.js';
 import { useCountryStore } from '@/stores/country'; // Add this import
 import { useNationalityStore } from '@/stores/nationality'; // Add this import
 import { useMembershipStore } from '@/stores/membership'; // Add this import
@@ -259,8 +259,7 @@ const updateHeight = () => {
   }
 };
 
-const profileStore = useProfileStore();
-const isLoading = computed(() => profileStore.isLoading);
+const isLoading = ref(true);
 const profileData = ref(null);
 const form = reactive({
   firstName: '',
@@ -288,13 +287,15 @@ const passwordHint = computed(() => {
 });
 
 const fetchData = async () => {
+  isLoading.value = true;
   try {
-    const data = await profileStore.fetchProfile();
+    const data = await fetchProfileData();
     profileData.value = data;
-    // Update form with profile data
-    Object.assign(form, data);
+    form.value = { ...form.value, ...data };
   } catch (error) {
     console.error('Error fetching profile:', error);
+  } finally {
+    isLoading.value = false;
   }
 };
 
@@ -361,15 +362,23 @@ const handleSubmit = async () => {
   }
 
   try {
-    const dataToSave = { ...form };
+    const dataToSave = { ...form.value };
 
     // Only include password if it was changed
     if (!dataToSave.password) {
       delete dataToSave.password;
     }
 
-    await profileStore.updateProfile(dataToSave);
-    form.password = ''; // Clear password input
+    // Simulate API call to save data
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    // Update profile data without password
+    profileData.value = {
+      ...dataToSave,
+      password: '' // Clear password field after save
+    };
+
+    form.value.password = ''; // Clear password input
     alert('تم حفظ البيانات بنجاح');
   } catch (error) {
     console.error('Error saving profile:', error);
