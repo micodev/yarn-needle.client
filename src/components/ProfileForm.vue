@@ -205,6 +205,7 @@
               name="governmentCard"
               severity="secondary"
               customUpload
+              multiple="false"
               class="p-button-outlined w-full"
               accept="image/*"
               chooseLabel="إرفاق البطاقة الحكومية"
