@@ -39,6 +39,7 @@ export const useProfileStore = defineStore('profile', {
       try {
         const response = await this.$axios.post('/api/auth/profile', profileData)
         this.profile = response.data
+        await this.fetchProfile()  // Fetch updated profile data
         return this.profile
       } catch (error) {
         this.error = error.message || 'Failed to submit profile'
