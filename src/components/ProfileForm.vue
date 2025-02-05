@@ -411,10 +411,12 @@ const handleSubmit = async () => {
 
 const onGovernmentCardUpload = (event) => {
   var fileBinary = event.files[0];
-  // fileBinary is a File object converted to a base64 string
-  var base64String = URL.createObjectURL(fileBinary);
-  form.governmentCardFile = base64String;
-
+  var reader = new FileReader();
+  reader.onload = function () {
+    var base64String = reader.result.split(',')[1];
+    form.governmentCardFile = base64String;
+  };
+  reader.readAsDataURL(fileBinary);
 };
 </script>
 
