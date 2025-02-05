@@ -215,7 +215,7 @@
 <script setup>
 import { ref, onMounted, computed, nextTick, reactive } from 'vue';
 import { DatePicker, MultiSelect, InputText, Button, IftaLabel, FileUpload } from 'primevue';
-import { fetchProfileData } from '@/stores/profile.js';
+import { useProfileStore } from '@/stores/profile';
 import { useCountryStore } from '@/stores/country'; // Add this import
 import { useNationalityStore } from '@/stores/nationality'; // Add this import
 import { useMembershipStore } from '@/stores/membership'; // Add this import
@@ -259,7 +259,8 @@ const updateHeight = () => {
   }
 };
 
-const isLoading = ref(true);
+const profileStore = useProfileStore();
+const isLoading = computed(() => profileStore.isLoading);
 const profileData = ref(null);
 const form = reactive({
   firstName: '',
@@ -287,15 +288,13 @@ const passwordHint = computed(() => {
 });
 
 const fetchData = async () => {
-  isLoading.value = true;
   try {
-    const data = await fetchProfileData();
+    const data = await profileStore.fetchProfile();
     profileData.value = data;
-    form.value = { ...form.value, ...data };
+    // Update form with profile data
+    Object.assign(form, data);
   } catch (error) {
     console.error('Error fetching profile:', error);
-  } finally {
-    isLoading.value = false;
   }
 };
 
@@ -362,23 +361,15 @@ const handleSubmit = async () => {
   }
 
   try {
-    const dataToSave = { ...form.value };
+    const dataToSave = { ...form };
 
     // Only include password if it was changed
     if (!dataToSave.password) {
       delete dataToSave.password;
     }
 
-    // Simulate API call to save data
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    // Update profile data without password
-    profileData.value = {
-      ...dataToSave,
-      password: '' // Clear password field after save
-    };
-
-    form.value.password = ''; // Clear password input
+    await profileStore.updateProfile(dataToSave);
+    form.password = ''; // Clear password input
     alert('تم حفظ البيانات بنجاح');
   } catch (error) {
     console.error('Error saving profile:', error);
