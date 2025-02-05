@@ -309,7 +309,7 @@ onMounted(async () => {
   await countryStore.fetchCountries();
   await nationalityStore.fetchNationalities();
   await membershipStore.fetchMemberships();
-  await profileStore.fetchProfile();
+  //await profileStore.fetchProfile();
   // Object.assign(form, profileStore.getProfile || {});
   // //assign nationalities to form.nationalities
   // form.nationalities = reactive(profileStore.getProfile?.nationalities || []);
