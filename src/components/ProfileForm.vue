@@ -201,12 +201,11 @@
 
         <div class="w-full px-2 mb-4">
           <IftaLabel>
-            <FileUpload
+            <FileUpload mode="basic"
               name="governmentCard"
               severity="secondary"
               class="p-button-outlined w-full"
-              accept="image/*,application/pdf"
-              mode="basic"
+              accept="image/*"
               chooseLabel="إرفاق البطاقة الحكومية"
               @select="onGovernmentCardUpload"
             />
