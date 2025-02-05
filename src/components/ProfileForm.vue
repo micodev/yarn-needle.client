@@ -352,14 +352,7 @@ onMounted(async () => {
 
 const civilianIdError = ref('');
 
-const validateCivilianId = (event) => {
-  const value = event.target.value;
-  if (value && !/^[A-Za-z0-9]+$/.test(value)) {
-    civilianIdError.value = 'الرقم المدني يجب أن يحتوي على أرقام وحروف فقط';
-  } else {
-    civilianIdError.value = '';
-  }
-};
+
 
 const validationError = ref(false);
 
