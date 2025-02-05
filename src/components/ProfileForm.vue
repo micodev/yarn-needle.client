@@ -224,13 +224,7 @@
             <label>البطاقة الحكومية <span class="text-red-500">*</span></label>
           </IftaLabel>
         </div>
-        <div class="w-full px-2 mb-4">
-          <IftaLabel>
-            <FileUpload name="identity" severity="secondary" class="p-button-outlined w-full" url="./upload"
-              accept="image/*" mode="basic" auto chooseLabel="إرفاق الهوية الوطنية" required />
-            <label>الهوية الوطنية <span class="text-red-500">*</span></label>
-          </IftaLabel>
-        </div>
+
         <div class="w-full px-2">
           <Button type="submit" label="إرسال" class="w-full" />
         </div>
