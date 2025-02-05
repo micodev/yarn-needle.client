@@ -309,6 +309,7 @@ onMounted(async () => {
   await countryStore.fetchCountries();
   await nationalityStore.fetchNationalities();
   await membershipStore.fetchMemberships();
+  await profileStore.fetchProfile();
 });
 
 const civilianIdError = ref('');
