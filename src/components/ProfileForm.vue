@@ -185,11 +185,9 @@
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
-            <InputText type="text" id="civilianId"  autocomplete="organization" v-model="form.civilianId" class="w-full" required
-              pattern="^[A-Za-z0-9]+$" maxlength="20" @input="validateCivilianId" />
-            <label>الرقم المدني <span class="text-red-500">*</span></label>
+            <InputText type="text" id="governmentId" v-model="form.governmentId" class="w-full" required />
+            <label>رقم الهوية الحكومية <span class="text-red-500">*</span></label>
           </IftaLabel>
-          <small v-if="civilianIdError" class="text-red-500 block mt-1">{{ civilianIdError }}</small>
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
