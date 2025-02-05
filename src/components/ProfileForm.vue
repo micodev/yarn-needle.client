@@ -362,19 +362,22 @@ const handleSubmit = async () => {
   }
   validationError.value = false;
 
-  if (!form.firstName ||
-    !form.secondName ||
-    !form.thirdName ||
-    !form.nationalities ||
-    !form.phoneNumber ||
-    !form.country ||
-    !form.birthDate ||
-    !form.degree ||
-    !form.fieldOfStudy ||
-    !form.jobTitle ||
-    !form.civilianId ||
-    (!profileExists.value && !form.password)) {
-    alert('الرجاء ملء جميع الحقول المطلوبة');
+  const missingFields = [];
+  if (!form.firstName) missingFields.push('الاسم الأول');
+  if (!form.secondName) missingFields.push('الاسم الثاني');
+  if (!form.thirdName) missingFields.push('الاسم الثالث');
+  if (!form.nationalities.length) missingFields.push('الجنسية');
+  if (!form.phoneNumber) missingFields.push('رقم الهاتف');
+  if (!form.country) missingFields.push('البلد');
+  if (!form.birthDate) missingFields.push('تاريخ الميلاد');
+  if (!form.degree) missingFields.push('الدرجة العلمية');
+  if (!form.fieldOfStudy) missingFields.push('مجال الدراسة');
+  if (!form.jobTitle) missingFields.push('المسمى الوظيفي');
+  if (!form.civilianId) missingFields.push('رقم الهوية');
+  if (!profileExists.value && !form.password) missingFields.push('كلمة المرور');
+
+  if (missingFields.length > 0) {
+    alert('الحقول التالية مطلوبة: ' + missingFields.join(', '));
     return;
   }
 
