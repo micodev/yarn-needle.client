@@ -385,7 +385,7 @@ const handleSubmit = async () => {
   }
 };
 </script>
-<!-- 
+
 <style scoped>
 .space-x-reverse {
   --tw-space-x-reverse: 1;
@@ -413,4 +413,4 @@ const handleSubmit = async () => {
   transform: translateY(-5px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
-</style> -->
+</style>
