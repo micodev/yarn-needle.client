@@ -121,7 +121,7 @@
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
-            <MultiSelect v-model="form.nationality" :options="nationalities" :loading="nationalityStore.isLoading"
+            <MultiSelect v-model="form.nationalities" :options="nationalities" :loading="nationalityStore.isLoading"
               :maxItems="1" :selectionLimit="1" :filter="true" optionLabel="name" class="w-full nationality-select"
               :class="{ 'p-invalid': validationError }" placeholder="اختر الجنسية" aria-label="اختيار الجنسية" required>
               <template #option="slotProps">
@@ -273,7 +273,7 @@ const form = reactive({
   firstName: '',
   secondName: '',
   thirdName: '',
-  nationality: '',
+  nationalities: [],
   phoneNumber: '',
   country: '',
   birthDate: null,
@@ -339,7 +339,7 @@ const validationError = ref(false);
 
 const handleSubmit = async () => {
   // Validate nationality
-  if (!form.nationality) {
+  if (!form.nationalities.length) {
     validationError.value = true;
     return;
   }
@@ -348,7 +348,7 @@ const handleSubmit = async () => {
   if (!form.firstName ||
     !form.secondName ||
     !form.thirdName ||
-    !form.nationality ||
+    !form.nationalities ||
     !form.phoneNumber ||
     !form.country ||
     !form.birthDate ||
