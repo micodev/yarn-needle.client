@@ -136,7 +136,7 @@
                 <i class="pi pi-search" />
               </template>
               <template #header>
-                <div class="px-4">الجنسيات المتاحة</div>
+                <div class="px-4 pt-2">الجنسيات المتاحة</div>
               </template>
             </MultiSelect>
             <label>الجنسية <span class="text-red-500">*</span></label>
