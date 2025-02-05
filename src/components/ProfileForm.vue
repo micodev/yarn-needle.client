@@ -312,7 +312,7 @@ onMounted(async () => {
   await profileStore.fetchProfile();
   Object.assign(form, profileStore.getProfile || {});
   //assign nationalities to form.nationalities
-  form.nationalities = profileData.value?.nationalities || [];
+  form.nationalities = reactive(profileStore.getProfile?.nationalities || []);
 });
 
 const civilianIdError = ref('');
