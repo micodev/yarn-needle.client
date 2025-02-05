@@ -19,7 +19,7 @@ export const useCountryStore = defineStore('country', {
       this.error = null
       
       try {
-        const response = await this.$axios.get('/api/countries')
+        const response = await this.$axios.get('/api/meta/countries')
         this.countries = response.data.map(country => ({
           id: country.id,
           code: country.code,
