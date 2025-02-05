@@ -445,4 +445,11 @@ const onGovernmentCardUpload = (event) => {
   transform: translateY(-5px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
+
+.p-fileupload-choose input[type="file"]::-webkit-file-upload-text {
+  visibility: hidden;
+}
+.p-fileupload-choose input[type="file"]::before {
+  content: '';
+}
 </style>
