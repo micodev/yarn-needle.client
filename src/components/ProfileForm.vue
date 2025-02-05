@@ -310,9 +310,7 @@ onMounted(async () => {
   await nationalityStore.fetchNationalities();
   await membershipStore.fetchMemberships();
   await profileStore.fetchProfile();
-  setTimeout(() => {
-    Object.assign(form, profileStore.getProfile || {});
-  }, 500);
+  Object.assign(form, profileStore.getProfile || {});
 });
 
 const civilianIdError = ref('');
