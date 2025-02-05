@@ -451,7 +451,7 @@ const onGovernmentCardUpload = (event) => {
 }
 
 /* no file choose hide */
-.p-fileupload-choose {
+.p-fileupload-choose-button {
   display: none;
 }
 
