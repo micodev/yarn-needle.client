@@ -112,6 +112,9 @@ export const useAuthStore = defineStore('auth', {
       localStorage.removeItem('token')
       this.refreshToken = null
       this.isAuthenticated = false
+    },
+    checkAuthStatus() {
+      return this.isAuthenticated;
     }
   },
 
