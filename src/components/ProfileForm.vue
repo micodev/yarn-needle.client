@@ -449,12 +449,10 @@ const onGovernmentCardUpload = (event) => {
   transform: translateY(-5px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
-.p-fileupload-basic > span {
-  display: block;
-  margin-top: 0.25rem;
-  font-size: 0.875rem;
-  color: #333;
-}
 
+/* no file choose hide */
+.p-fileupload-choose {
+  display: none;
+}
 
 </style>
