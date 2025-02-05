@@ -206,7 +206,6 @@
               name="governmentCard"
               severity="secondary"
               class="p-button-outlined w-full"
-              url="./upload"
               accept="image/*,application/pdf"
               mode="basic"
               auto
