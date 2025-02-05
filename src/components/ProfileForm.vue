@@ -447,7 +447,7 @@ const onGovernmentCardUpload = (event) => {
 }
 
 /* p-fileupload p-fileupload-basic p-component  >  span: hide it*/
-.p-fileupload .p-fileupload-buttonbar .p-fileupload-choose {
+#app > div > div.layout-main-container.px-6.md\:px-12.lg\:px-20 > div > div > div > form > div:nth-child(13) > span > div > span {
   display: none;
 }
 
