@@ -22,6 +22,7 @@ export const useMembershipStore = defineStore('membership', {
         this.memberships = response.data.map(membership => ({
           id: membership.id,
           name: membership.name,
+          code: membership.code,
           description: membership.description,
           price: membership.price
         }))
