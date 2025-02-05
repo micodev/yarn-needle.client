@@ -120,8 +120,9 @@
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
-            <MultiSelect :options="nationalities" filter v-model="form.nationality" :maxitems="1" :selectionLimit="1"
-              optionLabel="name" placeholder="اختر الجنسية" class="w-full" required>
+            <MultiSelect v-model="form.nationality" :options="nationalities" :loading="isLoading" :maxItems="1"
+              :selectionLimit="1" :filter="true" optionLabel="name" class="w-full nationality-select"
+              :class="{ 'p-invalid': validationError }" placeholder="اختر الجنسية" aria-label="اختيار الجنسية" required>
               <template #option="slotProps">
                 <div>
                   <div>{{ slotProps.option.name }}</div>
