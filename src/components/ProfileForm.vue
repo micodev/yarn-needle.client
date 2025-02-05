@@ -6,7 +6,7 @@
 
     <template v-else>
       <!-- Collapsable Subscription Info Section -->
-      <div :class="[
+      <div v-if="showSubscriptionSection" :class="[
         'mb-4 sm:mb-8 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all duration-300',
         { 'hover:scale-105': !isSubscriptionExpanded }
       ]">
@@ -268,6 +268,10 @@ const profileData = computed(() => profileStore.getProfile || {});
 // Add computed properties for current plan data with null checks
 const currentPlan = computed(() => profileData.value?.currentPlan || {});
 const currentPlanFeatures = computed(() => currentPlan.value?.features || []);
+
+const showSubscriptionSection = computed(() => {
+  return !!currentPlan.value?.title; // or any condition indicating a membership
+});
 
 const form = reactive({
   firstName: '',
