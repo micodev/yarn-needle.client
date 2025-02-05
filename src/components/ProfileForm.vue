@@ -307,7 +307,7 @@ const availablePlans = computed(() => membershipStore.getMemberships);
 
 onMounted(async () => {
   await countryStore.fetchCountries();
-  // await nationalityStore.fetchNationalities();
+  await nationalityStore.fetchNationalities();
   await membershipStore.fetchMemberships();
   form.nationalities.push({ name: "سعودي", code: "sa" })
   //await profileStore.fetchProfile();
