@@ -75,11 +75,11 @@
             <div class="p-4 sm:p-6 bg-white dark:bg-gray-800">
               <h3 class="text-lg sm:text-xl font-semibold mb-4 text-gray-900 dark:text-white">الترقية إلى</h3>
               <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                <div v-for="plan in availablePlans" :key="plan.title"
+                <div v-for="plan in availablePlans" :key="plan.name"
                   class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 sm:p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                   <div class="flex items-center mb-4">
                     <i :class="plan.iconClass" class="text-lg ml-3"></i>
-                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">{{ plan.title }}</h4>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">{{ plan.name }}</h4>
                   </div>
                   <p class="text-gray-600 dark:text-gray-400 mb-4">{{ plan.description }}</p>
                   <div class="mt-auto">
