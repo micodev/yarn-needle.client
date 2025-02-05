@@ -393,7 +393,7 @@ const handleSubmit = async () => {
       delete dataToSave.password;
     }
 
-    const updatedProfile = await profileStore.updateProfile(dataToSave);
+    const updatedProfile = await profileStore.submitProfile(dataToSave);
     profileData.value = updatedProfile;
     form.password = ''; // Clear password input
     alert('تم حفظ البيانات بنجاح');
