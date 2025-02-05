@@ -39,6 +39,13 @@ export const useProfileStore = defineStore('profile', {
       try {
         const response = await this.$axios.post('/api/auth/profile', profileData)
         this.profile = response.data
+        if (this.$toast) {
+          this.$toast.add({
+            severity: 'success',
+            summary: 'تم التحديث',
+            detail: 'تم حفظ البيانات بنجاح'
+          });
+        }
         await this.fetchProfile()  // Fetch updated profile data
         return this.profile
       } catch (error) {
