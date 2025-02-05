@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export const useCountryStore = defineStore('country', {
   state: () => ({
     countries: [],
+    countriesDropdown: [],
     isLoading: false,
     error: null
   }),
@@ -26,6 +27,12 @@ export const useCountryStore = defineStore('country', {
           name: country.name,
           dialCode: country.dialCode
 
+        }))
+        // fill countriesDropdown with countries but not dialCode
+        this.countriesDropdown = response.data.map(country => ({
+          id: country.id,
+          code: country.code,
+          name: country.name
         }))
       } catch (error) {
         this.error = error.message || 'Failed to fetch countries'
