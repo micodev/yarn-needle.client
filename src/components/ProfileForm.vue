@@ -319,9 +319,13 @@ const nationalities = computed(() => nationalityStore.getNationalities); // Add 
 
 const membershipStore = useMembershipStore();
 const availablePlans = computed(() => {
-  return membershipStore.getMemberships.filter(
+  console.log('Current Plan:', currentPlan.value);
+  console.log('All Memberships:', membershipStore.getMemberships);
+  const filtered = membershipStore.getMemberships.filter(
     plan => plan.code !== currentPlan.value?.code
   );
+  console.log('Filtered Plans:', filtered);
+  return filtered;
 });
 
 onMounted(async () => {
