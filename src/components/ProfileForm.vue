@@ -299,6 +299,7 @@ const form = reactive({
   secondName: '',
   thirdName: '',
   nationalities: [],
+  countries: [],
   phoneNumber: '',
   birthDate: null,
   degree: '',
