@@ -13,17 +13,17 @@ body {
 
 :root {
   /* Primary Colors */
-  --p-primary-50: #f5f3ff;
-  --p-primary-100: #ede9fe;
-  --p-primary-200: #ddd6fe;
-  --p-primary-300: #c4b5fd;
-  --p-primary-400: #a78bfa;
-  --p-primary-500: #8b5cf6;
-  --p-primary-600: #7c3aed;
-  --p-primary-700: #6d28d9;
-  --p-primary-800: #5b21b6;
-  --p-primary-900: #4c1d95;
-  --p-primary-950: #2e1065;
+  --p-primary-50: #F4F0FF;
+  --p-primary-100: #E9DDFF;
+  --p-primary-200: #D3BDFF;
+  --p-primary-300: #BE9EFF;
+  --p-primary-400: #A880FF;
+  --p-primary-500: #9263FF;
+  --p-primary-600: #7D45FF;
+  --p-primary-700: #6728FF;
+  --p-primary-800: #510BFF;
+  --p-primary-900: #3B00D1;
+  --p-primary-950: #2600A3;
 
   /* Surface Colors - Light Theme */
   --p-surface-0: #ffffff;
