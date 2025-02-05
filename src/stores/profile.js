@@ -18,7 +18,7 @@ export const useProfileStore = defineStore('profile', {
       this.error = null
       
       try {
-        const response = await this.$axios.get('/auth/profile')
+        const response = await this.$axios.get('/api/auth/profile')
         this.profile = response.data
         return this.profile
       } catch (error) {
