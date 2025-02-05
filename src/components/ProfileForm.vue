@@ -51,7 +51,7 @@
               <div class="bg-white dark:bg-gray-700 rounded-lg p-3 sm:p-4 shadow-sm">
                 <div class="flex items-center mb-4">
                   <i class="pi pi-star text-yellow-600 text-xl ml-3"></i>
-                  <h4 class="text-lg font-bold text-gray-900 dark:text-white">{{ currentPlan.title || 'لا توجد خطةحالية'
+                  <h4 class="text-lg font-bold text-gray-900 dark:text-white">{{ currentPlan.name || 'لا توجد خطة حالية'
                     }}</h4>
                 </div>
                 <ul class="text-gray-700 dark:text-gray-300 mb-4 list-disc list-inside">
