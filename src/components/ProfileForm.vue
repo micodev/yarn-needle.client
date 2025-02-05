@@ -449,7 +449,6 @@ const onGovernmentCardUpload = (event) => {
   transform: translateY(-5px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
-// government-card-upload sibling span
 .government-card-upload + span {
   display: block;
   margin-top: 0.25rem;
