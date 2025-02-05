@@ -220,18 +220,7 @@
       </form>
     </template>
   </div>
-  <div class="card flex flex-col items-center gap-6">
-        <FileUpload mode="basic" @select="onFileSelect" customUpload  severity="secondary" class="p-button-outlined" />
-        <FileUpload mode="basic"
-              name="governmentCard"
-              severity="secondary"
-              :multiple="true"
-              class="p-button-outlined w-full"
-              accept="image/*"
-              chooseLabel="إرفاق البطاقة الحكومية"
-              @select="onGovernmentCardUpload"
-           />
-       </div>
+
 
 </template>
 
