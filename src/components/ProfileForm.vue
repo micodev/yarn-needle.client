@@ -215,7 +215,7 @@
 <script setup>
 import { ref, onMounted, computed, nextTick, reactive } from 'vue';
 import { DatePicker, MultiSelect, InputText, Button, IftaLabel, FileUpload } from 'primevue';
-import { fetchProfileData } from '@/stores/profile.js';
+import { useProfileStore } from '@/stores/profile';
 import { useCountryStore } from '@/stores/country'; // Add this import
 import { useNationalityStore } from '@/stores/nationality'; // Add this import
 import { useMembershipStore } from '@/stores/membership'; // Add this import
@@ -259,7 +259,8 @@ const updateHeight = () => {
   }
 };
 
-const isLoading = ref(true);
+const profileStore = useProfileStore();
+const isLoading = computed(() => profileStore.isLoading);
 const profileData = ref(null);
 const form = reactive({
   firstName: '',
@@ -277,25 +278,22 @@ const form = reactive({
   password: ''
 });
 
-const profileExists = computed(() => profileData.value !== null);
-const expiryDate = computed(() => form.value.expiryDate || '');
+const profileExists = computed(() => profileStore.getProfile !== null);
+const expiryDate = computed(() => form.expiryDate || '');
 const passwordHint = computed(() => {
-  if (profileExists.value && form.value.password) {
+  if (profileExists.value && form.password) {
     return 'سيتم تحديث كلمة المرور';
   }
   return '';
 });
 
 const fetchData = async () => {
-  isLoading.value = true;
   try {
-    const data = await fetchProfileData();
+    const data = await profileStore.fetchProfile();
     profileData.value = data;
-    form.value = { ...form.value, ...data };
+    Object.assign(form, data);
   } catch (error) {
     console.error('Error fetching profile:', error);
-  } finally {
-    isLoading.value = false;
   }
 };
 
@@ -334,24 +332,24 @@ const validationError = ref(false);
 
 const handleSubmit = async () => {
   // Validate nationality
-  if (!form.value.nationality) {
+  if (!form.nationality) {
     validationError.value = true;
     return;
   }
   validationError.value = false;
 
-  if (!form.value.firstName ||
-    !form.value.secondName ||
-    !form.value.thirdName ||
-    !form.value.nationality ||
-    !form.value.phoneNumber ||
-    !form.value.country ||
-    !form.value.birthDate ||
-    !form.value.degree ||
-    !form.value.fieldOfStudy ||
-    !form.value.jobTitle ||
-    !form.value.civilianId ||
-    (!profileExists.value && !form.value.password)) {
+  if (!form.firstName ||
+    !form.secondName ||
+    !form.thirdName ||
+    !form.nationality ||
+    !form.phoneNumber ||
+    !form.country ||
+    !form.birthDate ||
+    !form.degree ||
+    !form.fieldOfStudy ||
+    !form.jobTitle ||
+    !form.civilianId ||
+    (!profileExists.value && !form.password)) {
     alert('الرجاء ملء جميع الحقول المطلوبة');
     return;
   }
@@ -362,23 +360,16 @@ const handleSubmit = async () => {
   }
 
   try {
-    const dataToSave = { ...form.value };
+    const dataToSave = { ...form };
 
     // Only include password if it was changed
     if (!dataToSave.password) {
       delete dataToSave.password;
     }
 
-    // Simulate API call to save data
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    // Update profile data without password
-    profileData.value = {
-      ...dataToSave,
-      password: '' // Clear password field after save
-    };
-
-    form.value.password = ''; // Clear password input
+    const updatedProfile = await profileStore.updateProfile(dataToSave);
+    profileData.value = updatedProfile;
+    form.password = ''; // Clear password input
     alert('تم حفظ البيانات بنجاح');
   } catch (error) {
     console.error('Error saving profile:', error);
