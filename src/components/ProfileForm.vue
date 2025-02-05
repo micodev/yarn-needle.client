@@ -291,7 +291,6 @@ const form = reactive({
 });
 
 const profileExists = computed(() => profileStore.getProfile !== null);
-const expiryDate = computed(() => form.expiryDate || '');
 const passwordHint = computed(() => {
   if (profileExists.value && form.password) {
     return 'سيتم تحديث كلمة المرور';
