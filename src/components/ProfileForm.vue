@@ -201,6 +201,29 @@
           </IftaLabel>
           <small v-if="passwordHint" class="text-gray-500 block mt-1">{{ passwordHint }}</small>
         </div>
+        <div class="w-full sm:w-1/2 px-2 mb-4">
+          <IftaLabel>
+            <InputText type="text" id="governmentId" v-model="form.governmentId" class="w-full" required />
+            <label>رقم الهوية الحكومية <span class="text-red-500">*</span></label>
+          </IftaLabel>
+        </div>
+        <div class="w-full px-2 mb-4">
+          <IftaLabel>
+            <FileUpload
+              name="governmentCard"
+              severity="secondary"
+              class="p-button-outlined w-full"
+              url="./upload"
+              accept="image/*,application/pdf"
+              mode="basic"
+              auto
+              chooseLabel="إرفاق البطاقة الحكومية"
+              required
+              @upload="onGovernmentCardUpload"
+            />
+            <label>البطاقة الحكومية <span class="text-red-500">*</span></label>
+          </IftaLabel>
+        </div>
         <div class="w-full px-2 mb-4">
           <IftaLabel>
             <FileUpload name="identity" severity="secondary" class="p-button-outlined w-full" url="./upload"
@@ -299,7 +322,9 @@ const form = reactive({
   jobTitle: '',
   civilianId: '',
   expiryDate: '',
-  password: ''
+  password: '',
+  governmentId: '',
+  governmentCardFile: null
 });
 
 const profileExists = computed(() => profileStore.getProfile !== null);
@@ -396,6 +421,10 @@ const handleSubmit = async () => {
     console.error('Error saving profile:', error);
     alert('حدث خطأ أثناء حفظ البيانات');
   }
+};
+
+const onGovernmentCardUpload = (event) => {
+  form.governmentCardFile = event.files[0];
 };
 </script>
 
