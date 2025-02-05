@@ -120,7 +120,7 @@
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
-            <MultiSelect v-model="nationality" :options="nationalities" optionLabel="name" filter
+            <MultiSelect v-model="form.nationality" :options="nationalities" optionLabel="name" filter
               placeholder="Select Cities" :maxSelectedLabels="3" class="w-full md:w-80" />
             <!-- <MultiSelect v-model="form.nationality" :options="nationalities" :loading="isLoading" :maxItems="1"
               :selectionLimit="1" :filter="true" optionLabel="name" class="w-full nationality-select"
@@ -260,7 +260,6 @@ const updateHeight = () => {
 
 const isLoading = ref(true);
 const profileData = ref(null);
-const nationality = ref();
 const form = ref({
   firstName: '',
   secondName: '',
