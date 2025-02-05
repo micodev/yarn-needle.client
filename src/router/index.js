@@ -8,6 +8,7 @@ import RoutesList from '@/components/RoutesList.vue'
 import CoursesView from '../views/CoursesView.vue'
 import OrderHistoryView from '../views/OrderHistoryView.vue'
 import MyCourseView from '../views/MyCourseView.vue'
+import { useAuthStore } from '@/stores/auth';
 
 const base = '/yarn-needle.client';
 
@@ -76,11 +77,13 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore();
   if (to.meta.requiresAuth) {
-    const isAuthenticated = checkAuthStatus() // Implement your logic
-    if (!isAuthenticated) return next('/')
+    if (!authStore.isAuthenticated) {
+      return next('/');
+    }
   }
-  next()
+  next();
 })
 
 export default router
