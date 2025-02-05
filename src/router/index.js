@@ -20,7 +20,7 @@ const router = createRouter({
       children: [
         {
           path: '/',
-          name: 'dashboard',
+          name: 'home',
           component: HomeView,
         },
         {
@@ -77,9 +77,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
-    // Add your authentication check logic here
-    // Example: const isAuthenticated = checkAuthStatus()
-    // if (!isAuthenticated) return next('/login')
+    const isAuthenticated = checkAuthStatus() // Implement your logic
+    if (!isAuthenticated) return next('/')
   }
   next()
 })
