@@ -274,7 +274,7 @@ const currentPlanFeatures = computed(() => currentPlan.value?.features || []);
 const readableExpiryDate = computed(() => {
   if (!currentPlan.value?.expiredAt) return '';
   const date = new Date(currentPlan.value.expiredAt);
-  return date.toLocaleDateString('ar-SA', {
+  return date.toLocaleDateString('ar', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
