@@ -207,6 +207,7 @@
               :showUploadButton="false"
               class="p-button-outlined w-full"
               accept="image/*"
+              :custom-upload="true"
               chooseLabel="إرفاق البطاقة الحكومية"
               @select="onGovernmentCardUpload"
             >
