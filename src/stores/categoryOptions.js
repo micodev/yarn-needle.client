@@ -22,9 +22,9 @@ export const useCategoryOptionsStore = defineStore('categoryOptions', {
       try {
         const response = await this.$axios.get('/api/meta/subhobbies')
         this.categories = response.data.map(category => ({
-          id: category.Id,
-          code: category.Code,
-          name: category.Name
+          id: category.id,
+          code: category.code,
+          name: category.name
         }))
       } catch (error) {
         this.error = error.message || 'Failed to fetch categories'
