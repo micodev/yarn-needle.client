@@ -1,28 +1,5 @@
 import { defineStore } from 'pinia'
 
-const categoryTemplates = [
-  { name: 'جميع المجالات', value: null, code: 'ALL' },
-  { name: 'كتابة سيناريو', value: 'scenario', code: 'SCEN' },
-  { name: 'كتابة شعر', value: 'poetry', code: 'POET' },
-  { name: 'تصميم صور', value: 'design', code: 'DSGN' },
-  { name: 'رسم', value: 'drawing', code: 'DRAW' },
-  { name: 'تعليق صوتي', value: 'voice', code: 'VOIC' }
-]
-
-function generateCategories(count = 6) {
-  const categories = []
-  for (let i = 0; i < count; i++) {
-    const template = categoryTemplates[i % categoryTemplates.length]
-    categories.push({
-      id: i + 1,
-      name: template.name,
-      value: template.value,
-      code: template.code
-    })
-  }
-  return categories
-}
-
 export const useCategoryOptionsStore = defineStore('categoryOptions', {
   state: () => ({
     categories: [],
@@ -31,64 +8,44 @@ export const useCategoryOptionsStore = defineStore('categoryOptions', {
   }),
 
   actions: {
-    async fetchCategories(count = 6) {
+    async fetchCategories() {
       this.loading = true
+      this.error = null
+
       try {
         // Simulate API call
         const response = await new Promise((resolve) => {
           setTimeout(() => {
-            resolve(generateCategories(count))
-          }, 1000)
-        })
-        this.categories = response
+            const mockCategories = [
+              { Id: 1, Name: 'جميع المجالات', Code: 'ALL' },
+              { Id: 2, Name: 'كتابة سيناريو', Code: 'SCEN' },
+              { Id: 3, Name: 'كتابة شعر', Code: 'POET' },
+              { Id: 4, Name: 'تصميم صور', Code: 'DSGN' },
+              { Id: 5, Name: 'رسم', Code: 'DRAW' },
+              { Id: 6, Name: 'تعليق صوتي', Code: 'VOIC' }
+            ];
+            resolve(mockCategories);
+          }, 1000);
+        });
+
+        this.categories = response.map(cat => ({
+          id: cat.Id,
+          name: cat.Name,
+          code: cat.Code,
+          value: cat.Code.toLowerCase() // Derive value from code for consistency
+        }));
       } catch (err) {
-        this.error = err.message
+        this.error = err.message || 'Failed to fetch categories'
+        console.error('Error fetching categories:', err)
       } finally {
         this.loading = false
       }
     },
 
-    async addCategory(category) {
-      this.loading = true
-      try {
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        const newId = Math.max(...this.categories.map(c => c.id)) + 1
-        this.categories.push({ ...category, id: newId })
-      } catch (err) {
-        this.error = err.message
-      } finally {
-        this.loading = false
-      }
-    },
-
-    async updateCategory(id, newCategory) {
-      this.loading = true
-      try {
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        const index = this.categories.findIndex(c => c.id === id)
-        if (index !== -1) {
-          this.categories[index] = { ...newCategory, id }
-        }
-      } catch (err) {
-        this.error = err.message
-      } finally {
-        this.loading = false
-      }
-    },
-
-    async deleteCategory(index) {
-      this.loading = true
-      try {
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        this.categories.splice(index, 1)
-      } catch (err) {
-        this.error = err.message
-      } finally {
-        this.loading = false
-      }
+    reset() {
+      this.categories = []
+      this.error = null
+      this.loading = false
     }
   },
 
