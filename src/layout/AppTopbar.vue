@@ -4,10 +4,10 @@
       <template #start>
         <img src="@/../public/favicon.svg" alt="Logo" class="h-10" />
         <InputGroup class="w-64 mr-2 hidden sm:flex">
-            <InputGroupAddon class="h-9">
-              <i class="pi pi-search"></i>
-            </InputGroupAddon>
-            <InputText placeholder="إسم الدورة" size="small" class="h-9" />
+          <InputGroupAddon class="h-9">
+            <i class="pi pi-search"></i>
+          </InputGroupAddon>
+          <InputText placeholder="إسم الدورة" size="small" class="h-9" />
 
         </InputGroup>
       </template>
@@ -29,7 +29,7 @@
           <Button :icon="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'" @click="toggleDarkMode" class="h-10" />
           <RegisterForm />
 
-          <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+          <Avatar label="P" class="mr-2" size="large" shape="circle" />
         </div>
       </template>
 
