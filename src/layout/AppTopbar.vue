@@ -47,7 +47,7 @@
 import { ref } from "vue";
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router'; // Add this import
-import { Menubar, Menu, InputText, Avatar, Button, Badge, InputGroup, InputGroupAddon } from "primevue";
+import { Menubar, Menu, Avatar, Button, Badge } from "primevue";
 import RegisterForm from "@/components/RegisterForm.vue";
 
 const authStore = useAuthStore();
@@ -56,7 +56,10 @@ const router = useRouter(); // Add router instance
 const items = ref([
   {
     label: 'الدورات',
-    icon: 'pi pi-home'
+    icon: 'pi pi-home',
+    command: () => {
+      router.push('/courses'); // Add navigation to home page
+    }
   },
   {
     label: 'العضويات',
