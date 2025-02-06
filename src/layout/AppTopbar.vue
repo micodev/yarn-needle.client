@@ -62,6 +62,13 @@ const items = ref([
     },
   },
   {
+    label: 'دوراتي',
+    icon: 'pi pi-book',
+    command: () => {
+      router.push('/my-courses'); // Add navigation to my courses page
+    },
+  },
+  {
     label: 'الطلبات',
     icon: 'pi pi-shopping-cart',
     command: () => {
