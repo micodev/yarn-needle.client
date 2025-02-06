@@ -102,6 +102,11 @@ const toggleDarkMode = () => {
 </script>
 
 <style>
+/* add padding padding: 21px; to avatar */
+.p-avatar {
+  padding: 21px;
+}
+
 .p-menu-submenu-label {
   /* remove padding */
   padding: 0 !important;
