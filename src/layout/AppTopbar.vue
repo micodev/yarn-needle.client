@@ -41,7 +41,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { Menubar } from "primevue";
+import { Menubar, Menu } from "primevue";
 import { InputText } from "primevue";
 import { Avatar } from "primevue";
 import { Button } from "primevue";
