@@ -33,7 +33,10 @@
           <Avatar v-if="authStore.isAuthenticated" :label="authStore.userInitials" shape="circle"
             class="bg-primary text-white dark:text-black cursor-pointer" @click="toggleProfileMenu" aria-haspopup="true"
             aria-controls="overlay_menu" />
-          <Menu ref="menu" id="overlay_menu" :model="menuItems" :popup="true" />
+          <Menu ref="menu" id="overlay_menu" :model="menuItems" :popup="true">
+            <template #start>
+            </template>
+          </Menu>
         </div>
       </template>
     </Menubar>
