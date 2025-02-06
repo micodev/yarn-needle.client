@@ -52,7 +52,7 @@ body {
   --p-content-hover-color: var(--p-surface-900);
 
   --p-highlight-background: var(--p-primary-100);
-  --p-highlight-color: #ff0000;
+  --p-highlight-color: var(--p-primary-500);
   --p-highlight-focus-background: var(--p-primary-200);
   --p-highlight-focus-color: var(--p-primary-900);
 
@@ -78,7 +78,7 @@ body {
   --p-content-hover-color: var(--p-surface-50);
 
   --p-highlight-background: rgba(139, 92, 246, 0.16);
-  --p-highlight-color: #ff0000;
+  --p-highlight-color: var(--p-primary-200);
   --p-highlight-focus-background: rgba(139, 92, 246, 0.24);
   --p-highlight-focus-color: var(--p-primary-200);
 
