@@ -63,12 +63,8 @@ const items = ref([
 const menu = ref();
 const menuItems = ref([
   {
-    label: 'Options',
     items: [
-      {
-        label: 'Profile',
-        icon: 'pi pi-user'
-      },
+
       {
         label: 'Logout',
         icon: 'pi pi-sign-out',
