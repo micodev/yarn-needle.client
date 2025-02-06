@@ -29,7 +29,7 @@
           <Button :icon="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'" @click="toggleDarkMode" class="h-10" />
           <RegisterForm />
 
-          <Avatar label="P" class="mr-2" size="large" shape="circle" />
+          <Avatar label="P" class="mr-2" shape="circle" />
         </div>
       </template>
 
