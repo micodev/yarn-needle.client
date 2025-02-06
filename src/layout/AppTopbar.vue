@@ -61,10 +61,6 @@ const items = ref([
       router.push('/courses'); // Add navigation to home page
     }
   },
-  {
-    label: 'العضويات',
-    icon: 'pi pi-search',
-  }
 ]);
 const menu = ref();
 const menuItems = ref([
