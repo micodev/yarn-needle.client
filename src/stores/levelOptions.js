@@ -2,12 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useLevelOptionsStore = defineStore('levelOptions', {
   state: () => ({
-    levels: [
-      { name: 'جميع المستويات', value: null },
-      { name: 'مبتدئ', value: 'beginner' },
-      { name: 'متوسط', value: 'intermediate' },
-      { name: 'متقدم', value: 'advanced' }
-    ],
+    levels: [],
     loading: false,
     error: null
   }),
@@ -15,21 +10,16 @@ export const useLevelOptionsStore = defineStore('levelOptions', {
   actions: {
     async fetchLevels() {
       this.loading = true
+      this.error = null
       try {
-        // Simulate API call
-        const response = await new Promise((resolve) => {
-          setTimeout(() => {
-            resolve([
-              { name: 'جميع المستويات', value: null },
-              { name: 'مبتدئ', value: 'beginner' },
-              { name: 'متوسط', value: 'intermediate' },
-              { name: 'متقدم', value: 'advanced' }
-            ])
-          }, 1000)
-        })
-        this.levels = response
+        const response = await this.$axios.get('/api/meta/course-levels')
+        this.levels = response.data.map(level => ({
+          name: level.name,
+          value: level.value
+        }))
       } catch (err) {
-        this.error = err.message
+        this.error = err.message || 'Failed to fetch levels'
+        console.error('Error fetching levels:', err)
       } finally {
         this.loading = false
       }
@@ -72,6 +62,12 @@ export const useLevelOptionsStore = defineStore('levelOptions', {
       } finally {
         this.loading = false
       }
+    },
+
+    reset() {
+      this.levels = []
+      this.error = null
+      this.loading = false
     }
   },
 
