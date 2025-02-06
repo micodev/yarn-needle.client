@@ -38,7 +38,6 @@ export const useCategoryOptionsStore = defineStore('categoryOptions', {
 
     reset() {
       this.categories = []
-      this.subhobbies = []
       this.selectedCategoryId = null
       this.error = null
       this.isLoading = false
