@@ -65,6 +65,9 @@ export const useAuthStore = defineStore('auth', {
         this.user = response.data.data
         return response.data
       } catch (error) {
+        if (error.response?.status === 401) {
+          this.handleLogout()
+        }
         return { success: false, errors: error.response.data }
       }
     },
@@ -106,13 +109,20 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    logout() {
+    handleLogout() {
       this.user = null
       this.token = null
-      localStorage.removeItem('token')
       this.refreshToken = null
       this.isAuthenticated = false
+      localStorage.removeItem('token')
+      // Optional: Redirect to login page if you have router instance
+      // this.router.push('/login')
     },
+
+    logout() {
+      this.handleLogout()
+    },
+
     checkAuthStatus() {
       return this.isAuthenticated;
     }
