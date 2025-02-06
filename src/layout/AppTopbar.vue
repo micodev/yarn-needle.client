@@ -64,15 +64,30 @@ const menu = ref();
 const menuItems = ref([
   {
     items: [
-
       {
-        label: 'Logout',
-        icon: 'pi pi-sign-out',
-        command: () => authStore.logout()
+        label: authStore.user?.userName || 'Profile',
+        icon: 'pi pi-user',
+        class: 'font-bold'
+      },
+      { separator: true },
+      {
+        label: 'Settings',
+        icon: 'pi pi-cog'
+      },
+      { separator: true },
+      {
+        label: 'Sign Out',
+        icon: 'pi pi-power-off',
+        command: () => {
+          authStore.logout();
+          // Optionally close the menu after logout
+          menu.value.hide();
+        }
       }
     ]
   }
 ]);
+
 const toggleProfileMenu = (event) => {
   menu.value.toggle(event);
 };
