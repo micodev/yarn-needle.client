@@ -8,6 +8,15 @@ export const useAuthStore = defineStore('auth', {
     isAuthenticated: false
   }),
 
+  getters: {
+    userInitials: (state) => {
+      if (state.user?.username) {
+        return state.user.username.substring(0, 2).toUpperCase();
+      }
+      return '';
+    }
+  },
+
   actions: {
     async init() {
       const token = localStorage.getItem('token')

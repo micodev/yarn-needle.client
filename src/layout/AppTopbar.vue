@@ -30,7 +30,7 @@
             <RegisterForm />
           </template>
 
-          <Avatar v-if="authStore.isAuthenticated" :label="userInitials" shape="circle"
+          <Avatar v-if="authStore.isAuthenticated" :label="authStore.userInitials" shape="circle"
             class="bg-primary text-white dark:text-black cursor-pointer" @click="toggleProfileMenu" aria-haspopup="true"
             aria-controls="overlay_menu" />
           <Menu ref="menu" id="overlay_menu" :model="menuItems" :popup="true" />
@@ -41,19 +41,14 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useAuthStore } from '@/stores/auth';
 import { Menubar, Menu, InputText, Avatar, Button, Badge, InputGroup, InputGroupAddon } from "primevue";
 import RegisterForm from "@/components/RegisterForm.vue";
 
 const authStore = useAuthStore();
 
-const userInitials = computed(() => {
-  if (authStore.user?.username) {
-    return authStore.user.username.substring(0, 2).toUpperCase();
-  }
-  return '';
-});
+// Remove userInitials computed property as it's now in the store
 
 const items = ref([
   {
