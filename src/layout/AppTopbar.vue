@@ -2,7 +2,7 @@
   <div class="card dark:bg-gray-800 dark:text-white bg-gray-200 text-black transition-colors duration-300">
     <Menubar :model="items">
       <template #start>
-        <img src="@/../public/favicon.svg" alt="Logo" class="h-10" />
+        <img src="@/../public/favicon.svg" alt="شعار" class="h-10" />
         <InputGroup class="w-64 mr-2 hidden sm:flex">
           <InputGroupAddon class="h-9">
             <i class="pi pi-search"></i>
@@ -68,7 +68,7 @@ const menuItems = ref([
   {
     items: [
       {
-        label: authStore.user?.userName || 'Profile',
+        label: authStore.user?.userName || 'الملف الشخصي',
         icon: 'pi pi-user',
         class: 'font-bold',
         command: () => {
@@ -78,7 +78,7 @@ const menuItems = ref([
       },
       { separator: true },
       {
-        label: 'Sign Out',
+        label: 'تسجيل الخروج',
         icon: 'pi pi-power-off',
         command: () => {
           authStore.logout();
