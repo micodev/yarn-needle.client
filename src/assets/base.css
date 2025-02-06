@@ -52,7 +52,7 @@ body {
   --p-content-hover-color: var(--p-surface-900);
 
   --p-highlight-background: var(--p-primary-100);
-  --p-highlight-color: var(--p-surface-0);
+  --p-highlight-color: var(--p-surface-900);
   --p-highlight-focus-background: var(--p-primary-200);
   --p-highlight-focus-color: var(--p-primary-900);
 
