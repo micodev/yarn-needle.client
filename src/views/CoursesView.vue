@@ -34,8 +34,8 @@
               <div class="flex flex-row gap-2">
                 <div class="w-1/2">
                   <span class="font-medium block mb-2">المجال</span>
-                  <Select v-model="categoryFilter" :options="categoryOptions" optionLabel="name" optionValue="value"
-                    placeholder="اختر المجال" class="w-full" />
+                  <Select v-model="categoryFilter" :options="categoryOptions" optionLabel="name" optionValue="code"
+                    placeholder="اختر المجال" class="w-full" :loading="categoryOptionsStore.isLoading" />
                 </div>
                 <div class="w-1/2">
                   <span class="font-medium block mb-2">اختر المستوى</span>
@@ -232,7 +232,13 @@ const courseTypeOptionsStore = useCourseTypeOptionsStore();
 
 // Replace static options with computed properties
 const levelOptions = computed(() => levelOptionsStore.getLevels);
-const categoryOptions = computed(() => categoryOptionsStore.getCategories);
+const categoryOptions = computed(() =>
+  categoryOptionsStore.getCategories.map(cat => ({
+
+    name: cat.name,
+    value: cat.code
+  }))
+);
 const courseTypeOptions = computed(() => courseTypeOptionsStore.getCourseTypes);
 
 const toggleLevel = (event) => {
@@ -272,7 +278,7 @@ onMounted(async () => {
   await Promise.all([
     fetchCourses(),
     levelOptionsStore.fetchLevels(),
-    categoryOptionsStore.fetchCategories(),
+    categoryOptionsStore.fetchCategories(), // Add this line
     courseTypeOptionsStore.fetchCourseTypes()
   ]);
   isLevelOptionsLoading.value = false;
@@ -286,7 +292,7 @@ const filteredCourses = computed(() => {
     return (course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       course.description.toLowerCase().includes(searchQuery.value.toLowerCase())) &&
       (!levelFilter.value || course.level === levelFilter.value) &&
-      (!categoryFilter.value || course.category === categoryFilter.value) &&  // Add category filter
+      (!categoryFilter.value || course.categoryCode === categoryFilter.value) &&  // Update this line
       (!courseTypeFilter.value || course.type === courseTypeFilter.value) && // Add type filter
       (course.duration >= durationRange.value[0] && course.duration <= durationRange.value[1]) &&
       (!lessonRangeFilter.value ||
