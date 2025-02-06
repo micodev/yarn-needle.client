@@ -120,13 +120,19 @@ export const useAuthStore = defineStore('auth', {
     },
 
     logout() {
-      this.user = null
-      this.token = null
-      this.refreshToken = null
-      this.isAuthenticated = false
-      localStorage.removeItem('token')
-      // Optional: Redirect to login page if you have router instance
-      // this.router.push('/login')
+      // Clear all auth-related state
+      this.user = null;
+      this.token = null;
+      this.refreshToken = null;
+      this.isAuthenticated = false;
+      
+      // Clear storage
+      localStorage.removeItem('token');
+      
+      // Optional: Use router to redirect (if router is available)
+      if (window.location.pathname !== '/') {
+        window.location.href = '/';
+      }
     },
 
     checkAuthStatus() {
