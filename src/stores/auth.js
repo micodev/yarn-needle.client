@@ -10,6 +10,7 @@ export const useAuthStore = defineStore('auth', {
 
   getters: {
     userInitials: (state) => {
+      console.log('User:', state.user);
       if (state.user?.userName) {
         return state.user.userName.substring(0, 2).toUpperCase();
       }
