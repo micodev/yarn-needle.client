@@ -68,6 +68,7 @@ const menuItems = ref([
         label: authStore.user?.userName || 'Profile',
         icon: 'pi pi-user',
         class: 'font-bold'
+
       },
       { separator: true },
       {
