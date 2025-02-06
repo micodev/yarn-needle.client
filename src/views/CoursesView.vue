@@ -40,7 +40,7 @@
                 <div class="w-1/2">
                   <span class="font-medium block mb-2">اختر المستوى</span>
                   <Select v-model="levelFilter" :options="levelOptions" filter optionLabel="name" optionValue="value"
-                    placeholder="جميع المستويات" class="w-full" />
+                    placeholder="جميع المستويات" class="w-full" :disabled="isLevelOptionsLoading" />
                 </div>
               </div>
 
@@ -265,14 +265,17 @@ const categoryFilter = ref(null);
 const courseTypeFilter = ref(null);
 
 const { courses, isLoading, fetchCourses } = useCoursesStore();
+const isLevelOptionsLoading = ref(false);
 
 onMounted(async () => {
+  isLevelOptionsLoading.value = true;
   await Promise.all([
     fetchCourses(),
     levelOptionsStore.fetchLevels(),
     categoryOptionsStore.fetchCategories(),
     courseTypeOptionsStore.fetchCourseTypes()
   ]);
+  isLevelOptionsLoading.value = false;
 });
 
 const filteredCourses = computed(() => {
