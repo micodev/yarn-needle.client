@@ -234,7 +234,6 @@ const courseTypeOptionsStore = useCourseTypeOptionsStore();
 const levelOptions = computed(() => levelOptionsStore.getLevels);
 const categoryOptions = computed(() =>
   categoryOptionsStore.getCategories.map(cat => ({
-
     name: cat.name,
     value: cat.code
   }))
