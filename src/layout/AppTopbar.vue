@@ -41,13 +41,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { Menubar, Menu } from "primevue";
-import { InputText } from "primevue";
-import { Avatar } from "primevue";
-import { Button } from "primevue";
-import { Badge } from "primevue";
-import { InputGroup } from "primevue";
-import { InputGroupAddon } from "primevue";
+import { Menubar, Menu, InputText, Avatar, Button, Badge, InputGroup, InputGroupAddon } from "primevue";
 import RegisterForm from "@/components/RegisterForm.vue";
 const items = ref([
   {
