@@ -72,7 +72,7 @@ export const useAuthStore = defineStore('auth', {
         const response = await this.$axios.post('/api/Auth/me', {}, {
           headers: { Authorization: `Bearer ${this.token}` }
         })
-        this.user = response.data.data
+        this.user = response.data.data[0]
         return response.data
       } catch (error) {
         if (error.response?.status === 401) {
