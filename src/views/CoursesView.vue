@@ -39,7 +39,7 @@
                 </div>
                 <div class="w-1/2">
                   <span class="font-medium block mb-2">اختر المستوى</span>
-                  <Select v-model="levelFilter" :options="levelOptions" optionLabel="name" optionValue="value"
+                  <Select v-model="levelFilter" :options="levelOptions" filter optionLabel="name" optionValue="value"
                     placeholder="جميع المستويات" class="w-full" />
                 </div>
               </div>
