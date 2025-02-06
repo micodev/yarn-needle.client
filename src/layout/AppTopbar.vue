@@ -59,7 +59,35 @@ const items = ref([
     icon: 'pi pi-home',
     command: () => {
       router.push('/courses'); // Add navigation to home page
-    }
+    },
+  },
+  {
+    label: 'الطلبات',
+    icon: 'pi pi-shopping-cart',
+    command: () => {
+      router.push('/order-history'); // Add navigation to order history page
+    },
+  },
+  {
+    label: 'المساعدة',
+    icon: 'pi pi-question-circle',
+    command: () => {
+      router.push('/help'); // Add navigation to help page
+    },
+  },
+  {
+    label: 'الإعدادات',
+    icon: 'pi pi-cog',
+    command: () => {
+      router.push('/settings'); // Add navigation to settings page
+    },
+  },
+  {
+    label: 'المزيد',
+    icon: 'pi pi-ellipsis-v',
+    command: () => {
+      router.push('/more'); // Add navigation to more page
+    },
   },
 ]);
 const menu = ref();
