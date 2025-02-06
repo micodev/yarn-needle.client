@@ -100,3 +100,10 @@ const toggleDarkMode = () => {
   document.documentElement.classList.toggle('dark', isDarkMode.value);
 };
 </script>
+
+<style scoped>
+.p-menu-item-label {
+  /* remove padding */
+  padding: 0 !important;
+}
+</style>
