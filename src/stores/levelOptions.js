@@ -15,7 +15,7 @@ export const useLevelOptionsStore = defineStore('levelOptions', {
         const response = await this.$axios.get('/api/meta/course-levels')
         this.levels = response.data.map(level => ({
           name: level.name,
-          value: level.value
+          value: level.code
         }))
       } catch (err) {
         this.error = err.message || 'Failed to fetch levels'
