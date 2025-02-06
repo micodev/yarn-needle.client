@@ -233,10 +233,7 @@ const courseTypeOptionsStore = useCourseTypeOptionsStore();
 // Replace static options with computed properties
 const levelOptions = computed(() => levelOptionsStore.getLevels);
 const categoryOptions = computed(() =>
-  categoryOptionsStore.getCategories.map(cat => ({
-    name: cat.name,
-    value: cat.code
-  }))
+  categoryOptionsStore.getCategories
 );
 const courseTypeOptions = computed(() => courseTypeOptionsStore.getCourseTypes);
 
