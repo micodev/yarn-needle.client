@@ -1,5 +1,5 @@
 <template>
-  <div class="card  dark:bg-gray-800 dark:text-white bg-gray-200 text-black transition-colors duration-300">
+  <div class="card dark:bg-gray-800 dark:text-white bg-gray-200 text-black transition-colors duration-300">
     <Menubar :model="items">
       <template #start>
         <img src="@/../public/favicon.svg" alt="Logo" class="h-10" />
@@ -8,7 +8,6 @@
             <i class="pi pi-search"></i>
           </InputGroupAddon>
           <InputText placeholder="إسم الدورة" size="small" class="h-9" />
-
         </InputGroup>
       </template>
 
@@ -25,24 +24,37 @@
       </template>
       <template #end>
         <div class="flex items-center gap-2">
-
           <Button :icon="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'" @click="toggleDarkMode" class="h-10" />
-          <RegisterForm />
 
-          <Avatar label="TA" shape="circle" class="bg-primary text-white dark:text-black cursor-pointer"
-            @click="toggleProfileMenu" aria-haspopup="true" aria-controls="overlay_menu" />
+          <template v-if="!authStore.isAuthenticated">
+            <RegisterForm />
+          </template>
+
+          <Avatar v-if="authStore.isAuthenticated" :label="userInitials" shape="circle"
+            class="bg-primary text-white dark:text-black cursor-pointer" @click="toggleProfileMenu" aria-haspopup="true"
+            aria-controls="overlay_menu" />
           <Menu ref="menu" id="overlay_menu" :model="menuItems" :popup="true" />
         </div>
       </template>
-
     </Menubar>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useAuthStore } from '@/stores/auth';
 import { Menubar, Menu, InputText, Avatar, Button, Badge, InputGroup, InputGroupAddon } from "primevue";
 import RegisterForm from "@/components/RegisterForm.vue";
+
+const authStore = useAuthStore();
+
+const userInitials = computed(() => {
+  if (authStore.user?.username) {
+    return authStore.user.username.substring(0, 2).toUpperCase();
+  }
+  return '';
+});
+
 const items = ref([
   {
     label: 'الدورات',
@@ -59,12 +71,13 @@ const menuItems = ref([
     label: 'Options',
     items: [
       {
-        label: 'Refresh',
-        icon: 'pi pi-refresh'
+        label: 'Profile',
+        icon: 'pi pi-user'
       },
       {
-        label: 'Export',
-        icon: 'pi pi-upload'
+        label: 'Logout',
+        icon: 'pi pi-sign-out',
+        command: () => authStore.logout()
       }
     ]
   }
