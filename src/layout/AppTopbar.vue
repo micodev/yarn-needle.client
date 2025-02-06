@@ -29,8 +29,8 @@
           <Button :icon="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'" @click="toggleDarkMode" class="h-10" />
           <RegisterForm />
 
-          <Avatar label="TA" shape="circle" class="bg-primary text-white dark:text-black" @click="toggleProfileMenu"
-            aria-haspopup="true" aria-controls="overlay_menu" />
+          <Avatar label="TA" shape="circle" class="bg-primary text-white dark:text-black cursor-pointer"
+            @click="toggleProfileMenu" aria-haspopup="true" aria-controls="overlay_menu" />
           <Menu ref="menu" id="overlay_menu" :model="menuItems" :popup="true" />
         </div>
       </template>
