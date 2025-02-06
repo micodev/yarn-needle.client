@@ -102,7 +102,7 @@ const toggleDarkMode = () => {
 </script>
 
 <style scoped>
-.p-menu-item-label {
+.p-menu-submenu-label {
   /* remove padding */
   padding: 0 !important;
 }
