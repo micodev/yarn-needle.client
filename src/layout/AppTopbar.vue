@@ -75,7 +75,6 @@ const items = ref([
       router.push('/help'); // Add navigation to help page
     },
   },
-
 ]);
 const menu = ref();
 const menuItems = ref([
