@@ -43,12 +43,12 @@
 <script setup>
 import { ref } from "vue";
 import { useAuthStore } from '@/stores/auth';
+import { useRouter } from 'vue-router'; // Add this import
 import { Menubar, Menu, InputText, Avatar, Button, Badge, InputGroup, InputGroupAddon } from "primevue";
 import RegisterForm from "@/components/RegisterForm.vue";
 
 const authStore = useAuthStore();
-
-// Remove userInitials computed property as it's now in the store
+const router = useRouter(); // Add router instance
 
 const items = ref([
   {
@@ -67,13 +67,11 @@ const menuItems = ref([
       {
         label: authStore.user?.userName || 'Profile',
         icon: 'pi pi-user',
-        class: 'font-bold'
-
-      },
-      { separator: true },
-      {
-        label: 'Settings',
-        icon: 'pi pi-cog'
+        class: 'font-bold',
+        command: () => {
+          router.push('/profile'); // Add navigation to profile page
+          menu.value.hide();
+        }
       },
       { separator: true },
       {
