@@ -75,20 +75,7 @@ const items = ref([
       router.push('/help'); // Add navigation to help page
     },
   },
-  {
-    label: 'الإعدادات',
-    icon: 'pi pi-cog',
-    command: () => {
-      router.push('/settings'); // Add navigation to settings page
-    },
-  },
-  {
-    label: 'المزيد',
-    icon: 'pi pi-ellipsis-v',
-    command: () => {
-      router.push('/more'); // Add navigation to more page
-    },
-  },
+
 ]);
 const menu = ref();
 const menuItems = ref([
