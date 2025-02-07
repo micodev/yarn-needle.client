@@ -40,7 +40,7 @@
                 <div class="w-1/2">
                   <span class="font-medium block mb-2">اختر المستوى</span>
                   <Select v-model="levelFilter" :options="levelOptions" filter optionLabel="name" optionValue="value"
-                    placeholder="جميع المستويات" class="w-full" :disabled="isLevelOptionsLoading" />
+                    placeholder="جميع المستويات" class="w-full" :loading="isLevelOptionsLoading" />
                 </div>
               </div>
 
