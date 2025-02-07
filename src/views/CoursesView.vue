@@ -200,7 +200,8 @@ import { InputText, InputGroup, InputGroupAddon } from "primevue";
 import { useCoursesStore } from '../stores/courses.js';
 import { useLevelOptionsStore } from '../stores/levelOptions.js';
 import { useCategoryOptionsStore } from '../stores/categoryOptions.js';
-import { useCourseTypeOptionsStore } from '../stores/courseType.js';
+// Updated store import for course type
+import { useCourseTypeStore } from '../stores/courseType.js';
 
 const searchQuery = ref("");
 const sortPopover = ref();
@@ -228,14 +229,16 @@ const FilterPopOver = ref();
 // Initialize stores
 const levelOptionsStore = useLevelOptionsStore();
 const categoryOptionsStore = useCategoryOptionsStore();
-const courseTypeOptionsStore = useCourseTypeOptionsStore();
+// Replace courseTypeOptionsStore with courseTypeStore
+const courseTypeStore = useCourseTypeStore();
 
 // Replace static options with computed properties
 const levelOptions = computed(() => levelOptionsStore.getLevels);
 const categoryOptions = computed(() =>
   categoryOptionsStore.getCategories
 );
-const courseTypeOptions = computed(() => courseTypeOptionsStore.getCourseTypes);
+// Replace computed property for courseTypeOptions
+const courseTypeOptions = computed(() => courseTypeStore.getCourseTypes);
 
 const toggleLevel = (event) => {
   FilterPopOver.value.toggle(event);
@@ -275,7 +278,7 @@ onMounted(async () => {
     fetchCourses(),
     levelOptionsStore.fetchLevels(),
     categoryOptionsStore.fetchCategories(), // Add this line
-    courseTypeOptionsStore.fetchCourseTypes()
+    courseTypeStore.fetchCourseTypes() // Updated call here
   ]);
   isLevelOptionsLoading.value = false;
 });
