@@ -186,8 +186,9 @@ import { InputText, InputGroup, InputGroupAddon } from "primevue";
 import { useCoursesStore } from '../stores/courses.js';
 import { useLevelOptionsStore } from '../stores/levelOptions.js';
 import { useCategoryOptionsStore } from '../stores/categoryOptions.js';
-// Updated store import for course type
 import { useCourseTypeStore } from '../stores/courseType.js';
+
+const coursesStore = useCoursesStore(); // Use Pinia store
 
 const searchQuery = ref("");
 const sortPopover = ref();
@@ -263,34 +264,38 @@ const priceRangeOptions = ref([
 const categoryFilter = ref(null);
 const courseTypeFilter = ref(null);
 
-const { courses, isLoading, fetchCourses } = useCoursesStore();
+const { isLoading } = coursesStore;
 const isLevelOptionsLoading = ref(false);
 
 onMounted(async () => {
-  isLevelOptionsLoading.value = true;
+  // Now fetching courses using the /api/course route via Pinia store
+  const levelOptionsStore = useLevelOptionsStore();
+  const categoryOptionsStore = useCategoryOptionsStore();
+  const courseTypeStore = useCourseTypeStore();
+  
+  // If needed update other loading states.
   await Promise.all([
-    fetchCourses(),
+    coursesStore.fetchCourses(),
     levelOptionsStore.fetchLevels(),
-    categoryOptionsStore.fetchCategories(), // Add this line
-    courseTypeStore.fetchCourseTypes() // Updated call here
+    categoryOptionsStore.fetchCategories(),
+    courseTypeStore.fetchCourseTypes()
   ]);
-  isLevelOptionsLoading.value = false;
 });
 
+// Use the reactive courses from the store in computed if needed.
 const filteredCourses = computed(() => {
-  let result = courses.value.filter(course => {
+  let result = coursesStore.courses.filter(course => {
     const coursePrice = Number(course.discountedPrice || course.originalPrice);
     const selectedPriceRange = priceRangeOptions.value.find(r => r.value === priceRangeFilter.value);
-
     return (course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       course.description.toLowerCase().includes(searchQuery.value.toLowerCase())) &&
       (!levelFilter.value || course.level === levelFilter.value) &&
-      (!categoryFilter.value || course.categoryCode === categoryFilter.value) &&  // Update this line
-      (!courseTypeFilter.value || course.type === courseTypeFilter.value) && // Add type filter
+      (!categoryFilter.value || course.categoryCode === categoryFilter.value) &&
+      (!courseTypeFilter.value || course.type === courseTypeFilter.value) &&
       (course.duration >= durationRange.value[0] && course.duration <= durationRange.value[1]) &&
       (!lessonRangeFilter.value ||
         (course.lessonCount >= lessonRangeOptions.value.find(r => r.value === lessonRangeFilter.value)?.min &&
-          course.lessonCount <= lessonRangeOptions.value.find(r => r.value === lessonRangeFilter.value)?.max)) &&
+         course.lessonCount <= lessonRangeOptions.value.find(r => r.value === lessonRangeFilter.value)?.max)) &&
       (!priceRangeFilter.value ||
         (coursePrice >= selectedPriceRange?.min && coursePrice <= selectedPriceRange?.max));
   });
@@ -308,7 +313,6 @@ const filteredCourses = computed(() => {
         break;
     }
   }
-
   return result;
 });
 </script>
