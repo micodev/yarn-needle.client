@@ -107,7 +107,7 @@
       </div>
 
       <!-- Course Cards Grid -->
-      <div v-if="isLoading" class="text-center p-8">جاري التحميل...</div>
+      <div v-if="isLoading && !courses.length" class="text-center p-8">جاري التحميل...</div>
       <div v-else-if="filteredCourses.length > 0"
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-8 relative">
         <div v-for="(course) in filteredCourses" :key="course.id"
@@ -149,6 +149,9 @@
               <Button label="تفاصيل" class="h-8 flex-1" severity="secondary" />
             </div>
           </div>
+        </div>
+        <div v-if="isLoading" class="col-span-full text-center p-4 text-gray-600">
+          جاري تحميل المزيد...
         </div>
       </div>
 
