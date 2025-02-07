@@ -244,7 +244,7 @@ const toggleLevel = (event) => {
 
 // Add duration filter state
 const durationRange = ref([0, 50]);
-const maxDuration = 50; // Maximum course duration in hours
+const maxDuration = 60; // Maximum course duration in hours
 
 const lessonRangeFilter = ref(null);
 const lessonRangeOptions = ref([
