@@ -283,7 +283,7 @@ onMounted(async () => {
     categoryOptionsStore.fetchCategories(),
     courseTypeStore.fetchCourseTypes()
   ]);
- 
+
 });
 
 // Use the reactive courses from the store without client-side filters.
