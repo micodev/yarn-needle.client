@@ -1,83 +1,43 @@
 import { defineStore } from 'pinia'
 
-export const useCourseTypeOptionsStore = defineStore('courseTypeOptions', {
+export const useCourseTypeStore = defineStore('courseType', {
   state: () => ({
-    courseTypes: [
-      { name: 'جميع الأنواع', value: null, icon: '' },
-      { name: 'حضوري', value: 'onsite', icon: '📍' },
-      { name: 'عن بعد - مسجل', value: 'recorded', icon: '🌐' },
-      { name: 'عن بعد - مباشر', value: 'live', icon: '🔴' }
-    ],
-    loading: false,
+    courseTypes: [],
+    isLoading: false,
     error: null
   }),
 
-  actions: {
-    async fetchCourseTypes() {
-      this.loading = true
-      try {
-        // Simulate API call
-        const response = await new Promise((resolve) => {
-          setTimeout(() => {
-            resolve([
-              { name: 'جميع الأنواع', value: null, icon: '' },
-              { name: 'حضوري', value: 'onsite', icon: '📍' },
-              { name: 'عن بعد - مسجل', value: 'recorded', icon: '🌐' },
-              { name: 'عن بعد - مباشر', value: 'live', icon: '🔴' }
-            ])
-          }, 1000)
-        })
-        this.courseTypes = response
-      } catch (err) {
-        this.error = err.message
-      } finally {
-        this.loading = false
-      }
-    },
-
-    async addCourseType(courseType) {
-      this.loading = true
-      try {
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        this.courseTypes.push(courseType)
-      } catch (err) {
-        this.error = err.message
-      } finally {
-        this.loading = false
-      }
-    },
-
-    async updateCourseType(index, newCourseType) {
-      this.loading = true
-      try {
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        this.courseTypes[index] = newCourseType
-      } catch (err) {
-        this.error = err.message
-      } finally {
-        this.loading = false
-      }
-    },
-
-    async deleteCourseType(index) {
-      this.loading = true
-      try {
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        this.courseTypes.splice(index, 1)
-      } catch (err) {
-        this.error = err.message
-      } finally {
-        this.loading = false
-      }
-    }
-  },
-
   getters: {
     getCourseTypes: (state) => state.courseTypes,
-    isLoading: (state) => state.loading,
-    getError: (state) => state.error
+    getCourseTypeById: (state) => (id) => state.courseTypes.find(ct => ct.id === id),
+    getCourseTypeByCode: (state) => (code) => state.courseTypes.find(ct => ct.code === code)
+  },
+
+  actions: {
+    async fetchCourseTypes() {
+      this.isLoading = true
+      this.error = null
+
+      try {
+        const response = await this.$axios.get('/api/meta/course-types')
+        this.courseTypes = response.data.map(courseType => ({
+          id: courseType.id,
+          code: courseType.code,
+          name: courseType.name
+        }))
+
+      } catch (error) {
+        this.error = error.message || 'Failed to fetch course types'
+        console.error('Error fetching course types:', error)
+      } finally {
+        this.isLoading = false
+      }
+    },
+
+    reset() {
+      this.courseTypes = []
+      this.error = null
+      this.isLoading = false
+    }
   }
 })
