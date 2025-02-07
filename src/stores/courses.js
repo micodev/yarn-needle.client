@@ -62,14 +62,14 @@ export const useCoursesStore = defineStore('courses', {
 					durationMin,
 					durationMax
 				};
-				
+
 				// Store current filters for subsequent paginated requests
 				if (page === 1) {
 					this.currentFilters = { search, sort, level, category, courseType, lessonRange, priceRange, durationMin, durationMax };
 				}
 
 				const response = await this.$axios.get('/api/course', { params });
-				
+
 				if (page === 1) {
 					this.courses = response.data;
 				} else {
