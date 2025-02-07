@@ -1,6 +1,5 @@
 <template>
   <div class="bg-white dark:bg-gray-900">
-    <LoadingOverlay v-if="isLoading" />
     <!-- Banner Section -->
     <div class="relative h-[150px] sm:h-[200px] w-full">
       <img src="https://images.unsplash.com/photo-1584992236310-6edddc08acff?q=80&w=1200&h=300&fit=crop" alt="Banner"
