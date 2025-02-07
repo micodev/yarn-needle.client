@@ -4,13 +4,7 @@ export const useCoursesStore = defineStore('courses', {
 	state: () => ({
 		courses: [],
 		isLoading: false,
-		error: null,
-		pagination: {
-			currentPage: 1,
-			totalPages: 1,
-			pageSize: 12,
-			totalItems: 0
-		}
+		error: null // added error property
 	}),
 	getters: {
 		getCourses: (state) => state.courses,
@@ -23,19 +17,8 @@ export const useCoursesStore = defineStore('courses', {
 			this.isLoading = true;
 			this.error = null;
 			try {
-				const response = await this.$axios.get('/api/course', {
-					params: {
-						page: this.pagination.currentPage,
-						pageSize: this.pagination.pageSize
-					}
-				});
-				this.courses = response.data.items;
-				this.pagination = {
-					currentPage: response.data.currentPage,
-					totalPages: response.data.totalPages,
-					pageSize: response.data.pageSize,
-					totalItems: response.data.totalItems
-				};
+				const response = await this.$axios.get('/api/course');
+				this.courses = response.data;
 			} catch (error) {
 				this.error = error.message || 'Failed to fetch courses';
 				console.error('Error fetching courses:', error);
@@ -43,7 +26,8 @@ export const useCoursesStore = defineStore('courses', {
 				this.isLoading = false;
 			}
 		},
-		async fetchFilteredCourses({ search, sort, level, category, courseType, lessonRange, priceRange, durationMin, durationMax, page }) {
+		// NEW ACTION: fetchFilteredCourses
+		async fetchFilteredCourses({ search, sort, level, category, courseType, lessonRange, priceRange, durationMin, durationMax }) {
 			this.isLoading = true;
 			this.error = null;
 			try {
@@ -56,18 +40,10 @@ export const useCoursesStore = defineStore('courses', {
 					lessonRange,
 					priceRange,
 					durationMin,
-					durationMax,
-					page: page || this.pagination.currentPage,
-					pageSize: this.pagination.pageSize
+					durationMax
 				};
 				const response = await this.$axios.get('/api/course', { params });
-				this.courses = response.data.items;
-				this.pagination = {
-					currentPage: response.data.currentPage,
-					totalPages: response.data.totalPages,
-					pageSize: response.data.pageSize,
-					totalItems: response.data.totalItems
-				};
+				this.courses = response.data;
 			} catch (error) {
 				this.error = error.message || 'Failed to fetch filtered courses';
 				console.error('Error fetching filtered courses:', error);
