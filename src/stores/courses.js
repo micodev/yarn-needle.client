@@ -24,6 +24,31 @@ export const useCoursesStore = defineStore('courses', {
 				this.isLoading = false;
 			}
 		},
+		// NEW ACTION: fetchFilteredCourses
+		async fetchFilteredCourses({ search, sort, level, category, courseType, lessonRange, priceRange, durationMin, durationMax }) {
+			this.isLoading = true;
+			this.error = null;
+			try {
+				const params = {
+					search,
+					sort,
+					level,
+					category,
+					courseType,
+					lessonRange,
+					priceRange,
+					durationMin,
+					durationMax
+				};
+				const response = await this.$axios.get('/api/course', { params });
+				this.courses = response.data;
+			} catch (error) {
+				this.error = error.message || 'Failed to fetch filtered courses';
+				console.error('Error fetching filtered courses:', error);
+			} finally {
+				this.isLoading = false;
+			}
+		},
 		reset() {
 			this.courses = [];
 			this.error = null;
