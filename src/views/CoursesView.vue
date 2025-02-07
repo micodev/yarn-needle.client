@@ -190,7 +190,6 @@ import { useCoursesStore } from '../stores/courses.js';
 import { useLevelOptionsStore } from '../stores/levelOptions.js';
 import { useCategoryOptionsStore } from '../stores/categoryOptions.js';
 import { useCourseTypeStore } from '../stores/courseType.js';
-import LoadingOverlay from '../components/LoadingOverlay.vue';
 
 const coursesStore = useCoursesStore(); // Use Pinia store
 const { isLoading, courses } = storeToRefs(coursesStore); // Use storeToRefs for reactive state
