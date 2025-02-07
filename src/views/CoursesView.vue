@@ -61,7 +61,7 @@
               <div>
                 <span class="font-medium block mb-2">مدة الدورة (بالساعات)</span>
                 <div class="flex flex-col gap-2">
-                  <Slider v-model="durationRange" range :min="0" :max="maxDuration" class="mt-2" dir="rtl" />
+                  <Slider v-model="durationRange" range :min="0" :max="maxDuration" class="mt-2" />
 
                     <div class="flex justify-center text-sm text-gray-600">
                     <span>من {{ durationRange[0] }} ساعة</span>
