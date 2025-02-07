@@ -25,12 +25,13 @@
           </InputGroup>
         </div>
         <div class="flex gap-2 overflow-x-auto pb-2 sm:pb-0 w-full md:w-1/2 justify-end">
-          <Button label="فرز" icon="pi pi-filter" @click="toggleLevel" :class="{
+          <Button label="فرز" icon="pi pi-filter" @click="showFilterDialog" :class="{
             'p-button-secondary': !(levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration),
             'p-button-primary': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration
           }" class="whitespace-nowrap" />
-          <Popover ref="FilterPopOver">
-            <div class="flex flex-col gap-4 p-4 w-[480px] overflow-y-auto">
+          <Dialog v-model:visible="filterDialogVisible" modal header="فرز" :style="{ width: '90vw', maxWidth: '500px' }" 
+              :breakpoints="{ '960px': '75vw', '641px': '90vw' }">
+            <div class="flex flex-col gap-4">
               <div class="flex flex-row gap-2">
                 <div class="w-1/2">
                   <span class="font-medium block mb-2">المجال</span>
@@ -57,7 +58,6 @@
                 </div>
               </div>
 
-
               <div>
                 <span class="font-medium block mb-2">مدة الدورة (بالساعات)</span>
                 <div class="flex flex-col gap-2">
@@ -75,23 +75,15 @@
                   placeholder="اختر نطاق السعر" class="w-full" />
               </div>
 
-
-
               <Button
                 v-if="levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration"
                 label="مسح التصفية" icon="pi pi-times" severity="secondary" text class="mt-2 w-full justify-center"
-                @click="() => {
-                  levelFilter = null;
-                  categoryFilter = null;
-                  courseTypeFilter = null;
-                  lessonRangeFilter = null;
-                  priceRangeFilter = null;
-                  durationRange = [0, maxDuration];
-                  applyFiltersAndSort();
-                }" />
+                @click="clearFilters" />
             </div>
-          </Popover>
-
+            <template #footer>
+              <Button label="تطبيق" icon="pi pi-check" @click="applyFiltersAndClose" autofocus />
+            </template>
+          </Dialog>
           <Button label="ترتيب" :icon="selectedSort?.icon || 'pi pi-sort'" @click="toggleSort" severity="secondary"
             :class="{ 'p-button-info': selectedSort }" class="whitespace-nowrap" />
           <Popover ref="sortPopover" appendTo="body">
@@ -184,7 +176,7 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import { storeToRefs } from 'pinia';
-import { Button, Popover, Select, Slider } from "primevue";
+import { Button, Dialog, Popover, Select, Slider } from "primevue";
 import { InputText, InputGroup, InputGroupAddon } from "primevue";
 import { useCoursesStore } from '../stores/courses.js';
 import { useLevelOptionsStore } from '../stores/levelOptions.js';
@@ -305,6 +297,27 @@ const applyFiltersAndSort = () => {
 		durationMax: durationRange.value[1]
 	});
 };
+
+const filterDialogVisible = ref(false);
+
+const showFilterDialog = () => {
+  filterDialogVisible.value = true;
+};
+
+const clearFilters = () => {
+  levelFilter.value = null;
+  categoryFilter.value = null;
+  courseTypeFilter.value = null;
+  lessonRangeFilter.value = null;
+  priceRangeFilter.value = null;
+  durationRange.value = [0, maxDuration];
+  applyFiltersAndSort();
+};
+
+const applyFiltersAndClose = () => {
+  applyFiltersAndSort();
+  filterDialogVisible.value = false;
+};
 </script>
 
 <style scoped>
@@ -401,5 +414,22 @@ const applyFiltersAndSort = () => {
   .card {
     max-width: 100%;
   }
+}
+
+:deep(.p-dialog) {
+  direction: rtl;
+}
+
+:deep(.p-dialog-header) {
+  padding: 1.5rem;
+}
+
+:deep(.p-dialog-content) {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+:deep(.p-dialog-footer) {
+  padding: 1.5rem;
+  text-align: left;
 }
 </style>
