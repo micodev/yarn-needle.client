@@ -313,7 +313,7 @@ onMounted(async () => {
 
 // Use the reactive courses from the store without client-side filters.
 // Retain sorting if a sort option is selected.
-const filteredCourses = computed(() => courses.value);
+const filteredCourses = computed(() => courses.value | 0);
 
 // NEW: helper method to send filters/sort/search to the store action
 const applyFiltersAndSort = (page) => {
