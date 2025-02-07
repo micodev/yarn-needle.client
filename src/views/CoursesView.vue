@@ -114,7 +114,7 @@
       </div>
 
       <!-- Course Cards Grid -->
-      <div v-if="loadingCourses" class="text-center p-8">جاري التحميل...</div>
+      <div v-if="isLoading" class="text-center p-8">جاري التحميل...</div>
       <div v-else-if="filteredCourses.length > 0"
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-8 relative">
         <div v-for="(course) in filteredCourses" :key="course.id"
@@ -267,12 +267,10 @@ const priceRangeOptions = ref([
 const categoryFilter = ref(null);
 const courseTypeFilter = ref(null);
 
-const loadingCourses = ref(false);
-
+const { isLoading } = coursesStore;
 const isLevelOptionsLoading = ref(false);
 
 onMounted(async () => {
-  loadingCourses.value = true;
   // Now fetching courses using the /api/course route via Pinia store
   const levelOptionsStore = useLevelOptionsStore();
   const categoryOptionsStore = useCategoryOptionsStore();
@@ -285,7 +283,7 @@ onMounted(async () => {
     categoryOptionsStore.fetchCategories(),
     courseTypeStore.fetchCourseTypes()
   ]);
-  loadingCourses.value = false;
+ 
 });
 
 // Use the reactive courses from the store without client-side filters.
@@ -293,9 +291,8 @@ onMounted(async () => {
 const filteredCourses = computed(() => coursesStore.getCourses);
 
 // NEW: helper method to send filters/sort/search to the store action
-const applyFiltersAndSort = async () => {
-	loadingCourses.value = true;
-	await coursesStore.fetchFilteredCourses({
+const applyFiltersAndSort = () => {
+	coursesStore.fetchFilteredCourses({
 		search: searchQuery.value,
 		sort: selectedSort.value ? selectedSort.value.value : null,
 		level: levelFilter.value,
@@ -306,7 +303,6 @@ const applyFiltersAndSort = async () => {
 		durationMin: durationRange.value[0],
 		durationMax: durationRange.value[1]
 	});
-	loadingCourses.value = false;
 };
 </script>
 
