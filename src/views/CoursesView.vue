@@ -208,7 +208,6 @@ const selectSort = (option) => {
 };
 
 const levelFilter = ref(null);
-const FilterPopOver = ref();
 
 // Initialize stores
 const levelOptionsStore = useLevelOptionsStore();
