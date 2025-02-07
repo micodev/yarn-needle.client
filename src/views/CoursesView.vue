@@ -200,7 +200,7 @@ import { InputText, InputGroup, InputGroupAddon } from "primevue";
 import { useCoursesStore } from '../stores/courses.js';
 import { useLevelOptionsStore } from '../stores/levelOptions.js';
 import { useCategoryOptionsStore } from '../stores/categoryOptions.js';
-import { useCourseTypeOptionsStore } from '../stores/courseTypeOptions.js';
+import { useCourseTypeOptionsStore } from '../stores/courseType.js';
 
 const searchQuery = ref("");
 const sortPopover = ref();
