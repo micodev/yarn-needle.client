@@ -272,7 +272,7 @@ onMounted(async () => {
   const levelOptionsStore = useLevelOptionsStore();
   const categoryOptionsStore = useCategoryOptionsStore();
   const courseTypeStore = useCourseTypeStore();
-  
+
   // If needed update other loading states.
   await Promise.all([
     coursesStore.fetchCourses(),
