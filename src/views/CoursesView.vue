@@ -218,13 +218,21 @@ const categoryOptionsStore = useCategoryOptionsStore();
 // Replace courseTypeOptionsStore with courseTypeStore
 const courseTypeStore = useCourseTypeStore();
 
-// Replace static options with computed properties
-const levelOptions = computed(() => levelOptionsStore.getLevels);
-const categoryOptions = computed(() =>
-  categoryOptionsStore.getCategories
-);
-// Replace computed property for courseTypeOptions
-const courseTypeOptions = computed(() => courseTypeStore.getCourseTypes);
+// Update computed options to include a default option
+const levelOptions = computed(() => [
+	{ name: 'جميع المستويات', value: null },
+	...levelOptionsStore.getLevels
+]);
+
+const categoryOptions = computed(() => [
+	{ name: 'جميع المجالات', code: null },
+	...categoryOptionsStore.getCategories
+]);
+
+const courseTypeOptions = computed(() => [
+	{ name: 'جميع الأنواع', code: null },
+	...courseTypeStore.getCourseTypes
+]);
 
 const toggleLevel = (event) => {
   FilterPopOver.value.toggle(event);
