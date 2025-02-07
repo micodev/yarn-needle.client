@@ -20,7 +20,7 @@
           <InputGroup>
             <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..." type="text" size="small" />
             <InputGroupAddon class="h-9">
-              <Button icon="pi pi-search" size="small" severity="secondary" variant="text" />
+              <Button icon="pi pi-search" size="small" severity="secondary" variant="text" @click="applyFiltersAndSort" />
             </InputGroupAddon>
           </InputGroup>
         </div>
@@ -87,6 +87,7 @@
                   lessonRangeFilter = null;
                   priceRangeFilter = null;
                   durationRange = [0, maxDuration];
+                  applyFiltersAndSort();
                 }" />
             </div>
           </Popover>
@@ -173,6 +174,7 @@
           priceRangeFilter = null;
           durationRange = [0, maxDuration];
           searchQuery = '';
+          applyFiltersAndSort();
         }" />
       </div>
     </div>
@@ -208,6 +210,7 @@ const toggleSort = (event) => {
 const selectSort = (option) => {
   selectedSort.value = option;
   sortPopover.value.hide();
+  applyFiltersAndSort();
 };
 
 const levelFilter = ref(null);
@@ -280,28 +283,28 @@ onMounted(async () => {
     categoryOptionsStore.fetchCategories(),
     courseTypeStore.fetchCourseTypes()
   ]);
+  // Initial filter/sort fetch if needed
+  applyFiltersAndSort();
 });
 
 // Use the reactive courses from the store without client-side filters.
 // Retain sorting if a sort option is selected.
-const filteredCourses = computed(() => {
-  let courses = coursesStore.getCourses;
+const filteredCourses = computed(() => coursesStore.getCourses);
 
-  if (selectedSort.value) {
-    switch (selectedSort.value.value) {
-      case 'newest':
-        courses = [...courses].sort((a, b) => b.id - a.id);
-        break;
-      case 'popular':
-        courses = [...courses].sort((a, b) => b.students - a.students);
-        break;
-      case 'top-rated':
-        courses = [...courses].sort((a, b) => b.rating - a.rating);
-        break;
-    }
-  }
-  return courses;
-});
+// NEW: helper method to send filters/sort/search to the store action
+const applyFiltersAndSort = () => {
+	coursesStore.fetchFilteredCourses({
+		search: searchQuery.value,
+		sort: selectedSort.value ? selectedSort.value.value : null,
+		level: levelFilter.value,
+		category: categoryFilter.value,
+		courseType: courseTypeFilter.value,
+		lessonRange: lessonRangeFilter.value,
+		priceRange: priceRangeFilter.value,
+		durationMin: durationRange.value[0],
+		durationMax: durationRange.value[1]
+	});
+};
 </script>
 
 <style scoped>
