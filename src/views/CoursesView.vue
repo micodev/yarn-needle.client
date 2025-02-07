@@ -286,7 +286,7 @@ onMounted(async () => {
 // Retain sorting if a sort option is selected.
 const filteredCourses = computed(() => {
   let courses = coursesStore.getCourses;
-  
+
   if (selectedSort.value) {
     switch (selectedSort.value.value) {
       case 'newest':
