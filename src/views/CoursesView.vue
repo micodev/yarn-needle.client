@@ -1,5 +1,6 @@
 <template>
   <div class="bg-white dark:bg-gray-900">
+    <LoadingOverlay v-if="isLoading" />
     <!-- Banner Section -->
     <div class="relative h-[150px] sm:h-[200px] w-full">
       <img src="https://images.unsplash.com/photo-1584992236310-6edddc08acff?q=80&w=1200&h=300&fit=crop" alt="Banner"
@@ -182,7 +183,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, defineComponent } from "vue";
+import { storeToRefs } from 'pinia'; // Add this import
 import { Button, Popover, Select, Slider } from "primevue";
 import { InputText, InputGroup, InputGroupAddon } from "primevue";
 import { useCoursesStore } from '../stores/courses.js';
@@ -191,6 +193,7 @@ import { useCategoryOptionsStore } from '../stores/categoryOptions.js';
 import { useCourseTypeStore } from '../stores/courseType.js';
 
 const coursesStore = useCoursesStore(); // Use Pinia store
+const { isLoading, courses } = storeToRefs(coursesStore); // Use storeToRefs for reactive state
 
 const searchQuery = ref("");
 const sortPopover = ref();
@@ -267,7 +270,6 @@ const priceRangeOptions = ref([
 const categoryFilter = ref(null);
 const courseTypeFilter = ref(null);
 
-const { isLoading } = coursesStore;
 const isLevelOptionsLoading = ref(false);
 
 onMounted(async () => {
@@ -288,7 +290,7 @@ onMounted(async () => {
 
 // Use the reactive courses from the store without client-side filters.
 // Retain sorting if a sort option is selected.
-const filteredCourses = computed(() => coursesStore.getCourses);
+const filteredCourses = computed(() => courses.value);
 
 // NEW: helper method to send filters/sort/search to the store action
 const applyFiltersAndSort = () => {
@@ -304,6 +306,16 @@ const applyFiltersAndSort = () => {
 		durationMax: durationRange.value[1]
 	});
 };
+
+// Replace existing isLoading declaration with loading overlay component
+const LoadingOverlay = defineComponent({
+  template: `
+    <div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+      <ProgressSpinner class="w-16 h-16" strokeWidth="4" fill="var(--surface-ground)" />
+      <span class="text-white text-xl mr-4">جاري التحميل...</span>
+    </div>
+  `
+});
 </script>
 
 <style scoped>
