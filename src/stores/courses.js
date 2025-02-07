@@ -7,7 +7,7 @@ export const useCoursesStore = defineStore('courses', {
 		error: null,
 		currentPage: 1,
 		hasMore: true,
-		limit: 12
+		limit: 2
 	}),
 	getters: {
 		getCourses: (state) => state.courses,
