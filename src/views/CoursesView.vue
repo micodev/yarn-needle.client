@@ -108,81 +108,47 @@
 
       <!-- Course Cards Grid -->
       <div v-if="isLoading" class="text-center p-8">جاري التحميل...</div>
-      <div v-else-if="filteredCourses.length > 0">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-8 relative">
-          <div v-for="(course) in filteredCourses" :key="course.id"
-            class="card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl dark:bg-slate-900">
-            <div class="relative">
-              <img :src="course.image" :alt="course.title" class="w-full h-36 sm:h-48 object-cover rounded" />
-              <div
-                class="absolute inset-0 bg-gradient-to-b from-transparent  dark:via-slate-800 via-70% to-surface-0 to-80% opacity-100 dark:to-gray-900">
-              </div>
-              <div class="relative w-full flex flex-col justify-center items-center rounded-md p-1">
-                <p class="text-lg font-bold mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
-                <p class="text-sm text-gray-700 dark:text-gray-300 mb-2">{{ course.description }}</p>
-                <div class="flex items-center gap-2 mb-2">
-                  <span class="text-yellow-500">{{ course.rating }}⭐</span>
-                  <span class="text-sm text-gray-600 dark:text-gray-400">({{ course.students }} طالب)</span>
-                </div>
-              </div>
-              <div class="absolute top-2 px-2 w-full">
-                <div class="flex justify-between">
-                  <Button icon="pi pi-heart" severity="primary" variant="text" />
-                  <span v-if="course.discount"
-                    class="text-green-500 font-bold text-center content-center rounded-md px-2 bg-green-100 bg-opacity-50 dark:bg-green-900">
-                    {{ course.discount }}%</span>
-                </div>
+      <div v-else-if="filteredCourses.length > 0"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-8 relative">
+        <div v-for="(course) in filteredCourses" :key="course.id"
+          class="card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl dark:bg-slate-900">
+          <div class="relative">
+            <img :src="course.image" :alt="course.title" class="w-full h-36 sm:h-48 object-cover rounded" />
+            <div
+              class="absolute inset-0 bg-gradient-to-b from-transparent  dark:via-slate-800 via-70% to-surface-0 to-80% opacity-100 dark:to-gray-900">
+            </div>
+            <div class="relative w-full flex flex-col justify-center items-center rounded-md p-1">
+              <p class="text-lg font-bold mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
+              <p class="text-sm text-gray-700 dark:text-gray-300 mb-2">{{ course.description }}</p>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-yellow-500">{{ course.rating }}⭐</span>
+                <span class="text-sm text-gray-600 dark:text-gray-400">({{ course.students }} طالب)</span>
               </div>
             </div>
-            <div class="flex justify-between p-3 sm:p-4 flex-col mt-auto bg-white dark:bg-gray-900 rounded-b-lg">
-              <div class="flex flex-col items-center mb-2">
-                <p class="text-gray-500 dark:text-gray-400 line-through text-xs mb-1" v-if="course.discount"
-                  v-tooltip="'ريال سعودي'">
-                  {{ course.originalPrice }} SAR
-                </p>
-                <p class="text-black dark:text-white font-bold text-sm" v-tooltip="'ريال سعودي'">
-                  {{ course.discountedPrice || course.originalPrice }} SAR
-                </p>
-              </div>
-              <div class="flex flex-row gap-1">
-                <Button label="شراء" class="h-8 flex-1" />
-                <Button label="تفاصيل" class="h-8 flex-1" severity="secondary" />
+            <div class="absolute top-2 px-2 w-full">
+              <div class="flex justify-between">
+                <Button icon="pi pi-heart" severity="primary" variant="text" />
+                <span v-if="course.discount"
+                  class="text-green-500 font-bold text-center content-center rounded-md px-2 bg-green-100 bg-opacity-50 dark:bg-green-900">
+                  {{ course.discount }}%</span>
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- Pagination Controls -->
-        <div class="flex justify-center items-center gap-2 mt-6">
-          <Button
-            icon="pi pi-angle-double-right"
-            @click="goToPage(1)"
-            :disabled="pagination.currentPage === 1"
-            class="p-button-rounded p-button-text"
-          />
-          <Button
-            icon="pi pi-angle-right"
-            @click="goToPage(pagination.currentPage - 1)"
-            :disabled="pagination.currentPage === 1"
-            class="p-button-rounded p-button-text"
-          />
-
-          <span class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800">
-            {{ pagination.currentPage }} من {{ pagination.totalPages }}
-          </span>
-
-          <Button
-            icon="pi pi-angle-left"
-            @click="goToPage(pagination.currentPage + 1)"
-            :disabled="pagination.currentPage === pagination.totalPages"
-            class="p-button-rounded p-button-text"
-          />
-          <Button
-            icon="pi pi-angle-double-left"
-            @click="goToPage(pagination.totalPages)"
-            :disabled="pagination.currentPage === pagination.totalPages"
-            class="p-button-rounded p-button-text"
-          />
+          <div class="flex justify-between p-3 sm:p-4 flex-col mt-auto bg-white dark:bg-gray-900 rounded-b-lg">
+            <div class="flex flex-col items-center mb-2">
+              <p class="text-gray-500 dark:text-gray-400 line-through text-xs mb-1" v-if="course.discount"
+                v-tooltip="'ريال سعودي'">
+                {{ course.originalPrice }} SAR
+              </p>
+              <p class="text-black dark:text-white font-bold text-sm" v-tooltip="'ريال سعودي'">
+                {{ course.discountedPrice || course.originalPrice }} SAR
+              </p>
+            </div>
+            <div class="flex flex-row gap-1">
+              <Button label="شراء" class="h-8 flex-1" />
+              <Button label="تفاصيل" class="h-8 flex-1" severity="secondary" />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -219,7 +185,7 @@ import { useCategoryOptionsStore } from '../stores/categoryOptions.js';
 import { useCourseTypeStore } from '../stores/courseType.js';
 
 const coursesStore = useCoursesStore(); // Use Pinia store
-const { isLoading, courses, pagination } = storeToRefs(coursesStore); // Use storeToRefs for reactive state
+const { isLoading, courses } = storeToRefs(coursesStore); // Use storeToRefs for reactive state
 
 const searchQuery = ref("");
 const sortPopover = ref();
@@ -313,10 +279,10 @@ onMounted(async () => {
 
 // Use the reactive courses from the store without client-side filters.
 // Retain sorting if a sort option is selected.
-const filteredCourses = computed(() => courses.value | 0);
+const filteredCourses = computed(() => courses.value);
 
 // NEW: helper method to send filters/sort/search to the store action
-const applyFiltersAndSort = (page) => {
+const applyFiltersAndSort = () => {
 	coursesStore.fetchFilteredCourses({
 		search: searchQuery.value,
 		sort: selectedSort.value ? selectedSort.value.value : null,
@@ -326,8 +292,7 @@ const applyFiltersAndSort = (page) => {
 		lessonRange: lessonRangeFilter.value,
 		priceRange: priceRangeFilter.value,
 		durationMin: durationRange.value[0],
-		durationMax: durationRange.value[1],
-		page: page
+		durationMax: durationRange.value[1]
 	});
 };
 
@@ -350,10 +315,6 @@ const clearFilters = () => {
 const applyFiltersAndClose = () => {
   applyFiltersAndSort();
   filterDialogVisible.value = false;
-};
-
-const goToPage = (page) => {
-  applyFiltersAndSort(page);
 };
 </script>
 
@@ -468,15 +429,5 @@ const goToPage = (page) => {
 :deep(.p-dialog-footer) {
   padding: 1.5rem;
   text-align: left;
-}
-
-/* Add these new styles for pagination */
-:deep(.p-button-rounded) {
-  width: 2.5rem;
-  height: 2.5rem;
-}
-
-:deep(.p-button-rounded .p-button-icon) {
-  font-size: 1rem;
 }
 </style>
