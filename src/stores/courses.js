@@ -4,21 +4,36 @@ export const useCoursesStore = defineStore('courses', {
 	state: () => ({
 		courses: [],
 		isLoading: false,
-		error: null // added error property
+		error: null,
+		currentPage: 1,
+		hasMore: true
 	}),
 	getters: {
 		getCourses: (state) => state.courses,
 		getCourseById: (state) => (id) => state.courses.find(c => c.id === id)
 	},
 	actions: {
-		async fetchCourses() {
-			// Guard: prevent duplicate fetch calls if already loading
-			if (this.isLoading) return;
+		async fetchCourses(page = 1) {
+			if (this.isLoading || !this.hasMore) return;
+			
 			this.isLoading = true;
 			this.error = null;
 			try {
-				const response = await this.$axios.get('/api/course');
-				this.courses = response.data;
+				const response = await this.$axios.get('/api/course', {
+					params: {
+						page: page,
+						limit: 12 // adjust limit as needed
+					}
+				});
+				
+				if (page === 1) {
+					this.courses = response.data.courses;
+				} else {
+					this.courses = [...this.courses, ...response.data.courses];
+				}
+				
+				this.hasMore = response.data.courses.length === 12; // if less than limit, no more pages
+				this.currentPage = page;
 			} catch (error) {
 				this.error = error.message || 'Failed to fetch courses';
 				console.error('Error fetching courses:', error);
@@ -26,7 +41,6 @@ export const useCoursesStore = defineStore('courses', {
 				this.isLoading = false;
 			}
 		},
-		// NEW ACTION: fetchFilteredCourses
 		async fetchFilteredCourses({ search, sort, level, category, courseType, lessonRange, priceRange, durationMin, durationMax }) {
 			this.isLoading = true;
 			this.error = null;
@@ -55,6 +69,8 @@ export const useCoursesStore = defineStore('courses', {
 			this.courses = [];
 			this.error = null;
 			this.isLoading = false;
+			this.currentPage = 1;
+			this.hasMore = true;
 		}
 	}
 });
