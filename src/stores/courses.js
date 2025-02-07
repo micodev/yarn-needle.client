@@ -12,6 +12,8 @@ export const useCoursesStore = defineStore('courses', {
 	},
 	actions: {
 		async fetchCourses() {
+			// Guard: prevent duplicate fetch calls if already loading
+			if (this.isLoading) return;
 			this.isLoading = true;
 			this.error = null;
 			try {
