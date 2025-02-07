@@ -15,6 +15,11 @@ export const useCoursesStore = defineStore('courses', {
 		getCourseById: (state) => (id) => state.courses.find(c => c.id === id)
 	},
 	actions: {
+		resetPagination() {
+			this.currentPage = 1;
+			this.hasMore = true;
+			this.courses = [];
+		},
 		async fetchCourses(page = 1) {
 			if (this.isLoading || !this.hasMore) return;
 
@@ -44,6 +49,10 @@ export const useCoursesStore = defineStore('courses', {
 			}
 		},
 		async fetchFilteredCourses({ search, sort, level, category, courseType, lessonRange, priceRange, durationMin, durationMax, page = 1 }) {
+			if (page === 1) {
+				this.resetPagination();
+			}
+
 			if (this.isLoading || (page > 1 && !this.hasMore)) return;
 
 			this.isLoading = true;

@@ -208,6 +208,7 @@ const toggleSort = (event) => {
 const selectSort = (option) => {
   selectedSort.value = option;
   sortPopover.value.hide();
+  coursesStore.resetPagination();
   applyFiltersAndSort();
 };
 
@@ -286,17 +287,18 @@ const filteredCourses = computed(() => courses.value);
 
 // NEW: helper method to send filters/sort/search to the store action
 const applyFiltersAndSort = () => {
-	coursesStore.fetchFilteredCourses({
-		search: searchQuery.value,
-		sort: selectedSort.value ? selectedSort.value.value : null,
-		level: levelFilter.value,
-		category: categoryFilter.value,
-		courseType: courseTypeFilter.value,
-		lessonRange: lessonRangeFilter.value,
-		priceRange: priceRangeFilter.value,
-		durationMin: durationRange.value[0],
-		durationMax: durationRange.value[1]
-	});
+  coursesStore.resetPagination();
+  coursesStore.fetchFilteredCourses({
+    search: searchQuery.value,
+    sort: selectedSort.value ? selectedSort.value.value : null,
+    level: levelFilter.value,
+    category: categoryFilter.value,
+    courseType: courseTypeFilter.value,
+    lessonRange: lessonRangeFilter.value,
+    priceRange: priceRangeFilter.value,
+    durationMin: durationRange.value[0],
+    durationMax: durationRange.value[1]
+  });
 };
 
 const filterDialogVisible = ref(false);
@@ -325,7 +327,11 @@ const handleScroll = () => {
   const bottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 100;
 
   if (bottom && !isLoading.value && coursesStore.hasMore) {
-    coursesStore.fetchCourses(coursesStore.currentPage + 1);
+    if (coursesStore.currentFilters) {
+      coursesStore.loadMore();
+    } else {
+      coursesStore.fetchCourses(coursesStore.currentPage + 1);
+    }
   }
 };
 
