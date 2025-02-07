@@ -150,8 +150,8 @@
             </div>
           </div>
         </div>
-        <div v-if="isLoading" class="col-span-full text-center p-4 text-gray-600">
-          جاري تحميل المزيد...
+        <div v-if="isLoading" class="col-span-full flex justify-center items-center p-4">
+          <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="3" />
         </div>
       </div>
 
@@ -180,7 +180,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { storeToRefs } from 'pinia';
-import { Button, Dialog, Popover, Select, Slider } from "primevue";
+import { Button, Dialog, Popover, Select, Slider, ProgressSpinner } from "primevue";
 import { InputText, InputGroup, InputGroupAddon } from "primevue";
 import { useCoursesStore } from '../stores/courses.js';
 import { useLevelOptionsStore } from '../stores/levelOptions.js';
@@ -456,5 +456,15 @@ onUnmounted(() => {
 :deep(.p-dialog-footer) {
   padding: 1.5rem;
   text-align: left;
+}
+
+:deep(.p-progress-spinner) {
+  width: 50px;
+  height: 50px;
+}
+
+:deep(.p-progress-spinner-circle) {
+  stroke: var(--primary-color);
+  stroke-width: 3;
 }
 </style>
