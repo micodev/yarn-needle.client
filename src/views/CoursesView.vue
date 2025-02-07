@@ -282,9 +282,9 @@ onMounted(async () => {
   ]);
 });
 
-// Use the reactive courses from the store in computed if needed.
+// Use the reactive courses from the store in computed using the getter.
 const filteredCourses = computed(() => {
-  let result = coursesStore.courses.filter(course => {
+  let result = coursesStore.getCourses.filter(course => {
     const coursePrice = Number(course.discountedPrice || course.originalPrice);
     const selectedPriceRange = priceRangeOptions.value.find(r => r.value === priceRangeFilter.value);
     return (course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
