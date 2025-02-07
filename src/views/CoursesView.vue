@@ -320,7 +320,7 @@ const applyFiltersAndClose = () => {
 // Add scroll handling logic
 const handleScroll = () => {
   const bottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 100;
-  
+
   if (bottom && !isLoading.value && coursesStore.hasMore) {
     coursesStore.fetchCourses(coursesStore.currentPage + 1);
   }

@@ -15,7 +15,7 @@ export const useCoursesStore = defineStore('courses', {
 	actions: {
 		async fetchCourses(page = 1) {
 			if (this.isLoading || !this.hasMore) return;
-			
+
 			this.isLoading = true;
 			this.error = null;
 			try {
@@ -25,13 +25,13 @@ export const useCoursesStore = defineStore('courses', {
 						limit: 12 // adjust limit as needed
 					}
 				});
-				
+
 				if (page === 1) {
 					this.courses = response.data.courses;
 				} else {
 					this.courses = [...this.courses, ...response.data.courses];
 				}
-				
+
 				this.hasMore = response.data.courses.length === 12; // if less than limit, no more pages
 				this.currentPage = page;
 			} catch (error) {
