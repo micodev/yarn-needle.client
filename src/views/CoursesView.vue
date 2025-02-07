@@ -151,34 +151,34 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Pagination Controls -->
         <div class="flex justify-center items-center gap-2 mt-6">
-          <Button 
-            icon="pi pi-angle-double-right" 
+          <Button
+            icon="pi pi-angle-double-right"
             @click="goToPage(1)"
             :disabled="pagination.currentPage === 1"
             class="p-button-rounded p-button-text"
           />
-          <Button 
-            icon="pi pi-angle-right" 
+          <Button
+            icon="pi pi-angle-right"
             @click="goToPage(pagination.currentPage - 1)"
             :disabled="pagination.currentPage === 1"
             class="p-button-rounded p-button-text"
           />
-          
+
           <span class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800">
             {{ pagination.currentPage }} من {{ pagination.totalPages }}
           </span>
-          
-          <Button 
-            icon="pi pi-angle-left" 
+
+          <Button
+            icon="pi pi-angle-left"
             @click="goToPage(pagination.currentPage + 1)"
             :disabled="pagination.currentPage === pagination.totalPages"
             class="p-button-rounded p-button-text"
           />
-          <Button 
-            icon="pi pi-angle-double-left" 
+          <Button
+            icon="pi pi-angle-double-left"
             @click="goToPage(pagination.totalPages)"
             :disabled="pagination.currentPage === pagination.totalPages"
             class="p-button-rounded p-button-text"
