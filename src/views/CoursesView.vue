@@ -29,7 +29,7 @@
             'p-button-secondary': !(levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration),
             'p-button-primary': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration
           }" class="whitespace-nowrap" />
-          <Dialog v-model:visible="filterDialogVisible" modal header="فرز" :style="{ width: '90vw', maxWidth: '500px' }" 
+          <Dialog v-model:visible="filterDialogVisible" modal header="فرز" :style="{ width: '90vw', maxWidth: '500px' }"
               :breakpoints="{ '960px': '75vw', '641px': '90vw' }">
             <div class="flex flex-col gap-4">
               <div class="flex flex-row gap-2">
@@ -232,9 +232,7 @@ const courseTypeOptions = computed(() => [
 	...courseTypeStore.getCourseTypes
 ]);
 
-const toggleLevel = (event) => {
-  FilterPopOver.value.toggle(event);
-};
+
 
 // Add duration filter state
 const durationRange = ref([0, 50]);
