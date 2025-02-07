@@ -27,12 +27,12 @@ export const useCoursesStore = defineStore('courses', {
 				});
 
 				if (page === 1) {
-					this.courses = response.data.courses;
+					this.courses = response.data;
 				} else {
-					this.courses = [...this.courses, ...response.data.courses];
+					this.courses = [...this.courses, ...response.data];
 				}
 
-				this.hasMore = response.data.courses.length === 12; // if less than limit, no more pages
+				this.hasMore = response.data.length === 12; // if less than limit, no more pages
 				this.currentPage = page;
 			} catch (error) {
 				this.error = error.message || 'Failed to fetch courses';
