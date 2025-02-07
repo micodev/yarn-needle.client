@@ -282,38 +282,25 @@ onMounted(async () => {
   ]);
 });
 
-// Use the reactive courses from the store in computed using the getter.
+// Use the reactive courses from the store without client-side filters.
+// Retain sorting if a sort option is selected.
 const filteredCourses = computed(() => {
-  let result = coursesStore.getCourses.filter(course => {
-    const coursePrice = Number(course.discountedPrice || course.originalPrice);
-    const selectedPriceRange = priceRangeOptions.value.find(r => r.value === priceRangeFilter.value);
-    return (course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      course.description.toLowerCase().includes(searchQuery.value.toLowerCase())) &&
-      (!levelFilter.value || course.level === levelFilter.value) &&
-      (!categoryFilter.value || course.categoryCode === categoryFilter.value) &&
-      (!courseTypeFilter.value || course.type === courseTypeFilter.value) &&
-      (course.duration >= durationRange.value[0] && course.duration <= durationRange.value[1]) &&
-      (!lessonRangeFilter.value ||
-        (course.lessonCount >= lessonRangeOptions.value.find(r => r.value === lessonRangeFilter.value)?.min &&
-         course.lessonCount <= lessonRangeOptions.value.find(r => r.value === lessonRangeFilter.value)?.max)) &&
-      (!priceRangeFilter.value ||
-        (coursePrice >= selectedPriceRange?.min && coursePrice <= selectedPriceRange?.max));
-  });
-
+  let courses = coursesStore.getCourses;
+  
   if (selectedSort.value) {
     switch (selectedSort.value.value) {
       case 'newest':
-        result = [...result].sort((a, b) => b.id - a.id);
+        courses = [...courses].sort((a, b) => b.id - a.id);
         break;
       case 'popular':
-        result = [...result].sort((a, b) => b.students - a.students);
+        courses = [...courses].sort((a, b) => b.students - a.students);
         break;
       case 'top-rated':
-        result = [...result].sort((a, b) => b.rating - a.rating);
+        courses = [...courses].sort((a, b) => b.rating - a.rating);
         break;
     }
   }
-  return result;
+  return courses;
 });
 </script>
 
