@@ -53,7 +53,7 @@
                 <div class="w-1/2">
                   <span class="font-medium block mb-2">نوع الدورة</span>
                   <Select v-model="courseTypeFilter" :options="courseTypeOptions" optionLabel="name" optionValue="value"
-                    placeholder="اختر نوع الدورة" class="w-full">
+                    placeholder="اختر نوع الدورة" class="w-full" :loading="courseTypeStore.isLoading">
                     <template #value="slotProps">
                       <div class="flex items-center gap-2" v-if="slotProps.value">
                         <span>{{ courseTypeOptions.find(opt => opt.value === slotProps.value)?.icon }}</span>
