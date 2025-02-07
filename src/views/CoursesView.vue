@@ -175,7 +175,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { storeToRefs } from 'pinia';
 import { Button, Dialog, Popover, Select, Slider } from "primevue";
 import { InputText, InputGroup, InputGroupAddon } from "primevue";
@@ -316,6 +316,24 @@ const applyFiltersAndClose = () => {
   applyFiltersAndSort();
   filterDialogVisible.value = false;
 };
+
+// Add scroll handling logic
+const handleScroll = () => {
+  const bottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 100;
+  
+  if (bottom) {
+    alert('You have reached the bottom of the page!');
+  }
+};
+
+onMounted(() => {
+  // ...existing code...
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 </script>
 
 <style scoped>
