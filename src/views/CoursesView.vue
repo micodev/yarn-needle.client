@@ -320,7 +320,7 @@ const applyFiltersAndClose = () => {
 // Add scroll handling logic
 const handleScroll = () => {
   const bottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 100;
-  
+
   if (bottom) {
     alert('You have reached the bottom of the page!');
   }
