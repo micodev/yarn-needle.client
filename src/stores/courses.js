@@ -6,7 +6,8 @@ export const useCoursesStore = defineStore('courses', {
 		isLoading: false,
 		error: null,
 		currentPage: 1,
-		hasMore: true
+		hasMore: true,
+		limit: 12
 	}),
 	getters: {
 		getCourses: (state) => state.courses,
@@ -22,7 +23,7 @@ export const useCoursesStore = defineStore('courses', {
 				const response = await this.$axios.get('/api/course', {
 					params: {
 						page: page,
-						limit: 12 // adjust limit as needed
+						limit: this.limit
 					}
 				});
 
@@ -32,7 +33,7 @@ export const useCoursesStore = defineStore('courses', {
 					this.courses = [...this.courses, ...response.data];
 				}
 
-				this.hasMore = response.data.length === 12; // if less than limit, no more pages
+				this.hasMore = response.data.length === this.limit;
 				this.currentPage = page;
 			} catch (error) {
 				this.error = error.message || 'Failed to fetch courses';
