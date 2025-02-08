@@ -13,7 +13,7 @@ export const pagination = ref({
 export async function fetchComments(courseId) {
   loading.value = true;
   try {
-    const response = await axios.get(`/comments/${courseId}`, {
+    const response = await axios.get(`api/comments/${courseId}`, {
       params: {
         page: pagination.value.currentPage,
         limit: pagination.value.limit
