@@ -7,7 +7,7 @@ export const useCommentsStore = defineStore('comments', {
     loading: false,
     pagination: {
       currentPage: 1,
-      limit: 10,
+      limit: 2,
       hasMore: true
     }
   }),
