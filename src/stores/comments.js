@@ -37,20 +37,32 @@ export const useCommentsStore = defineStore('comments', {
       }
     },
 
-    addComment() {
+    async addComment(courseId) {
       if (this.newComment.rating && this.newComment.text) {
         this.loading = true;
-        setTimeout(() => {
-          this.comments.push({
-            id: this.comments.length + 1,
-            name: "مستخدم جديد",
-            avatar: "https://placehold.co/40x40",
-            ...this.newComment
+        try {
+          const response = await this.$axios.post(`api/course/comment/${courseId}`, {
+            text: this.newComment.text,
+            rate: this.newComment.rating
           });
-          this.newComment.rating = 0;
-          this.newComment.text = "";
+          
+          // If successful, add the new comment to the list
+          if (response.data) {
+            this.comments.unshift({
+              id: response.data,
+              name: "مستخدم جديد",
+              avatar: "https://placehold.co/40x40",
+              ...this.newComment
+            });
+            // Reset the form
+            this.newComment.rating = 0;
+            this.newComment.text = "";
+          }
+        } catch (error) {
+          console.error('Error adding comment:', error);
+        } finally {
           this.loading = false;
-        }, 1000);
+        }
       }
     },
 
