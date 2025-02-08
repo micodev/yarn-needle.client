@@ -146,7 +146,12 @@
             </div>
             <div class="flex flex-row gap-1">
               <Button label="شراء" class="h-8 flex-1" />
-              <Button label="تفاصيل" class="h-8 flex-1" severity="secondary" />
+              <Button 
+                label="تفاصيل" 
+                class="h-8 flex-1" 
+                severity="secondary"
+                @click="navigateToDetails(course.id)"
+              />
             </div>
           </div>
         </div>
@@ -179,6 +184,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
+import { useRouter } from 'vue-router'; // Add this import
 import { storeToRefs } from 'pinia';
 import { Button, Dialog, Popover, Select, Slider, ProgressSpinner } from "primevue";
 import { InputText, InputGroup, InputGroupAddon } from "primevue";
@@ -333,6 +339,13 @@ const handleScroll = () => {
       coursesStore.fetchCourses(coursesStore.currentPage + 1);
     }
   }
+};
+
+const router = useRouter(); // Add this
+
+// Add this function
+const navigateToDetails = (courseId) => {
+  router.push({ name: 'course', params: { id: courseId }});
 };
 
 onMounted(() => {
