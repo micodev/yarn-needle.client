@@ -40,7 +40,7 @@
 
         <p v-if="!course.purchased" class="text-xl mb-2 text-gray-900 dark:text-gray-100">امتلك الدورة بـ</p>
         <p v-else class="text-xl mb-2 text-transparent">.</p>
-        <Button :label="course.purchased ? 'ابدأ الآن' : course.price"
+        <Button :label="course.purchased ? 'ابدأ الآن' : course.originalPrice"
           :icon="course.purchased ? 'pi pi-arrow-left' : ''" />
       </div>
     </div>
