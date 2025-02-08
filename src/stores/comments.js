@@ -1,5 +1,4 @@
 import { ref, computed } from 'vue';
-import axios from 'axios';
 
 export const comments = ref([]);
 export const newComment = ref({ rating: 0, text: "" });
@@ -13,7 +12,7 @@ export const pagination = ref({
 export async function fetchComments(courseId) {
   loading.value = true;
   try {
-    const response = await axios.get(`api/comments/${courseId}`, {
+    const response = this.$axios.get(`api/comments/${courseId}`, {
       params: {
         page: pagination.value.currentPage,
         limit: pagination.value.limit
