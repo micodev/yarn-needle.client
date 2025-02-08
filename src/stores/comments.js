@@ -1,35 +1,35 @@
 import { ref, computed } from 'vue';
+import axios from 'axios';
 
-// Initialize comments with static data moved from course.js
-export const comments = ref([
-  {
-    id: 1,
-    name: "محمد أحمد",
-    avatar: "https://placehold.co/40x40",
-    rating: 4,
-    text: "دورة ممتازة ومفيدة جداً."
-  },
-  {
-    id: 2,
-    name: "سارة علي",
-    avatar: "https://placehold.co/40x40",
-    rating: 5,
-    text: "استفدت كثيراً من هذه الدورة."
-  },
-  {
-    id: 3,
-    name: "سارة علي",
-    avatar: "https://placehold.co/40x40",
-    rating: 5,
-    text: "استفدت كثيراً من هذه الدورة."
-  }
-])
-
+export const comments = ref([]);
 export const newComment = ref({ rating: 0, text: "" });
-export const displayedCount = ref(2);
-export const displayedComments = computed(() => comments.value.slice(0, displayedCount.value));
-export const showMoreButton = computed(() => displayedCount.value < comments.value.length);
 export const loading = ref(false);
+export const pagination = ref({
+  currentPage: 1,
+  totalPages: 1,
+  limit: 10
+});
+
+export async function fetchComments(courseId) {
+  loading.value = true;
+  try {
+    const response = await axios.get(`/comments/${courseId}`, {
+      params: {
+        page: pagination.value.currentPage,
+        limit: pagination.value.limit
+      }
+    });
+    comments.value = response.data.items || [];
+    pagination.value.totalPages = Math.ceil(response.data.total / pagination.value.limit);
+  } catch (error) {
+    console.error('Error fetching comments:', error);
+  } finally {
+    loading.value = false;
+  }
+}
+
+export const displayedComments = computed(() => comments.value);
+export const showMoreButton = computed(() => pagination.value.currentPage < pagination.value.totalPages);
 
 export function addComment() {
   if (newComment.value.rating && newComment.value.text) {
@@ -43,22 +43,19 @@ export function addComment() {
       });
       newComment.value.rating = 0;
       newComment.value.text = "";
-      if (displayedCount.value < comments.value.length) {
-        displayedCount.value = comments.value.length;
-      }
+    
       loading.value = false;
     }, 1000); // mimic API delay
   }
 }
 
 export function showMoreComments() {
-  displayedCount.value += 2;
-}
-
-export function updateDisplayedComments() {
-  if (displayedCount.value > comments.value.length) {
-    displayedCount.value = comments.value.length;
+  if (pagination.value.currentPage < pagination.value.totalPages) {
+    pagination.value.currentPage++;
+    fetchComments();
   }
 }
 
-// ...existing code if any...
+export function updateDisplayedComments() {
+  // This function can be removed if not needed anymore
+}
