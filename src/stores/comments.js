@@ -50,7 +50,7 @@ export const useCommentsStore = defineStore('comments', {
             // Reset the form
             this.newComment.rating = 0;
             this.newComment.text = "";
-            
+
             // Reset pagination to first page and fetch fresh comments
             this.pagination.currentPage = 1;
             await this.fetchComments(courseId);
