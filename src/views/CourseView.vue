@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="flex items-center mb-8">
-          <img :src="course.instructorImage" alt="Instructor" class="rounded-full ml-2">
+          <img :src="course.instructorImage" alt="Instructor" class="rounded-full w-12 h-12 ml-2">
           <p class="text-lg text-gray-900 dark:text-gray-100">تقديم {{ course.instructor }}</p>
         </div>
         <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">سجل بهذه الدورة واحصل على:</h2>
