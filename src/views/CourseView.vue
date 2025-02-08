@@ -151,7 +151,7 @@ onUnmounted(() => {
 });
 
 const addComment = () => commentsStore.addComment(route.params.id);
-const showMoreComments = () => commentsStore.showMoreComments();
+const showMoreComments = () => commentsStore.showMoreComments(route.params.id);
 </script>
 
 <style scoped>
