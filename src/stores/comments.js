@@ -41,7 +41,7 @@ export const useCommentsStore = defineStore('comments', {
       if (this.newComment.rating && this.newComment.text) {
         this.loading = true;
         try {
-          const response = await this.$axios.post(`api/course/comment/${courseId}`, {
+          const response = await this.$axios.post(`api/course/comments/${courseId}`, {
             text: this.newComment.text,
             rate: this.newComment.rating
           });
