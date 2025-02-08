@@ -27,8 +27,7 @@ export const useCommentsStore = defineStore('comments', {
             limit: this.pagination.limit
           }
         });
-        this.comments = response.data.items || [];
-        this.pagination.totalPages = Math.ceil(response.data.total / this.pagination.limit);
+        this.comments = response.data || [];
       } catch (error) {
         console.error('Error fetching comments:', error);
       } finally {
