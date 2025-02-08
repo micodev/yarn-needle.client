@@ -26,7 +26,7 @@
           </div>
           <div class="flex items-center">
             <i class="pi pi-clock ml-2"></i>
-            <p>{{ course.duration }} ساعات</p>
+            <p>{{ course.duration/60 }} ساعات</p>
           </div>
         </div>
         <div class="flex items-center mb-8">
