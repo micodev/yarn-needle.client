@@ -112,7 +112,7 @@
 </template>
 
 <script setup>
-import { computed, watch, onMounted, onUnmounted } from 'vue';
+import { computed, watch, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { Button, Fieldset, Rating, Textarea, ProgressSpinner } from 'primevue';
 import { useCourseStore } from '@/stores/course';
