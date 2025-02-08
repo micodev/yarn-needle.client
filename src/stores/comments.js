@@ -45,18 +45,15 @@ export const useCommentsStore = defineStore('comments', {
             text: this.newComment.text,
             rate: this.newComment.rating
           });
-          
-          // If successful, add the new comment to the list
+
           if (response.data) {
-            this.comments.unshift({
-              id: response.data,
-              name: "مستخدم جديد",
-              avatar: "https://placehold.co/40x40",
-              ...this.newComment
-            });
             // Reset the form
             this.newComment.rating = 0;
             this.newComment.text = "";
+            
+            // Reset pagination to first page and fetch fresh comments
+            this.pagination.currentPage = 1;
+            await this.fetchComments(courseId);
           }
         } catch (error) {
           console.error('Error adding comment:', error);
