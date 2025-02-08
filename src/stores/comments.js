@@ -43,7 +43,7 @@ export function addComment() {
       });
       newComment.value.rating = 0;
       newComment.value.text = "";
-    
+
       loading.value = false;
     }, 1000); // mimic API delay
   }
