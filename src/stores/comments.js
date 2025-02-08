@@ -18,7 +18,7 @@ export const useCommentsStore = defineStore('comments', {
   },
 
   actions: {
-    async fetchComments(courseId) {
+    async fetchComments(courseId, append = false) {
       this.loading = true;
       try {
         const response = await this.$axios.get(`api/course/comments/${courseId}`, {
@@ -27,8 +27,12 @@ export const useCommentsStore = defineStore('comments', {
             limit: this.pagination.limit
           }
         });
-        this.comments = response.data || [];
-        // Update hasMore based on response length
+        
+        if (append) {
+          this.comments = [...this.comments, ...(response.data || [])];
+        } else {
+          this.comments = response.data || [];
+        }
         this.pagination.hasMore = response.data.length >= this.pagination.limit;
       } catch (error) {
         console.error('Error fetching comments:', error);
@@ -63,10 +67,10 @@ export const useCommentsStore = defineStore('comments', {
       }
     },
 
-    showMoreComments(courseId) {
-      if (this.pagination.hasMore) {
+    async showMoreComments(courseId) {
+      if (this.pagination.hasMore && !this.loading) {
         this.pagination.currentPage++;
-        this.fetchComments( courseId );
+        await this.fetchComments(courseId, true);
       }
     }
   }
