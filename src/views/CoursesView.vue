@@ -146,9 +146,9 @@
             </div>
             <div class="flex flex-row gap-1">
               <Button label="شراء" class="h-8 flex-1" />
-              <Button 
-                label="تفاصيل" 
-                class="h-8 flex-1" 
+              <Button
+                label="تفاصيل"
+                class="h-8 flex-1"
                 severity="secondary"
                 @click="navigateToDetails(course.id)"
               />
