@@ -63,10 +63,10 @@ export const useCommentsStore = defineStore('comments', {
       }
     },
 
-    showMoreComments() {
+    showMoreComments(courseId) {
       if (this.pagination.hasMore) {
         this.pagination.currentPage++;
-        this.fetchComments();
+        this.fetchComments( courseId );
       }
     }
   }
