@@ -21,7 +21,7 @@ export const useCommentsStore = defineStore('comments', {
     async fetchComments(courseId) {
       this.loading = true;
       try {
-        const response = this.$axios.get(`api/comments/${courseId}`, {
+        const response = this.$axios.get(`api/course/comments/${courseId}`, {
           params: {
             page: this.pagination.currentPage,
             limit: this.pagination.limit
