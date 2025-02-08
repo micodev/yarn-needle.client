@@ -121,19 +121,17 @@ import { computed, watch, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { Button, Fieldset, Rating, Textarea, ProgressSpinner } from 'primevue';
 import { useCourseStore } from '@/stores/course';
-import {
-  newComment,
-  displayedComments,
-  showMoreButton,
-  addComment,
-  showMoreComments,
-  loading,
-  fetchComments
-} from '@/stores/comments';
+import { useCommentsStore } from '@/stores/comments';
 
 const route = useRoute();
 const courseStore = useCourseStore();
+const commentsStore = useCommentsStore();
+
 const course = computed(() => courseStore.course);
+const displayedComments = computed(() => commentsStore.displayedComments);
+const showMoreButton = computed(() => commentsStore.showMoreButton);
+const newComment = computed(() => commentsStore.newComment);
+const loading = computed(() => commentsStore.loading);
 
 // Watch for route changes and fetch course data
 watch(
@@ -141,7 +139,7 @@ watch(
   (newId) => {
     if (newId) {
       courseStore.fetchCourse(newId);
-      fetchComments(newId); // Load comments when course changes
+      commentsStore.fetchComments(newId);
     }
   },
   { immediate: true }
@@ -152,7 +150,8 @@ onUnmounted(() => {
   courseStore.clearCourse();
 });
 
-
+const addComment = () => commentsStore.addComment();
+const showMoreComments = () => commentsStore.showMoreComments();
 </script>
 
 <style scoped>
