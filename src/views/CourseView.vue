@@ -18,7 +18,7 @@
         <div class="text-gray-700 dark:text-gray-300 mb-4 flex flex-row space-x-4 gap-x-4">
           <div class="flex items-center">
             <i class="pi pi-book ml-2"></i>
-            <p>{{ course.lessons }} درس</p>
+            <p>{{ course.lessonCount }} درس</p>
           </div>
           <div class="flex items-center">
             <i class="pi pi-user ml-2"></i>
