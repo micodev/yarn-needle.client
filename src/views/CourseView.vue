@@ -112,19 +112,36 @@
 </template>
 
 <script setup>
-import { computed, watch } from 'vue';
+import { computed, watch, onMounted, onUnmounted } from 'vue';
+import { useRoute } from 'vue-router';
 import { Button, Fieldset, Rating, Textarea, ProgressSpinner } from 'primevue';
 import { useCourseStore } from '@/stores/course';
 import { newComment, displayedComments, showMoreButton, addComment, showMoreComments, updateDisplayedComments, loading } from '@/stores/comments';
 
+const route = useRoute();
 const courseStore = useCourseStore();
 const course = computed(() => courseStore.course);
 
-// Watch for changes in comments and update the displayed count accordingly.
-watch(() => course.value.comments, () => {
-  updateDisplayedComments();
+// Watch for route changes and fetch course data
+watch(
+  () => route.params.id,
+  (newId) => {
+    if (newId) {
+      courseStore.fetchCourse(newId);
+    }
+  },
+  { immediate: true }
+);
+
+// Clear course data when component is unmounted
+onUnmounted(() => {
+  courseStore.clearCourse();
 });
 
+// Watch for changes in comments and update the displayed count accordingly
+watch(() => course.value?.comments, () => {
+  updateDisplayedComments();
+}, { deep: true });
 </script>
 
 <style scoped>
