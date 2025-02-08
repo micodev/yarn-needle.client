@@ -150,7 +150,7 @@ onUnmounted(() => {
   courseStore.clearCourse();
 });
 
-const addComment = () => commentsStore.addComment();
+const addComment = () => commentsStore.addComment(route.params.id);
 const showMoreComments = () => commentsStore.showMoreComments();
 </script>
 
