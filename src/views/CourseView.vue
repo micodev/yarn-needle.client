@@ -121,14 +121,14 @@ import { computed, watch, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { Button, Fieldset, Rating, Textarea, ProgressSpinner } from 'primevue';
 import { useCourseStore } from '@/stores/course';
-import { 
-  newComment, 
-  displayedComments, 
-  showMoreButton, 
-  addComment, 
-  showMoreComments, 
+import {
+  newComment,
+  displayedComments,
+  showMoreButton,
+  addComment,
+  showMoreComments,
   loading,
-  fetchComments 
+  fetchComments
 } from '@/stores/comments';
 
 const route = useRoute();
@@ -152,10 +152,7 @@ onUnmounted(() => {
   courseStore.clearCourse();
 });
 
-// Watch for changes in comments and update the displayed count accordingly
-watch(() => course.value?.comments, () => {
-  updateDisplayedComments();
-}, { deep: true });
+
 </script>
 
 <style scoped>
