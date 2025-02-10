@@ -1,4 +1,5 @@
 <template>
+  <Toast />
   <div v-if="course">
     <div class="flex flex-col md:flex-row bg-white dark:bg-gray-900 text-black dark:text-white p-4 md:p-8 h-full">
       <div class="w-full md:flex-1 flex justify-center items-center md:ml-2 h-auto">
@@ -119,7 +120,8 @@
 <script setup>
 import { computed, watch, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { Button, Fieldset, Rating, Textarea, ProgressSpinner } from 'primevue';
+import { Button, Fieldset, Rating, Textarea, ProgressSpinner, Toast } from 'primevue';
+import { useToast } from 'primevue/usetoast';
 import { useCourseStore } from '@/stores/course';
 import { useCommentsStore } from '@/stores/comments';
 
@@ -132,6 +134,8 @@ const displayedComments = computed(() => commentsStore.displayedComments);
 const showMoreButton = computed(() => commentsStore.showMoreButton);
 const newComment = computed(() => commentsStore.newComment);
 const loading = computed(() => commentsStore.loading);
+
+const toast = useToast();
 
 // Watch for route changes and fetch course data
 watch(
@@ -152,6 +156,22 @@ onUnmounted(() => {
 
 const addComment = () => commentsStore.addComment(route.params.id);
 const showMoreComments = () => commentsStore.showMoreComments(route.params.id);
+
+// Watch for errors in comments store and show toast notification
+watch(
+  () => commentsStore.error,
+  (error) => {
+    if (error) {
+      toast.add({
+        severity: 'error',
+        summary: 'خطأ',
+        detail: error,
+        life: 3000
+      });
+    }
+  }
+);
+
 </script>
 
 <style scoped>
