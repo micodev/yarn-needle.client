@@ -37,3 +37,24 @@ export const useOrdersStore = defineStore('orders', () => {
     sortedOrders
   }
 })
+
+/*
+  const generateOrders = (count) => {
+    const orderTypes = ['دورة', 'عضوية']
+    const titles = ['تطوير الويب', 'تصميم الجرافيك', 'التسويق الرقمي', 'الذكاء الاصطناعي', 'علوم البيانات']
+    const states = ['مكتمل', 'قيد الانتظار', 'ملغى']
+    const paymentStates = ['مصرح', 'قيد الانتظار', 'مرفوض']
+
+    return Array.from({ length: count }, (_, index) => ({
+      id: (1020 + index).toString(),
+      key: `order-${crypto.randomUUID()}`,
+      type: orderTypes[Math.floor(Math.random() * orderTypes.length)],
+      title: titles[Math.floor(Math.random() * titles.length)],
+      date: new Date(2025, 0, 25 - index),
+      orderState: states[Math.floor(Math.random() * states.length)],
+      paymentState: paymentStates[Math.floor(Math.random() * paymentStates.length)],
+      price: Math.floor(Math.random() * 500 + 100)
+    }))
+  }
+
+*/
