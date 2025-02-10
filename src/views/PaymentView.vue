@@ -265,9 +265,9 @@ export default {
   methods: {
     async submitPayment() {
       // Update validation
-      if (!this.payment.cartId || !this.payment.transactionType || 
-          !this.payment.transactionClass || !this.payment.cartDescription || 
-          !this.payment.cartCurrency || !this.payment.cartAmount || 
+      if (!this.payment.cartId || !this.payment.transactionType ||
+          !this.payment.transactionClass || !this.payment.cartDescription ||
+          !this.payment.cartCurrency || !this.payment.cartAmount ||
           !this.payment.callback || !this.payment.return) {
         this.error = 'Please fill in all required fields';
         return;
