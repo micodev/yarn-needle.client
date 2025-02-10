@@ -136,7 +136,7 @@ const showMoreButton = computed(() => commentsStore.showMoreButton);
 const newComment = computed(() => commentsStore.newComment);
 const loading = computed(() => commentsStore.loading);
 const hasAlreadyCommented = computed(() => commentsStore.error === "already_commented");
-const subscriptionIncludedNames = computed(() => commentsStore.course.subscriptionIncludedNames.join(', '));
+const subscriptionIncludedNames = computed(() => commentsStore.course.subscriptionIncludedNames);
 const toast = useToast();
 
 // Watch for route changes and fetch course data
