@@ -14,7 +14,7 @@
             <span>
               <span v-if="course.subscriptionIncludedNames.length > 0 && !course.isSubscribtionIncluded"
                 class=" bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-300 py-1 px-2 rounded">
-                {{ course.subscriptionIncludedNames.join("، ") }}
+                {{"العضويات المشمولة : " +  course.subscriptionIncludedNames.join("، ") }}
               </span>
             </span>
           </div>
