@@ -37,7 +37,7 @@
         <label for="transactionType" class="block text-sm font-medium text-gray-700">Transaction Type</label>
         <input
           id="transactionType"
-          v-model="payment.transactionType"
+          v-model="payment.tranType"
           type="text"
           required
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -48,7 +48,7 @@
         <label for="transactionClass" class="block text-sm font-medium text-gray-700">Transaction Class</label>
         <input
           id="transactionClass"
-          v-model="payment.transactionClass"
+          v-model="payment.tranClass"
           type="text"
           required
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -241,8 +241,8 @@ export default {
       isFramed: false,
       payment: {
         profileId: 0,
-        transactionType: '',
-        transactionClass: '',
+        tranType: '',
+        tranClass: '',
         cartId: '',
         cartDescription: '',
         cartCurrency: 'IQD',
