@@ -35,8 +35,9 @@
               <div class="flex items-start space-x-2">
                 <span class="ml-2">🛒</span>
                 <div>
-                  <span class="font-medium">{{ order.type }}:</span>
-                  <span class="ml-1">{{ order.title }}</span>
+                  <span class="font-medium">{{ order.orderType }}:</span>
+                  <span v-if="order.course" class="ml-1">{{ order.course.title }}</span>
+                  <span v-if="order.membership" class="ml-1">{{ order.membership.name }}</span>
                 </div>
               </div>
 
