@@ -4,6 +4,7 @@ export const useCommentsStore = defineStore('comments', {
   state: () => ({
     comments: [],
     newComment: { rating: 0, text: "" },
+    error: null,
     loading: false,
     pagination: {
       currentPage: 1,
@@ -60,6 +61,10 @@ export const useCommentsStore = defineStore('comments', {
             await this.fetchComments(courseId);
           }
         } catch (error) {
+          if (error.response && error.response.status === 400) {
+            this.error = error.response.data;
+            console.error('Invalid comment:', error.response.data);
+          }
           console.error('Error adding comment:', error);
         } finally {
           this.loading = false;
