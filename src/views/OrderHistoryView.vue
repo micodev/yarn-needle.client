@@ -104,7 +104,7 @@ const formatDate = (date) => {
     month: 'long',
     day: 'numeric',
     calendar: 'gregory'
-  }).format(date)
+  }).format(new Date(date))
 }
 
 const formatPrice = (price) => {
