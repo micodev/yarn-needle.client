@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
 import axios from 'axios'
 
 export const useOrdersStore = defineStore('orders', {
@@ -13,7 +12,7 @@ export const useOrdersStore = defineStore('orders', {
     async fetchOrders() {
       this.isLoading = true
       this.error = null
-      
+
       try {
         const response = await axios.get('/api/order')
         this.orders = response.data
