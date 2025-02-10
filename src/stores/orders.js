@@ -8,11 +8,8 @@ export const useOrdersStore = defineStore('orders', () => {
   const fetchOrders = async () => {
     isLoading.value = true
     try {
-      const response = await fetch('/api/order')
-      if (!response.ok) {
-        throw new Error('Failed to fetch orders')
-      }
-      orders.value = await response.json()
+      const response = await this.$axios.get('/api/order')
+      orders.value = response.data
     } catch (error) {
       console.error('Error fetching orders:', error)
       orders.value = []
