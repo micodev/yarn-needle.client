@@ -25,7 +25,7 @@
         <template #header>
           <div class="flex justify-between items-start mb-4">
             <span class="text-lg font-semibold">📌 طلب #{{ order.id }}</span>
-            <span class="text-primary font-bold">{{ formatPrice(order.price) }} ريال</span>
+            <span class="text-primary font-bold">{{ formatPrice(order.purchasePrice) }} ريال</span>
           </div>
         </template>
 
