@@ -135,7 +135,7 @@ export default {
         this.error = null
 
         // Get client IP
-        const ipResponse = await axios.get('https://api.ipify.org?format=json')
+        const ipResponse = await axios.get('https://api.myip.com/')
         this.payment.customer_details.ip = ipResponse.data.ip
 
         const response = await axios.post('/api/payment/initiate', this.payment)
