@@ -46,6 +46,29 @@
         />
       </div>
 
+      <!-- Add these fields before the customer details section -->
+      <div class="form-group">
+        <label for="return" class="block text-sm font-medium text-gray-700">Return URL</label>
+        <input
+          id="return"
+          v-model="payment.return"
+          type="url"
+          required
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="callback" class="block text-sm font-medium text-gray-700">Callback URL</label>
+        <input
+          id="callback"
+          v-model="payment.callback"
+          type="url"
+          required
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        />
+      </div>
+
       <div class="space-y-4">
         <h3 class="text-lg font-medium text-gray-900">Customer Details</h3>
 
@@ -187,6 +210,8 @@ export default {
         cart_amount: 0,
         cart_currency: 'IQD',
         cart_description: '',
+        return: '', // Add return URL field
+        callback: '', // Add callback URL field
         customer_details: {
           name: '',
           email: '',
@@ -202,6 +227,14 @@ export default {
   },
   methods: {
     async submitPayment() {
+      // Validate required fields
+      if (!this.payment.return || !this.payment.callback || 
+          !this.payment.cart_currency || !this.payment.cart_description || 
+          !this.payment.customer_details) {
+        this.error = 'Please fill in all required fields';
+        return;
+      }
+      
       try {
         this.loading = true
         this.error = null
