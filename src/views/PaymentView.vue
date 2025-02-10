@@ -105,7 +105,7 @@
     <!-- Customer Details Form Section -->
     <div class="space-y-4">
     <h3 class="text-lg font-medium text-gray-900">Customer Details</h3>
-    
+
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
       <div class="form-group">
         <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
