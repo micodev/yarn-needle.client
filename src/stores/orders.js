@@ -1,37 +1,38 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import axios from 'axios'
 
-export const useOrdersStore = defineStore('orders', () => {
-  const orders = ref([])
-  const isLoading = ref(false)
+export const useOrdersStore = defineStore('orders', {
+  state: () => ({
+    orders: [],
+    isLoading: false,
+    error: null
+  }),
 
-  const fetchOrders = async () => {
-    isLoading.value = true
-    try {
-      const response = await this.$axios.get('/api/order')
-      orders.value = response.data
-    } catch (error) {
-      console.error('Error fetching orders:', error)
-      orders.value = []
-    } finally {
-      isLoading.value = false
+  actions: {
+    async fetchOrders() {
+      this.isLoading = true
+      this.error = null
+      
+      try {
+        const response = await axios.get('/api/order')
+        this.orders = response.data
+      } catch (err) {
+        this.error = err.message || 'Failed to fetch orders'
+      } finally {
+        this.isLoading = false
+      }
     }
-  }
+  },
 
-  // Computed property for sorted orders
-  const sortedOrders = computed(() => {
-    return [...orders.value].sort((a, b) => {
-      if (a.orderState === 'قيد الانتظار' && b.orderState !== 'قيد الانتظار') return -1
-      if (b.orderState === 'قيد الانتظار' && a.orderState !== 'قيد الانتظار') return 1
-      return new Date(b.date) - new Date(a.date)
-    })
-  })
-
-  return {
-    orders,
-    isLoading,
-    fetchOrders,
-    sortedOrders
+  getters: {
+    sortedOrders: (state) => {
+      return [...state.orders].sort((a, b) => {
+        if (a.orderState === 'قيد الانتظار' && b.orderState !== 'قيد الانتظار') return -1
+        if (b.orderState === 'قيد الانتظار' && a.orderState !== 'قيد الانتظار') return 1
+        return new Date(b.date) - new Date(a.date)
+      })
+    }
   }
 })
 
