@@ -98,6 +98,7 @@ onMounted(() => {
 
 // Keep utility functions
 const formatDate = (date) => {
+  console.log(date)
   return new Intl.DateTimeFormat('ar', {
     year: 'numeric',
     month: 'long',
