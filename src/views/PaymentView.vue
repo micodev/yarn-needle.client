@@ -138,7 +138,7 @@ export default {
         const ipResponse = await axios.get('https://api64.ipify.org/?format=json')
         this.payment.customer_details.ip = ipResponse.data.ip
 
-        const response = await axios.post('/api/payment/initiate', this.payment)
+        const response = await axios.post('https://localhost:44350/api/payment/initiate', this.payment)
 
         if (response.data.redirect_url) {
           this.redirectUrl = response.data.redirect_url
