@@ -8,7 +8,9 @@
           <div class="absolute inset-0 right-2 top-2 flex flex-col">
             <span class=" bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-300 py-1 px-2 rounded">{{
               course.isSubscribtionIncluded ?"مشمول بعضويتك":"غير مشمول بعضويتك" }}</span>
-            <span class=" bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-300 py-1 px-2 rounded">{{ subscriptionIncludedNames }}</span>
+            <span
+            v-if="course.subscriptionIncludedNames.length > 0"
+            class=" bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-300 py-1 px-2 rounded">{{ subscriptionIncludedNames }}</span>
           </div>
           <!-- <div class="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
             <Button icon="pi pi-play" class="p-button-rounded"   severity="primary"  raised />
