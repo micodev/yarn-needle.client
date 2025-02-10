@@ -102,6 +102,74 @@
       </div>
     </div>
   </div>
+    <!-- Customer Details Form Section -->
+    <div class="space-y-4">
+    <h3 class="text-lg font-medium text-gray-900">Customer Details</h3>
+    
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div class="form-group">
+        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+        <input
+          id="name"
+          v-model="payment.customer_details.name"
+          type="text"
+          required
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input
+          id="email"
+          v-model="payment.customer_details.email"
+          type="email"
+          required
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+        <input
+          id="phone"
+          v-model="payment.customer_details.phone"
+          type="tel"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="street" class="block text-sm font-medium text-gray-700">Street Address</label>
+        <input
+          id="street"
+          v-model="payment.customer_details.street1"
+          type="text"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+        <input
+          id="city"
+          v-model="payment.customer_details.city"
+          type="text"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="state" class="block text-sm font-medium text-gray-700">State</label>
+        <input
+          id="state"
+          v-model="payment.customer_details.state"
+          type="text"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -122,8 +190,12 @@ export default {
         customer_details: {
           name: '',
           email: '',
-          ip: '',
-          country: 'IQ'
+          country: 'IQ',
+          phone: '',
+          street1: '',
+          city: '',
+          state: '',
+          ip: '' // This will be set automatically in submitPayment method
         }
       }
     }
