@@ -80,7 +80,7 @@
             <Button v-if="showMoreButton" label="عرض المزيد" severity="primary" size="small" class="w-1/4"
               @click="showMoreComments" />
           </div>
-          <div class="mt-4 flex flex-col space-y-4 justify-center">
+          <div v-if="!hasAlreadyCommented" class="mt-4 flex flex-col space-y-4 justify-center">
             <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">أضف تقييمك وتعليقك</h3>
             <Rating v-model="newComment.rating" :stars="5" cancel="false" />
             <Textarea v-model="newComment.text" class="w-full mt-2 p-2 border rounded" placeholder="اكتب تعليقك هنا..." />
@@ -134,6 +134,7 @@ const displayedComments = computed(() => commentsStore.displayedComments);
 const showMoreButton = computed(() => commentsStore.showMoreButton);
 const newComment = computed(() => commentsStore.newComment);
 const loading = computed(() => commentsStore.loading);
+const hasAlreadyCommented = computed(() => commentsStore.error === "already_commented");
 
 const toast = useToast();
 
