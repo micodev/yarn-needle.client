@@ -27,7 +27,7 @@ export const useCommentsStore = defineStore('comments', {
             limit: this.pagination.limit
           }
         });
-        
+
         if (append) {
           this.comments = [...this.comments, ...(response.data || [])];
         } else {
