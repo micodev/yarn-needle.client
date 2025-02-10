@@ -9,6 +9,7 @@ import CoursesView from '../views/CoursesView.vue'
 import OrderHistoryView from '../views/OrderHistoryView.vue'
 import MyCourseView from '../views/MyCourseView.vue'
 import { useAuthStore } from '@/stores/auth';
+import PaymentView from '@/views/PaymentView.vue'
 
 const base = '/yarn-needle.client';
 
@@ -65,6 +66,11 @@ const router = createRouter({
             requiresAuth: true,
             title: 'My Courses'
           }
+        },
+        {
+          path: '/payment',
+          name: 'Payment',
+          component: PaymentView
         }
       ],
     },
