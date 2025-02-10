@@ -14,7 +14,7 @@ export const useOrdersStore = defineStore('orders', {
       this.error = null
 
       try {
-        const response = await axios.get('/api/order')
+        const response = await this.$axios.get('/api/order')
         this.orders = response.data
       } catch (err) {
         this.error = err.message || 'Failed to fetch orders'
