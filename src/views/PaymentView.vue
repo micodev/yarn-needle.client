@@ -11,12 +11,45 @@
 
     <form @submit.prevent="submitPayment" v-if="!loading" class="space-y-6">
       <div class="form-group">
+        <label for="cartId" class="block text-sm font-medium text-gray-700">Cart ID</label>
+        <input
+          id="cartId"
+          v-model="payment.cartId"
+          type="text"
+          required
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        />
+      </div>
+
+      <div class="form-group">
         <label for="amount" class="block text-sm font-medium text-gray-700">Amount</label>
         <input
           id="amount"
-          v-model="payment.cart_amount"
+          v-model="payment.cartAmount"
           type="number"
           step="0.01"
+          required
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="transactionType" class="block text-sm font-medium text-gray-700">Transaction Type</label>
+        <input
+          id="transactionType"
+          v-model="payment.transactionType"
+          type="text"
+          required
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="transactionClass" class="block text-sm font-medium text-gray-700">Transaction Class</label>
+        <input
+          id="transactionClass"
+          v-model="payment.transactionClass"
+          type="text"
           required
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
         />
@@ -26,7 +59,7 @@
         <label for="currency" class="block text-sm font-medium text-gray-700">Currency</label>
         <select
           id="currency"
-          v-model="payment.cart_currency"
+          v-model="payment.cartCurrency"
           required
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
         >
@@ -39,7 +72,7 @@
         <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
         <input
           id="description"
-          v-model="payment.cart_description"
+          v-model="payment.cartDescription"
           type="text"
           required
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -76,7 +109,7 @@
           <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
           <input
             id="name"
-            v-model="payment.customer_details.name"
+            v-model="payment.customerDetails.name"
             type="text"
             required
             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -87,7 +120,7 @@
           <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
           <input
             id="email"
-            v-model="payment.customer_details.email"
+            v-model="payment.customerDetails.email"
             type="email"
             required
             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -134,7 +167,7 @@
         <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
         <input
           id="name"
-          v-model="payment.customer_details.name"
+          v-model="payment.customerDetails.name"
           type="text"
           required
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -145,7 +178,7 @@
         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
         <input
           id="email"
-          v-model="payment.customer_details.email"
+          v-model="payment.customerDetails.email"
           type="email"
           required
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -156,7 +189,7 @@
         <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
         <input
           id="phone"
-          v-model="payment.customer_details.phone"
+          v-model="payment.customerDetails.phone"
           type="tel"
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
         />
@@ -166,7 +199,7 @@
         <label for="street" class="block text-sm font-medium text-gray-700">Street Address</label>
         <input
           id="street"
-          v-model="payment.customer_details.street1"
+          v-model="payment.customerDetails.street1"
           type="text"
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
         />
@@ -176,7 +209,7 @@
         <label for="city" class="block text-sm font-medium text-gray-700">City</label>
         <input
           id="city"
-          v-model="payment.customer_details.city"
+          v-model="payment.customerDetails.city"
           type="text"
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
         />
@@ -186,7 +219,7 @@
         <label for="state" class="block text-sm font-medium text-gray-700">State</label>
         <input
           id="state"
-          v-model="payment.customer_details.state"
+          v-model="payment.customerDetails.state"
           type="text"
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
         />
@@ -207,41 +240,46 @@ export default {
       redirectUrl: null,
       isFramed: false,
       payment: {
-        cart_amount: 0,
-        cart_currency: 'IQD',
-        cart_description: '',
-        return: '', // Add return URL field
-        callback: '', // Add callback URL field
-        customer_details: {
+        profileId: 0,
+        transactionType: '',
+        transactionClass: '',
+        cartId: '',
+        cartDescription: '',
+        cartCurrency: 'IQD',
+        cartAmount: 0,
+        callback: '',
+        return: '',
+        customerDetails: {
           name: '',
           email: '',
-          country: 'IQ',
           phone: '',
           street1: '',
           city: '',
           state: '',
-          ip: '' // This will be set automatically in submitPayment method
+          country: 'IQ',
+          ip: ''
         }
       }
     }
   },
   methods: {
     async submitPayment() {
-      // Validate required fields
-      if (!this.payment.return || !this.payment.callback || 
-          !this.payment.cart_currency || !this.payment.cart_description || 
-          !this.payment.customer_details) {
+      // Update validation
+      if (!this.payment.cartId || !this.payment.transactionType || 
+          !this.payment.transactionClass || !this.payment.cartDescription || 
+          !this.payment.cartCurrency || !this.payment.cartAmount || 
+          !this.payment.callback || !this.payment.return) {
         this.error = 'Please fill in all required fields';
         return;
       }
-      
+
       try {
         this.loading = true
         this.error = null
 
         // Get client IP
         const ipResponse = await axios.get('https://api64.ipify.org/?format=json')
-        this.payment.customer_details.ip = ipResponse.data.ip
+        this.payment.customerDetails.ip = ipResponse.data.ip
 
         const response = await axios.post('https://localhost:44350/api/payment/initiate', this.payment)
 
