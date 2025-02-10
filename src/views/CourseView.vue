@@ -136,7 +136,7 @@ const showMoreButton = computed(() => commentsStore.showMoreButton);
 const newComment = computed(() => commentsStore.newComment);
 const loading = computed(() => commentsStore.loading);
 const hasAlreadyCommented = computed(() => commentsStore.error === "already_commented");
-
+const subscriptionIncludedNames = computed(() => commentsStore.course.join(', '));
 const toast = useToast();
 
 // Watch for route changes and fetch course data
@@ -158,7 +158,6 @@ onUnmounted(() => {
 
 const addComment = () => commentsStore.addComment(route.params.id);
 const showMoreComments = () => commentsStore.showMoreComments(route.params.id);
-const subscriptionIncludedNames = computed(() => course.value.join(', '));
 // Watch for errors in comments store and show toast notification
 watch(
   () => commentsStore.error,
