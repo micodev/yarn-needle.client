@@ -6,15 +6,15 @@
         <div class="relative rounded overflow-hidden w-full">
           <img :src="course.image" alt="Course Thumbnail" class="w-full h-full object-cover rounded">
           <div class="absolute inset-0 right-2 top-2 flex flex-col">
-            <span >
+            <span>
 
-              <span class=" bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-300 py-1 px-2 rounded">    {{course.isSubscribtionIncluded ?"مشمول بعضويتك":"غير مشمول بعضويتك" }}   </span>
+              <span class=" bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-300 py-1 px-2 rounded">
+                {{ course.isSubscribtionIncluded ? "مشمول بعضويتك" : "غير مشمول بعضويتك" }} </span>
             </span>
             <span>
-            <span
-            v-if="course.subscriptionIncludedNames.length > 0"
-            class=" bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-300 py-1 px-2 rounded">
-            {{ course.subscriptionIncludedNames.join(",") }}</span></span>
+              <span v-if="course.subscriptionIncludedNames.length > 0"
+                class=" bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-300 py-1 px-2 rounded">
+                {{ course.subscriptionIncludedNames.join(",") }} </span> </span>
           </div>
           <!-- <div class="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
             <Button icon="pi pi-play" class="p-button-rounded"   severity="primary"  raised />
@@ -34,7 +34,7 @@
           </div>
           <div class="flex items-center">
             <i class="pi pi-clock ml-2"></i>
-            <p>{{ course.duration/60 }} ساعات</p>
+            <p>{{ course.duration / 60 }} ساعات</p>
           </div>
         </div>
         <div class="flex items-center mb-8">
@@ -90,9 +90,11 @@
           <div v-if="!hasAlreadyCommented" class="mt-4 flex flex-col space-y-4 justify-center">
             <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">أضف تقييمك وتعليقك</h3>
             <Rating v-model="newComment.rating" :stars="5" cancel="false" />
-            <Textarea v-model="newComment.text" class="w-full mt-2 p-2 border rounded" placeholder="اكتب تعليقك هنا..." />
+            <Textarea v-model="newComment.text" class="w-full mt-2 p-2 border rounded"
+              placeholder="اكتب تعليقك هنا..." />
             <div>
-              <Button v-if="!loading" label="إرسال" class="mt-2 w-1/2" @click="addComment" :disabled="!newComment.rating || !newComment.text" />
+              <Button v-if="!loading" label="إرسال" class="mt-2 w-1/2" @click="addComment"
+                :disabled="!newComment.rating || !newComment.text" />
               <ProgressSpinner v-else class="mt-2" />
             </div>
           </div>
