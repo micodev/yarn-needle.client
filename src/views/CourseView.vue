@@ -161,11 +161,11 @@ const showMoreComments = () => commentsStore.showMoreComments(route.params.id);
 watch(
   () => commentsStore.error,
   (error) => {
-    if (error) {
+    if (error == "already_commented") {
       toast.add({
         severity: 'error',
         summary: 'خطأ',
-        detail: error,
+        detail: 'لقد قمت بتقييم هذه الدورة مسبقاً',
         life: 3000
       });
     }
