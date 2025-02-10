@@ -73,9 +73,9 @@
             <div class="mt-auto pt-4">
               <div
                 class="p-2 bg-gray-100 dark:bg-gray-700 rounded text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center gap-2 copy-button-shadow"
-                @click="copyOrderKey(order.key)" tabindex="0" v-tooltip.focus.top="'تم النسخ'">
+                @click="copyOrderKey(order.orderKey)" tabindex="0" v-tooltip.focus.top="'تم النسخ'">
                 <i class="pi pi-copy text-gray-600 dark:text-gray-400"></i>
-                <span class="text-sm text-gray-600 dark:text-gray-400">{{ order.key }}</span>
+                <span class="text-sm text-gray-600 dark:text-gray-400">{{ order.orderKey }}</span>
               </div>
             </div>
           </div>
