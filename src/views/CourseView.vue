@@ -6,7 +6,7 @@
         <div class="relative rounded overflow-hidden w-full">
           <img :src="course.image" alt="Course Thumbnail" class="w-full h-full object-cover rounded">
           <div class="absolute inset-0 right-2 top-2 d-flex flex-row">
-            <span class=" bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-300 py-1 px-2 rounded">{{
+            <span class=" bg-gray-50 flex-1 dark:bg-gray-700 text-gray-900 dark:text-gray-300 py-1 px-2 rounded">{{
               course.isSubscribtionIncluded ?"مشمول بعضويتك":"غير مشمول بعضويتك" }}</span>
             <span class=" bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-300 py-1 px-2 rounded">{{ course.subscriptionIncludedNames }}</span>
           </div>
