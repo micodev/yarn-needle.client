@@ -5,7 +5,7 @@
       <div class="w-full md:flex-1 flex justify-center items-center md:ml-2 h-auto">
         <div class="relative rounded overflow-hidden w-full">
           <img :src="course.image" alt="Course Thumbnail" class="w-full h-full object-cover rounded">
-          <div class="absolute inset-0 right-2 top-2 flex flex-col gap-y-1">
+          <div class="absolute inset-0 right-2 top-2 flex flex-col gap-y-1" v-if="!course.purchased">
             <span>
 
               <span class=" bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-300 py-1 px-2 rounded">
