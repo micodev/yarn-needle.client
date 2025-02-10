@@ -44,7 +44,7 @@
               <div class="space-y-3">
                 <div class="flex items-center space-x-2">
                   <span class="ml-2">📅</span>
-                  <span>{{ formatDate(order.date) }}</span>
+                  <span>{{ formatDate(order.orderDate) }}</span>
                 </div>
 
                 <div class="flex items-center space-x-2">
