@@ -153,7 +153,14 @@
 
 <script>
 import axios from 'axios'
-
+window.addEventListener('message', function(event) {
+    // Replace 'https://localhost:44350' with your payment page origin for security
+    // if (event.origin !== 'https://localhost:44350') return;
+    
+    if (event.data && event.data.action === 'reload') {
+        window.location.reload();
+    }
+});
 export default {
   name: 'PaymentForm',
   data() {
