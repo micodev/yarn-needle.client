@@ -153,15 +153,8 @@
 
 <script>
 import axios from 'axios'
-window.addEventListener('message', function(event) {
-    // Replace 'https://localhost:44350' with your payment page origin for security
-    // if (event.origin !== 'https://localhost:44350') return;
+//make vue listen to the message event from the iframe and navigate to my-courses
 
-    if (event.data && event.data.action === 'reload') {
-       // using vue route navigate to my-courses
-        this.$router.push('/my-courses')
-    }
-});
 export default {
   name: 'PaymentForm',
   data() {
