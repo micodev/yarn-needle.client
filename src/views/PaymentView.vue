@@ -158,7 +158,8 @@ window.addEventListener('message', function(event) {
     // if (event.origin !== 'https://localhost:44350') return;
 
     if (event.data && event.data.action === 'reload') {
-        window.location.reload();
+       // using vue route navigate to my-courses
+        this.$router.push('/my-courses')
     }
 });
 export default {
