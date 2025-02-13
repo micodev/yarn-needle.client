@@ -9,7 +9,19 @@
       {{ error }}
     </div>
 
-    <form @submit.prevent="submitPayment" v-if="!loading" class="space-y-6">
+    <div v-if="redirectUrl" class="mt-4">
+      <div class="rounded-lg overflow-hidden shadow-lg">
+        <iframe
+          :src="redirectUrl"
+          width="100%"
+          height="600"
+          frameborder="0"
+          class="w-full"
+        ></iframe>
+      </div>
+    </div>
+
+    <form v-else-if="!loading" @submit.prevent="submitPayment" class="space-y-6">
       <div class="form-group">
         <label for="cartId" class="block text-sm font-medium text-gray-700">Cart ID</label>
         <input
@@ -136,86 +148,6 @@
         Proceed to Payment
       </button>
     </form>
-
-    <div v-if="redirectUrl" class="mt-4">
-      <div class="rounded-lg overflow-hidden shadow-lg">
-        <iframe
-          :src="redirectUrl"
-          width="100%"
-          height="600"
-          frameborder="0"
-          class="w-full"
-        ></iframe>
-      </div>
-    </div>
-  </div>
-    <!-- Customer Details Form Section -->
-    <div class="space-y-4">
-    <h3 class="text-lg font-medium text-gray-900">Customer Details</h3>
-
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-      <div class="form-group">
-        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-        <input
-          id="name"
-          v-model="payment.customerDetails.name"
-          type="text"
-          required
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-        <input
-          id="email"
-          v-model="payment.customerDetails.email"
-          type="email"
-          required
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-        <input
-          id="phone"
-          v-model="payment.customerDetails.phone"
-          type="tel"
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="street" class="block text-sm font-medium text-gray-700">Street Address</label>
-        <input
-          id="street"
-          v-model="payment.customerDetails.street1"
-          type="text"
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-        <input
-          id="city"
-          v-model="payment.customerDetails.city"
-          type="text"
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="state" class="block text-sm font-medium text-gray-700">State</label>
-        <input
-          id="state"
-          v-model="payment.customerDetails.state"
-          type="text"
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-        />
-      </div>
-    </div>
   </div>
 </template>
 
