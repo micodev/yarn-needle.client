@@ -154,7 +154,11 @@
 <script>
 import axios from 'axios'
 //make vue listen to the message event from the iframe and navigate to my-courses
-
+window.addEventListener('message', (event) => {
+  if (event.origin === 'https://localhost:44350') {
+      window.location.href = '/my-courses'
+  }
+})
 export default {
   name: 'PaymentForm',
   data() {
