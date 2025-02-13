@@ -138,7 +138,7 @@
     </form>
 
     <div v-if="redirectUrl" class="mt-4">
-      <div v-if="isFramed" class="rounded-lg overflow-hidden shadow-lg">
+      <div class="rounded-lg overflow-hidden shadow-lg">
         <iframe
           :src="redirectUrl"
           width="100%"
@@ -146,15 +146,6 @@
           frameborder="0"
           class="w-full"
         ></iframe>
-      </div>
-      <div v-else class="text-center">
-        <p class="text-gray-600 mb-4">Redirecting to payment page...</p>
-        <button
-          @click="redirectToPayment"
-          class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-        >
-          Click here if not redirected automatically
-        </button>
       </div>
     </div>
   </div>
@@ -282,24 +273,13 @@ export default {
 
         const response = await axios.post('https://localhost:44350/api/payment/initiate', this.payment)
 
-        if (response.data.redirect_url) {
-          this.redirectUrl = response.data.redirect_url
-          this.isFramed = !!response.data.framed
-
-          if (!this.isFramed) {
-            window.location.href = this.redirectUrl
-          }
+        if (response.data.redirectUrl) {
+          this.redirectUrl = response.data.redirectUrl
         }
       } catch (err) {
         this.error = err.response?.data?.error || 'Failed to process payment'
       } finally {
         this.loading = false
-      }
-    },
-
-    redirectToPayment() {
-      if (this.redirectUrl) {
-        window.location.href = this.redirectUrl
       }
     }
   }
