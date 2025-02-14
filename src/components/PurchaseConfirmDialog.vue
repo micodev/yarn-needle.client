@@ -53,7 +53,9 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useOrderStore } from '../stores/orderStore'
-import { Dialog, Button,Textarea } from 'primevue'
+import { Dialog, Button, Textarea } from 'primevue'
+import { useRouter } from 'vue-router'
+
 const props = defineProps({
   modelValue: {
     type: Boolean,
@@ -69,6 +71,7 @@ const emit = defineEmits(['update:modelValue', 'purchase-success'])
 
 const orderStore = useOrderStore()
 const note = ref('')
+const router = useRouter()
 
 const isVisible = computed({
   get: () => props.modelValue,
@@ -82,9 +85,9 @@ const handleClose = () => {
 
 const handleConfirm = async () => {
   try {
-    await orderStore.createOrder(props.courseId, note.value)
-
+    const order = await orderStore.createOrder(props.courseId, note.value)
     handleClose()
+    router.push(`/payment/${order.id}`)
   } catch (error) {
     console.error(error)
   }
