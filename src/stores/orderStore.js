@@ -16,6 +16,10 @@ export const useOrderStore = defineStore('order', {
           courseId: courseId,
           note: note
         })
+        if (response.status === 201) {
+          // response.data.redirectUrl
+
+        }
         return response.data
       } catch (error) {
         this.error = error.response?.data?.message || 'Failed to create order'
