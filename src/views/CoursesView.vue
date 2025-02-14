@@ -145,7 +145,11 @@
               </p>
             </div>
             <div class="flex flex-row gap-1">
-              <Button label="شراء" class="h-8 flex-1" />
+              <Button
+                label="شراء"
+                class="h-8 flex-1"
+                @click="handlePurchaseClick(course.id)"
+              />
               <Button
                 label="تفاصيل"
                 class="h-8 flex-1"
@@ -180,6 +184,11 @@
       </div>
     </div>
   </div>
+  <PurchaseConfirmDialog
+    v-model="showPurchaseDialog"
+    :course-id="selectedCourseId"
+    @purchase-success="handlePurchaseSuccess"
+  />
 </template>
 
 <script setup>
@@ -192,6 +201,7 @@ import { useCoursesStore } from '../stores/courses.js';
 import { useLevelOptionsStore } from '../stores/levelOptions.js';
 import { useCategoryOptionsStore } from '../stores/categoryOptions.js';
 import { useCourseTypeStore } from '../stores/courseType.js';
+import PurchaseConfirmDialog from '../components/PurchaseConfirmDialog.vue'; // Add this import
 
 const coursesStore = useCoursesStore(); // Use Pinia store
 const { isLoading, courses } = storeToRefs(coursesStore); // Use storeToRefs for reactive state
@@ -346,6 +356,22 @@ const router = useRouter(); // Add this
 // Add this function
 const navigateToDetails = (courseId) => {
   router.push({ name: 'course', params: { id: courseId }});
+};
+
+// Add these refs for purchase dialog
+const showPurchaseDialog = ref(false);
+const selectedCourseId = ref(null);
+
+// Add these methods for purchase handling
+const handlePurchaseClick = (courseId) => {
+  selectedCourseId.value = courseId;
+  showPurchaseDialog.value = true;
+};
+
+const handlePurchaseSuccess = () => {
+  // You can add success notification or refresh course data if needed
+  // For example:
+  // toast.success('تم الشراء بنجاح');
 };
 
 onMounted(() => {
