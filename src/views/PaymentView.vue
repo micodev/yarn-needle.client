@@ -2,7 +2,7 @@
   <div class="payment-form">
     <div v-if="orderStore.isLoading" class="text-center py-4">
       <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
-      <p class="mt-2 text-gray-600">Processing...</p>
+      <p class="mt-2 text-gray-600">جاري المعالجة...</p>
     </div>
 
     <div v-if="orderStore.error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
