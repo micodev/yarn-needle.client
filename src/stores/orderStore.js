@@ -25,9 +25,9 @@ export const useOrderStore = defineStore('order', {
           throw new Error(errors?.[0] || message || 'فشل في إنشاء الطلب')
         }
 
-        if (data?.paymentUrl) {
-          this.redirectUrl = data.paymentUrl
-          return data
+        if (single?.paymentUrl) {
+          this.redirectUrl = single.paymentUrl
+          return single
         }
 
         throw new Error('تنسيق الاستجابة غير صالح')
