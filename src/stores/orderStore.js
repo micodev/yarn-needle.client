@@ -18,12 +18,21 @@ export const useOrderStore = defineStore('order', {
           courseId: courseId,
           note: note
         })
-        if (response.status === 201 || response.status === 200) {
-          this.redirectUrl = response.data.paymentUrl
-          return response.data
+
+        const { success, message, data, errors } = response.data
+
+        if (!success) {
+          throw new Error(errors?.[0] || message || 'Failed to create order')
         }
+
+        if (data?.paymentUrl) {
+          this.redirectUrl = data.paymentUrl
+          return data
+        }
+
+        throw new Error('Invalid response format')
       } catch (error) {
-        this.error = error.response?.data?.message || 'Failed to create order'
+        this.error = error.message || 'Failed to create order'
         throw error
       } finally {
         this.isLoading = false
@@ -31,5 +40,5 @@ export const useOrderStore = defineStore('order', {
     }
   },
 
-  persist: true // Add this line to enable persistence
+  persist: true
 })
