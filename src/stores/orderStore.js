@@ -7,14 +7,14 @@ export const useOrderStore = defineStore('order', {
   }),
 
   actions: {
-    async createOrder(courseId, note) {
+    async createOrder(courseId, note = null) {
       this.isLoading = true
       this.error = null
 
       try {
         const response = await this.$axios.post('/api/order/create', {
-          courseId,
-          note
+          courseId: courseId,
+          note: note
         })
         return response.data
       } catch (error) {
