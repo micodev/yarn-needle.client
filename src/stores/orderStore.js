@@ -22,7 +22,7 @@ export const useOrderStore = defineStore('order', {
         const { success, message, data, errors } = response.data
 
         if (!success) {
-          throw new Error(errors?.[0] || message || 'Failed to create order')
+          throw new Error(errors?.[0] || message || 'فشل في إنشاء الطلب')
         }
 
         if (data?.paymentUrl) {
@@ -30,9 +30,9 @@ export const useOrderStore = defineStore('order', {
           return data
         }
 
-        throw new Error('Invalid response format')
+        throw new Error('تنسيق الاستجابة غير صالح')
       } catch (error) {
-        this.error = error.message || 'Failed to create order'
+        this.error = error.message || 'فشل في إنشاء الطلب'
         throw error
       } finally {
         this.isLoading = false
