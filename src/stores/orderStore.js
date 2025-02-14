@@ -32,9 +32,9 @@ export const useOrderStore = defineStore('order', {
 
         throw new Error('تنسيق الاستجابة غير صالح')
       } catch (error) {
-        // if error.response then show response.data.errors
+        // if error.response then show response.data.errors (join as string with  \n)
         if (error.response) {
-          this.error = error.response.data.errors[0] || error.message || 'فشل في إنشاء الطلب'
+          this.error = error.response.data.errors.join('\n') || 'فشل في إنشاء الطلب'
         } else
         {
           this.error = error.message || 'فشل في إنشاء الطلب'
