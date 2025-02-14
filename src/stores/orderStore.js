@@ -22,7 +22,7 @@ export const useOrderStore = defineStore('order', {
         const { success, message, data, single , errors } = response.data
        console.log( success, message, data,single, errors)
         if (!success) {
-          throw new Error(errors?[0] || message || 'فشل في إنشاء الطلب')
+          throw new Error(errors[0] || message || 'فشل في إنشاء الطلب')
         }
 
         if (single?.paymentUrl) {
