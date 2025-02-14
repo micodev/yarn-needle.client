@@ -1,4 +1,5 @@
 <template>
+  <Toast />
   <Dialog
     v-model:visible="isVisible"
     :modal="true"
@@ -88,7 +89,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useOrderStore } from '../stores/orderStore'
-import { Dialog, Button, Textarea } from 'primevue'
+import { Dialog, Button, Textarea, Toast, useToast } from 'primevue'
 
 const props = defineProps({
   modelValue: {
@@ -119,11 +120,19 @@ const handleClose = () => {
   orderStore.$reset()
 }
 
+const toast = useToast()
+
 const handleConfirm = async () => {
   try {
     await orderStore.createOrder(props.courseId, note.value)
     currentStep.value = 'payment'
   } catch (error) {
+    toast.add({
+      severity: 'error',
+      summary: 'خطأ',
+      detail: orderStore.error || 'حدث خطأ أثناء معالجة طلبك',
+      life: 3000
+    })
     console.error(error)
   }
 }
