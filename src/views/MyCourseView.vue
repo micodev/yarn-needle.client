@@ -14,9 +14,23 @@
 
     <!-- Course Cards Grid -->
     <div class="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
-      <div v-if="myCourses.length > 0"
+      <!-- Loading State -->
+      <div v-if="courseStore.loading" class="text-center py-8">
+        <i class="pi pi-spin pi-spinner text-4xl text-blue-500"></i>
+        <p class="mt-2 text-gray-600">جاري تحميل الدورات...</p>
+      </div>
+
+      <!-- Error State -->
+      <div v-else-if="courseStore.error" class="text-center py-8">
+        <i class="pi pi-exclamation-circle text-4xl text-red-500"></i>
+        <p class="mt-2 text-red-600">{{ courseStore.error }}</p>
+        <Button label="إعادة المحاولة" icon="pi pi-refresh" @click="courseStore.fetchMyCourses()" class="mt-4" />
+      </div>
+
+      <!-- Course Grid -->
+      <div v-else-if="courseStore.hasCourses"
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        <div v-for="course in myCourses" :key="course.id"
+        <div v-for="course in courseStore.courses" :key="course.id"
           class="w-full rounded-lg shadow-md relative flex flex-col bg-surface-0 dark:bg-surface-900 transition-all duration-300 ease-in-out hover:shadow-xl sm:hover:-translate-y-1">
           <div class="relative aspect-video">
             <img :src="course.image" :alt="course.title" class="w-full h-full object-cover rounded-t-lg"
@@ -60,52 +74,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onMounted } from 'vue';
 import { Button } from 'primevue';
+import { useMyCourseStore } from '@/stores/myCourses';
 
-const generateCourses = (count) => {
-  const courses = [];
-  const titles = [
-    "الجوانب الأربع لجودة الحياة",
-    "التطريز اليدوي للمبتدئين",
-    "أساسيات الخياطة",
-    "فن النسيج التقليدي",
-    "تصميم الأزياء المعاصرة"
-  ];
-  const descriptions = [
-    "تعلم كيفية تحسين جودة حياتك من خلال فهم الجوانب الأربعة الرئيسية",
-    "تعلم أساسيات التطريز اليدوي خطوة بخطوة",
-    "دورة شاملة في أساسيات الخياطة",
-    "اكتشف فنون النسيج التقليدي",
-    "تعلم أحدث تقنيات تصميم الأزياء"
-  ];
-  const instructors = ["عبدالله الخليفة", "سارة أحمد", "نورة السعيد", "محمد العلي", "فاطمة الزهراء"];
-  const images = [
-    "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=500&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=500&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?w=500&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=500&h=300&fit=crop"
-  ];
+const courseStore = useMyCourseStore();
 
-  for (let i = 0; i < count; i++) {
-    courses.push({
-      id: i + 1,
-      title: titles[i % titles.length],
-      description: descriptions[i % descriptions.length],
-      image: images[i % images.length], // Use real images instead of placehold.co
-      completedLessons: Math.floor(Math.random() * 15) + 1,
-      totalLessons: 15,
-      duration: Math.floor(Math.random() * 8) + 2,
-      instructor: instructors[i % instructors.length],
-    });
-  }
-  return courses;
-};
-
-const myCourses = ref(generateCourses(10)); // Generate 6 courses initially
-
-
+onMounted(() => {
+  courseStore.fetchMyCourses();
+});
 </script>
 
 <style scoped>
