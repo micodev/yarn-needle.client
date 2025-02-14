@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import axios from 'axios'
 
 export const useMyCourseStore = defineStore('myCourses', {
   state: () => ({
@@ -17,7 +16,7 @@ export const useMyCourseStore = defineStore('myCourses', {
       this.loading = true
       this.error = null
       try {
-        const response = await axios.get('https://localhost:44350/api/my-courses')
+        const response = await this.$axios.get('/api/course/my-courses')
         this.courses = response.data
       } catch (err) {
         this.error = err.message || 'Failed to fetch courses'
