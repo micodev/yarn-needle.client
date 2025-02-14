@@ -29,5 +29,7 @@ export const useOrderStore = defineStore('order', {
         this.isLoading = false
       }
     }
-  }
+  },
+  
+  persist: true // Add this line to enable persistence
 })
