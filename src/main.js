@@ -31,4 +31,4 @@ app.use(PrimeVue, {
   ripple: true,
 })
 
-app.mount('#app'
+app.mount('#app');
