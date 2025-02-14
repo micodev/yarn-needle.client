@@ -20,7 +20,7 @@ export const useOrderStore = defineStore('order', {
         })
 
         const { success, message, data, errors } = response.data
-
+       console.log( success, message, data, errors)
         if (!success) {
           throw new Error(errors?.[0] || message || 'فشل في إنشاء الطلب')
         }
