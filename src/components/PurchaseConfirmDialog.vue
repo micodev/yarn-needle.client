@@ -85,9 +85,9 @@ const handleClose = () => {
 
 const handleConfirm = async () => {
   try {
-    const order = await orderStore.createOrder(props.courseId, note.value)
+    await orderStore.createOrder(props.courseId, note.value)
     handleClose()
-    router.push(`/payment/${order.id}`)
+    router.push(`/payment`)
   } catch (error) {
     console.error(error)
   }
