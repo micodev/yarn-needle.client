@@ -83,7 +83,7 @@ const handleClose = () => {
 const handleConfirm = async () => {
   try {
     await orderStore.createOrder(props.courseId, note.value)
-    emit('purchase-success')
+
     handleClose()
   } catch (error) {
     console.error(error)
