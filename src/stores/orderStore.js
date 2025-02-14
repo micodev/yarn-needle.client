@@ -19,7 +19,7 @@ export const useOrderStore = defineStore('order', {
           note: note
         })
         if (response.status === 201 || response.status === 200) {
-          this.redirectUrl = response.data.redirectUrl
+          this.redirectUrl = response.data.paymentUrl
           return response.data
         }
       } catch (error) {
@@ -30,6 +30,6 @@ export const useOrderStore = defineStore('order', {
       }
     }
   },
-  
+
   persist: true // Add this line to enable persistence
 })
