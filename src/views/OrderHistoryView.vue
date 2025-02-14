@@ -8,18 +8,7 @@
       <ProgressSpinner />
     </div>
 
-    <div v-else :class="[
-      'grid gap-4',
-      {
-        'grid-cols-1': ordersStore.sortedOrders.length === 1 || ordersStore.sortedOrders.length > 4,
-        'grid-cols-2': ordersStore.sortedOrders.length === 2 || ordersStore.sortedOrders.length === 4,
-        'grid-cols-3': ordersStore.sortedOrders.length === 3
-      },
-      {
-        'md:grid-cols-2': ordersStore.sortedOrders.length > 2,
-        'lg:grid-cols-3': ordersStore.sortedOrders.length > 3
-      }
-    ]">
+    <div v-else class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       <Card v-for="order in ordersStore.sortedOrders" :key="order.id"
         class="bg-white dark:bg-gray-800 rounded-lg card-shadow p-5">
         <template #header>
