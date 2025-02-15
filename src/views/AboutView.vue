@@ -408,13 +408,13 @@ const values = ref([
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Shadow adjustments for dark mode */
+/* Replace the existing shadow-lg styles with these */
 .shadow-lg {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 :root.dark .shadow-lg {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
 /* Rest of existing styles remain unchanged */
