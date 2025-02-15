@@ -63,7 +63,6 @@
 .org-chart {
   direction: rtl;
   overflow-x: hidden;
-  background-color: var(--p-background-color);
   transition: background-color 0.3s ease;
 }
 
