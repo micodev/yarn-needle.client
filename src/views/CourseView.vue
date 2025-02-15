@@ -178,6 +178,7 @@ onMounted(async () => {
 watch(
   () => route.params.id,
   async (newId) => {
+    console.log("here")
     await fetchCourseAndComments(newId);
   }
 );
