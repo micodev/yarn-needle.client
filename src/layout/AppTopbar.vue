@@ -54,6 +54,13 @@ const authStore = useAuthStore();
 const router = useRouter(); // Add router instance
 
 const items = ref([
+{
+    label: 'الرئيسية',
+    icon: 'pi pi-home',
+    command: () => {
+      router.push('/'); // Add navigation to home page
+    },
+  },
   {
     label: 'الدورات',
     icon: 'pi pi-home',
