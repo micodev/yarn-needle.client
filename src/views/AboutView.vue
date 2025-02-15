@@ -165,30 +165,40 @@
       <div class="max-w-6xl mx-auto">
         <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">نبذة تعريفية عن مواهبنا</h2>
 
-        <TabView>
-          <TabPanel v-for="(forum, index) in forums"
-                    :key="index"
-                    :header="forum.title">
-            <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
-              <div class="mb-8">
-                <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
-                  {{ forum.description }}
-                </p>
-              </div>
+        <Tabs value="0">
+          <TabList>
+            <Tab v-for="(forum, index) in forums"
+                 :key="index"
+                 :value="index.toString()">
+              {{ forum.title }}
+            </Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel v-for="(forum, index) in forums"
+                      :key="index"
+                      :value="index.toString()">
+              <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
+                <div class="mb-8">
+                  <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
+                    {{ forum.description }}
+                  </p>
+                </div>
 
-              <div class="mt-8">
-                <h3 class="text-2xl font-bold mb-6 text-[var(--p-text-color)]">أهداف الملتقى</h3>
-                <ul class="space-y-4">
-                  <li v-for="(objective, idx) in forum.objectives" :key="idx"
-                      class="flex items-start gap-4">
-                    <i class="pi pi-check-circle text-[var(--p-primary-color)] mt-1"></i>
-                    <span class="text-[var(--p-text-muted-color)]">{{ objective }}</span>
-                  </li>
-                </ul>
+                <div class="mt-8">
+                  <h3 class="text-2xl font-bold mb-6 text-[var(--p-text-color)]">أهداف الملتقى</h3>
+                  <ul class="space-y-4">
+                    <li v-for="(objective, idx) in forum.objectives"
+                        :key="idx"
+                        class="flex items-start gap-4">
+                      <i class="pi pi-check-circle text-[var(--p-primary-color)] mt-1"></i>
+                      <span class="text-[var(--p-text-muted-color)]">{{ objective }}</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
-          </TabPanel>
-        </TabView>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
       </div>
     </div>
   </div>
@@ -196,8 +206,11 @@
 
 <script setup>
 import { ref } from 'vue';
-import TabView from 'primevue/tabview';
+import Tabs from 'primevue/tabs';
+import TabList from 'primevue/tablist';
+import Tab from 'primevue/tab';
 import TabPanel from 'primevue/tabpanel';
+import TabPanels from 'primevue/tabpanels';
 
 const goals = ref([
   'بناء قاعدة جماهيرية متفاعلة من المواهب الواعدة ومحبي تطوير المهارات.',
