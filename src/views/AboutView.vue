@@ -1,6 +1,6 @@
 <template>
   <div class="about-section min-h-screen">
-    <ScrollReveal>
+    <ScrollReveal :delay="0">
       <!-- Hero Section -->
       <div class="hero-section relative py-12 sm:py-20 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto text-center px-4">
@@ -12,7 +12,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="200">
       <!-- Vision & Mission Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -34,7 +34,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="400">
       <!-- Values Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -51,7 +51,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="600">
       <!-- What We Offer Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -67,7 +67,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="800">
       <!-- Goals Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -85,7 +85,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="1000">
       <!-- Our Fields Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -101,7 +101,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="1200">
       <!-- Forums Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -145,7 +145,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="1400">
       <!-- History Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -191,7 +191,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="1600">
       <!-- Impact & Future Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -220,7 +220,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="1800">
       <!-- Organizational Structure Section -->
       <div class="py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -408,13 +408,13 @@ const values = ref([
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Shadow adjustments for dark mode */
+/* Replace the existing shadow-lg styles with these */
 .shadow-lg {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 :root.dark .shadow-lg {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
 /* Rest of existing styles remain unchanged */
