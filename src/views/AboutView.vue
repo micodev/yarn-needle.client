@@ -40,34 +40,12 @@
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
           <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">قيمنا</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <ScrollReveal v-for="(field, index) in fields" :key="index" :delay="index * 200">
-              <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105">
-                <i class="pi pi-verified text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-                <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">الثقة</h3>
-                <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">بناء أو تعزيز علاقة موثوقة ومستدامة مع شركائنا ومواهبنا.</p>
-              </div>
-            </ScrollReveal>
-            <ScrollReveal v-for="(field, index) in fields" :key="index" :delay="index * 200">
-              <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105">
-                <i class="pi pi-star text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-                <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">التميز</h3>
-                <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">تحقيق معايير استثنائية وتقديم الدعم بطريقة مميزة.</p>
-              </div>
-            </ScrollReveal>
-            <ScrollReveal v-for="(field, index) in fields" :key="index" :delay="index * 200">
-              <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105">
-                <i class="pi pi-check-circle text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-                <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">المُسؤولية</h3>
-                <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">الالتزام بتنمية المواهب وتحقيق الأهداف بوعي وتفانٍ.</p>
-              </div>
-            </ScrollReveal>
-            <ScrollReveal v-for="(field, index) in fields" :key="index" :delay="index * 200">
-              <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105">
-                <i class="pi pi-refresh text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-                <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">الاستدامة</h3>
-                <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">الالتزام بالنمو والتطور المستدام.</p>
-              </div>
-            </ScrollReveal>
+            <div v-for="(value, index) in values" :key="index"
+                 class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105">
+              <i :class="value.icon" class="text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+              <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">{{ value.title }}</h3>
+              <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">{{ value.description }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -359,6 +337,29 @@ const forums = ref([
       'تقديم برامج تدريبية حديثة وشاملة تغطي مختلف مستويات المعرفة في الحاسب، وتتماشى مع أحدث التطورات التكنولوجية.',
       'تدريب الأعضاء على البرمجة والحاسب باستخدام بيانات تفاعلية وعملية، مما يعزز جاهزيتهم المهنية ويؤهلهم للانخراط في سوق العمل مباشرة بعد الانتهاء من البرنامج.'
     ]
+  }
+]);
+
+const values = ref([
+  {
+    icon: 'pi pi-verified',
+    title: 'الثقة',
+    description: 'بناء أو تعزيز علاقة موثوقة ومستدامة مع شركائنا ومواهبنا.'
+  },
+  {
+    icon: 'pi pi-star',
+    title: 'التميز',
+    description: 'تحقيق معايير استثنائية وتقديم الدعم بطريقة مميزة.'
+  },
+  {
+    icon: 'pi pi-check-circle',
+    title: 'المُسؤولية',
+    description: 'الالتزام بتنمية المواهب وتحقيق الأهداف بوعي وتفانٍ.'
+  },
+  {
+    icon: 'pi pi-refresh',
+    title: 'الاستدامة',
+    description: 'الالتزام بالنمو والتطور المستدام.'
   }
 ]);
 </script>
