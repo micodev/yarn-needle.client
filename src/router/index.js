@@ -56,7 +56,10 @@ const router = createRouter({
         {
           path: '/order-history',
           name: 'OrderHistory',
-          component: OrderHistoryView
+          component: OrderHistoryView,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: '/my-courses',
@@ -70,7 +73,10 @@ const router = createRouter({
         {
           path: '/payment',
           name: 'Payment',
-          component: PaymentView
+          component: PaymentView,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: '/about',
