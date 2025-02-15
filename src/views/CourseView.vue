@@ -162,11 +162,11 @@ const toast = useToast();
 // Watch for route changes and fetch course data
 watch(
   () => route.params.id,
-  (newId) => {
+  async (newId) => {
     if (newId) {
-      courseStore.fetchCourse(newId);
+      await courseStore.fetchCourse(newId);
       if (authStore.isAuthenticated) {
-      commentsStore.fetchComments(newId);
+      await commentsStore.fetchComments(newId);
       }
     }
   },
