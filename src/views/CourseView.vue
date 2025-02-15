@@ -151,7 +151,6 @@ const courseStore = useCourseStore();
 const commentsStore = useCommentsStore();
 const authStore = useAuthStore();  // Add this line
 
-console.log("courseStore", useCourseStore);
 
 const course = computed(() => courseStore.course);
 const displayedComments = computed(() => commentsStore.displayedComments);
