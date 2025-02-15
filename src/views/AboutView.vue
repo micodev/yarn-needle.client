@@ -10,20 +10,6 @@
       </div>
     </div>
 
-    <!-- What We Offer Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
-      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">ماذا نقدم؟</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div v-for="(offer, index) in offers" :key="index"
-               class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg flex items-start gap-4">
-            <i class="pi pi-check-circle text-xl text-[var(--p-primary-color)] mt-1"></i>
-            <p class="text-lg text-[var(--p-text-muted-color)]">{{ offer }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Vision & Mission Section -->
     <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -73,6 +59,20 @@
       </div>
     </div>
 
+    <!-- What We Offer Section -->
+    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
+      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">ماذا نقدم؟</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div v-for="(offer, index) in offers" :key="index"
+               class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg flex items-start gap-4">
+            <i class="pi pi-check-circle text-xl text-[var(--p-primary-color)] mt-1"></i>
+            <p class="text-lg text-[var(--p-text-muted-color)]">{{ offer }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Goals Section -->
     <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -86,6 +86,62 @@
             <p class="text-lg text-[var(--p-text-color)]">{{ goal }}</p>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Our Fields Section -->
+    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
+      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">مجالاتنا</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div v-for="(field, index) in fields" :key="index"
+               class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-transform duration-300 hover:scale-105">
+            <i :class="fieldIcons[index]" class="text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+            <h3 class="text-xl font-bold text-[var(--p-text-color)]">{{ field }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Forums Section -->
+    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
+      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">نبذة تعريفية عن مواهبنا</h2>
+
+        <Tabs value="0" scrollable>
+          <TabList>
+            <Tab v-for="(forum, index) in forums"
+                 :key="index"
+                 :value="index.toString()">
+              {{ forum.title }}
+            </Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel v-for="(forum, index) in forums"
+                      :key="index"
+                      :value="index.toString()">
+              <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
+                <div class="mb-8">
+                  <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
+                    {{ forum.description }}
+                  </p>
+                </div>
+
+                <div class="mt-8">
+                  <h3 class="text-2xl font-bold mb-6 text-[var(--p-text-color)]">أهداف الملتقى</h3>
+                  <ul class="space-y-4">
+                    <li v-for="(objective, idx) in forum.objectives"
+                        :key="idx"
+                        class="flex items-start gap-4">
+                      <i class="pi pi-check-circle text-[var(--p-primary-color)] mt-1"></i>
+                      <span class="text-[var(--p-text-muted-color)]">{{ objective }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
       </div>
     </div>
 
@@ -165,62 +221,6 @@
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
         <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">الهيكل التنظيمي</h2>
         <OrganizationalChart />
-      </div>
-    </div>
-
-    <!-- Our Fields Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
-      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">مجالاتنا</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          <div v-for="(field, index) in fields" :key="index"
-               class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-transform duration-300 hover:scale-105">
-            <i :class="fieldIcons[index]" class="text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-            <h3 class="text-xl font-bold text-[var(--p-text-color)]">{{ field }}</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Forums Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
-      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">نبذة تعريفية عن مواهبنا</h2>
-
-        <Tabs value="0" scrollable>
-          <TabList>
-            <Tab v-for="(forum, index) in forums"
-                 :key="index"
-                 :value="index.toString()">
-              {{ forum.title }}
-            </Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel v-for="(forum, index) in forums"
-                      :key="index"
-                      :value="index.toString()">
-              <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
-                <div class="mb-8">
-                  <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
-                    {{ forum.description }}
-                  </p>
-                </div>
-
-                <div class="mt-8">
-                  <h3 class="text-2xl font-bold mb-6 text-[var(--p-text-color)]">أهداف الملتقى</h3>
-                  <ul class="space-y-4">
-                    <li v-for="(objective, idx) in forum.objectives"
-                        :key="idx"
-                        class="flex items-start gap-4">
-                      <i class="pi pi-check-circle text-[var(--p-primary-color)] mt-1"></i>
-                      <span class="text-[var(--p-text-muted-color)]">{{ objective }}</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
       </div>
     </div>
   </div>
