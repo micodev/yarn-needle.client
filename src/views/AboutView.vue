@@ -146,6 +146,14 @@
       </div>
     </div>
 
+    <!-- Organizational Structure Section -->
+    <div class="py-16 px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">الهيكل التنظيمي</h2>
+        <OrganizationalChart />
+      </div>
+    </div>
+
     <!-- Our Fields Section -->
     <div class="py-16 px-4 bg-[var(--p-background-color)]">
       <div class="max-w-6xl mx-auto">
@@ -211,6 +219,7 @@ import TabList from 'primevue/tablist';
 import Tab from 'primevue/tab';
 import TabPanel from 'primevue/tabpanel';
 import TabPanels from 'primevue/tabpanels';
+import OrganizationalChart from '@/components/OrganizationalChart.vue';
 
 const goals = ref([
   'بناء قاعدة جماهيرية متفاعلة من المواهب الواعدة ومحبي تطوير المهارات.',
