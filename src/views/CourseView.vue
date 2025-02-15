@@ -160,17 +160,24 @@ const loading = computed(() => commentsStore.loading);
 const hasAlreadyCommented = computed(() => commentsStore.error === "already_commented");
 const toast = useToast();
 
-// Watch for route changes and fetch course data
+// Fetch course and comments when component is mounted and watch for route changes
+const fetchCourseAndComments = async (id) => {
+  if (id) {
+    await courseStore.fetchCourse(id);
+
+    if (authStore.isAuthenticated) {
+      await commentsStore.fetchComments(id);
+    }
+  }
+};
+
+// Fetch data when component is mounted
+fetchCourseAndComments(route.params.id);
+
 watch(
   () => route.params.id,
   async (newId) => {
-    if (newId) {
-      await courseStore.fetchCourse(newId);
-
-      if (authStore.isAuthenticated) {
-        await commentsStore.fetchComments(newId);
-      }
-    }
+    await fetchCourseAndComments(newId);
   }
 );
 
