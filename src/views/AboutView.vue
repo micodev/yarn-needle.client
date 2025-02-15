@@ -1,6 +1,6 @@
 <template>
   <div class="about-section min-h-screen">
-    <ScrollReveal>
+    <ScrollReveal :delay="0">
       <!-- Hero Section -->
       <div class="hero-section relative py-12 sm:py-20 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto text-center px-4">
@@ -12,7 +12,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="200">
       <!-- Vision & Mission Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -34,7 +34,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="400">
       <!-- Values Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -51,7 +51,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="600">
       <!-- What We Offer Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -67,7 +67,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="800">
       <!-- Goals Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -85,7 +85,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="1000">
       <!-- Our Fields Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -101,7 +101,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="1200">
       <!-- Forums Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -145,7 +145,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="1400">
       <!-- History Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -191,7 +191,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="1600">
       <!-- Impact & Future Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -220,7 +220,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal :delay="1800">
       <!-- Organizational Structure Section -->
       <div class="py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
