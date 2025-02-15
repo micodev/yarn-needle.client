@@ -12,7 +12,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 
-const props = defineProps({
+defineProps({
   delay: {
     type: Number,
     default: 0
