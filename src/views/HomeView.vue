@@ -8,7 +8,7 @@
           تبدأ مهاراتك في الازدهار</span></h1>
       <p class="text-xl mb-6 text-gray-700 dark:text-gray-300">اكتشف الدورات المتنوعة وابدأ رحلتك التعليمية معنا</p>
       <div class="flex justify-center md:justify-end gap-1">
-        <Button label="استكشف جميع الدورات" class="h-10 mb-6 flex-auto" />
+        <Button label="استكشف جميع الدورات" class="h-10 mb-6 flex-auto" @click="router.push('/courses')" />
         <Button label="حول خيط وإبرة" severity="secondary" class="h-10 mb-6 flex px-5" />
       </div>
     </div>
@@ -124,8 +124,10 @@
 import { onMounted } from "vue";
 import { Button } from "primevue";
 import { useHomeStore } from '@/stores/home';  // This should now work
+import { useRouter } from 'vue-router'; // Add this import
 
 const homeStore = useHomeStore();
+const router = useRouter(); // Add this line
 
 onMounted(async () => {
   await homeStore.fetchCourses();
