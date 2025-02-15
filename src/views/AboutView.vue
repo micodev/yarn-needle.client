@@ -218,9 +218,9 @@
 
     <!-- Organizational Structure Section -->
     <div class="py-16 px-0 sm:px-4">
-      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0 bg-[var(--p-card-background)]">
+      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
         <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">الهيكل التنظيمي</h2>
-        <OrganizationalChart />
+        <OrganizationalChart class="bg-[var(--p-card-background)]" />
       </div>
     </div>
   </div>
