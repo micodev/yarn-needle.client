@@ -1,5 +1,5 @@
 <template>
-  <div class="org-chart p-8 bg-[var(--p-surface-0)] min-h-screen">
+  <div class="org-chart p-8 bg-[var(--p-card-background)] min-h-screen">
     <div class="max-w-7xl mx-auto">
       <!-- Level 1 -->
       <div class="flex justify-center mb-16">
@@ -7,7 +7,7 @@
       </div>
 
       <!-- Vertical Line -->
-      <div class="w-px h-8 bg-blue-600 mx-auto -mt-12 mb-4"></div>
+      <div class="connector-line vertical"></div>
 
       <!-- Level 2 -->
       <div class="flex justify-center mb-16">
@@ -15,7 +15,7 @@
       </div>
 
       <!-- Vertical Line -->
-      <div class="w-px h-8 bg-blue-600 mx-auto -mt-12 mb-4"></div>
+      <div class="connector-line vertical"></div>
 
       <!-- Level 3 -->
       <div class="flex justify-center mb-16">
@@ -23,7 +23,7 @@
       </div>
 
       <!-- Vertical Line -->
-      <div class="w-px h-8 bg-blue-600 mx-auto -mt-12 mb-4"></div>
+      <div class="connector-line vertical"></div>
 
       <!-- Level 4 -->
       <div class="flex justify-center mb-16">
@@ -32,9 +32,9 @@
 
       <!-- Vertical Line and Horizontal Line for Level 5 -->
       <div class="relative">
-        <div class="w-px h-8 bg-blue-600 mx-auto -mt-12 mb-4"></div>
+        <div class="connector-line vertical"></div>
         <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2">
-          <div class="w-[80%] h-px bg-blue-600 mx-auto"></div>
+          <div class="connector-line horizontal"></div>
         </div>
       </div>
 
@@ -53,8 +53,39 @@
 
 <style scoped>
 .chart-box {
-  @apply bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg text-center min-w-[200px]
-         text-lg font-bold transition-transform duration-300 hover:scale-105;
+  background-color: var(--p-primary-color);
+  color: var(--p-button-text-primary-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  min-width: 200px;
+  font-size: 1.125rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.chart-box:hover {
+  background-color: var(--p-primary-hover-color);
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.connector-line {
+  background-color: var(--p-primary-color);
+  position: relative;
+}
+
+.connector-line.vertical {
+  width: 3px;
+  height: 2rem;
+  margin: -0.75rem auto 1rem;
+}
+
+.connector-line.horizontal {
+  width: 80%;
+  height: 3px;
+  margin: 0 auto;
 }
 
 .org-chart {
