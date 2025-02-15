@@ -138,11 +138,11 @@
 </template>
 
 <script setup>
-import { computed, watch, onUnmounted } from 'vue';
+import { computed, watch, onUnmounted,onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { Button, Fieldset, Rating, Textarea, ProgressSpinner, Toast } from 'primevue';
 import { useToast } from 'primevue/usetoast';
-import { useCourseStore } from '../stores/course';
+import { useCourseStore } from '@/stores/course';
 import { useCommentsStore } from '@/stores/comments';
 import { useAuthStore } from '@/stores/auth';  // Add this import
 
@@ -171,11 +171,12 @@ const fetchCourseAndComments = async (id) => {
   }
 };
 
+// Fetch data when component is mounted
+await fetchCourseAndComments(route.params.id);
 
 watch(
   () => route.params.id,
   async (newId) => {
-    console.log("here")
     await fetchCourseAndComments(newId);
   }
 );
