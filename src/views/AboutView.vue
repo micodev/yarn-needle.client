@@ -10,6 +10,20 @@
       </div>
     </div>
 
+    <!-- What We Offer Section -->
+    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
+      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">ماذا نقدم؟</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div v-for="(offer, index) in offers" :key="index"
+               class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg flex items-start gap-4">
+            <i class="pi pi-check-circle text-xl text-[var(--p-primary-color)] mt-1"></i>
+            <p class="text-lg text-[var(--p-text-muted-color)]">{{ offer }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Vision & Mission Section -->
     <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -225,6 +239,13 @@ const goals = ref([
   'بناء قاعدة جماهيرية متفاعلة من المواهب الواعدة ومحبي تطوير المهارات.',
   'توفير بيئة شاملة رياضية وثقافية وتنموية واجتماعية لتمكين المواهب وتوسيع آفاقهم.',
   'دعم المواهب وتنمية مهاراتها وتطوير قدراتها للوصول إلى إمكاناتها الكاملة.'
+]);
+
+const offers = ref([
+  'تقديم برامج تدريبية وورش عمل متخصصة في مجالات متنوعة.',
+  'توفير إرشادات وتوجيهات مهنية لدعم تطوير المهارات.',
+  'تنظيم فعاليات تعليمية وتدريبية وتنموية لتعزيز التطور المستمر.',
+  'بناء مجتمع تفاعلي ومحفز يدعم الطموح والإبداع.'
 ]);
 
 const fields = ref([
