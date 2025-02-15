@@ -9,7 +9,7 @@
       <p class="text-xl mb-6 text-gray-700 dark:text-gray-300">اكتشف الدورات المتنوعة وابدأ رحلتك التعليمية معنا</p>
       <div class="flex justify-center md:justify-end gap-1">
         <Button label="استكشف جميع الدورات" class="h-10 mb-6 flex-auto" @click="router.push('/courses')" />
-        <Button label="حول خيط وإبرة" severity="secondary" class="h-10 mb-6 flex px-5" />
+        <Button label="حول خيط وإبرة" severity="secondary" class="h-10 mb-6 flex px-5" @click="router.push('/about')" />
       </div>
     </div>
   </div>
