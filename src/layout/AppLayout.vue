@@ -2,7 +2,7 @@
   <div class="layout-wrapper bg-zinc-50 dark:bg-zinc-900 text-gray-900 dark:text-gray-100">
     <app-topbar></app-topbar>
     <app-sidebar></app-sidebar>
-    <div class="layout-main-container px-6 md:px-12 lg:px-20">
+    <div class="layout-main-container md:px-12 lg:px-20">
       <div class="layout-main">
         <router-view></router-view>
       </div>
