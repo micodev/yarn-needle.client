@@ -14,10 +14,7 @@
 </template>
 
 <script setup>
-
 import AppSidebar from './AppSidebar.vue'
 import AppTopbar from './AppTopbar.vue'
 import AppFooter from './AppFooter.vue'
-
-
 </script>
