@@ -118,6 +118,47 @@
         </div>
       </div>
     </div>
+
+    <!-- Impact & Future Section -->
+    <div class="py-16 px-4 bg-[var(--p-surface-0)]">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">أثرنا ومستقبلنا</h2>
+        <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-4 text-[var(--p-text-color)]">امتداد التأثير</h3>
+            <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
+              واليوم، وبعد ثلاثة أعوام من العطاء، امتدت تأثيرات المنصة وانتشارها جغرافياً، حيث جذبت مواهب من المملكة العربية السعودية أولاً، ومن ثم من مختلف الدول العربية، بما في ذلك العراق وسوريا ومصر والأردن والجزائر واليمن وغيرها من الدول، مما جعلها حاضنة إبداعية على مستوى الوطن العربي.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-4 text-[var(--p-text-color)]">رؤيتنا المستقبلية</h3>
+            <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
+              تواصل منصة "خيط وإبرة" رسالتها الرائدة في دعم الموهوبين وتطوير مهاراتهم، مع رؤية مستقبلية طموحة تهدف إلى أن تصل إلى كل بيت سعودي أولاً، ومن ثم البيوت في مختلف البلدان العربية، لتصبح شريكاً أساسياً في تعزيز قدرات الأفراد.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-4 text-[var(--p-text-color)]">المساهمة في رؤية 2030</h3>
+            <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
+              تلتزم المنصة بالمساهمة في تحقيق رؤية المملكة 2030 من خلال دعم الإبداع، وتمكين المواهب، وتعزيز جودة الحياة، بما يتماشى مع أهداف الرؤية التي تسعى لبناء مجتمع حيوي يمكن الأفراد من تحقيق إمكانياتهم الكاملة.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Our Fields Section -->
+    <div class="py-16 px-4 bg-[var(--p-background-color)]">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">مجالاتنا</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div v-for="(field, index) in fields" :key="index"
+               class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-transform duration-300 hover:scale-105">
+            <i :class="fieldIcons[index]" class="text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+            <h3 class="text-xl font-bold text-[var(--p-text-color)]">{{ field }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -129,4 +170,24 @@ const goals = ref([
   'توفير بيئة شاملة رياضية وثقافية وتنموية واجتماعية لتمكين المواهب وتوسيع آفاقهم.',
   'دعم المواهب وتنمية مهاراتها وتطوير قدراتها للوصول إلى إمكاناتها الكاملة.'
 ]);
+
+const fields = ref([
+  'الإعلام والإلقاء',
+  'الكتابة',
+  'التنمية',
+  'الصحة واللياقة',
+  'الفنون البصرية والتشكيلية',
+  'اللغة الإنجليزية',
+  'المحاسبة'
+]);
+
+const fieldIcons = [
+  'pi pi-microphone',
+  'pi pi-pencil',
+  'pi pi-chart-line',
+  'pi pi-heart',
+  'pi pi-palette',
+  'pi pi-globe',
+  'pi pi-calculator'
+];
 </script>
