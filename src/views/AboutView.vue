@@ -165,7 +165,7 @@
       <div class="max-w-6xl mx-auto">
         <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">نبذة تعريفية عن مواهبنا</h2>
 
-        <TabView>
+        <Tabs>
           <TabPanel v-for="(forum, index) in forums" :key="index" :header="forum.title">
             <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
               <div class="mb-8">
@@ -186,7 +186,7 @@
               </div>
             </div>
           </TabPanel>
-        </TabView>
+        </Tabs>
       </div>
     </div>
   </div>
@@ -194,8 +194,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import TabView from 'primevue/tabview';
-import TabPanel from 'primevue/tabpanel';
+import { Tabs, TabPanel } from 'primevue';
 
 const goals = ref([
   'بناء قاعدة جماهيرية متفاعلة من المواهب الواعدة ومحبي تطوير المهارات.',
@@ -246,19 +245,19 @@ const forums = ref([
 </script>
 
 <style scoped>
-:deep(.p-tabview-nav) {
+:deep(.p-tabs-nav) {
   @apply flex flex-wrap justify-center gap-2 border-b border-[var(--p-surface-200)] mb-8;
 }
 
-:deep(.p-tabview-nav-link) {
+:deep(.p-tabs-nav-link) {
   @apply px-6 py-3 text-[var(--p-text-muted-color)] hover:text-[var(--p-text-color)] transition-colors rounded-t-lg;
 }
 
-:deep(.p-tabview-selected .p-tabview-nav-link) {
+:deep(.p-tabs-selected .p-tabs-nav-link) {
   @apply bg-[var(--p-primary-color)] text-[var(--p-button-text-primary-color)];
 }
 
-:deep(.p-tabview-panels) {
+:deep(.p-tabs-panels) {
   @apply mt-6;
 }
 </style>
