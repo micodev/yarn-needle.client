@@ -356,7 +356,6 @@ const forums = ref([
 }
 
 :deep(.p-tabview-nav li.p-highlight .p-tabview-nav-link) {
-  background-color: var(--p-primary-color);
   color: var(--p-button-text-primary-color);
   border-color: var(--p-primary-color);
 }
