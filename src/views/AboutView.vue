@@ -263,7 +263,6 @@ const forums = ref([
 <style>
 :deep(.p-tab) {
   background: transparent !important;
-  border: none !important;
 }
 
 
