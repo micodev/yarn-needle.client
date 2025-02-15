@@ -1,6 +1,6 @@
 <template>
   <div class="about-section min-h-screen">
-    <ScrollReveal :delay="200">
+    <ScrollReveal>
       <!-- Hero Section -->
       <div class="hero-section relative py-12 sm:py-20 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto text-center px-4">
@@ -12,7 +12,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="200">
+    <ScrollReveal>
       <!-- Vision & Mission Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -34,7 +34,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="200">
+    <ScrollReveal>
       <!-- Values Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -51,7 +51,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="200">
+    <ScrollReveal>
       <!-- What We Offer Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -67,7 +67,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="200">
+    <ScrollReveal>
       <!-- Goals Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -85,7 +85,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="200">
+    <ScrollReveal>
       <!-- Our Fields Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -101,7 +101,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="200">
+    <ScrollReveal>
       <!-- Forums Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -145,7 +145,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="200">
+    <ScrollReveal>
       <!-- History Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -165,7 +165,7 @@
               </div>
               <div class="flex gap-4">
                 <div class="flex-shrink-0">
-                  <div class="w-4 h-5 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
+                  <div class="w-4 h-4 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
                 </div>
                 <div>
                   <h3 class="text-xl font-bold mb-2 text-[var(--p-text-color)]">2021 - التوسع</h3>
@@ -176,7 +176,7 @@
               </div>
               <div class="flex gap-4">
                 <div class="flex-shrink-0">
-                  <div class="w-4 ه-4 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
+                  <div class="w-4 h-4 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
                 </div>
                 <div>
                   <h3 class="text-xl font-bold mb-2 text-[var(--p-text-color)]">اليوم</h3>
@@ -191,7 +191,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="200">
+    <ScrollReveal>
       <!-- Impact & Future Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -220,7 +220,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="200">
+    <ScrollReveal>
       <!-- Organizational Structure Section -->
       <div class="py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -408,13 +408,13 @@ const values = ref([
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Replace the existing shadow-lg styles with these */
+/* Shadow adjustments for dark mode */
 .shadow-lg {
-  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
 }
 
 :root.dark .shadow-lg {
-  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
 }
 
 /* Rest of existing styles remain unchanged */
