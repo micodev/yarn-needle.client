@@ -1,7 +1,7 @@
 <template>
   <div class="about-section min-h-screen">
     <!-- Hero Section -->
-    <div class="hero-section relative py-12 sm:py-20 px-0 sm:px-4 bg-gradient-to-br from-[var(--p-primary-50)] to-[var(--p-surface-50)] dark:from-[var(--p-surface-800)] dark:to-[var(--p-surface-900)]">
+    <div class="hero-section relative py-12 sm:py-20 px-0 sm:px-4 bg-[var(--p-surface-50)]">
       <div class="w-full sm:max-w-6xl mx-auto text-center px-4">
         <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 text-[var(--p-text-color)]">من نحن</h1>
         <p class="text-base sm:text-xl md:text-2xl text-[var(--p-text-muted-color)] max-w-4xl mx-auto leading-relaxed px-2">
@@ -31,7 +31,7 @@
     </div>
 
     <!-- Values Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-background-color)]">
+    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
         <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">قيمنا</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -60,7 +60,7 @@
     </div>
 
     <!-- Goals Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-0)]">
+    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
         <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">أهدافنا</h2>
         <div class="space-y-4">
@@ -76,7 +76,7 @@
     </div>
 
     <!-- History Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-background-color)]">
+    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
         <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">تاريخنا</h2>
         <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
@@ -120,7 +120,7 @@
     </div>
 
     <!-- Impact & Future Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-0)]">
+    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
         <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">أثرنا ومستقبلنا</h2>
         <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg space-y-8">
@@ -147,7 +147,7 @@
     </div>
 
     <!-- Organizational Structure Section -->
-    <div class="py-16 px-0 sm:px-4">
+    <div class="py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
         <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">الهيكل التنظيمي</h2>
         <OrganizationalChart />
@@ -155,7 +155,7 @@
     </div>
 
     <!-- Our Fields Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-background-color)]">
+    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
         <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">مجالاتنا</h2>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -169,7 +169,7 @@
     </div>
 
     <!-- Forums Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-0)]">
+    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
         <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">نبذة تعريفية عن مواهبنا</h2>
 
