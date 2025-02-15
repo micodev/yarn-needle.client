@@ -12,7 +12,7 @@ export const useCourseStore = defineStore('course', {
     async fetchCourse(courseId) {
       this.loading = true;
       try {
-        const response = await axios.get(`/api/courses/${courseId}`);
+        const response = await axios.get(`/api/course/${courseId}`);
         this.course = response.data;
       } catch (error) {
         this.error = error.message;
