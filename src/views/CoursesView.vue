@@ -141,7 +141,7 @@
                 {{ course.originalPrice }} SAR
               </p>
               <p class="text-black dark:text-white font-bold text-sm" v-tooltip="'ريال سعودي'">
-                {{ course.discountedPrice || course.originalPrice }} SAR
+                {{ computeDiscountedPrice(course.originalPrice, course.discount) }} SAR
               </p>
             </div>
             <div class="flex flex-row gap-1">
@@ -373,6 +373,13 @@ const handlePurchaseSuccess = () => {
   // You can add success notification or refresh course data if needed
   // For example:
   // toast.success('تم الشراء بنجاح');
+};
+
+// Add this function to compute discounted price
+const computeDiscountedPrice = (originalPrice, discount) => {
+  if (!discount) return originalPrice;
+  const discountAmount = (originalPrice * discount) / 100;
+  return Math.round(originalPrice - discountAmount);
 };
 
 onMounted(() => {
