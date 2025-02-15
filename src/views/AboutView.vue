@@ -159,11 +159,42 @@
         </div>
       </div>
     </div>
+
+    <!-- Forums Section -->
+    <div class="py-16 px-4 bg-[var(--p-surface-0)]">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">نبذة تعريفية عن مواهبنا</h2>
+
+        <TabView>
+          <TabPanel v-for="(forum, index) in forums" :key="index" :header="forum.title">
+            <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
+              <div class="mb-8">
+                <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
+                  {{ forum.description }}
+                </p>
+              </div>
+
+              <div class="mt-8">
+                <h3 class="text-2xl font-bold mb-6 text-[var(--p-text-color)]">أهداف الملتقى</h3>
+                <ul class="space-y-4">
+                  <li v-for="(objective, idx) in forum.objectives" :key="idx"
+                      class="flex items-start gap-4">
+                    <i class="pi pi-check-circle text-[var(--p-primary-color)] mt-1"></i>
+                    <span class="text-[var(--p-text-muted-color)]">{{ objective }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </TabPanel>
+        </TabView>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import { TabView, TabPanel } from 'primevue/tabview';
 
 const goals = ref([
   'بناء قاعدة جماهيرية متفاعلة من المواهب الواعدة ومحبي تطوير المهارات.',
@@ -190,4 +221,44 @@ const fieldIcons = [
   'pi pi-globe',
   'pi pi-calculator'
 ];
+
+const forums = ref([
+  {
+    title: 'ملتقى الإعلام والإلقاء',
+    description: 'يسعى ملتقى الإعلام والإلقاء إلى تمكين الأفراد من تطوير مهاراتهم في فن التواصل والإلقاء، سواء أمام الجمهور أو عبر وسائل الإعلام المختلفة. يوفر الملتقى برامج تدريبية شاملة تركز على تعزيز الثقة وبناء مهارات التحدث بوضوح وفعالية، مما يساعد المشاركين على إيصال أفكارهم بطريقة مؤثرة وجذابة.',
+    objectives: [
+      'تمكين الأعضاء من المهارات الإعلامية والإلقائية من خلال تقديم البرامج التدريبية لهم.',
+      'تعزيز القدرات الإعلامية للمشاركين لتمكينهم من تقديم المحتوى عبر مختلف وسائل الإعلام.',
+      'إعداد متحدثين بارزين في جميع أنواع التعليق الصوتي لإيصال المحتوى باحترافية عالية.'
+    ]
+  },
+  {
+    title: 'ملتقى الكتابة',
+    description: 'ملتقى الكتابة يهدف إلى تطوير مهارات الكتابة لدى الأفراد في مختلف الأنماط، من الكتابة الإبداعية إلى الكتابة المهنية. يوفر الملتقى برامج تدريبية وورش عمل تساعد المشاركين على تحسين أساليبهم التعبيرية وصياغة الأفكار بوضوح وإبداع، مما يمكنهم من تحويل أفكارهم إلى أعمال مكتوبة متميزة تجذب القراء.',
+    objectives: [
+      'تطوير قدرات الكتابة في مختلف المجالات عبر برامج تدريبية تعزز مهارات الكتابة.',
+      'تشجيع الابتكار والإبداع الكتابي من خلال تقديم بيئة محفزة للتجربة وتطوير الأساليب الأدبية.',
+      'إعداد كتاب مؤثرين قادرين على إنتاج محتوى يلهم ويثري المجتمع في المجالات الإبداعية والمهنية.'
+    ]
+  },
+  // Add other forums similarly...
+]);
 </script>
+
+<style scoped>
+:deep(.p-tabview-nav) {
+  @apply flex flex-wrap justify-center gap-2 border-b border-[var(--p-surface-200)] mb-8;
+}
+
+:deep(.p-tabview-nav-link) {
+  @apply px-6 py-3 text-[var(--p-text-muted-color)] hover:text-[var(--p-text-color)] transition-colors rounded-t-lg;
+}
+
+:deep(.p-tabview-selected .p-tabview-nav-link) {
+  @apply bg-[var(--p-primary-color)] text-[var(--p-button-text-primary-color)];
+}
+
+:deep(.p-tabview-panels) {
+  @apply mt-6;
+}
+</style>
