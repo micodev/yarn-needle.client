@@ -1,6 +1,6 @@
 <template>
   <div class="about-section min-h-screen">
-    <ScrollReveal :delay="0">
+    <ScrollReveal :delay="200">
       <!-- Hero Section -->
       <div class="hero-section relative py-12 sm:py-20 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto text-center px-4">
@@ -34,7 +34,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="400">
+    <ScrollReveal :delay="200">
       <!-- Values Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -51,7 +51,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="600">
+    <ScrollReveal :delay="200">
       <!-- What We Offer Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -67,7 +67,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="800">
+    <ScrollReveal :delay="200">
       <!-- Goals Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -85,7 +85,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="1000">
+    <ScrollReveal :delay="200">
       <!-- Our Fields Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -101,7 +101,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="1200">
+    <ScrollReveal :delay="200">
       <!-- Forums Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -145,7 +145,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="1400">
+    <ScrollReveal :delay="200">
       <!-- History Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -165,7 +165,7 @@
               </div>
               <div class="flex gap-4">
                 <div class="flex-shrink-0">
-                  <div class="w-4 h-4 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
+                  <div class="w-4 h-5 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
                 </div>
                 <div>
                   <h3 class="text-xl font-bold mb-2 text-[var(--p-text-color)]">2021 - التوسع</h3>
@@ -176,7 +176,7 @@
               </div>
               <div class="flex gap-4">
                 <div class="flex-shrink-0">
-                  <div class="w-4 h-4 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
+                  <div class="w-4 ه-4 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
                 </div>
                 <div>
                   <h3 class="text-xl font-bold mb-2 text-[var(--p-text-color)]">اليوم</h3>
@@ -191,7 +191,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="1600">
+    <ScrollReveal :delay="200">
       <!-- Impact & Future Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
@@ -220,7 +220,7 @@
       </div>
     </ScrollReveal>
 
-    <ScrollReveal :delay="1800">
+    <ScrollReveal :delay="200">
       <!-- Organizational Structure Section -->
       <div class="py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
