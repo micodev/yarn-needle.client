@@ -1,7 +1,7 @@
 <template>
   <div class="about-section min-h-screen ">
     <!-- Hero Section -->
-    <div class="hero-section relative py-12 sm:py-20 px-0 sm:px-4 bg-[var(--p-surface-50)] animate-fadeIn">
+    <div class="hero-section relative py-12 sm:py-20 px-0 sm:px-4  animate-fadeIn">
       <div class="w-full sm:max-w-6xl mx-auto text-center px-4">
         <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 text-[var(--p-text-color)]">من نحن</h1>
         <p class="text-base sm:text-xl md:text-2xl text-[var(--p-text-muted-color)] max-w-4xl mx-auto leading-relaxed px-2">
