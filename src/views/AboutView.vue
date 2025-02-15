@@ -361,14 +361,12 @@ const forums = ref([
 }
 
 :deep(.p-tabview-panels) {
-  background-color: var(--p-card-background);
   color: var(--p-text-color);
   border-color: var(--p-content-border-color);
 }
 
 /* Add hover states for interactive elements */
 :deep(.p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link) {
-  background-color: var(--p-content-hover-background);
   color: var(--p-content-hover-color);
   border-color: var(--p-primary-color);
 }
