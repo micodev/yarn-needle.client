@@ -194,7 +194,8 @@
 
 <script setup>
 import { ref } from 'vue';
-import { TabView, TabPanel } from 'primevue';
+import TabView from 'primevue/tabview';
+import TabPanel from 'primevue/tabpanel';
 
 const goals = ref([
   'بناء قاعدة جماهيرية متفاعلة من المواهب الواعدة ومحبي تطوير المهارات.',
@@ -240,8 +241,7 @@ const forums = ref([
       'تشجيع الابتكار والإبداع الكتابي من خلال تقديم بيئة محفزة للتجربة وتطوير الأساليب الأدبية.',
       'إعداد كتاب مؤثرين قادرين على إنتاج محتوى يلهم ويثري المجتمع في المجالات الإبداعية والمهنية.'
     ]
-  },
-  // Add other forums similarly...
+  }
 ]);
 </script>
 
