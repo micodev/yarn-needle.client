@@ -12,7 +12,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 
-defineProps({
+const props = defineProps({
   delay: {
     type: Number,
     default: 0
@@ -26,7 +26,9 @@ const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        isVisible.value = true;
+        setTimeout(() => {
+          isVisible.value = true;
+        }, props.delay);
         observer.unobserve(entry.target);
       }
     });
