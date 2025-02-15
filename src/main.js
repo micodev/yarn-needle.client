@@ -10,6 +10,8 @@ import Ripple from 'primevue/ripple';
 import axiosInstance from '../plugins/axios.plugin'
 import Tooltip from 'primevue/tooltip';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import TabView from 'primevue/tabview';
+import TabPanel from 'primevue/tabpanel';
 
 const app = createApp(App)
 const pinia = createPinia();
@@ -30,5 +32,7 @@ app.use(PrimeVue, {
   theme: 'none',
   ripple: true,
 })
+app.component('TabView', TabView);
+app.component('TabPanel', TabPanel);
 
 app.mount('#app');
