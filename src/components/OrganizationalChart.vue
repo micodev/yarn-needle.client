@@ -1,5 +1,5 @@
 <template>
-  <div class="org-chart p-4 sm:p-8 min-h-screen">
+  <div class="org-chart p-4 sm:p-8 bg-[var(--p-surface-0)] min-h-screen">
     <div class="max-w-7xl mx-auto">
       <!-- Level 1 -->
       <div class="flex justify-center mb-16">
