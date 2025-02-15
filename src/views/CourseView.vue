@@ -168,11 +168,10 @@ watch(
       await courseStore.fetchCourse(newId);
 
       if (authStore.isAuthenticated) {
-      await commentsStore.fetchComments(newId);
+        await commentsStore.fetchComments(newId);
       }
     }
-  },
-  { immediate: true }
+  }
 );
 
 // Clear course data and reset comments when component is unmounted
