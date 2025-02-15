@@ -20,7 +20,7 @@
               أن تكون المنصة رائدة في بناء أجيال متكاملة ثقافياً وتنموياً ورياضياً واجتماعياً، وتعزيز الصحة والمواهب في المجتمع.
             </p>
           </div>
-          <div class=" p-8 rounded-2xl shadow-lg animate-slideInRight">
+          <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg animate-slideInRight">
             <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-[var(--p-text-color)]">رسالتنا</h2>
             <p class="text-base sm:text-lg text-[var(--p-text-muted-color)] leading-relaxed">
               تسعى المنصة إلى تقديم العلم والمعرفة من خلال أساليب تدريبية وترفيهية، ودعم المواهب وتطويرها في بيئة ملهمة تعزز من إمكانياتهم وتحقق طموحاتهم.
