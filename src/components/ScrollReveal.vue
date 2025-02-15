@@ -12,12 +12,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 
-const props = defineProps({
-  delay: {
-    type: Number,
-    default: 0
-  }
-});
+
 
 const elementRef = ref(null);
 const isVisible = ref(false);
