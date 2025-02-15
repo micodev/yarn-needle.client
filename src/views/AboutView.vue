@@ -47,6 +47,27 @@
                 <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">بناء أو تعزيز علاقة موثوقة ومستدامة مع شركائنا ومواهبنا.</p>
               </div>
             </ScrollReveal>
+            <ScrollReveal v-for="(field, index) in fields" :key="index" :delay="index * 200">
+              <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105">
+                <i class="pi pi-star text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+                <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">التميز</h3>
+                <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">تحقيق معايير استثنائية وتقديم الدعم بطريقة مميزة.</p>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal v-for="(field, index) in fields" :key="index" :delay="index * 200">
+              <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105">
+                <i class="pi pi-check-circle text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+                <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">المُسؤولية</h3>
+                <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">الالتزام بتنمية المواهب وتحقيق الأهداف بوعي وتفانٍ.</p>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal v-for="(field, index) in fields" :key="index" :delay="index * 200">
+              <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105">
+                <i class="pi pi-refresh text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+                <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">الاستدامة</h3>
+                <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">الالتزام بالنمو والتطور المستدام.</p>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>
