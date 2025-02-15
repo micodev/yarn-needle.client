@@ -1,7 +1,7 @@
 <template>
   <div class="about-section min-h-screen">
     <!-- Hero Section -->
-    <div class="hero-section relative py-12 sm:py-20 px-0 sm:px-4 bg-[var(--p-surface-50)]">
+    <div class="hero-section relative py-12 sm:py-20 px-0 sm:px-4 bg-[var(--p-surface-50)] animate-fadeIn">
       <div class="w-full sm:max-w-6xl mx-auto text-center px-4">
         <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 text-[var(--p-text-color)]">من نحن</h1>
         <p class="text-base sm:text-xl md:text-2xl text-[var(--p-text-muted-color)] max-w-4xl mx-auto leading-relaxed px-2">
@@ -14,13 +14,13 @@
     <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
+          <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg animate-slideInLeft">
             <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-[var(--p-text-color)]">رؤيتنا</h2>
             <p class="text-base sm:text-lg text-[var(--p-text-muted-color)] leading-relaxed">
               أن تكون المنصة رائدة في بناء أجيال متكاملة ثقافياً وتنموياً ورياضياً واجتماعياً، وتعزيز الصحة والمواهب في المجتمع.
             </p>
           </div>
-          <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
+          <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg animate-slideInRight">
             <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-[var(--p-text-color)]">رسالتنا</h2>
             <p class="text-base sm:text-lg text-[var(--p-text-muted-color)] leading-relaxed">
               تسعى المنصة إلى تقديم العلم والمعرفة من خلال أساليب تدريبية وترفيهية، ودعم المواهب وتطويرها في بيئة ملهمة تعزز من إمكانياتهم وتحقق طموحاتهم.
@@ -33,24 +33,24 @@
     <!-- Values Section -->
     <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">قيمنا</h2>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)] animate-fadeIn">قيمنا</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center">
+          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105 animate-fadeInUp" style="animation-delay: 0ms;">
             <i class="pi pi-verified text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
             <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">الثقة</h3>
             <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">بناء أو تعزيز علاقة موثوقة ومستدامة مع شركائنا ومواهبنا.</p>
           </div>
-          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center">
+          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105 animate-fadeInUp" style="animation-delay: 200ms;">
             <i class="pi pi-star text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
             <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">التميز</h3>
             <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">تحقيق معايير استثنائية وتقديم الدعم بطريقة مميزة.</p>
           </div>
-          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center">
+          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105 animate-fadeInUp" style="animation-delay: 400ms;">
             <i class="pi pi-check-circle text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
             <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">المُسؤولية</h3>
             <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">الالتزام بتنمية المواهب وتحقيق الأهداف بوعي وتفانٍ.</p>
           </div>
-          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center">
+          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105 animate-fadeInUp" style="animation-delay: 600ms;">
             <i class="pi pi-refresh text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
             <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">الاستدامة</h3>
             <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">الالتزام بالنمو والتطور المستدام.</p>
@@ -374,6 +374,102 @@ const forums = ref([
 
   :deep(.p-tab-header) {
     padding: 0.5rem 0.75rem;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 1s ease-out;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 1s ease-out;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 1s ease-out;
+  animation-fill-mode: both;
+}
+
+/* Add smooth transitions */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Add hover effects */
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+}
+
+/* Add scroll reveal effect */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive animations */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fadeIn,
+  .animate-slideInLeft,
+  .animate-slideInRight,
+  .animate-fadeInUp {
+    animation: none;
+  }
+
+  .transition-all {
+    transition: none;
   }
 }
 </style>
