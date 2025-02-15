@@ -337,9 +337,61 @@ const forums = ref([
 <style scoped>
 .p-tab {
   background: transparent !important;
+  color: var(--p-text-color) !important;
 }
 
 /* Add responsive styles for tabs */
+:deep(.p-tabview-nav) {
+  flex-wrap: wrap;
+  border-color: var(--p-content-border-color);
+}
+
+:deep(.p-tabview-nav li) {
+  margin-bottom: 0.5rem;
+}
+
+:deep(.p-tabview-nav li .p-tabview-nav-link) {
+  background-color: var(--p-card-background);
+  color: var(--p-text-color);
+  border-color: var(--p-content-border-color);
+}
+
+:deep(.p-tabview-nav li.p-highlight .p-tabview-nav-link) {
+  background-color: var(--p-primary-color);
+  color: var(--p-button-text-primary-color);
+  border-color: var(--p-primary-color);
+}
+
+:deep(.p-tabview-panels) {
+  background-color: var(--p-card-background);
+  color: var(--p-text-color);
+  border-color: var(--p-content-border-color);
+}
+
+/* Add hover states for interactive elements */
+:deep(.p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link) {
+  background-color: var(--p-content-hover-background);
+  color: var(--p-content-hover-color);
+  border-color: var(--p-primary-color);
+}
+
+/* Add transition for theme changes */
+.about-section,
+.about-section *,
+:deep(.p-tabview *) {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Shadow adjustments for dark mode */
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+}
+
+:root.dark .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+}
+
+/* Rest of existing styles remain unchanged */
 :deep(.p-tabview-nav) {
   flex-wrap: wrap;
 }
