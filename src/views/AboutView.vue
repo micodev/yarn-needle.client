@@ -1,5 +1,5 @@
 <template>
-  <div class="about-section min-h-screen dark:bg-slate-600">
+  <div class="about-section min-h-screen ">
     <!-- Hero Section -->
     <div class="hero-section relative py-12 sm:py-20 px-0 sm:px-4 bg-[var(--p-surface-50)] animate-fadeIn">
       <div class="w-full sm:max-w-6xl mx-auto text-center px-4">
