@@ -71,7 +71,7 @@
   color: var(--p-button-text-primary-color);
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
   text-align: center;
   min-width: 150px;
   max-width: 100%;
@@ -92,7 +92,7 @@
 .chart-box:hover {
   background-color: var(--p-primary-hover-color);
   transform: scale(1.05);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .arrow-container {
