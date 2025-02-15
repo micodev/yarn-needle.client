@@ -172,7 +172,7 @@ const fetchCourseAndComments = async (id) => {
 };
 
 // Fetch data when component is mounted
-fetchCourseAndComments(route.params.id);
+await fetchCourseAndComments(route.params.id);
 
 watch(
   () => route.params.id,
