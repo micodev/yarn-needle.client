@@ -138,7 +138,7 @@
 </template>
 
 <script setup>
-import { computed, watch, onUnmounted } from 'vue';
+import { computed, watch, onUnmounted, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { Button, Fieldset, Rating, Textarea, ProgressSpinner, Toast } from 'primevue';
 import { useToast } from 'primevue/usetoast';
@@ -170,9 +170,9 @@ const fetchCourseAndComments = async (id) => {
     }
   }
 };
-
-// Fetch data when component is mounted
-await fetchCourseAndComments(route.params.id);
+onMounted(async () => {
+  await fetchCourseAndComments(route.params.id);
+});
 
 watch(
   () => route.params.id,
