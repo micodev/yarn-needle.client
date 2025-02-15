@@ -1,4 +1,5 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
+import axios from 'axios';
 
 export const useCourseStore = defineStore('course', {
   state: () => ({
@@ -8,23 +9,22 @@ export const useCourseStore = defineStore('course', {
   }),
 
   actions: {
-    async fetchCourse(id) {
-      this.loading = true
-      this.error = null
+    async fetchCourse(courseId) {
+      this.loading = true;
       try {
-        const response = await this.$axios.get(`/api/course/${id}`)
-        this.course = response.data
-      } catch (err) {
-        this.error = err.message || 'Failed to fetch course'
-        console.error('Error fetching course:', err)
+        const response = await axios.get(`/api/courses/${courseId}`);
+        this.course = response.data;
+      } catch (error) {
+        this.error = error.message;
+        console.error('Error fetching course:', error);
       } finally {
-        this.loading = false
+        this.loading = false;
       }
     },
 
     clearCourse() {
-      this.course = null
-      this.error = null
+      this.course = null;
+      this.error = null;
     }
   }
-})
+});
