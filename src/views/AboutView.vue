@@ -3,8 +3,8 @@
     <!-- Hero Section -->
     <div class="hero-section relative py-12 sm:py-20 px-0 sm:px-4 bg-gradient-to-br from-[var(--p-primary-50)] to-[var(--p-surface-50)] dark:from-[var(--p-surface-800)] dark:to-[var(--p-surface-900)]">
       <div class="w-full sm:max-w-6xl mx-auto text-center px-4">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 text-[var(--p-text-color)]">من نحن</h1>
-        <p class="text-lg sm:text-xl md:text-2xl text-[var(--p-text-muted-color)] max-w-4xl mx-auto leading-relaxed px-2">
+        <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 text-[var(--p-text-color)]">من نحن</h1>
+        <p class="text-base sm:text-xl md:text-2xl text-[var(--p-text-muted-color)] max-w-4xl mx-auto leading-relaxed px-2">
           منصة تهدف إلى تعزيز المواهب والقدرات الإبداعية وتطوير المهارات الفردية من خلال تقديم فرص تعليمية وتدريبية شاملة.
         </p>
       </div>
@@ -15,14 +15,14 @@
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
-            <h2 class="text-3xl font-bold mb-6 text-[var(--p-text-color)]">رؤيتنا</h2>
-            <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-[var(--p-text-color)]">رؤيتنا</h2>
+            <p class="text-base sm:text-lg text-[var(--p-text-muted-color)] leading-relaxed">
               أن تكون المنصة رائدة في بناء أجيال متكاملة ثقافياً وتنموياً ورياضياً واجتماعياً، وتعزيز الصحة والمواهب في المجتمع.
             </p>
           </div>
           <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
-            <h2 class="text-3xl font-bold mb-6 text-[var(--p-text-color)]">رسالتنا</h2>
-            <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-[var(--p-text-color)]">رسالتنا</h2>
+            <p class="text-base sm:text-lg text-[var(--p-text-muted-color)] leading-relaxed">
               تسعى المنصة إلى تقديم العلم والمعرفة من خلال أساليب تدريبية وترفيهية، ودعم المواهب وتطويرها في بيئة ملهمة تعزز من إمكانياتهم وتحقق طموحاتهم.
             </p>
           </div>
@@ -33,27 +33,27 @@
     <!-- Values Section -->
     <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-background-color)]">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">قيمنا</h2>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">قيمنا</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center">
-            <i class="pi pi-verified text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-            <h3 class="text-xl font-bold mb-3 text-[var(--p-text-color)]">الثقة</h3>
-            <p class="text-[var(--p-text-muted-color)]">بناء أو تعزيز علاقة موثوقة ومستدامة مع شركائنا ومواهبنا.</p>
+            <i class="pi pi-verified text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+            <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">الثقة</h3>
+            <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">بناء أو تعزيز علاقة موثوقة ومستدامة مع شركائنا ومواهبنا.</p>
           </div>
           <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center">
-            <i class="pi pi-star text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-            <h3 class="text-xl font-bold mb-3 text-[var(--p-text-color)]">التميز</h3>
-            <p class="text-[var(--p-text-muted-color)]">تحقيق معايير استثنائية وتقديم الدعم بطريقة مميزة.</p>
+            <i class="pi pi-star text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+            <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">التميز</h3>
+            <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">تحقيق معايير استثنائية وتقديم الدعم بطريقة مميزة.</p>
           </div>
           <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center">
-            <i class="pi pi-check-circle text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-            <h3 class="text-xl font-bold mb-3 text-[var(--p-text-color)]">المُسؤولية</h3>
-            <p class="text-[var(--p-text-muted-color)]">الالتزام بتنمية المواهب وتحقيق الأهداف بوعي وتفانٍ.</p>
+            <i class="pi pi-check-circle text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+            <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">المُسؤولية</h3>
+            <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">الالتزام بتنمية المواهب وتحقيق الأهداف بوعي وتفانٍ.</p>
           </div>
           <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center">
-            <i class="pi pi-refresh text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-            <h3 class="text-xl font-bold mb-3 text-[var(--p-text-color)]">الاستدامة</h3>
-            <p class="text-[var(--p-text-muted-color)]">الالتزام بالنمو والتطور المستدام.</p>
+            <i class="pi pi-refresh text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+            <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">الاستدامة</h3>
+            <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">الالتزام بالنمو والتطور المستدام.</p>
           </div>
         </div>
       </div>
@@ -342,6 +342,17 @@ const forums = ref([
 
   :deep(.p-tabview-nav li) {
     flex: 0 0 auto;
+  }
+}
+
+/* Add additional responsive text styles */
+@media (max-width: 640px) {
+  :deep(.p-tabview-title) {
+    font-size: 0.875rem;
+  }
+
+  :deep(.p-tab-header) {
+    padding: 0.5rem 0.75rem;
   }
 }
 </style>
