@@ -171,9 +171,6 @@ const fetchCourseAndComments = async (id) => {
   }
 };
 
-onMounted(async () => {
-  await fetchCourseAndComments(route.params.id);
-});
 
 watch(
   () => route.params.id,
