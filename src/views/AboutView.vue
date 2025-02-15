@@ -194,7 +194,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { TabView, TabPanel } from 'primevue/tabview';
+import { TabView, TabPanel } from 'primevue';
 
 const goals = ref([
   'بناء قاعدة جماهيرية متفاعلة من المواهب الواعدة ومحبي تطوير المهارات.',
