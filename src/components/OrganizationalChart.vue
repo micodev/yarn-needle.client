@@ -1,5 +1,5 @@
 <template>
-  <div class="org-chart p-8 bg-[var(--p-card-background)] min-h-screen">
+  <div class="org-chart p-4 sm:p-8 bg-[var(--p-card-background)] min-h-screen">
     <div class="max-w-7xl mx-auto">
       <!-- Level 1 -->
       <div class="flex justify-center mb-16">
@@ -39,7 +39,7 @@
       </div>
 
       <!-- Level 5 -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center max-w-6xl mx-auto mt-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 justify-items-center max-w-6xl mx-auto mt-8">
         <div class="chart-box">مشرف موهبة</div>
         <div class="chart-box">مشرف معد</div>
         <div class="chart-box">مشرف مقدم</div>
@@ -55,14 +55,24 @@
 .chart-box {
   background-color: var(--p-primary-color);
   color: var(--p-button-text-primary-color);
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   text-align: center;
-  min-width: 200px;
-  font-size: 1.125rem;
+  min-width: 150px;
+  max-width: 100%;
+  font-size: 1rem;
   font-weight: bold;
   transition: all 0.3s ease;
+  margin: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .chart-box {
+    min-width: 200px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.125rem;
+  }
 }
 
 .chart-box:hover {
@@ -74,21 +84,36 @@
 .connector-line {
   background-color: var(--p-primary-color);
   position: relative;
+  border-radius: 999px;
 }
 
 .connector-line.vertical {
   width: 3px;
-  height: 2rem;
-  margin: -0.75rem auto 1rem;
+  height: 1.5rem;
+  margin: -0.5rem auto 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .connector-line.vertical {
+    height: 2rem;
+    margin: -0.75rem auto 1rem;
+  }
 }
 
 .connector-line.horizontal {
-  width: 80%;
+  width: 90%;
   height: 3px;
   margin: 0 auto;
 }
 
+@media (min-width: 640px) {
+  .connector-line.horizontal {
+    width: 80%;
+  }
+}
+
 .org-chart {
   direction: rtl;
+  overflow-x: hidden;
 }
 </style>
