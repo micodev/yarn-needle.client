@@ -1,233 +1,262 @@
 <template>
-  <div class="about-section min-h-screen ">
-    <!-- Hero Section -->
-    <div class="hero-section relative py-12 sm:py-20 px-0 sm:px-4  animate-fadeIn">
-      <div class="w-full sm:max-w-6xl mx-auto text-center px-4">
-        <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 text-[var(--p-text-color)]">من نحن</h1>
-        <p class="text-base sm:text-xl md:text-2xl text-[var(--p-text-muted-color)] max-w-4xl mx-auto leading-relaxed px-2">
-          منصة تهدف إلى تعزيز المواهب والقدرات الإبداعية وتطوير المهارات الفردية من خلال تقديم فرص تعليمية وتدريبية شاملة.
-        </p>
-      </div>
-    </div>
-
-    <!-- Vision & Mission Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4">
-      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg animate-slideInLeft">
-            <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-[var(--p-text-color)]">رؤيتنا</h2>
-            <p class="text-base sm:text-lg text-[var(--p-text-muted-color)] leading-relaxed">
-              أن تكون المنصة رائدة في بناء أجيال متكاملة ثقافياً وتنموياً ورياضياً واجتماعياً، وتعزيز الصحة والمواهب في المجتمع.
-            </p>
-          </div>
-          <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg animate-slideInRight">
-            <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-[var(--p-text-color)]">رسالتنا</h2>
-            <p class="text-base sm:text-lg text-[var(--p-text-muted-color)] leading-relaxed">
-              تسعى المنصة إلى تقديم العلم والمعرفة من خلال أساليب تدريبية وترفيهية، ودعم المواهب وتطويرها في بيئة ملهمة تعزز من إمكانياتهم وتحقق طموحاتهم.
-            </p>
-          </div>
+  <div class="about-section min-h-screen">
+    <ScrollReveal>
+      <!-- Hero Section -->
+      <div class="hero-section relative py-12 sm:py-20 px-0 sm:px-4">
+        <div class="w-full sm:max-w-6xl mx-auto text-center px-4">
+          <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 text-[var(--p-text-color)]">من نحن</h1>
+          <p class="text-base sm:text-xl md:text-2xl text-[var(--p-text-muted-color)] max-w-4xl mx-auto leading-relaxed px-2">
+            منصة تهدف إلى تعزيز المواهب والقدرات الإبداعية وتطوير المهارات الفردية من خلال تقديم فرص تعليمية وتدريبية شاملة.
+          </p>
         </div>
       </div>
-    </div>
+    </ScrollReveal>
 
-    <!-- Values Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4">
-      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)] animate-fadeIn">قيمنا</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105 animate-fadeInUp" style="animation-delay: 0ms;">
-            <i class="pi pi-verified text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-            <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">الثقة</h3>
-            <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">بناء أو تعزيز علاقة موثوقة ومستدامة مع شركائنا ومواهبنا.</p>
-          </div>
-          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105 animate-fadeInUp" style="animation-delay: 200ms;">
-            <i class="pi pi-star text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-            <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">التميز</h3>
-            <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">تحقيق معايير استثنائية وتقديم الدعم بطريقة مميزة.</p>
-          </div>
-          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105 animate-fadeInUp" style="animation-delay: 400ms;">
-            <i class="pi pi-check-circle text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-            <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">المُسؤولية</h3>
-            <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">الالتزام بتنمية المواهب وتحقيق الأهداف بوعي وتفانٍ.</p>
-          </div>
-          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105 animate-fadeInUp" style="animation-delay: 600ms;">
-            <i class="pi pi-refresh text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-            <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">الاستدامة</h3>
-            <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">الالتزام بالنمو والتطور المستدام.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- What We Offer Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4">
-      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">ماذا نقدم؟</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div v-for="(offer, index) in offers" :key="index"
-               class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg flex items-start gap-4">
-            <i class="pi pi-check-circle text-xl text-[var(--p-primary-color)] mt-1"></i>
-            <p class="text-lg text-[var(--p-text-muted-color)]">{{ offer }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Goals Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4">
-      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-        <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">أهدافنا</h2>
-        <div class="space-y-4">
-          <div v-for="(goal, index) in goals" :key="index"
-               class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg flex items-center gap-4">
-            <div class="bg-[var(--p-primary-color)] text-[var(--p-button-text-primary-color)] w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold">
-              {{ index + 1 }}
+    <ScrollReveal>
+      <!-- Vision & Mission Section -->
+      <div class="py-12 sm:py-16 px-0 sm:px-4">
+        <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
+              <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-[var(--p-text-color)]">رؤيتنا</h2>
+              <p class="text-base sm:text-lg text-[var(--p-text-muted-color)] leading-relaxed">
+                أن تكون المنصة رائدة في بناء أجيال متكاملة ثقافياً وتنموياً ورياضياً واجتماعياً، وتعزيز الصحة والمواهب في المجتمع.
+              </p>
             </div>
-            <p class="text-lg text-[var(--p-text-color)]">{{ goal }}</p>
+            <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
+              <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-[var(--p-text-color)]">رسالتنا</h2>
+              <p class="text-base sm:text-lg text-[var(--p-text-muted-color)] leading-relaxed">
+                تسعى المنصة إلى تقديم العلم والمعرفة من خلال أساليب تدريبية وترفيهية، ودعم المواهب وتطويرها في بيئة ملهمة تعزز من إمكانياتهم وتحقق طموحاتهم.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ScrollReveal>
 
-    <!-- Our Fields Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4">
-      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">مجالاتنا</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          <div v-for="(field, index) in fields" :key="index"
-               class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-transform duration-300 hover:scale-105">
-            <i :class="fieldIcons[index]" class="text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-            <h3 class="text-xl font-bold text-[var(--p-text-color)]">{{ field }}</h3>
+    <ScrollReveal>
+      <!-- Values Section -->
+      <div class="py-12 sm:py-16 px-0 sm:px-4">
+        <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">قيمنا</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <ScrollReveal v-for="(field, index) in fields" :key="index" :delay="index * 200">
+              <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105">
+                <i class="pi pi-verified text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+                <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">الثقة</h3>
+                <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">بناء أو تعزيز علاقة موثوقة ومستدامة مع شركائنا ومواهبنا.</p>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal v-for="(field, index) in fields" :key="index" :delay="index * 200">
+              <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105">
+                <i class="pi pi-star text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+                <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">التميز</h3>
+                <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">تحقيق معايير استثنائية وتقديم الدعم بطريقة مميزة.</p>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal v-for="(field, index) in fields" :key="index" :delay="index * 200">
+              <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105">
+                <i class="pi pi-check-circle text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+                <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">المُسؤولية</h3>
+                <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">الالتزام بتنمية المواهب وتحقيق الأهداف بوعي وتفانٍ.</p>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal v-for="(field, index) in fields" :key="index" :delay="index * 200">
+              <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105">
+                <i class="pi pi-refresh text-2xl sm:text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+                <h3 class="text-lg sm:text-xl font-bold mb-3 text-[var(--p-text-color)]">الاستدامة</h3>
+                <p class="text-sm sm:text-base text-[var(--p-text-muted-color)]">الالتزام بالنمو والتطور المستدام.</p>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>
-    </div>
+    </ScrollReveal>
 
-    <!-- Forums Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4">
-      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">نبذة تعريفية عن مواهبنا</h2>
+    <ScrollReveal>
+      <!-- What We Offer Section -->
+      <div class="py-12 sm:py-16 px-0 sm:px-4">
+        <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
+          <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">ماذا نقدم؟</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div v-for="(offer, index) in offers" :key="index"
+                 class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg flex items-start gap-4">
+              <i class="pi pi-check-circle text-xl text-[var(--p-primary-color)] mt-1"></i>
+              <p class="text-lg text-[var(--p-text-muted-color)]">{{ offer }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ScrollReveal>
 
-        <Tabs value="0" scrollable>
-          <TabList>
-            <Tab v-for="(forum, index) in forums"
-                 :key="index"
-                 :value="index.toString()">
-              {{ forum.title }}
-            </Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel v-for="(forum, index) in forums"
-                      :key="index"
-                      :value="index.toString()">
-              <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
-                <div class="mb-8">
-                  <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
-                    {{ forum.description }}
+    <ScrollReveal>
+      <!-- Goals Section -->
+      <div class="py-12 sm:py-16 px-0 sm:px-4">
+        <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
+          <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">أهدافنا</h2>
+          <div class="space-y-4">
+            <div v-for="(goal, index) in goals" :key="index"
+                 class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg flex items-center gap-4">
+              <div class="bg-[var(--p-primary-color)] text-[var(--p-button-text-primary-color)] w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold">
+                {{ index + 1 }}
+              </div>
+              <p class="text-lg text-[var(--p-text-color)]">{{ goal }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ScrollReveal>
+
+    <ScrollReveal>
+      <!-- Our Fields Section -->
+      <div class="py-12 sm:py-16 px-0 sm:px-4">
+        <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
+          <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">مجالاتنا</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div v-for="(field, index) in fields" :key="index"
+                 class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-transform duration-300 hover:scale-105">
+              <i :class="fieldIcons[index]" class="text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+              <h3 class="text-xl font-bold text-[var(--p-text-color)]">{{ field }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ScrollReveal>
+
+    <ScrollReveal>
+      <!-- Forums Section -->
+      <div class="py-12 sm:py-16 px-0 sm:px-4">
+        <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
+          <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">نبذة تعريفية عن مواهبنا</h2>
+
+          <Tabs value="0" scrollable>
+            <TabList>
+              <Tab v-for="(forum, index) in forums"
+                   :key="index"
+                   :value="index.toString()">
+                {{ forum.title }}
+              </Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel v-for="(forum, index) in forums"
+                        :key="index"
+                        :value="index.toString()">
+                <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
+                  <div class="mb-8">
+                    <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
+                      {{ forum.description }}
+                    </p>
+                  </div>
+
+                  <div class="mt-8">
+                    <h3 class="text-2xl font-bold mb-6 text-[var(--p-text-color)]">أهداف الملتقى</h3>
+                    <ul class="space-y-4">
+                      <li v-for="(objective, idx) in forum.objectives"
+                          :key="idx"
+                          class="flex items-start gap-4">
+                        <i class="pi pi-check-circle text-[var(--p-primary-color)] mt-1"></i>
+                        <span class="text-[var(--p-text-muted-color)]">{{ objective }}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </div>
+      </div>
+    </ScrollReveal>
+
+    <ScrollReveal>
+      <!-- History Section -->
+      <div class="py-12 sm:py-16 px-0 sm:px-4">
+        <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
+          <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">تاريخنا</h2>
+          <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
+            <div class="space-y-6">
+              <div class="flex gap-4">
+                <div class="flex-shrink-0">
+                  <div class="w-4 h-4 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold mb-2 text-[var(--p-text-color)]">2020 - التأسيس</h3>
+                  <p class="text-[var(--p-text-muted-color)]">
+                    تأسست منصة "خيط وإبرة" في أبريل 2020، في خضم أزمة جائحة كورونا، على يد المؤسس ريان القرشي.
                   </p>
                 </div>
-
-                <div class="mt-8">
-                  <h3 class="text-2xl font-bold mb-6 text-[var(--p-text-color)]">أهداف الملتقى</h3>
-                  <ul class="space-y-4">
-                    <li v-for="(objective, idx) in forum.objectives"
-                        :key="idx"
-                        class="flex items-start gap-4">
-                      <i class="pi pi-check-circle text-[var(--p-primary-color)] mt-1"></i>
-                      <span class="text-[var(--p-text-muted-color)]">{{ objective }}</span>
-                    </li>
-                  </ul>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex-shrink-0">
+                  <div class="w-4 h-4 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold mb-2 text-[var(--p-text-color)]">2021 - التوسع</h3>
+                  <p class="text-[var(--p-text-muted-color)]">
+                    في يونيو 2021، أطلقت المنصة ملتقياتها الخاصة لدعم المواهب، لتصبح منبراً جامعاً للموهوبين والهواة.
+                  </p>
                 </div>
               </div>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </div>
-    </div>
-
-    <!-- History Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4">
-      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-        <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">تاريخنا</h2>
-        <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
-          <div class="space-y-6">
-            <div class="flex gap-4">
-              <div class="flex-shrink-0">
-                <div class="w-4 h-4 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold mb-2 text-[var(--p-text-color)]">2020 - التأسيس</h3>
-                <p class="text-[var(--p-text-muted-color)]">
-                  تأسست منصة "خيط وإبرة" في أبريل 2020، في خضم أزمة جائحة كورونا، على يد المؤسس ريان القرشي.
-                </p>
-              </div>
-            </div>
-            <div class="flex gap-4">
-              <div class="flex-shrink-0">
-                <div class="w-4 h-4 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold mb-2 text-[var(--p-text-color)]">2021 - التوسع</h3>
-                <p class="text-[var(--p-text-muted-color)]">
-                  في يونيو 2021، أطلقت المنصة ملتقياتها الخاصة لدعم المواهب، لتصبح منبراً جامعاً للموهوبين والهواة.
-                </p>
-              </div>
-            </div>
-            <div class="flex gap-4">
-              <div class="flex-shrink-0">
-                <div class="w-4 h-4 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold mb-2 text-[var(--p-text-color)]">اليوم</h3>
-                <p class="text-[var(--p-text-muted-color)]">
-                  تضم المنصة اليوم أكثر من 25,000 متابع وتدعم مجموعة واسعة من المواهب في مجالات متعددة.
-                </p>
+              <div class="flex gap-4">
+                <div class="flex-shrink-0">
+                  <div class="w-4 h-4 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold mb-2 text-[var(--p-text-color)]">اليوم</h3>
+                  <p class="text-[var(--p-text-muted-color)]">
+                    تضم المنصة اليوم أكثر من 25,000 متابع وتدعم مجموعة واسعة من المواهب في مجالات متعددة.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </ScrollReveal>
 
-    <!-- Impact & Future Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4">
-      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">أثرنا ومستقبلنا</h2>
-        <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg space-y-8">
-          <div>
-            <h3 class="text-2xl font-bold mb-4 text-[var(--p-text-color)]">امتداد التأثير</h3>
-            <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
-              واليوم، وبعد ثلاثة أعوام من العطاء، امتدت تأثيرات المنصة وانتشارها جغرافياً، حيث جذبت مواهب من المملكة العربية السعودية أولاً، ومن ثم من مختلف الدول العربية، بما في ذلك العراق وسوريا ومصر والأردن والجزائر واليمن وغيرها من الدول، مما جعلها حاضنة إبداعية على مستوى الوطن العربي.
-            </p>
-          </div>
-          <div>
-            <h3 class="text-2xl font-bold mb-4 text-[var(--p-text-color)]">رؤيتنا المستقبلية</h3>
-            <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
-              تواصل منصة "خيط وإبرة" رسالتها الرائدة في دعم الموهوبين وتطوير مهاراتهم، مع رؤية مستقبلية طموحة تهدف إلى أن تصل إلى كل بيت سعودي أولاً، ومن ثم البيوت في مختلف البلدان العربية، لتصبح شريكاً أساسياً في تعزيز قدرات الأفراد.
-            </p>
-          </div>
-          <div>
-            <h3 class="text-2xl font-bold mb-4 text-[var(--p-text-color)]">المساهمة في رؤية 2030</h3>
-            <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
-              تلتزم المنصة بالمساهمة في تحقيق رؤية المملكة 2030 من خلال دعم الإبداع، وتمكين المواهب، وتعزيز جودة الحياة، بما يتماشى مع أهداف الرؤية التي تسعى لبناء مجتمع حيوي يمكن الأفراد من تحقيق إمكانياتهم الكاملة.
-            </p>
+    <ScrollReveal>
+      <!-- Impact & Future Section -->
+      <div class="py-12 sm:py-16 px-0 sm:px-4">
+        <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
+          <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">أثرنا ومستقبلنا</h2>
+          <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg space-y-8">
+            <div>
+              <h3 class="text-2xl font-bold mb-4 text-[var(--p-text-color)]">امتداد التأثير</h3>
+              <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
+                واليوم، وبعد ثلاثة أعوام من العطاء، امتدت تأثيرات المنصة وانتشارها جغرافياً، حيث جذبت مواهب من المملكة العربية السعودية أولاً، ومن ثم من مختلف الدول العربية، بما في ذلك العراق وسوريا ومصر والأردن والجزائر واليمن وغيرها من الدول، مما جعلها حاضنة إبداعية على مستوى الوطن العربي.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold mb-4 text-[var(--p-text-color)]">رؤيتنا المستقبلية</h3>
+              <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
+                تواصل منصة "خيط وإبرة" رسالتها الرائدة في دعم الموهوبين وتطوير مهاراتهم، مع رؤية مستقبلية طموحة تهدف إلى أن تصل إلى كل بيت سعودي أولاً، ومن ثم البيوت في مختلف البلدان العربية، لتصبح شريكاً أساسياً في تعزيز قدرات الأفراد.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold mb-4 text-[var(--p-text-color)]">المساهمة في رؤية 2030</h3>
+              <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
+                تلتزم المنصة بالمساهمة في تحقيق رؤية المملكة 2030 من خلال دعم الإبداع، وتمكين المواهب، وتعزيز جودة الحياة، بما يتماشى مع أهداف الرؤية التي تسعى لبناء مجتمع حيوي يمكن الأفراد من تحقيق إمكانياتهم الكاملة.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ScrollReveal>
 
-    <!-- Organizational Structure Section -->
-    <div class="py-16 px-0 sm:px-4">
-      <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-        <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">الهيكل التنظيمي</h2>
-        <OrganizationalChart />
+    <ScrollReveal>
+      <!-- Organizational Structure Section -->
+      <div class="py-16 px-0 sm:px-4">
+        <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
+          <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">الهيكل التنظيمي</h2>
+          <OrganizationalChart />
+        </div>
       </div>
-    </div>
+    </ScrollReveal>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import ScrollReveal from '@/components/ScrollReveal.vue';
 import Tabs from 'primevue/tabs';
 import TabList from 'primevue/tablist';
 import Tab from 'primevue/tab';
@@ -425,6 +454,14 @@ const forums = ref([
   }
 }
 
+/* Remove the standalone animation classes since we're using ScrollReveal */
+.animate-fadeIn,
+.animate-slideInLeft,
+.animate-slideInRight,
+.animate-fadeInUp {
+  animation: none;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -465,23 +502,6 @@ const forums = ref([
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 1s ease-out;
-}
-
-.animate-slideInLeft {
-  animation: slideInLeft 1s ease-out;
-}
-
-.animate-slideInRight {
-  animation: slideInRight 1s ease-out;
-}
-
-.animate-fadeInUp {
-  animation: fadeInUp 1s ease-out;
-  animation-fill-mode: both;
 }
 
 /* Add smooth transitions */
