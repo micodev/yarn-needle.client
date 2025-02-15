@@ -165,7 +165,7 @@
       <div class="max-w-6xl mx-auto">
         <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">نبذة تعريفية عن مواهبنا</h2>
 
-        <Tabs value="0">
+        <Tabs value="0" scrollable>
           <TabList>
             <Tab v-for="(forum, index) in forums"
                  :key="index"
