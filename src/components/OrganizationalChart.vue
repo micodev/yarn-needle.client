@@ -1,5 +1,5 @@
 <template>
-  <div class="org-chart p-4 sm:p-8 bg-[var(--p-surface-100)] min-h-screen">
+  <div class="org-chart p-4 sm:p-8 min-h-screen">
     <div class="max-w-7xl mx-auto">
       <!-- Level 1 -->
       <div class="flex justify-center mb-16">
@@ -60,6 +60,13 @@
 </template>
 
 <style scoped>
+.org-chart {
+  direction: rtl;
+  overflow-x: hidden;
+  background-color: var(--p-background-color);
+  transition: background-color 0.3s ease;
+}
+
 .chart-box {
   background-color: var(--p-primary-color);
   color: var(--p-button-text-primary-color);
@@ -104,6 +111,7 @@
   border-right: 10px solid transparent;
   border-top: 15px solid var(--p-primary-color);
   position: relative;
+  transition: border-color 0.3s ease;
 }
 
 .arrow-down::before {
@@ -114,6 +122,7 @@
   width: 4px;
   height: 20px;
   background-color: var(--p-primary-color);
+  transition: background-color 0.3s ease;
 }
 
 .arrow-horizontal-container {
@@ -131,6 +140,7 @@
   width: 100%;
   height: 4px;
   background-color: var(--p-primary-color);
+  transition: background-color 0.3s ease;
 }
 
 .arrow-horizontal::after {
@@ -143,6 +153,7 @@
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
   border-left: 15px solid var(--p-primary-color);
+  transition: border-color 0.3s ease;
 }
 
 .arrow-horizontal::before {
@@ -155,6 +166,7 @@
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
   border-right: 15px solid var(--p-primary-color);
+  transition: border-color 0.3s ease;
 }
 
 /* Remove the old connector-line styles */
@@ -178,10 +190,5 @@
     top: -30px;
     height: 25px;
   }
-}
-
-.org-chart {
-  direction: rtl;
-  overflow-x: hidden;
 }
 </style>
