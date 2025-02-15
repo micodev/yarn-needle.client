@@ -11,7 +11,7 @@
     </div>
 
     <!-- Vision & Mission Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-0)]">
+    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
