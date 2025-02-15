@@ -261,4 +261,35 @@ const forums = ref([
 </script>
 
 <style scoped>
+:deep(.p-tabview .p-tabview-nav) {
+  border: none;
+  background: transparent;
+}
+
+:deep(.p-tabview .p-tabview-nav li .p-tabview-nav-link) {
+  background: var(--p-surface-0);
+  color: var(--p-text-muted-color);
+  border: 1px solid var(--p-surface-200);
+  border-radius: 0.5rem;
+  margin: 0 0.5rem;
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+:deep(.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link) {
+  background: var(--p-primary-color);
+  color: var(--p-button-text-primary-color);
+  border-color: var(--p-primary-color);
+}
+
+:deep(.p-tabview .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link) {
+  background: var(--p-surface-100);
+  border-color: var(--p-surface-300);
+  color: var(--p-text-color);
+}
+
+:deep(.p-tabview-ink-bar) {
+  display: none;
+}
 </style>
