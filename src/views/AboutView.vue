@@ -351,7 +351,6 @@ const forums = ref([
 }
 
 :deep(.p-tabview-nav li .p-tabview-nav-link) {
-  background-color: var(--p-card-background);
   color: var(--p-text-color);
   border-color: var(--p-content-border-color);
 }
