@@ -103,7 +103,7 @@
             <template v-else>
               <div class="text-center">
                 <p class="text-gray-700 dark:text-gray-300 mb-4">يجب تسجيل الدخول لإضافة تعليق</p>
-                <router-link to="/login" class="text-primary">
+                <router-link to="/" class="text-primary">
                   <Button label="تسجيل الدخول" severity="primary" />
                 </router-link>
               </div>
