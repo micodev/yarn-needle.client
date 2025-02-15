@@ -145,11 +145,13 @@ import { useToast } from 'primevue/usetoast';
 import { useCourseStore } from '@/stores/course';
 import { useCommentsStore } from '@/stores/comments';
 import { useAuthStore } from '@/stores/auth';  // Add this import
-console.log("courseStore", useCourseStore);
+
 const route = useRoute();
 const courseStore = useCourseStore();
 const commentsStore = useCommentsStore();
 const authStore = useAuthStore();  // Add this line
+
+console.log("courseStore", useCourseStore);
 
 const course = computed(() => courseStore.course);
 const displayedComments = computed(() => commentsStore.displayedComments);
