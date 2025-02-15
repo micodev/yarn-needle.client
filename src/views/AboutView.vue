@@ -11,7 +11,7 @@
     </div>
 
     <!-- Vision & Mission Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4 ">
+    <div class="py-12 sm:py-16 px-0 sm:px-4">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg animate-slideInLeft">
@@ -20,7 +20,7 @@
               أن تكون المنصة رائدة في بناء أجيال متكاملة ثقافياً وتنموياً ورياضياً واجتماعياً، وتعزيز الصحة والمواهب في المجتمع.
             </p>
           </div>
-          <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg animate-slideInRight">
+          <div class=" p-8 rounded-2xl shadow-lg animate-slideInRight">
             <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-[var(--p-text-color)]">رسالتنا</h2>
             <p class="text-base sm:text-lg text-[var(--p-text-muted-color)] leading-relaxed">
               تسعى المنصة إلى تقديم العلم والمعرفة من خلال أساليب تدريبية وترفيهية، ودعم المواهب وتطويرها في بيئة ملهمة تعزز من إمكانياتهم وتحقق طموحاتهم.
