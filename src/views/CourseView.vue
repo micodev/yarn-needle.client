@@ -165,7 +165,9 @@ watch(
   (newId) => {
     if (newId) {
       courseStore.fetchCourse(newId);
+      if (authStore.isAuthenticated) {
       commentsStore.fetchComments(newId);
+      }
     }
   },
   { immediate: true }
