@@ -190,7 +190,7 @@
     </div>
 
     <!-- Impact & Future Section -->
-    <div class="py-12 sm:py-16 px-0 sm:px-4 bg-[var(--p-surface-50)]">
+    <div class="py-12 sm:py-16 px-0 sm:px-4">
       <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
         <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">أثرنا ومستقبلنا</h2>
         <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg space-y-8">
