@@ -260,7 +260,7 @@ const forums = ref([
 ]);
 </script>
 
-<style scoped>
+<style>
 :deep(.p-tabview-nav) {
   background: transparent !important;
   border: none !important;
