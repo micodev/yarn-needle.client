@@ -1,11 +1,23 @@
 <template>
-  <div ref="elementRef" class="scroll-reveal" :class="{ visible: isVisible }">
+  <div
+    ref="elementRef"
+    class="scroll-reveal"
+    :class="{ visible: isVisible }"
+    :style="{ transitionDelay: `${delay}ms` }"
+  >
     <slot></slot>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+
+const props = defineProps({
+  delay: {
+    type: Number,
+    default: 0
+  }
+});
 
 const elementRef = ref(null);
 const isVisible = ref(false);
@@ -21,6 +33,7 @@ const observer = new IntersectionObserver(
   },
   {
     threshold: 0.1,
+    rootMargin: '50px'
   }
 );
 
@@ -31,6 +44,31 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
+  if (elementRef.value) {
+    observer.unobserve(elementRef.value);
+  }
   observer.disconnect();
 });
 </script>
+
+<style scoped>
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
