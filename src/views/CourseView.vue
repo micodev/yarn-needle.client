@@ -89,15 +89,25 @@
               @click="showMoreComments" />
           </div>
           <div v-if="!hasAlreadyCommented" class="mt-4 flex flex-col space-y-4 justify-center">
-            <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">أضف تقييمك وتعليقك</h3>
-            <Rating v-model="newComment.rating" :stars="5" cancel="false" />
-            <Textarea v-model="newComment.text" class="w-full mt-2 p-2 border rounded"
-              placeholder="اكتب تعليقك هنا..." />
-            <div>
-              <Button v-if="!loading" label="إرسال" class="mt-2 w-1/2" @click="addComment"
-                :disabled="!newComment.rating || !newComment.text" />
-              <ProgressSpinner v-else class="mt-2" />
-            </div>
+            <template v-if="authStore.isAuthenticated">
+              <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">أضف تقييمك وتعليقك</h3>
+              <Rating v-model="newComment.rating" :stars="5" cancel="false" />
+              <Textarea v-model="newComment.text" class="w-full mt-2 p-2 border rounded"
+                placeholder="اكتب تعليقك هنا..." />
+              <div>
+                <Button v-if="!loading" label="إرسال" class="mt-2 w-1/2" @click="addComment"
+                  :disabled="!newComment.rating || !newComment.text" />
+                <ProgressSpinner v-else class="mt-2" />
+              </div>
+            </template>
+            <template v-else>
+              <div class="text-center">
+                <p class="text-gray-700 dark:text-gray-300 mb-4">يجب تسجيل الدخول لإضافة تعليق</p>
+                <router-link to="/login" class="text-primary">
+                  <Button label="تسجيل الدخول" severity="primary" />
+                </router-link>
+              </div>
+            </template>
           </div>
         </Fieldset>
       </div>
@@ -134,10 +144,12 @@ import { Button, Fieldset, Rating, Textarea, ProgressSpinner, Toast } from 'prim
 import { useToast } from 'primevue/usetoast';
 import { useCourseStore } from '@/stores/course';
 import { useCommentsStore } from '@/stores/comments';
+import { useAuthStore } from '@/stores/auth';  // Add this import
 
 const route = useRoute();
 const courseStore = useCourseStore();
 const commentsStore = useCommentsStore();
+const authStore = useAuthStore();  // Add this line
 
 const course = computed(() => courseStore.course);
 const displayedComments = computed(() => commentsStore.displayedComments);
@@ -164,7 +176,28 @@ onUnmounted(() => {
   courseStore.clearCourse();
 });
 
-const addComment = () => commentsStore.addComment(route.params.id);
+// Modify addComment to include user info
+const addComment = async () => {
+  if (!authStore.isAuthenticated) {
+    toast.add({
+      severity: 'warn',
+      summary: 'تنبيه',
+      detail: 'يجب تسجيل الدخول لإضافة تعليق',
+      life: 3000
+    });
+    return;
+  }
+
+  // Add user info to comment
+  const commentWithUser = {
+    ...newComment.value,
+    userName: authStore.user?.userName,
+    userImage: authStore.user?.profileImage || '/default-avatar.png'
+  };
+
+  await commentsStore.addComment(route.params.id, commentWithUser);
+};
+
 const showMoreComments = () => commentsStore.showMoreComments(route.params.id);
 // Watch for errors in comments store and show toast notification
 watch(
