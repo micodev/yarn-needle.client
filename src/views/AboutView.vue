@@ -3,65 +3,118 @@
     <!-- Hero Section -->
     <div class="hero-section relative py-20 px-4 bg-gradient-to-br from-[var(--p-primary-50)] to-[var(--p-surface-50)] dark:from-[var(--p-surface-800)] dark:to-[var(--p-surface-900)]">
       <div class="max-w-6xl mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold mb-6 text-[var(--p-text-color)] opacity-0 transform translate-y-5 animate-[fadeIn_1s_ease-in_forwards]">
-          خيط وإبرة
-        </h1>
-        <p class="text-xl md:text-2xl text-[var(--p-text-muted-color)] max-w-3xl mx-auto leading-relaxed">
-          نحول شغفك بالخياطة إلى مهارة احترافية
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 text-[var(--p-text-color)]">من نحن</h1>
+        <p class="text-xl md:text-2xl text-[var(--p-text-muted-color)] max-w-4xl mx-auto leading-relaxed">
+          منصة تهدف إلى تعزيز المواهب والقدرات الإبداعية وتطوير المهارات الفردية من خلال تقديم فرص تعليمية وتدريبية شاملة.
         </p>
       </div>
     </div>
 
-    <!-- Features Section -->
+    <!-- Vision & Mission Section -->
     <div class="py-16 px-4 bg-[var(--p-surface-0)]">
       <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="bg-[var(--p-card-background)] p-8 rounded-xl shadow-lg text-center transition-transform duration-300 hover:scale-105">
-            <i class="pi pi-star text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-            <h3 class="text-xl font-bold mb-3 text-[var(--p-text-color)]">تعلم احترافي</h3>
-            <p class="text-[var(--p-text-muted-color)]">دورات مصممة بعناية من قبل خبراء في مجال الخياطة</p>
-          </div>
-          <div class="bg-[var(--p-card-background)] p-8 rounded-xl shadow-lg text-center transition-transform duration-300 hover:scale-105">
-            <i class="pi pi-users text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-            <h3 class="text-xl font-bold mb-3 text-[var(--p-text-color)]">مجتمع داعم</h3>
-            <p class="text-[var(--p-text-muted-color)]">تواصل مع متعلمين آخرين وشارك تجاربك</p>
-          </div>
-          <div class="bg-[var(--p-card-background)] p-8 rounded-xl shadow-lg text-center transition-transform duration-300 hover:scale-105">
-            <i class="pi pi-check-circle text-3xl mb-4 text-[var(--p-primary-color)]"></i>
-            <h3 class="text-xl font-bold mb-3 text-[var(--p-text-color)]">شهادات معتمدة</h3>
-            <p class="text-[var(--p-text-muted-color)]">احصل على شهادات تؤهلك للعمل في مجال الخياطة</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Vision & Mission -->
-    <div class="py-16 px-4 bg-[var(--p-background-color)]">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div class="bg-[var(--p-card-background)] p-8 rounded-xl shadow-lg transition-shadow duration-300 hover:shadow-2xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
             <h2 class="text-3xl font-bold mb-6 text-[var(--p-text-color)]">رؤيتنا</h2>
             <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
-              نسعى لنكون المنصة الرائدة في تعليم الخياطة والتصميم في العالم العربي
+              أن تكون المنصة رائدة في بناء أجيال متكاملة ثقافياً وتنموياً ورياضياً واجتماعياً، وتعزيز الصحة والمواهب في المجتمع.
             </p>
           </div>
-          <div class="bg-[var(--p-card-background)] p-8 rounded-xl shadow-lg transition-shadow duration-300 hover:shadow-2xl">
-            <h2 class="text-3xl font-bold mb-6 text-[var(--p-text-color)]">مهمتنا</h2>
+          <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
+            <h2 class="text-3xl font-bold mb-6 text-[var(--p-text-color)]">رسالتنا</h2>
             <p class="text-lg text-[var(--p-text-muted-color)] leading-relaxed">
-              تمكين الأفراد من تحقيق أحلامهم في عالم الخياطة من خلال تعليم عالي الجودة
+              تسعى المنصة إلى تقديم العلم والمعرفة من خلال أساليب تدريبية وترفيهية، ودعم المواهب وتطويرها في بيئة ملهمة تعزز من إمكانياتهم وتحقق طموحاتهم.
             </p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Call to Action -->
-    <div class="py-16 px-4 bg-[var(--p-primary-color)]">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-6 text-[var(--p-button-text-primary-color)]">ابدأ رحلتك التعليمية اليوم</h2>
-        <div class="space-x-4 rtl:space-x-reverse">
-          <Button label="سجل الآن" class="h-12 text-lg bg-[var(--p-surface-0)] text-[var(--p-primary-color)] hover:bg-[var(--p-surface-100)]" />
-          <Button label="تواصل معنا" text class="h-12 text-lg text-[var(--p-button-text-primary-color)] hover:bg-[var(--p-primary-hover-color)]" />
+    <!-- Values Section -->
+    <div class="py-16 px-4 bg-[var(--p-background-color)]">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">قيمنا</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center">
+            <i class="pi pi-verified text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+            <h3 class="text-xl font-bold mb-3 text-[var(--p-text-color)]">الثقة</h3>
+            <p class="text-[var(--p-text-muted-color)]">بناء أو تعزيز علاقة موثوقة ومستدامة مع شركائنا ومواهبنا.</p>
+          </div>
+          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center">
+            <i class="pi pi-star text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+            <h3 class="text-xl font-bold mb-3 text-[var(--p-text-color)]">التميز</h3>
+            <p class="text-[var(--p-text-muted-color)]">تحقيق معايير استثنائية وتقديم الدعم بطريقة مميزة.</p>
+          </div>
+          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center">
+            <i class="pi pi-check-circle text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+            <h3 class="text-xl font-bold mb-3 text-[var(--p-text-color)]">المُسؤولية</h3>
+            <p class="text-[var(--p-text-muted-color)]">الالتزام بتنمية المواهب وتحقيق الأهداف بوعي وتفانٍ.</p>
+          </div>
+          <div class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center">
+            <i class="pi pi-refresh text-3xl mb-4 text-[var(--p-primary-color)]"></i>
+            <h3 class="text-xl font-bold mb-3 text-[var(--p-text-color)]">الاستدامة</h3>
+            <p class="text-[var(--p-text-muted-color)]">الالتزام بالنمو والتطور المستدام.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Goals Section -->
+    <div class="py-16 px-4 bg-[var(--p-surface-0)]">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">أهدافنا</h2>
+        <div class="space-y-4">
+          <div v-for="(goal, index) in goals" :key="index"
+               class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg flex items-center gap-4">
+            <div class="bg-[var(--p-primary-color)] text-[var(--p-button-text-primary-color)] w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold">
+              {{ index + 1 }}
+            </div>
+            <p class="text-lg text-[var(--p-text-color)]">{{ goal }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- History Section -->
+    <div class="py-16 px-4 bg-[var(--p-background-color)]">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">تاريخنا</h2>
+        <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-4 h-4 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-2 text-[var(--p-text-color)]">2020 - التأسيس</h3>
+                <p class="text-[var(--p-text-muted-color)]">
+                  تأسست منصة "خيط وإبرة" في أبريل 2020، في خضم أزمة جائحة كورونا، على يد المؤسس ريان القرشي.
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-4 h-4 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-2 text-[var(--p-text-color)]">2021 - التوسع</h3>
+                <p class="text-[var(--p-text-muted-color)]">
+                  في يونيو 2021، أطلقت المنصة ملتقياتها الخاصة لدعم المواهب، لتصبح منبراً جامعاً للموهوبين والهواة.
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-4 h-4 rounded-full bg-[var(--p-primary-color)] mt-2"></div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-2 text-[var(--p-text-color)]">اليوم</h3>
+                <p class="text-[var(--p-text-muted-color)]">
+                  تضم المنصة اليوم أكثر من 25,000 متابع وتدعم مجموعة واسعة من المواهب في مجالات متعددة.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -69,5 +122,11 @@
 </template>
 
 <script setup>
-import { Button } from 'primevue';
+import { ref } from 'vue';
+
+const goals = ref([
+  'بناء قاعدة جماهيرية متفاعلة من المواهب الواعدة ومحبي تطوير المهارات.',
+  'توفير بيئة شاملة رياضية وثقافية وتنموية واجتماعية لتمكين المواهب وتوسيع آفاقهم.',
+  'دعم المواهب وتنمية مهاراتها وتطوير قدراتها للوصول إلى إمكاناتها الكاملة.'
+]);
 </script>
