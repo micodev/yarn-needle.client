@@ -261,22 +261,10 @@ const forums = ref([
 </script>
 
 <style>
-:deep(.p-tabview-nav) {
+:deep(.p-tab) {
   background: transparent !important;
   border: none !important;
 }
 
-:deep(.p-tabview-nav-link) {
-  background: transparent !important;
-}
 
-:deep(.p-tabview-selected .p-tabview-nav-link) {
-  background: transparent !important;
-  border-color: var(--p-primary-color) !important;
-}
-
-:deep(.p-tabview-panels) {
-  background: transparent !important;
-  border: none !important;
-}
 </style>
