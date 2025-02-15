@@ -165,6 +165,8 @@ watch(
   async (newId) => {
     if (newId) {
       await courseStore.fetchCourse(newId);
+      console.log(authStore.isAuthenticated);
+      console.log(courseStore.course);
       if (authStore.isAuthenticated) {
       await commentsStore.fetchComments(newId);
       }
