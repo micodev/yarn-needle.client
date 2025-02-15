@@ -261,7 +261,7 @@ const forums = ref([
 </script>
 
 <style>
-:deep(.p-tab) {
+.p-tab {
   background: transparent !important;
 }
 
