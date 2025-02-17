@@ -114,7 +114,7 @@
             <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ plan.title }}</h3>
           </div>
           <ul class="text-gray-700 dark:text-gray-300 mb-4 list-disc list-inside">
-            <li v-for="(point, index) in plan.description" :key="index">{{ point }}</li>
+            <li v-for="(point, index) in plan.features" :key="index">{{ point }}</li>
           </ul>
         </div>
         <div class="mt-auto">
