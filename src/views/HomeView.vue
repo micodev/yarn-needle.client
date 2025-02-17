@@ -142,6 +142,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { Button } from "primevue";
+import { useToast } from 'primevue/usetoast';
 import { useMembershipStore } from '@/stores/membership';
 import { useCoursesStore } from '@/stores/courses';
 import { useAuthStore } from '@/stores/auth';
@@ -152,6 +153,8 @@ const membershipStore = useMembershipStore();
 const coursesStore = useCoursesStore();
 const authStore = useAuthStore();
 const router = useRouter();
+
+const toast = useToast();
 
 const getDiscountedPrice = (course) => {
   if (!course.discount) return course.originalPrice;
@@ -192,7 +195,12 @@ const navigateToDetails = (courseId) => {
 
 const handleSubscription = () => {
   if (!authStore.hasProfile) {
-    alert('يجب اكمال معلومات حسابك');
+    toast.add({
+      severity: 'warn',
+      summary: 'تنبيه',
+      detail: 'يجب إكمال معلومات حسابك الشخصي قبل الاشتراك',
+      life: 3000
+    });
     return;
   }
   // Continue with subscription logic
