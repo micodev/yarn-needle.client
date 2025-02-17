@@ -24,6 +24,7 @@ export const useMembershipStore = defineStore('membership', {
           title: membership.name,
           description: membership.description.split(','), // Assuming description comes as comma-separated string
           price: membership.price,
+          features: JSON.parse(membership.features), // Assuming features come as JSON
           iconClass: membership.iconClass || 'pi pi-star' // Default icon if none provided
         }))
       } catch (error) {
