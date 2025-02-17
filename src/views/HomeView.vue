@@ -67,7 +67,7 @@
             <div class="flex justify-between">
               <Button icon="pi pi-heart" severity="primary" variant="text" />
               <span v-if="course.discount"
-                class="text-green-500 font-bold text-center content-center rounded-md px-2 bg-green-100 bg-opacity-50 dark:bg-green-900">{{
+                class="text-green-500 font-bold text-center content-center rounded-md px-2 bg-primary bg-opacity-50 dark:bg-green-900">{{
                   course.discount }}%</span>
             </div>
           </div>
