@@ -148,7 +148,21 @@ const router = useRouter();
 
 const getDiscountedPrice = (course) => {
   if (!course.discount) return course.originalPrice;
-  return Math.round(course.originalPrice * (1 - course.discount / 100));
+
+  let discountRate = course.discount;
+  let originalPrice = course.originalPrice;
+
+  if (discountRate > 1) {
+    discountRate /= 100; // Convert percentage to decimal
+  }
+
+  // Calculate discount amount
+  const discountAmount = originalPrice * discountRate;
+
+  // Calculate discounted price
+  const discountedPrice = originalPrice - discountAmount;
+
+  return discountedPrice;
 };
 
 // Add these refs for purchase dialog
