@@ -8,11 +8,13 @@ export const useCoursesStore = defineStore('courses', {
 		currentPage: 1,
 		hasMore: true,
 		limit: 2,
-		currentFilters: null
+		currentFilters: null,
+		recentCourses: []
 	}),
 	getters: {
 		getCourses: (state) => state.courses,
-		getCourseById: (state) => (id) => state.courses.find(c => c.id === id)
+		getCourseById: (state) => (id) => state.courses.find(c => c.id === id),
+		getRecentCourses: (state) => state.recentCourses
 	},
 	actions: {
 		resetPagination() {
@@ -90,6 +92,23 @@ export const useCoursesStore = defineStore('courses', {
 			} catch (error) {
 				this.error = error.message || 'Failed to fetch filtered courses';
 				console.error('Error fetching filtered courses:', error);
+			} finally {
+				this.isLoading = false;
+			}
+		},
+		async fetchRecentCourses() {
+			this.isLoading = true;
+			this.error = null;
+			try {
+				const response = await this.$axios.get('/api/course', {
+					params: {
+						limit: 3
+					}
+				});
+				this.recentCourses = response.data;
+			} catch (error) {
+				this.error = error.message || 'Failed to fetch recent courses';
+				console.error('Error fetching recent courses:', error);
 			} finally {
 				this.isLoading = false;
 			}
