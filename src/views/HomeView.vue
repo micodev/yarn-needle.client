@@ -79,8 +79,18 @@
             <p class="text-gray-500 dark:text-gray-400 line-through ml-2 content-center text-xs" v-if="course.discount">{{ course.originalPrice }} ريال سعودي</p>
           </div>
           <div class="flex flex-row gap-1">
-            <Button label="شراء" class="h-8 flex-1" :severity="index == 1?'contrast':'primary'" />
-            <Button label="تفاصيل" class="h-8 flex-1" severity="secondary" />
+            <Button
+              label="شراء"
+              class="h-8 flex-1"
+              :severity="index == 1?'contrast':'primary'"
+              @click="handlePurchaseClick(course.id)"
+            />
+            <Button
+              label="تفاصيل"
+              class="h-8 flex-1"
+              severity="secondary"
+              @click="navigateToDetails(course.id)"
+            />
           </div>
         </div>
       </div>
@@ -115,17 +125,22 @@
     </div>
   </div>
 
-  <!-- New Content Section -->
-
+  <PurchaseConfirmDialog
+    v-if="selectedCourseId"
+    v-model="showPurchaseDialog"
+    :course-id="selectedCourseId"
+    @purchase-success="handlePurchaseSuccess"
+  />
 
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { Button } from "primevue";
 import { useHomeStore } from '@/stores/home';
 import { useCoursesStore } from '@/stores/courses'; // Add this import
 import { useRouter } from 'vue-router';
+import PurchaseConfirmDialog from '../components/PurchaseConfirmDialog.vue';
 
 const homeStore = useHomeStore();
 const coursesStore = useCoursesStore(); // Add this line
@@ -134,6 +149,24 @@ const router = useRouter();
 const getDiscountedPrice = (course) => {
   if (!course.discount) return course.originalPrice;
   return Math.round(course.originalPrice * (1 - course.discount / 100));
+};
+
+// Add these refs for purchase dialog
+const showPurchaseDialog = ref(false);
+const selectedCourseId = ref(null);
+
+// Add these methods for handling purchase and navigation
+const handlePurchaseClick = (courseId) => {
+  selectedCourseId.value = courseId;
+  showPurchaseDialog.value = true;
+};
+
+const handlePurchaseSuccess = () => {
+  // You can add success notification or refresh course data if needed
+};
+
+const navigateToDetails = (courseId) => {
+  router.push({ name: 'course', params: { id: courseId }});
 };
 
 onMounted(async () => {
