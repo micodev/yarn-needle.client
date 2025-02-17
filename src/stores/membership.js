@@ -18,13 +18,13 @@ export const useMembershipStore = defineStore('membership', {
       this.error = null
       
       try {
-        const response = await this.$axios.get('/api/meta/memberships')
+        const response = await this.$axios.get('/api/memberships')
         this.memberships = response.data.map(membership => ({
           id: membership.id,
-          name: membership.name,
-          code: membership.code,
-          description: membership.description,
-          price: membership.price
+          title: membership.name,
+          description: membership.description.split(','), // Assuming description comes as comma-separated string
+          price: membership.price,
+          iconClass: membership.iconClass || 'pi pi-star' // Default icon if none provided
         }))
       } catch (error) {
         this.error = error.message || 'Failed to fetch memberships'
