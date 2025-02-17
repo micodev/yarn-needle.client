@@ -162,7 +162,7 @@ const getDiscountedPrice = (course) => {
   // Calculate discounted price
   const discountedPrice = originalPrice - discountAmount;
 
-  return discountedPrice;
+  return Math.round(discountedPrice);
 };
 
 // Add these refs for purchase dialog
