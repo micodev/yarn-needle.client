@@ -215,7 +215,7 @@
         </div>
 
         <div class="w-full px-2">
-          <Button type="submit" label="إرسال" class="w-full" />
+          <Button type="submit" label="حفظ" class="w-full" />
         </div>
       </form>
     </template>
