@@ -74,8 +74,8 @@
         </div>
         <div class="flex justify-between p-4 flex-col mt-auto">
           <div class="flex flex-row justify-center mb-2">
-            <p class=" text-black dark:text-white font-bold text-base align-middle ml-2" v-if="course.discount">{{ course.discountedPrice }} ريال سعودي</p>
-            <p class=" text-black dark:text-white font-bold text-base" v-if="!course.discount">{{ course.originalPrice }} ريال سعودي</p>
+            <p class="text-black dark:text-white font-bold text-base align-middle ml-2" v-if="course.discount">{{ getDiscountedPrice(course) }} ريال سعودي</p>
+            <p class="text-black dark:text-white font-bold text-base" v-if="!course.discount">{{ course.originalPrice }} ريال سعودي</p>
             <p class="text-gray-500 dark:text-gray-400 line-through ml-2 content-center text-xs" v-if="course.discount">{{ course.originalPrice }} ريال سعودي</p>
           </div>
           <div class="flex flex-row gap-1">
@@ -130,6 +130,11 @@ import { useRouter } from 'vue-router';
 const homeStore = useHomeStore();
 const coursesStore = useCoursesStore(); // Add this line
 const router = useRouter();
+
+const getDiscountedPrice = (course) => {
+  if (!course.discount) return course.originalPrice;
+  return Math.round(course.originalPrice * (1 - course.discount / 100));
+};
 
 onMounted(async () => {
   await Promise.all([
