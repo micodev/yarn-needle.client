@@ -119,7 +119,12 @@
         </div>
         <div class="mt-auto">
           <p class="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">{{ plan.price }} ريال سعودي / الشهر</p>
-          <Button label="إشترك الآن" icon="pi pi-arrow-left" class="h-10 w-full" />
+          <Button
+            label="إشترك الآن"
+            icon="pi pi-arrow-left"
+            class="h-10 w-full"
+            @click="handleSubscription"
+          />
         </div>
       </div>
     </div>
@@ -139,11 +144,13 @@ import { onMounted, ref } from "vue";
 import { Button } from "primevue";
 import { useMembershipStore } from '@/stores/membership';
 import { useCoursesStore } from '@/stores/courses';
+import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
 import PurchaseConfirmDialog from '../components/PurchaseConfirmDialog.vue';
 
 const membershipStore = useMembershipStore();
 const coursesStore = useCoursesStore();
+const authStore = useAuthStore();
 const router = useRouter();
 
 const getDiscountedPrice = (course) => {
@@ -181,6 +188,14 @@ const handlePurchaseSuccess = () => {
 
 const navigateToDetails = (courseId) => {
   router.push({ name: 'course', params: { id: courseId }});
+};
+
+const handleSubscription = () => {
+  if (!authStore.hasProfile) {
+    alert('يجب اكمال معلومات حسابك');
+    return;
+  }
+  // Continue with subscription logic
 };
 
 onMounted(async () => {
