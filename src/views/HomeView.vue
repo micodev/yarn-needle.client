@@ -43,13 +43,13 @@
       <p class="text-lg text-gray-600 dark:text-gray-400">دورات مصممة لتطوير مهاراتك في مجالات متعددة</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 relative">
-      <div v-if="homeStore.loading" class="col-span-3 text-center">
+      <div v-if="coursesStore.isLoading" class="col-span-3 text-center">
         <i class="pi pi-spin pi-spinner text-4xl"></i>
       </div>
-      <div v-else-if="homeStore.error" class="col-span-3 text-center text-red-500">
-        {{ homeStore.error }}
+      <div v-else-if="coursesStore.error" class="col-span-3 text-center text-red-500">
+        {{ coursesStore.error }}
       </div>
-      <div v-else v-for="(course, index) in homeStore.paddedCourses" :key="course.title"
+      <div v-else v-for="(course, index) in coursesStore.getRecentCourses" :key="course.title"
         :class="['card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full', 'bg-slate-50 dark:bg-gray-800' ]">
         <div class="relative">
           <img :src="course.image" alt="Course Image" class="w-full rounded" />
@@ -123,14 +123,18 @@
 <script setup>
 import { onMounted } from "vue";
 import { Button } from "primevue";
-import { useHomeStore } from '@/stores/home';  // This should now work
-import { useRouter } from 'vue-router'; // Add this import
+import { useHomeStore } from '@/stores/home';
+import { useCoursesStore } from '@/stores/courses'; // Add this import
+import { useRouter } from 'vue-router';
 
 const homeStore = useHomeStore();
-const router = useRouter(); // Add this line
+const coursesStore = useCoursesStore(); // Add this line
+const router = useRouter();
 
 onMounted(async () => {
-  await homeStore.fetchCourses();
-  await homeStore.fetchPlans();
+  await Promise.all([
+    homeStore.fetchPlans(),
+    coursesStore.fetchRecentCourses() // Replace homeStore.fetchCourses with this
+  ]);
 });
 </script>
