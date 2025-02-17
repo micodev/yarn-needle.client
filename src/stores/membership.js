@@ -16,9 +16,9 @@ export const useMembershipStore = defineStore('membership', {
     async fetchMemberships() {
       this.isLoading = true
       this.error = null
-      
+
       try {
-        const response = await this.$axios.get('/api/memberships')
+        const response = await this.$axios.get('/api/meta/memberships')
         this.memberships = response.data.map(membership => ({
           id: membership.id,
           title: membership.name,
