@@ -15,6 +15,9 @@ export const useAuthStore = defineStore('auth', {
         return state.user.userName.substring(0, 2).toUpperCase();
       }
       return '';
+    },
+    hasProfile: (state) => {
+      return state.user?.hasProfile || false;
     }
   },
 
@@ -125,10 +128,10 @@ export const useAuthStore = defineStore('auth', {
       this.token = null;
       this.refreshToken = null;
       this.isAuthenticated = false;
-      
+
       // Clear storage
       localStorage.removeItem('token');
-      
+
       // Optional: Use router to redirect (if router is available)
       if (window.location.pathname !== '/') {
         window.location.href = '/';
