@@ -14,7 +14,7 @@
       <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-center gap-3 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
         <i class="pi pi-shopping-cart text-2xl text-primary dark:text-primary-400"></i>
         <span class="text-base sm:text-lg font-medium text-gray-700 dark:text-gray-200 text-center sm:text-right">
-          هل تريد المتابعة لإتمام عملية الشراء؟
+          {{ type === 'course' ? 'هل تريد المتابعة لإتمام عملية الشراء؟' : 'هل تريد المتابعة لإتمام عملية الاشتراك؟' }}
         </span>
       </div>
 
@@ -99,6 +99,11 @@ const props = defineProps({
   courseId: {
     type: [String, Number],
     required: true
+  },
+  type: {
+    type: String,
+    required: true,
+    validator: (value) => ['course', 'membership'].includes(value)
   }
 })
 
@@ -124,7 +129,11 @@ const toast = useToast()
 
 const handleConfirm = async () => {
   try {
-    await orderStore.createOrder(props.courseId, note.value)
+    if (props.type === 'course') {
+      await orderStore.createOrder(props.courseId, note.value)
+    } else {
+      await orderStore.subscribeMembership(props.courseId, note.value)
+    }
     currentStep.value = 'payment'
   } catch (error) {
     toast.add({
