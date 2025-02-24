@@ -81,13 +81,15 @@
               <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <div v-for="plan in availablePlans" :key="plan.name"
                   class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 sm:p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                  <div class="flex items-center mb-4">
-                    <i :class="plan.iconClass" class="text-lg ml-3"></i>
-                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">{{ plan.name }}</h4>
-                  </div>
-                  <ul class="text-gray-700 dark:text-gray-300 mb-4 list-disc list-inside">
+                  <div>
+          <div class="flex items-center mb-4">
+            <i :class="plan.iconClass" class="text-lg ml-3"></i>
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ plan.title }}</h3>
+          </div>
+          <ul class="text-gray-700 dark:text-gray-300 mb-4 list-disc list-inside">
             <li v-for="(point, index) in plan.features" :key="index">{{ point }}</li>
           </ul>
+        </div>
                   <div class="mt-auto">
                     <p class="text-lg font-bold mb-4 text-gray-900 dark:text-white">
                       {{ plan.price }} ريال سعودي / الشهر
