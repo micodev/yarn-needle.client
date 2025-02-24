@@ -154,7 +154,7 @@ const coursesStore = useCoursesStore();
 const authStore = useAuthStore();
 const router = useRouter();
 const toast = useToast();
-
+const purchaseType = ref('course');
 const getDiscountedPrice = (course) => {
   if (!course.discount) return course.originalPrice;
 
@@ -182,6 +182,7 @@ const selectedCourseId = ref(null);
 const handlePurchaseClick = (courseId) => {
   selectedCourseId.value = courseId;
   showPurchaseDialog.value = true;
+  purchaseType.value = 'course';
 };
 
 const handlePurchaseSuccess = () => {
@@ -203,22 +204,9 @@ const handleSubscription = async (plan) => {
     return;
   }
 
-  try {
-    await membershipStore.subscribeToPlan(plan.code);
-    toast.add({
-      severity: 'success',
-      summary: 'تم بنجاح',
-      detail: 'تم الاشتراك في العضوية بنجاح',
-      life: 3000
-    });
-  } catch  {
-    toast.add({
-      severity: 'error',
-      summary: 'خطأ',
-      detail: 'حدث خطأ أثناء الاشتراك في العضوية',
-      life: 3000
-    });
-  }
+  selectedCourseId.value = plan.code;
+  showPurchaseDialog.value = true;
+  purchaseType.value = 'membership';
 };
 
 onMounted(async () => {
