@@ -153,7 +153,6 @@ const membershipStore = useMembershipStore();
 const coursesStore = useCoursesStore();
 const authStore = useAuthStore();
 const router = useRouter();
-
 const toast = useToast();
 
 const getDiscountedPrice = (course) => {
