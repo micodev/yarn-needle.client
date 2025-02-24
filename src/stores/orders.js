@@ -21,14 +21,14 @@ export const useOrdersStore = defineStore('orders', {
         this.isLoading = false
       }
     },
-    async subscribeMembership(membershipId, note = '') {
+    async subscribeMembership(code, note = '') {
       this.isLoading = true
       this.error = null
 
       try {
         const response = await this.$axios.post('/api/order/membership', {
-          membershipId,
-          note
+          MembershipCode: code,
+          Note:note
         })
         await this.fetchOrders()
         return response.data
