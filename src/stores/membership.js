@@ -23,6 +23,7 @@ export const useMembershipStore = defineStore('membership', {
         this.memberships = response.data.map(membership => ({
           id: membership.id,
           title: membership.name,
+          code: membership.code,
           description: membership.description.split(','), // Assuming description comes as comma-separated string
           price: membership.price,
           features: JSON.parse(membership.features), // Assuming features come as JSON
