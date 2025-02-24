@@ -89,7 +89,6 @@
           <ul class="text-gray-700 dark:text-gray-300 mb-4 list-disc list-inside">
             <li v-for="(point, index) in plan.features" :key="index">{{ point }}</li>
           </ul>
-        </div>
                   <div class="mt-auto">
                     <p class="text-lg font-bold mb-4 text-gray-900 dark:text-white">
                       {{ plan.price }} ريال سعودي / الشهر
