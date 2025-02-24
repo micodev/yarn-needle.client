@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { useOrdersStore } from './orders'
+import { useOrderStore } from './orderStore'
 
 export const useMembershipStore = defineStore('membership', {
   state: () => ({
@@ -38,7 +38,7 @@ export const useMembershipStore = defineStore('membership', {
     },
 
     async subscribeToPlan(code, note = '') {
-      const ordersStore = useOrdersStore()
+      const ordersStore = useOrderStore()
       return await ordersStore.subscribeMembership(code, note)
     },
 
