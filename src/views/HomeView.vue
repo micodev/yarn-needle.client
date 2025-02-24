@@ -123,7 +123,7 @@
             label="إشترك الآن"
             icon="pi pi-arrow-left"
             class="h-10 w-full"
-            @click="handleSubscription"
+            @click="handleSubscription(plan)"
           />
         </div>
       </div>
@@ -193,7 +193,7 @@ const navigateToDetails = (courseId) => {
   router.push({ name: 'course', params: { id: courseId }});
 };
 
-const handleSubscription = () => {
+const handleSubscription = async (plan) => {
   if (!authStore.hasProfile) {
     toast.add({
       severity: 'warn',
@@ -203,7 +203,23 @@ const handleSubscription = () => {
     });
     return;
   }
-  // Continue with subscription logic
+
+  try {
+    await membershipStore.subscribeToPlan(plan.id);
+    toast.add({
+      severity: 'success',
+      summary: 'تم بنجاح',
+      detail: 'تم الاشتراك في العضوية بنجاح',
+      life: 3000
+    });
+  } catch  {
+    toast.add({
+      severity: 'error',
+      summary: 'خطأ',
+      detail: 'حدث خطأ أثناء الاشتراك في العضوية',
+      life: 3000
+    });
+  }
 };
 
 onMounted(async () => {

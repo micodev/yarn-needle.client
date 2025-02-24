@@ -20,6 +20,24 @@ export const useOrdersStore = defineStore('orders', {
       } finally {
         this.isLoading = false
       }
+    },
+    async subscribeMembership(membershipId, note = '') {
+      this.isLoading = true
+      this.error = null
+
+      try {
+        const response = await this.$axios.post('/api/order/membership', {
+          membershipId,
+          note
+        })
+        await this.fetchOrders()
+        return response.data
+      } catch (err) {
+        this.error = err.message || 'Failed to subscribe to membership'
+        throw err
+      } finally {
+        this.isLoading = false
+      }
     }
   },
 
