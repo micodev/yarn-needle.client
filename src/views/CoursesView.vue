@@ -186,6 +186,7 @@
   </div>
   <PurchaseConfirmDialog
     v-if="selectedCourseId"
+    type="course"
     v-model="showPurchaseDialog"
     :course-id="selectedCourseId"
     @purchase-success="handlePurchaseSuccess"
