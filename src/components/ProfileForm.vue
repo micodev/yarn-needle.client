@@ -66,6 +66,7 @@
                   </span>
                   <button
                     v-if="isExpired"
+                    @click="handleSubscription(currentPlan)"
                     class="w-full sm:w-auto px-4 py-2 rounded-lg border border-gray-300 hover:border-gray-400 transition-colors flex items-center justify-center">
                     <i class="pi pi-refresh ml-2"></i>
                     تجديد العضوية
@@ -84,12 +85,15 @@
                     <i :class="plan.iconClass" class="text-lg ml-3"></i>
                     <h4 class="text-lg font-bold text-gray-900 dark:text-white">{{ plan.name }}</h4>
                   </div>
-                  <p class="text-gray-600 dark:text-gray-400 mb-4">{{ plan.description }}</p>
+                  <ul class="text-gray-700 dark:text-gray-300 mb-4 list-disc list-inside">
+            <li v-for="(point, index) in plan.features" :key="index">{{ point }}</li>
+          </ul>
                   <div class="mt-auto">
                     <p class="text-lg font-bold mb-4 text-gray-900 dark:text-white">
                       {{ plan.price }} ريال سعودي / الشهر
                     </p>
                     <button
+                      @click="handleSubscription(plan)"
                       class="w-full px-4 py-2 text-white border border-blue-600 rounded-lg hover:border-blue-700 transition-colors flex items-center justify-center">
                       <i class="pi pi-arrow-up ml-2"></i>
                       ترقية
@@ -226,6 +230,7 @@
     v-if="selectedItemId"
     v-model="showPurchaseDialog"
     :course-id="selectedItemId"
+    :type="purchaseType"
     @purchase-success="handlePurchaseSuccess"
   />
 
@@ -442,6 +447,7 @@ const purchaseType = ref('membership');
 const handleSubscription = async (plan) => {
   selectedItemId.value = plan.code;
   showPurchaseDialog.value = true;
+  purchaseType.value = 'membership';
 };
 
 const handlePurchaseSuccess = () => {
