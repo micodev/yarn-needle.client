@@ -205,7 +205,7 @@ const handleSubscription = async (plan) => {
   }
 
   try {
-    await membershipStore.subscribeToPlan(plan.id);
+    await membershipStore.subscribeToPlan(plan.code);
     toast.add({
       severity: 'success',
       summary: 'تم بنجاح',

@@ -36,9 +36,9 @@ export const useMembershipStore = defineStore('membership', {
       }
     },
 
-    async subscribeToPlan(membershipId, note = '') {
+    async subscribeToPlan(code, note = '') {
       const ordersStore = useOrdersStore()
-      return await ordersStore.subscribeMembership(membershipId, note)
+      return await ordersStore.subscribeMembership(code, note)
     },
 
     reset() {
