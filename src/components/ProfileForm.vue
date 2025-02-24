@@ -65,6 +65,7 @@
                     {{ currentPlan.price ? `${currentPlan.price} ريال سعودي / الشهر` : '' }}
                   </span>
                   <button
+                    v-if="isExpired"
                     class="w-full sm:w-auto px-4 py-2 rounded-lg border border-gray-300 hover:border-gray-400 transition-colors flex items-center justify-center">
                     <i class="pi pi-refresh ml-2"></i>
                     تجديد العضوية
@@ -297,6 +298,12 @@ const readableExpiryDate = computed(() => {
 
 const showSubscriptionSection = computed(() => {
   return !!currentPlan.value?.name; // or any condition indicating a membership
+});
+
+const isExpired = computed(() => {
+  if (!currentPlan.value?.expiredAt) return false;
+  const expiryDate = new Date(currentPlan.value.expiredAt);
+  return expiryDate < new Date();
 });
 
 const form = reactive({
