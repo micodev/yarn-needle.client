@@ -222,6 +222,12 @@
     </template>
   </div>
 
+  <PurchaseConfirmDialog
+    v-if="selectedItemId"
+    v-model="showPurchaseDialog"
+    :course-id="selectedItemId"
+    @purchase-success="handlePurchaseSuccess"
+  />
 
 </template>
 
@@ -233,6 +239,7 @@ import { useCountryStore } from '@/stores/country'; // Add this import
 import { useNationalityStore } from '@/stores/nationality'; // Add this import
 import { useMembershipStore } from '@/stores/membership'; // Add this import
 import { useToast } from 'primevue/usetoast';
+import PurchaseConfirmDialog from './PurchaseConfirmDialog.vue';
 
 const toast = useToast();
 
@@ -426,6 +433,26 @@ const onGovernmentCardUpload = (event) => {
     form.governmentCardFile = reader.result;
   };
   reader.readAsDataURL(fileBinary);
+};
+
+const showPurchaseDialog = ref(false);
+const selectedItemId = ref(null);
+const purchaseType = ref('membership');
+
+const handleSubscription = async (plan) => {
+  selectedItemId.value = plan.code;
+  showPurchaseDialog.value = true;
+};
+
+const handlePurchaseSuccess = () => {
+  toast.add({
+    severity: 'success',
+    summary: 'تم بنجاح',
+    detail: 'تم شراء العضوية بنجاح',
+    life: 3000
+  });
+  // Refresh profile data to show new subscription
+  profileStore.fetchProfile();
 };
 </script>
 
