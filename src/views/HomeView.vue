@@ -134,6 +134,7 @@
     v-if="selectedCourseId"
     v-model="showPurchaseDialog"
     :course-id="selectedCourseId"
+    :type="purchaseType"
     @purchase-success="handlePurchaseSuccess"
   />
 
