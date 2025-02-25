@@ -225,9 +225,11 @@
           <Button type="submit" label="حفظ" class="w-full" />
         </div>
       </form>
-      <v-icon name="bi-facebook" />
-      <v-icon name="fa-telegram" />
-      <v-icon name="fa-whatsapp" />
+      <v-icon name="la-facebook" />
+      <v-icon name="la-twitter" />
+      <v-icon name="la-whatsapp" />
+      <v-icon name="la-instagram" />
+      <v-icon name="la-telegram" />
     </template>
   </div>
 
