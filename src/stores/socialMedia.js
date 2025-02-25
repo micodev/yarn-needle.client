@@ -24,7 +24,7 @@ export const useSocialMediaStore = defineStore('socialMedia', {
           name: social.name,
           code: social.code,
           icon: social.icon || 'pi pi-globe',
-          isActive: social.isActive
+          // isActive: social.isActive
         }))
       } catch (error) {
         this.error = error.message || 'Failed to fetch social media links'
