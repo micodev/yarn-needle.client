@@ -11,10 +11,31 @@ import axiosInstance from '../plugins/axios.plugin'
 import Tooltip from 'primevue/tooltip';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { OhVueIcon, addIcons } from "oh-vue-icons";
-import { BiFacebook } from "oh-vue-icons/icons";
-import { FaWhatsapp, FaTelegram } from "oh-vue-icons/icons";
+import {  MdFacebook,
+  MdTwitter,
+  MdLinkedin,
+  MdGoogle,
+  MdGithub,
+  MdInstagram,
+  MdSlack,
+  MdMicrosoft,
+  MdDiscord,
+  MdWhatsapp,
+  MdTelegram } from "oh-vue-icons/icons";
 
-addIcons(BiFacebook, FaWhatsapp, FaTelegram);
+addIcons(
+  MdFacebook,
+  MdTwitter,
+  MdLinkedin,
+  MdGoogle,
+  MdGithub,
+  MdInstagram,
+  MdSlack,
+  MdMicrosoft,
+  MdDiscord,
+  MdWhatsapp,
+  MdTelegram
+);
 const app = createApp(App)
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate)
