@@ -242,7 +242,7 @@
               <div class="w-full sm:w-1/3">
                 <IftaLabel>
                   <InputText v-model="social.value"
-                            :placeholder="social.type ? `أدخل ${social.type.name}` : 'أدخل القيمة'"
+                            :placeholder="social.type ? `أدخل ${social.type.code}` : 'أدخل القيمة'"
                             class="w-full" />
                   <label>القيمة</label>
                 </IftaLabel>
@@ -464,10 +464,10 @@ const handleSubmit = async () => {
   try {
     const dataToSave = { ...form };
 
-    // Format social media data
+    // Format social media data with code
     dataToSave.socialMedia = form.socialMedia.map(sm => ({
       socialMediaId: sm.type.id,
-      value: sm.value
+      value: `${sm.type.code}${sm.value}` // Prepend the social media code to the value
     }));
 
     // Only include password if it was changed
