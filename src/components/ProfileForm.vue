@@ -229,8 +229,9 @@
                  class="flex flex-wrap items-center gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
               <div class="w-full sm:w-1/3">
                 <IftaLabel>
-                  <Dropdown v-model="social.type"
+                  <MultiSelect v-model="social.type"
                            :options="availableSocialMedia"
+                           :selectionLimit="1"
                            optionLabel="name"
                            :placeholder="'اختر المنصة'"
                            class="w-full" />
