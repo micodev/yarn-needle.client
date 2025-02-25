@@ -233,7 +233,7 @@
                            :options="availableSocialMedia"
                            :selectionLimit="1"
                            optionLabel="name"
-                           option-value="code"
+                           optionValue="code"
                            :placeholder="'اختر المنصة'"
                            class="w-full" />
                   <label>المنصة</label>
