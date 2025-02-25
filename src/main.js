@@ -10,7 +10,7 @@ import Ripple from 'primevue/ripple';
 import axiosInstance from '../plugins/axios.plugin'
 import Tooltip from 'primevue/tooltip';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-
+import { OhVueIcon, addIcons } from "oh-vue-icons";
 const app = createApp(App)
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate)
@@ -32,3 +32,6 @@ app.use(PrimeVue, {
 })
 
 app.mount('#app');
+
+app.component("v-icon", OhVueIcon);
+app.mount("#app");
