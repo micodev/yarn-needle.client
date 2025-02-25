@@ -41,7 +41,7 @@ export const useSocialMediaStore = defineStore('socialMedia', {
       this.error = null
 
       try {
-        const response = await this.$axios.post('/api/profile/social-media', { socialMedia: socialMediaList })
+        const response = await this.$axios.post('/api/profile/socialmedia', { socialMedia: socialMediaList })
         this.userSocialMedia = response.data
         return response.data
       } catch (error) {
