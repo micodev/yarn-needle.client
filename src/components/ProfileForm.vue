@@ -229,10 +229,11 @@
                  class="flex flex-wrap items-center gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
               <div class="w-full sm:w-1/3">
                 <IftaLabel>
-                  <MultiSelect v-model="social.type"
+                  <MultiSelect v-model="social.code"
                            :options="availableSocialMedia"
                            :selectionLimit="1"
                            optionLabel="name"
+                           option-value="code"
                            :placeholder="'اختر المنصة'"
                            class="w-full" />
                   <label>المنصة</label>
@@ -466,8 +467,8 @@ const handleSubmit = async () => {
 
     // Format social media data with code
     dataToSave.socialMedia = form.socialMedia.map(sm => ({
-      socialMediaId: sm.type.id,
-      value: `${sm.type.code}${sm.value}` // Prepend the social media code to the value
+      socialMediaCode: sm.code,
+      value: `{sm.value}` // Prepend the social media code to the value
     }));
 
     // Only include password if it was changed
