@@ -411,15 +411,14 @@ const availablePlans = computed(() => {
 const socialMediaStore = useSocialMediaStore(); // Add this line
 
 // Add new computed property
-const availableSocialMedia = computed(() => socialMediaStore.getSocialMedia); // Add this line
+const availableSocialMedia = computed(() => socialMediaStore.getSocialMedia);
 
 onMounted(async () => {
   await countryStore.fetchCountries();
   await nationalityStore.fetchNationalities();
   await membershipStore.fetchMemberships();
   await profileStore.fetchProfile();
-  await socialMediaStore.fetchSocialMedia(); // Add this line
-  await socialMediaStore.fetchUserSocialMedia(); // Add this line
+  await socialMediaStore.fetchSocialMedia();
   Object.assign(form, profileStore.getProfile || {});
   // Update form with user's social media
   form.socialMedia = socialMediaStore.getUserSocialMedia.map(sm => ({
