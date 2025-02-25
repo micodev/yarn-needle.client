@@ -226,6 +226,8 @@
         </div>
       </form>
       <v-icon name="bi-facebook" />
+      <v-icon name="fa-telegram" />
+      <v-icon name="fa-whatsapp" />
     </template>
   </div>
 
