@@ -225,7 +225,6 @@
           <Button type="submit" label="حفظ" class="w-full" />
         </div>
       </form>
-<!-- <OhVueIcon class="bi-facebook"/> -->
     </template>
   </div>
 
@@ -248,7 +247,6 @@ import { useNationalityStore } from '@/stores/nationality'; // Add this import
 import { useMembershipStore } from '@/stores/membership'; // Add this import
 import { useToast } from 'primevue/usetoast';
 import PurchaseConfirmDialog from './PurchaseConfirmDialog.vue';
-import OhVueIcon from "oh-vue-icons";
 const toast = useToast();
 
 
