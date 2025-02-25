@@ -23,7 +23,7 @@ export const useSocialMediaStore = defineStore('socialMedia', {
           id: social.id,
           name: social.name,
           code: social.code,
-          icon: social.icon || 'pi pi-globe',
+          icon: social.icon || 'la-globe-africa-solid',
           // isActive: social.isActive
         }))
       } catch (error) {
