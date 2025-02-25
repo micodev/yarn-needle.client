@@ -225,7 +225,7 @@
           <Button type="submit" label="حفظ" class="w-full" />
         </div>
       </form>
-      <v-icon name="la-globe-africa-solid" />
+
     </template>
   </div>
 
