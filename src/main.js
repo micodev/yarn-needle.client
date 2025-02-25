@@ -11,6 +11,9 @@ import axiosInstance from '../plugins/axios.plugin'
 import Tooltip from 'primevue/tooltip';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { OhVueIcon, addIcons } from "oh-vue-icons";
+import { BiFacebook } from "oh-vue-icons/icons";
+
+addIcons(BiFacebook);
 const app = createApp(App)
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate)
