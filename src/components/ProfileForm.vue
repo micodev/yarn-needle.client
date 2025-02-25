@@ -283,7 +283,7 @@
 
 <script setup>
 import { ref, onMounted, computed, nextTick, reactive } from 'vue';
-import { DatePicker, MultiSelect, InputText, Button, IftaLabel, FileUpload, Dropdown } from 'primevue';
+import { DatePicker, MultiSelect, InputText, Button, IftaLabel, FileUpload } from 'primevue';
 import { useProfileStore } from '@/stores/profile';
 import { useCountryStore } from '@/stores/country'; // Add this import
 import { useNationalityStore } from '@/stores/nationality'; // Add this import
