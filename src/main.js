@@ -31,7 +31,5 @@ app.use(PrimeVue, {
   ripple: true,
 })
 
-app.mount('#app');
-
 app.component("v-icon", OhVueIcon);
 app.mount("#app");
