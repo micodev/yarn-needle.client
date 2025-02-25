@@ -221,6 +221,47 @@
           </IftaLabel>
         </div>
 
+        <!-- Social Media Section -->
+        <div class="w-full px-2 mb-6">
+          <h3 class="text-lg font-semibold mb-4">وسائل التواصل الاجتماعي</h3>
+          <div class="space-y-4">
+            <div v-for="(social, index) in form.socialMedia" :key="index"
+                 class="flex flex-wrap items-center gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+              <div class="w-full sm:w-1/3">
+                <IftaLabel>
+                  <Dropdown v-model="social.type"
+                           :options="availableSocialMedia"
+                           optionLabel="name"
+                           :placeholder="'اختر المنصة'"
+                           class="w-full" />
+                  <label>المنصة</label>
+                </IftaLabel>
+              </div>
+
+              <div class="w-full sm:w-1/3">
+                <IftaLabel>
+                  <InputText v-model="social.value"
+                            :placeholder="social.type ? `أدخل ${social.type.name}` : 'أدخل القيمة'"
+                            class="w-full" />
+                  <label>القيمة</label>
+                </IftaLabel>
+              </div>
+
+              <Button type="button"
+                      icon="pi pi-trash"
+                      severity="danger"
+                      @click="removeSocialMedia(index)"
+                      class="p-button-text" />
+            </div>
+
+            <Button type="button"
+                    @click="addSocialMedia"
+                    icon="pi pi-plus"
+                    label="إضافة وسيلة تواصل"
+                    class="p-button-outlined" />
+          </div>
+        </div>
+
         <div class="w-full px-2">
           <Button type="submit" label="حفظ" class="w-full" />
         </div>
@@ -241,11 +282,12 @@
 
 <script setup>
 import { ref, onMounted, computed, nextTick, reactive } from 'vue';
-import { DatePicker, MultiSelect, InputText, Button, IftaLabel, FileUpload } from 'primevue';
+import { DatePicker, MultiSelect, InputText, Button, IftaLabel, FileUpload, Dropdown } from 'primevue';
 import { useProfileStore } from '@/stores/profile';
 import { useCountryStore } from '@/stores/country'; // Add this import
 import { useNationalityStore } from '@/stores/nationality'; // Add this import
 import { useMembershipStore } from '@/stores/membership'; // Add this import
+import { useSocialMediaStore } from '@/stores/socialMedia'; // Add this import
 import { useToast } from 'primevue/usetoast';
 import PurchaseConfirmDialog from './PurchaseConfirmDialog.vue';
 const toast = useToast();
@@ -334,7 +376,8 @@ const form = reactive({
   expiryDate: '',
   password: '',
   governmentId: '',
-  governmentCardFile: null
+  governmentCardFile: null,
+  socialMedia: [] // Add this line
 });
 
 const profileExists = computed(() => profileStore.getProfile !== null);
@@ -364,13 +407,24 @@ const availablePlans = computed(() => {
   return filtered;
 });
 
+const socialMediaStore = useSocialMediaStore(); // Add this line
+
+// Add new computed property
+const availableSocialMedia = computed(() => socialMediaStore.getSocialMedia); // Add this line
+
 onMounted(async () => {
   await countryStore.fetchCountries();
   await nationalityStore.fetchNationalities();
   await membershipStore.fetchMemberships();
   await profileStore.fetchProfile();
+  await socialMediaStore.fetchSocialMedia(); // Add this line
+  await socialMediaStore.fetchUserSocialMedia(); // Add this line
   Object.assign(form, profileStore.getProfile || {});
-
+  // Update form with user's social media
+  form.socialMedia = socialMediaStore.getUserSocialMedia.map(sm => ({
+    type: availableSocialMedia.value.find(a => a.id === sm.socialMediaId),
+    value: sm.value
+  })) || []; // Add this line
 });
 
 const civilianIdError = ref('');
@@ -414,6 +468,12 @@ const handleSubmit = async () => {
   try {
     const dataToSave = { ...form };
 
+    // Format social media data
+    dataToSave.socialMedia = form.socialMedia.map(sm => ({
+      socialMediaId: sm.type.id,
+      value: sm.value
+    }));
+
     // Only include password if it was changed
     if (!dataToSave.password) {
       delete dataToSave.password;
@@ -427,6 +487,8 @@ const handleSubmit = async () => {
       summary: 'تم التحديث',
       detail: 'تم حفظ البيانات بنجاح'
     });
+    // Update social media separately
+    await socialMediaStore.updateUserSocialMedia(dataToSave.socialMedia);
   } catch (error) {
     console.error('Error saving profile:', error);
     alert('حدث خطأ أثناء حفظ البيانات');
@@ -461,6 +523,18 @@ const handlePurchaseSuccess = () => {
   });
   // Refresh profile data to show new subscription
   profileStore.fetchProfile();
+};
+
+// Add new methods
+const addSocialMedia = () => {
+  form.socialMedia.push({
+    type: null,
+    value: ''
+  });
+};
+
+const removeSocialMedia = (index) => {
+  form.socialMedia.splice(index, 1);
 };
 </script>
 
