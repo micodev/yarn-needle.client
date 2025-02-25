@@ -420,11 +420,7 @@ onMounted(async () => {
   await profileStore.fetchProfile();
   await socialMediaStore.fetchSocialMedia();
   Object.assign(form, profileStore.getProfile || {});
-  // Update form with user's social media
-  form.socialMedia = socialMediaStore.getUserSocialMedia.map(sm => ({
-    type: availableSocialMedia.value.find(a => a.id === sm.socialMediaId),
-    value: sm.value
-  })) || []; // Add this line
+
 });
 
 const civilianIdError = ref('');
