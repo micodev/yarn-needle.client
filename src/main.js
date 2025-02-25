@@ -16,7 +16,8 @@ import {
   LaTwitter,
   LaInstagram,
   LaWhatsapp,
-  LaTelegram
+  LaTelegram,
+  LaGlobeAfricaSolid
 } from "oh-vue-icons/icons";
 
 addIcons(
@@ -24,7 +25,8 @@ addIcons(
   LaTwitter,
   LaInstagram,
   LaWhatsapp,
-  LaTelegram
+  LaTelegram,
+  LaGlobeAfricaSolid
 );
 const app = createApp(App)
 const pinia = createPinia();
