@@ -225,7 +225,7 @@
           <Button type="submit" label="حفظ" class="w-full" />
         </div>
       </form>
-      <v-icon name="bi-music-player" />
+      <v-icon name="bi-facebook" />
     </template>
   </div>
 
