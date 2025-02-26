@@ -228,8 +228,7 @@ const handleSubscription = async (plan) => {
 
 const handleAddCourse = async (courseId) => {
   try {
-    // Add logic to add course to user's library
-    await coursesStore.addCourseToLibrary(courseId);
+    await coursesStore.enrollCourse(courseId);
     toast.add({
       severity: 'success',
       summary: 'تم بنجاح',
