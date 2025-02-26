@@ -229,11 +229,11 @@
                  class="flex flex-wrap items-center gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
               <div class="w-full sm:w-1/3">
                 <IftaLabel>
-                  <MultiSelect v-model="social.code"
+                  <MultiSelect v-model="social.socialMediaCode"
                            :options="availableSocialMedia"
                            :selectionLimit="1"
                            optionLabel="name"
-                           optionValue="code"
+                           optionValue="socialMediaCode"
                            :placeholder="'اختر المنصة'"
                            class="w-full" />
                   <label>المنصة</label>
