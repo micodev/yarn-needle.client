@@ -57,7 +57,8 @@
             : course.isSubscribtionIncluded
               ? 'أضف الدورة'
               : `${course.originalPrice} ${course.currency}`"
-          :icon="course.purchased ? 'pi pi-arrow-left' : ''" />
+          :icon="course.purchased ? 'pi pi-arrow-left' : ''"
+          @click="handleCourseAction" />
       </div>
     </div>
     <div class="flex flex-col md:flex-row bg-white dark:bg-gray-900 text-black dark:text-white p-4 md:p-8 h-full mt-8">
@@ -230,6 +231,35 @@ watch(
     }
   }
 );
+
+const handleCourseAction = async () => {
+  if (course.value.purchased) {
+    // Handle navigation to course content
+    // Add your navigation logic here
+  } else if (course.value.isSubscribtionIncluded) {
+    try {
+      await courseStore.enrollCourse(course.value.id);
+      toast.add({
+        severity: 'success',
+        summary: 'تم بنجاح',
+        detail: 'تم إضافة الدورة إلى مكتبتك',
+        life: 3000
+      });
+      // Refresh course data
+      await courseStore.fetchCourse(route.params.id);
+    } catch  {
+      toast.add({
+        severity: 'error',
+        summary: 'خطأ',
+        detail: 'حدث خطأ أثناء إضافة الدورة',
+        life: 3000
+      });
+    }
+  } else {
+    // Handle purchase flow
+    // Add your purchase logic here
+  }
+};
 
 </script>
 
