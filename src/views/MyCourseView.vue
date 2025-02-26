@@ -51,7 +51,8 @@
                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.duration }} ساعات</span>
               </div>
               <div class="flex gap-2 flex-col sm:flex-row">
-                <Button label="عرض التفاصيل" icon="pi pi-eye" class="w-full sm:flex-1" severity="primary" />
+                <Button label="عرض التفاصيل" icon="pi pi-eye" class="w-full sm:flex-1" severity="primary"
+                  @click="$router.push(`/course/${course.id}`)" />
                 <Button label="معلومات إضافية" icon="pi pi-info-circle" class="w-full sm:flex-1" severity="secondary" />
               </div>
             </div>
