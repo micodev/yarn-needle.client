@@ -484,8 +484,6 @@ const handleSubmit = async () => {
       summary: 'تم التحديث',
       detail: 'تم حفظ البيانات بنجاح'
     });
-    // Update social media separately
-    await socialMediaStore.updateUserSocialMedia(dataToSave.socialMedia);
   } catch (error) {
     console.error('Error saving profile:', error);
     alert('حدث خطأ أثناء حفظ البيانات');
