@@ -385,8 +385,8 @@ const handlePurchaseClick = async (courseId) => {
     const course = courses.value.find(c => c.id === courseId);
     if (course?.isSubscribtionIncluded) {
       await courseStore.enrollCourse(courseId);
-      // Refresh the courses list or update the specific course
-      await coursesStore.fetchCourses();
+      // route to my courses
+      router.push({ name: 'my-courses' });
       //show toast
       toast.add({
         severity: 'success',
