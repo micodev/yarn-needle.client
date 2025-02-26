@@ -387,6 +387,8 @@ const handlePurchaseClick = async (courseId) => {
       await courseStore.enrollCourse(courseId);
       // Refresh the courses list or update the specific course
       await coursesStore.fetchCourses();
+      //show toast
+
     } else {
       selectedCourseId.value = courseId;
       showPurchaseDialog.value = true;
