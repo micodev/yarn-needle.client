@@ -240,7 +240,7 @@
                 </IftaLabel>
               </div>
 
-              <div class="w-full sm:w-1/3">
+              <div class="w-full">
                 <IftaLabel>
                   <InputText v-model="social.value"
                             :placeholder="social.code ? `أدخل ${social.name}` : 'أدخل القيمة'"
