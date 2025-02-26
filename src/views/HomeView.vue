@@ -80,12 +80,28 @@
           </div>
           <div class="flex flex-row gap-1">
             <Button
+              v-if="!course.purchased && !course.isSubscribtionIncluded"
               label="شراء"
               class="h-8 flex-1"
               :severity="index == 1?'contrast':'primary'"
               @click="handlePurchaseClick(course.id)"
             />
             <Button
+              v-if="course.isSubscribtionIncluded"
+              label="إضافة للمكتبة"
+              class="h-8 flex-1"
+              severity="success"
+              @click="handleAddCourse(course.id)"
+            />
+            <Button
+              label="فتح الدورة"
+              v-if="course.purchased"
+              class="h-8 flex-1"
+              severity="primary"
+              @click="navigateToDetails(course.id)"
+            />
+            <Button
+              v-if="!course.purchased"
               label="تفاصيل"
               class="h-8 flex-1"
               severity="secondary"
@@ -208,6 +224,26 @@ const handleSubscription = async (plan) => {
   selectedCourseId.value = plan.code;
   showPurchaseDialog.value = true;
   purchaseType.value = 'membership';
+};
+
+const handleAddCourse = async (courseId) => {
+  try {
+    // Add logic to add course to user's library
+    await coursesStore.addCourseToLibrary(courseId);
+    toast.add({
+      severity: 'success',
+      summary: 'تم بنجاح',
+      detail: 'تم إضافة الدورة إلى مكتبتك',
+      life: 3000
+    });
+  } catch (error) {
+    toast.add({
+      severity: 'error',
+      summary: 'خطأ',
+      detail: 'حدث خطأ أثناء إضافة الدورة',
+      life: 3000
+    });
+  }
 };
 
 onMounted(async () => {
