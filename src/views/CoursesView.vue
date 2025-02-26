@@ -216,7 +216,7 @@ import { useCategoryOptionsStore } from '../stores/categoryOptions.js';
 import { useCourseTypeStore } from '../stores/courseType.js';
 import PurchaseConfirmDialog from '../components/PurchaseConfirmDialog.vue'; // Add this import
 import { useCourseStore } from '../stores/course.js';
-
+import { useToast } from 'primevue/usetoast';
 const coursesStore = useCoursesStore(); // Use Pinia store
 const { isLoading, courses } = storeToRefs(coursesStore); // Use storeToRefs for reactive state
 
@@ -378,7 +378,7 @@ const selectedCourseId = ref(null);
 
 // Add these methods for purchase handling
 const courseStore = useCourseStore();
-
+const toast = useToast();
 // Update handlePurchaseClick method
 const handlePurchaseClick = async (courseId) => {
   try {
@@ -388,7 +388,7 @@ const handlePurchaseClick = async (courseId) => {
       // Refresh the courses list or update the specific course
       await coursesStore.fetchCourses();
       //show toast
-
+      toast.success('تم الإضافة بنجاح');
     } else {
       selectedCourseId.value = courseId;
       showPurchaseDialog.value = true;
