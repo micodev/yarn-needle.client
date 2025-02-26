@@ -145,11 +145,21 @@
               </p>
             </div>
             <div class="flex flex-row gap-1">
-              <Button
-                label="شراء"
-                class="h-8 flex-1"
-                @click="handlePurchaseClick(course.id)"
-              />
+              <template v-if="course.purchased">
+                <Button
+                  label="فتح الدورة"
+                  class="h-8 flex-1"
+                  @click="navigateToDetails(course.id)"
+                  severity="success"
+                />
+              </template>
+              <template v-else>
+                <Button
+                  :label="course.isSubscribtionIncluded ? 'إضافة الدورة' : 'شراء'"
+                  class="h-8 flex-1"
+                  @click="handlePurchaseClick(course.id)"
+                />
+              </template>
               <Button
                 label="تفاصيل"
                 class="h-8 flex-1"
