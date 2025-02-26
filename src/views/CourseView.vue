@@ -47,9 +47,16 @@
           <li v-for="award in course.awards" :key="award">{{ award }}</li>
         </ul>
 
-        <p v-if="!course.purchased" class="text-xl mb-2 text-gray-900 dark:text-gray-100">امتلك الدورة بـ</p>
+        <p v-if="!course.purchased" class="text-xl mb-2 text-gray-900 dark:text-gray-100">
+          {{ course.isSubscribtionIncluded ? 'أضف الدورة إلى حسابك' : 'امتلك الدورة بـ' }}
+        </p>
         <p v-else class="text-xl mb-2 text-transparent">.</p>
-        <Button :label="course.purchased ? 'ابدأ الآن' : `${course.originalPrice}  ${course.currency}`"
+        <Button
+          :label="course.purchased
+            ? 'ابدأ الآن'
+            : course.isSubscribtionIncluded
+              ? 'أضف الدورة'
+              : `${course.originalPrice} ${course.currency}`"
           :icon="course.purchased ? 'pi pi-arrow-left' : ''" />
       </div>
     </div>
