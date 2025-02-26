@@ -161,6 +161,7 @@
                 />
               </template>
               <Button
+               v-if="!course.purchased"
                 label="تفاصيل"
                 class="h-8 flex-1"
                 severity="secondary"
