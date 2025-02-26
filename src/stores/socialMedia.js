@@ -36,8 +36,6 @@ export const useSocialMediaStore = defineStore('socialMedia', {
       }
     },
 
-
-
     async fetchUserSocialMedia() {
       this.isLoading = true
       this.error = null
