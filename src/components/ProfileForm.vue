@@ -227,7 +227,7 @@
           <div class="space-y-4">
             <div v-for="(social, index) in form.socialMedia" :key="index"
                  class="flex flex-wrap items-center gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-              <div class="flex-1">
+              <div class="flex">
                 <IftaLabel>
                   <MultiSelect v-model="social.socialMediaCode"
                            :options="availableSocialMedia"
@@ -240,7 +240,7 @@
                 </IftaLabel>
               </div>
 
-              <div class="flex-2">
+              <div class="flex-1">
                 <IftaLabel>
                   <InputText v-model="social.value"
                             :placeholder="social.code ? `أدخل ${social.name}` : 'أدخل القيمة'"
