@@ -236,7 +236,7 @@ const handleAddCourse = async (courseId) => {
       detail: 'تم إضافة الدورة إلى مكتبتك',
       life: 3000
     });
-  } catch (error) {
+  } catch  {
     toast.add({
       severity: 'error',
       summary: 'خطأ',
