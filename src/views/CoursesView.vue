@@ -215,6 +215,7 @@ import { useLevelOptionsStore } from '../stores/levelOptions.js';
 import { useCategoryOptionsStore } from '../stores/categoryOptions.js';
 import { useCourseTypeStore } from '../stores/courseType.js';
 import PurchaseConfirmDialog from '../components/PurchaseConfirmDialog.vue'; // Add this import
+import { useCourseStore } from '../stores/course.js';
 
 const coursesStore = useCoursesStore(); // Use Pinia store
 const { isLoading, courses } = storeToRefs(coursesStore); // Use storeToRefs for reactive state
@@ -376,9 +377,24 @@ const showPurchaseDialog = ref(false);
 const selectedCourseId = ref(null);
 
 // Add these methods for purchase handling
-const handlePurchaseClick = (courseId) => {
-  selectedCourseId.value = courseId;
-  showPurchaseDialog.value = true;
+const courseStore = useCourseStore();
+
+// Update handlePurchaseClick method
+const handlePurchaseClick = async (courseId) => {
+  try {
+    const course = courses.value.find(c => c.id === courseId);
+    if (course?.isSubscribtionIncluded) {
+      await courseStore.enrollCourse(courseId);
+      // Refresh the courses list or update the specific course
+      await coursesStore.fetchCourses();
+    } else {
+      selectedCourseId.value = courseId;
+      showPurchaseDialog.value = true;
+    }
+  } catch (error) {
+    console.error('Error handling course action:', error);
+    // Handle error (you might want to show a toast or error message)
+  }
 };
 
 const handlePurchaseSuccess = () => {
