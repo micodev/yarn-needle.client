@@ -388,7 +388,12 @@ const handlePurchaseClick = async (courseId) => {
       // Refresh the courses list or update the specific course
       await coursesStore.fetchCourses();
       //show toast
-      toast.success('تم الإضافة بنجاح');
+      toast.add({
+        severity: 'success',
+        summary: 'تم بنجاح',
+        detail: 'تم إضافة الدورة إلى مكتبتك',
+        life: 3000
+      });
     } else {
       selectedCourseId.value = courseId;
       showPurchaseDialog.value = true;
