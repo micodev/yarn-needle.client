@@ -36,21 +36,7 @@ export const useSocialMediaStore = defineStore('socialMedia', {
       }
     },
 
-    async updateUserSocialMedia(socialMediaList) {
-      this.isLoading = true
-      this.error = null
 
-      try {
-        const response = await this.$axios.post('/api/profile/socialmedia', { socialMedia: socialMediaList })
-        this.userSocialMedia = response.data
-        return response.data
-      } catch (error) {
-        this.error = error.message || 'Failed to update social media'
-        throw error
-      } finally {
-        this.isLoading = false
-      }
-    },
 
     async fetchUserSocialMedia() {
       this.isLoading = true
