@@ -53,7 +53,8 @@
               <div class="flex gap-2 flex-col sm:flex-row">
                 <Button label="عرض التفاصيل" icon="pi pi-eye" class="w-full sm:flex-1" severity="primary"
                   @click="$router.push(`/course/${course.id}`)" />
-                <Button label="معلومات إضافية" icon="pi pi-info-circle" class="w-full sm:flex-1" severity="secondary" />
+                <Button label="معلومات إضافية" icon="pi pi-info-circle" class="w-full sm:flex-1" severity="secondary"
+                  @click="showSocialsDialog(course)" />
               </div>
             </div>
           </div>
@@ -72,14 +73,57 @@
       </div>
     </div>
   </div>
+
+  <!-- Social Media Dialog -->
+  <Dialog v-model:visible="isDialogVisible" :header="selectedCourse?.title" :modal="true" class="p-fluid">
+    <div class="p-4">
+      <h3 class="text-xl mb-4">وسائل التواصل</h3>
+      <div v-if="selectedCourse?.socials?.length" class="space-y-4">
+        <div v-for="social in selectedCourse.socials" :key="social.id"
+          class="flex items-center p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+          <i :class="['las', social.socialIcon, 'text-2xl mr-3']"></i>
+          <div>
+            <div class="font-semibold">
+              {{ getSocialMediaName(social.socialMediaCode) }}
+            </div>
+            <div class="text-sm text-gray-600 dark:text-gray-400">
+              {{ social.value }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-else class="text-center text-gray-600 dark:text-gray-400">
+        لا توجد وسائل تواصل متاحة
+      </div>
+    </div>
+  </Dialog>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { onMounted } from 'vue';
-import { Button } from 'primevue';
+import { Button, Dialog } from 'primevue';
 import { useMyCourseStore } from '@/stores/myCourses';
 
 const courseStore = useMyCourseStore();
+const isDialogVisible = ref(false);
+const selectedCourse = ref(null);
+
+const showSocialsDialog = (course) => {
+  selectedCourse.value = course;
+  isDialogVisible.value = true;
+};
+
+const getSocialMediaName = (code) => {
+  const socialMedia = {
+    WA: 'WhatsApp',
+    FB: 'Facebook',
+    TW: 'Twitter',
+    IG: 'Instagram',
+    TG: 'Telegram'
+  };
+  return socialMedia[code] || code;
+};
 
 onMounted(() => {
   courseStore.fetchMyCourses();
