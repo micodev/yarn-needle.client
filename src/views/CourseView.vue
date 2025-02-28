@@ -143,22 +143,29 @@
   <div v-else class="flex justify-center items-center h-screen bg-white dark:bg-gray-900">
     <ProgressSpinner />
   </div>
+
+  <!-- Add the SocialMediaDialog component -->
+  <SocialMediaDialog
+    v-model="showSocialDialog"
+    :courseData="course"
+  />
 </template>
 
 <script setup>
-import { computed, watch, onUnmounted, onMounted } from 'vue';
+import { computed, watch, onUnmounted, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { Button, Fieldset, Rating, Textarea, ProgressSpinner, Toast } from 'primevue';
 import { useToast } from 'primevue/usetoast';
 import { useCourseStore } from '@/stores/course';
 import { useCommentsStore } from '@/stores/comments';
-import { useAuthStore } from '@/stores/auth';  // Add this import
+import { useAuthStore } from '@/stores/auth';
+import SocialMediaDialog from '@/components/SocialMediaDialog.vue';
 
 const route = useRoute();
 const courseStore = useCourseStore();
 const commentsStore = useCommentsStore();
-const authStore = useAuthStore();  // Add this line
-
+const authStore = useAuthStore();
+const showSocialDialog = ref(false);
 
 const course = computed(() => courseStore.course);
 const displayedComments = computed(() => commentsStore.displayedComments);
@@ -234,8 +241,8 @@ watch(
 
 const handleCourseAction = async () => {
   if (course.value.purchased) {
-    // Handle navigation to course content
-    // Add your navigation logic here
+    // Show social media dialog for purchased courses
+    showSocialDialog.value = true;
   } else if (course.value.isSubscribtionIncluded) {
     try {
       await courseStore.enrollCourse(course.value.id);
