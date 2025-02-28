@@ -18,6 +18,11 @@ export const useAuthStore = defineStore('auth', {
     },
     hasProfile: (state) => {
       return state.user?.hasProfile || false;
+    },
+    isAuthenticated: (state) => !!state.token,
+    isAdmin: (state) => {
+      return state.user && state.user.roles &&
+             (state.user.roles.includes('admin') || state.user.isAdmin === true);
     }
   },
 

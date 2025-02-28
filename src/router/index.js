@@ -10,6 +10,7 @@ import OrderHistoryView from '../views/OrderHistoryView.vue'
 import MyCourseView from '../views/MyCourseView.vue'
 import { useAuthStore } from '@/stores/auth';
 import PaymentView from '@/views/PaymentView.vue'
+import AdminView from '@/views/AdminView.vue'
 
 const base = '/yarn-needle.client';
 
@@ -82,17 +83,19 @@ const router = createRouter({
           path: '/about',
           name: 'about',
           component: () => import('../views/AboutView.vue')
+        },
+        {
+          path: '/admin',
+          name: 'Admin',
+          component: AdminView,
+          meta: {
+            requiresAuth: true,
+            requiresAdmin: true,
+            title: 'Admin Dashboard'
+          }
         }
       ],
     },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue'),
-    // },
   ],
 })
 
@@ -103,6 +106,14 @@ router.beforeEach((to, from, next) => {
       return next('/');
     }
   }
+
+  // Add admin authorization check
+  if (to.meta.requiresAdmin) {
+    if (!authStore.isAdmin) {
+      return next('/');
+    }
+  }
+
   next();
 })
 
