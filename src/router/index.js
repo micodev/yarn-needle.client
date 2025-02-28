@@ -101,18 +101,19 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
-  if (to.meta.requiresAuth) {
+  // Add admin authorization check
+  if (to.meta.requiresAdmin) {
+    if (!authStore.isAdmin) {
+      return next('/admin');
+    }
+  }
+  else if (to.meta.requiresAuth) {
     if (!authStore.isAuthenticated) {
       return next('/');
     }
   }
 
-  // Add admin authorization check
-  if (to.meta.requiresAdmin) {
-    if (!authStore.isAdmin) {
-      return next('/');
-    }
-  }
+
 
   next();
 })
