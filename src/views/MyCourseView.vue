@@ -133,7 +133,7 @@ const getSocialMediaName = (code) => {
   return socialMedia[code] || code;
 };
 
-const isNumber = (val) => /^[0-9]+$/.test(val)
+const isNumber = (val) => /^(\+|00)?[0-9]+$/.test(val)
 const isLink = (val) => {
   try {
     new URL(val)
