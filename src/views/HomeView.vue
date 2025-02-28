@@ -87,7 +87,7 @@
               @click="handlePurchaseClick(course.id)"
             />
             <Button
-              v-if="course.isSubscribtionIncluded"
+              v-if="course.isSubscribtionIncluded && !course.purchased"
               label="إضافة للمكتبة"
               class="h-8 flex-1"
               severity="success"
