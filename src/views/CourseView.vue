@@ -53,7 +53,7 @@
         <p v-else class="text-xl mb-2 text-transparent">.</p>
         <Button
           :label="course.purchased
-            ? 'معلومات البدأ بالدورة'
+            ? 'معلومات التواصل'
             : course.isSubscribtionIncluded
               ? 'أضف الدورة'
               : `${course.originalPrice} ${course.currency}`"
