@@ -87,7 +87,15 @@
               {{ getSocialMediaName(social.socialMediaCode) }}
             </div>
             <div class="text-sm text-gray-600 dark:text-gray-400">
-              {{ social.value }}
+              <template v-if="isNumber(social.value)">
+                <a :href="`tel:${social.value}`">{{ social.value }}</a>
+              </template>
+              <template v-else-if="isLink(social.value)">
+                <a :href="social.value" target="_blank" rel="noopener noreferrer">{{ social.value }}</a>
+              </template>
+              <template v-else>
+                {{ social.value }}
+              </template>
             </div>
           </div>
         </div>
@@ -124,6 +132,16 @@ const getSocialMediaName = (code) => {
   };
   return socialMedia[code] || code;
 };
+
+const isNumber = (val) => /^[0-9]+$/.test(val)
+const isLink = (val) => {
+  try {
+    new URL(val)
+    return true
+  } catch {
+    return false
+  }
+}
 
 onMounted(() => {
   courseStore.fetchMyCourses();
