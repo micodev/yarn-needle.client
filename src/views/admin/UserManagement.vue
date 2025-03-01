@@ -105,7 +105,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { useUserStore } from '../../stores/userStore';
+import { useUserStore } from '@/stores/userStore';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Button from 'primevue/button';
