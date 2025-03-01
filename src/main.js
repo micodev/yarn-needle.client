@@ -17,7 +17,13 @@ import {
   LaInstagram,
   LaWhatsapp,
   LaTelegram,
-  LaGlobeAfricaSolid
+  LaGlobeAfricaSolid,
+
+  FaUsers,
+  FaBook,
+  FaShoppingCart,
+  FaChalkboardTeacher,
+  FaComments
 } from "oh-vue-icons/icons";
 
 addIcons(
@@ -26,7 +32,12 @@ addIcons(
   LaInstagram,
   LaWhatsapp,
   LaTelegram,
-  LaGlobeAfricaSolid
+  LaGlobeAfricaSolid,
+  FaUsers,
+  FaBook,
+  FaShoppingCart,
+  FaChalkboardTeacher,
+  FaComments
 );
 const app = createApp(App)
 const pinia = createPinia();
