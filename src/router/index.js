@@ -103,8 +103,8 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
   // Add admin authorization check
   if (to.meta.requiresAdmin) {
-    if (authStore.isAdmin) {
-      return next('/admin');
+    if (!authStore.isAdmin) {
+      return next('/');
     }
   }
   else if (to.meta.requiresAuth) {
