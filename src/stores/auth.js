@@ -80,6 +80,18 @@ export const useAuthStore = defineStore('auth', {
           headers: { Authorization: `Bearer ${this.token}` }
         })
         this.user = response.data.data[0]
+
+        // Check if user is admin and redirect to admin dashboard
+        if (this.user && this.user.roleCode !== "U") {
+          // Use router if it's available through this.$router
+          if (this.$router) {
+            this.$router.push('/admin');
+          } else {
+            // Fallback to window.location if router isn't available
+            window.location.href = '/admin';
+          }
+        }
+
         return response.data
       } catch (error) {
         if (error.response?.status === 401) {
