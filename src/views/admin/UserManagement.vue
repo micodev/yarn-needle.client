@@ -1,137 +1,215 @@
 <template>
-  <div class="user-management">
-    <h1>User Management</h1>
-    <div class="admin-panel">
-      <div class="search-filter">
-        <input type="text" placeholder="Search users..." v-model="searchQuery" />
-        <select v-model="filterRole">
-          <option value="">All Roles</option>
-          <option value="admin">Admin</option>
-          <option value="user">User</option>
-          <option value="lecturer">Lecturer</option>
-        </select>
+  <div class="p-5">
+    <h1 class="text-2xl font-bold mb-5">User Management</h1>
+    <div class="bg-white rounded-lg shadow-md p-5 relative">
+      <div class="flex gap-3 mb-5">
+        <InputText
+          v-model="searchQuery"
+          placeholder="Search users..."
+          class="flex-1"
+          type="text"
+        />
+        <Dropdown
+          v-model="filterRole"
+          :options="roleOptions"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="All Roles"
+          class="w-48"
+        />
       </div>
 
-      <table class="user-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in filteredUsers" :key="user.id">
-            <td>{{ user.id }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.role }}</td>
-            <td>{{ user.status }}</td>
-            <td class="actions">
-              <button @click="editUser(user)">Edit</button>
-              <button @click="deleteUser(user.id)" class="delete">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <ProgressSpinner v-if="userStore.loading" class="flex justify-center my-8" />
+      <Message v-else-if="userStore.error" severity="error">{{ userStore.error }}</Message>
+
+      <DataTable
+        v-else
+        :value="filteredUsers"
+        stripedRows
+        paginator
+        :rows="10"
+        :rowsPerPageOptions="[5, 10, 20]"
+        tableClass="min-w-full"
+        class="p-datatable-sm"
+        emptyMessage="No users found matching your search criteria."
+      >
+        <Column field="id" header="ID" sortable />
+        <Column field="userName" header="Username" sortable />
+        <Column header="Full Name" sortable :sortField="getFullName">
+          <template #body="slotProps">
+            {{ getFullName(slotProps.data) }}
+          </template>
+        </Column>
+        <Column field="email" header="Email" sortable />
+        <Column header="Role" sortable :sortField="getRoleName">
+          <template #body="slotProps">
+            {{ getRoleName(slotProps.data) }}
+          </template>
+        </Column>
+        <Column header="Membership">
+          <template #body="slotProps">
+            {{ getActiveMembership(slotProps.data) }}
+          </template>
+        </Column>
+        <Column header="Created At" sortable :sortField="formatDate">
+          <template #body="slotProps">
+            {{ formatDate(slotProps.data.createdAt) }}
+          </template>
+        </Column>
+        <Column header="Actions">
+          <template #body="slotProps">
+            <div class="flex gap-2">
+              <Button
+                icon="pi pi-pencil"
+                @click="editUser(slotProps.data)"
+                class="p-button-sm p-button-info"
+              />
+              <Button
+                icon="pi pi-trash"
+                @click="confirmDeleteUser(slotProps.data)"
+                class="p-button-sm p-button-danger"
+              />
+            </div>
+          </template>
+        </Column>
+      </DataTable>
+
+      <!-- Delete Confirmation Dialog -->
+      <Dialog
+        v-model:visible="showDeleteModal"
+        header="Confirm Deletion"
+        :style="{width: '400px'}"
+        :modal="true"
+      >
+        <div class="p-4">
+          <p>Are you sure you want to delete user: {{ selectedUser?.userName }}?</p>
+        </div>
+        <template #footer>
+          <Button
+            label="Cancel"
+            icon="pi pi-times"
+            @click="cancelDelete"
+            class="p-button-text"
+          />
+          <Button
+            label="Delete"
+            icon="pi pi-check"
+            @click="deleteUser"
+            class="p-button-danger"
+          />
+        </template>
+      </Dialog>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue';
+import { useUserStore } from '../../stores/userStore';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import Button from 'primevue/button';
+import InputText from 'primevue/inputtext';
+import Dropdown from 'primevue/dropdown';
+import Dialog from 'primevue/dialog';
+import ProgressSpinner from 'primevue/progressspinner';
+import Message from 'primevue/message';
 
-// Mock data for demonstration
-const users = ref([
-  { id: 1, name: 'John Doe', email: 'john@example.com', role: 'admin', status: 'active' },
-  { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'user', status: 'active' },
-  { id: 3, name: 'Robert Johnson', email: 'robert@example.com', role: 'lecturer', status: 'inactive' },
-])
+// Initialize the store
+const userStore = useUserStore();
 
-const searchQuery = ref('')
-const filterRole = ref('')
+// State variables
+const searchQuery = ref('');
+const filterRole = ref('');
+const showDeleteModal = ref(false);
+const selectedUser = ref(null);
 
+// Role filter options
+const roleOptions = [
+  { label: 'All Roles', value: '' },
+  { label: 'Admin', value: 'M' },
+  { label: 'User', value: 'U' },
+  { label: 'Lecturer', value: 'L' }
+];
+
+// Fetch users on component mount
+onMounted(async () => {
+  await userStore.fetchUsers();
+});
+
+// Computed properties
 const filteredUsers = computed(() => {
-  return users.value.filter(user => {
+  return userStore.users.filter(user => {
+    const fullName = getFullName(user);
     const matchesSearch =
-      user.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchQuery.value.toLowerCase())
+      user.userName?.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      user.email?.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      fullName.toLowerCase().includes(searchQuery.value.toLowerCase());
 
-    const matchesRole = filterRole.value === '' || user.role === filterRole.value
+    const matchesRole = filterRole.value === '' || user.roleCode === filterRole.value;
 
-    return matchesSearch && matchesRole
-  })
-})
+    return matchesSearch && matchesRole;
+  });
+});
 
-function editUser(user) {
-  // Implement edit logic
-  console.log('Editing user:', user)
+// Helper functions
+function getFullName(user) {
+  if (!user.hasProfile || !user.profile) return 'N/A';
+
+  const { firstName, secondName, thirdName } = user.profile;
+  return [firstName, secondName, thirdName].filter(Boolean).join(' ');
 }
 
-function deleteUser(userId) {
-  // Implement delete logic
-  console.log('Deleting user with ID:', userId)
-  users.value = users.value.filter(user => user.id !== userId)
+function getRoleName(user) {
+  if (!user.roleCodeNavigation) return user.roleCode || 'N/A';
+  return `${user.roleCodeNavigation.name} (${user.roleCode})`;
+}
+
+function getActiveMembership(user) {
+  if (!user.membershipUsers || user.membershipUsers.length === 0) return 'None';
+
+  const activeMembership = user.membershipUsers.find(m => m.stateCode === 'ACTIVE');
+  if (activeMembership) {
+    return activeMembership.membershipCodeNavigation?.name || activeMembership.membershipCode;
+  }
+
+  return 'None';
+}
+
+function formatDate(dateString) {
+  if (!dateString) return 'N/A';
+
+  try {
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
+  } catch (e) {
+    return dateString;
+  }
+}
+
+// Action methods
+function editUser(user) {
+  // Implement edit logic, e.g., navigate to edit form or open modal
+  console.log('Editing user:', user);
+}
+
+function confirmDeleteUser(user) {
+  selectedUser.value = user;
+  showDeleteModal.value = true;
+}
+
+async function deleteUser() {
+  if (!selectedUser.value) return;
+
+  const success = await userStore.deleteUser(selectedUser.value.id);
+  if (success) {
+    showDeleteModal.value = false;
+    selectedUser.value = null;
+  }
+}
+
+function cancelDelete() {
+  showDeleteModal.value = false;
+  selectedUser.value = null;
 }
 </script>
-
-<style scoped>
-.user-management {
-  padding: 20px;
-}
-
-.admin-panel {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-}
-
-.search-filter {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.search-filter input, .search-filter select {
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.search-filter input {
-  flex: 1;
-}
-
-.user-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.user-table th, .user-table td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #eee;
-}
-
-.user-table th {
-  background-color: #f8f9fa;
-}
-
-.actions button {
-  margin-right: 5px;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #4CAF50;
-  color: white;
-}
-
-.actions button.delete {
-  background-color: #f44336;
-}
-</style>
