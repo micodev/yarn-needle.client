@@ -182,7 +182,7 @@ function formatDate(dateString) {
   try {
     const date = new Date(dateString);
     return date.toLocaleDateString();
-  } catch (e) {
+  } catch  {
     return dateString;
   }
 }
