@@ -18,7 +18,6 @@ import {
   LaWhatsapp,
   LaTelegram,
   LaGlobeAfricaSolid,
-
   FaUsers,
   FaBook,
   FaShoppingCart,
