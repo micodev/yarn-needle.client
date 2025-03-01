@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import router from '../router';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -84,9 +85,8 @@ export const useAuthStore = defineStore('auth', {
         // Check if user is admin and redirect to admin dashboard
         if (this.user && this.user.roleCode !== "U") {
           // Use router if it's available through this.$router
-          if (this.$router) {
-            this.$router.push('/admin');
-          }
+          router.push('/admin');
+
         }
 
         return response.data
