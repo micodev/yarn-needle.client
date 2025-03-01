@@ -12,6 +12,13 @@ import { useAuthStore } from '@/stores/auth';
 import PaymentView from '@/views/PaymentView.vue'
 import AdminView from '@/views/AdminView.vue'
 
+// Import admin views
+import UserManagement from '@/views/admin/UserManagement.vue'
+import CourseManagement from '@/views/admin/CourseManagement.vue'
+import LecturerManagement from '@/views/admin/LecturerManagement.vue'
+import CommentManagement from '@/views/admin/CommentManagement.vue'
+import OrderAdministrator from '@/views/admin/OrderAdministrator.vue'
+
 const base = '/yarn-needle.client';
 
 const router = createRouter({
@@ -93,6 +100,57 @@ const router = createRouter({
             requiresAdmin: true,
             title: 'Admin Dashboard'
           }
+        },
+        // Admin nested routes
+        {
+          path: '/admin/users',
+          name: 'AdminUsers',
+          component: UserManagement,
+          meta: {
+            requiresAuth: true,
+            requiresAdmin: true,
+            title: 'User Management'
+          }
+        },
+        {
+          path: '/admin/courses',
+          name: 'AdminCourses',
+          component: CourseManagement,
+          meta: {
+            requiresAuth: true,
+            requiresAdmin: true,
+            title: 'Course Management'
+          }
+        },
+        {
+          path: '/admin/lecturers',
+          name: 'AdminLecturers',
+          component: LecturerManagement,
+          meta: {
+            requiresAuth: true,
+            requiresAdmin: true,
+            title: 'Lecturer Management'
+          }
+        },
+        {
+          path: '/admin/comments',
+          name: 'AdminComments',
+          component: CommentManagement,
+          meta: {
+            requiresAuth: true,
+            requiresAdmin: true,
+            title: 'Comment Management'
+          }
+        },
+        {
+          path: '/admin/orders',
+          name: 'AdminOrders',
+          component: OrderAdministrator,
+          meta: {
+            requiresAuth: true,
+            requiresAdmin: true,
+            title: 'Order Management'
+          }
         }
       ],
     },
@@ -112,8 +170,6 @@ router.beforeEach((to, from, next) => {
       return next('/');
     }
   }
-
-
 
   next();
 })
