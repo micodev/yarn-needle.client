@@ -8,7 +8,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
         <div class="bg-gradient-to-r from-indigo-400 to-indigo-600 text-white w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
-          <v-oh-fa-users class="w-7 h-7" />
+          <v-icon name="fa-users" class="w-7 h-7" />
         </div>
         <div class="w-full">
           <h2 class="text-xl font-semibold text-gray-800 mb-3">إدارة المستخدمين</h2>
