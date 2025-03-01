@@ -1,17 +1,28 @@
 <template>
-  <div class="comment-management">
-    <h1>Comment Management</h1>
-    <div class="admin-panel">
-      <div class="filter-section">
+  <div class="max-w-7xl mx-auto p-5">
+    <h1 class="text-2xl mb-5 text-gray-800">Comment Management</h1>
+    <div class="bg-gray-50 rounded-lg p-5 shadow-md">
+      <div class="flex flex-wrap justify-between items-center gap-2.5 mb-5">
         <div class="search-box">
-          <input type="text" placeholder="Search comments..." v-model="searchQuery" />
+          <input
+            type="text"
+            placeholder="Search comments..."
+            v-model="searchQuery"
+            class="p-2.5 border border-gray-300 rounded-md w-72 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
         </div>
-        <div class="filters">
-          <select v-model="courseFilter">
+        <div class="flex gap-2.5">
+          <select
+            v-model="courseFilter"
+            class="p-2.5 border border-gray-300 rounded-md bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
             <option value="">All Courses</option>
             <option v-for="course in uniqueCourses" :key="course" :value="course">{{ course }}</option>
           </select>
-          <select v-model="statusFilter">
+          <select
+            v-model="statusFilter"
+            class="p-2.5 border border-gray-300 rounded-md bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
             <option value="">All Statuses</option>
             <option value="approved">Approved</option>
             <option value="pending">Pending Review</option>
@@ -20,50 +31,100 @@
         </div>
       </div>
 
-      <div class="comments-list">
+      <div class="flex flex-col gap-4">
         <div
           v-for="comment in paginatedComments"
           :key="comment.id"
-          class="comment-card"
-          :class="{ 'flagged': comment.status === 'flagged', 'pending': comment.status === 'pending' }"
+          class="bg-white rounded-md p-4 shadow-sm"
+          :class="{
+            'border-l-4 border-red-500': comment.status === 'flagged',
+            'border-l-4 border-yellow-500': comment.status === 'pending'
+          }"
         >
-          <div class="comment-header">
-            <div class="user-info">
-              <img :src="comment.userAvatar" :alt="comment.userName" class="user-avatar" />
+          <div class="flex justify-between mb-2.5">
+            <div class="flex items-center gap-2.5">
+              <img
+                :src="comment.userAvatar"
+                :alt="comment.userName"
+                class="w-10 h-10 rounded-full object-cover"
+              />
               <div>
-                <div class="user-name">{{ comment.userName }}</div>
-                <div class="comment-meta">
+                <div class="font-bold text-gray-800">{{ comment.userName }}</div>
+                <div class="text-xs text-gray-500">
                   <span>{{ formatDate(comment.date) }}</span> |
                   <span>Course: {{ comment.course }}</span>
                 </div>
               </div>
             </div>
-            <div class="comment-status">
-              <span class="status-badge" :class="comment.status">{{ comment.status }}</span>
+            <div>
+              <span
+                class="text-xs px-2 py-1 rounded-full capitalize"
+                :class="{
+                  'bg-green-500 text-white': comment.status === 'approved',
+                  'bg-yellow-500 text-white': comment.status === 'pending',
+                  'bg-red-500 text-white': comment.status === 'flagged'
+                }"
+              >
+                {{ comment.status }}
+              </span>
             </div>
           </div>
 
-          <div class="comment-content">
+          <div class="mb-4 leading-relaxed">
             {{ comment.content }}
           </div>
 
-          <div class="comment-actions">
-            <button v-if="comment.status !== 'approved'" @click="approveComment(comment.id)" class="approve">Approve</button>
-            <button v-if="comment.status !== 'flagged'" @click="flagComment(comment.id)" class="flag">Flag</button>
-            <button @click="deleteComment(comment.id)" class="delete">Delete</button>
-            <button @click="replyToComment(comment.id)" class="reply">Reply</button>
+          <div class="flex gap-2.5">
+            <button
+              v-if="comment.status !== 'approved'"
+              @click="approveComment(comment.id)"
+              class="px-3 py-1.5 bg-green-500 text-white rounded text-sm hover:bg-opacity-90 transition"
+            >
+              Approve
+            </button>
+            <button
+              v-if="comment.status !== 'flagged'"
+              @click="flagComment(comment.id)"
+              class="px-3 py-1.5 bg-yellow-500 text-white rounded text-sm hover:bg-opacity-90 transition"
+            >
+              Flag
+            </button>
+            <button
+              @click="deleteComment(comment.id)"
+              class="px-3 py-1.5 bg-red-500 text-white rounded text-sm hover:bg-opacity-90 transition"
+            >
+              Delete
+            </button>
+            <button
+              @click="replyToComment(comment.id)"
+              class="px-3 py-1.5 bg-blue-500 text-white rounded text-sm hover:bg-opacity-90 transition"
+            >
+              Reply
+            </button>
           </div>
         </div>
 
-        <div v-if="filteredComments.length === 0" class="no-results">
+        <div v-if="filteredComments.length === 0" class="text-center py-5 text-gray-500">
           No comments match your search criteria
         </div>
       </div>
 
-      <div class="pagination">
-        <button :disabled="currentPage === 1" @click="currentPage--">Previous</button>
-        <span>Page {{ currentPage }} of {{ totalPages }}</span>
-        <button :disabled="currentPage === totalPages" @click="currentPage++">Next</button>
+      <div class="mt-5 flex justify-center items-center gap-2.5">
+        <button
+          :disabled="currentPage === 1"
+          @click="currentPage--"
+          class="px-4 py-2 border border-gray-300 bg-white rounded disabled:text-gray-300 disabled:cursor-not-allowed"
+        >
+          Previous
+        </button>
+        <span class="text-gray-600">Page {{ currentPage }} of {{ totalPages }}</span>
+        <button
+          :disabled="currentPage === totalPages"
+          @click="currentPage++"
+          class="px-4 py-2 border border-gray-300 bg-white rounded disabled:text-gray-300 disabled:cursor-not-allowed"
+        >
+          Next
+        </button>
       </div>
     </div>
   </div>
@@ -192,217 +253,3 @@ const replyToComment = (commentId) => {
   console.log(`Replying to comment ${commentId}`);
 }
 </script>
-
-<style scoped>
-.comment-management {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.admin-panel {
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.filter-section {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.search-box input {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  width: 300px;
-  font-size: 14px;
-}
-
-.filters {
-  display: flex;
-  gap: 10px;
-}
-
-.filters select {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: white;
-  font-size: 14px;
-}
-
-.comments-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.comment-card {
-  background-color: white;
-  border-radius: 6px;
-  padding: 15px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.comment-card.flagged {
-  border-left: 4px solid #ff4d4f;
-}
-
-.comment-card.pending {
-  border-left: 4px solid #faad14;
-}
-
-.comment-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.user-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.user-name {
-  font-weight: bold;
-  color: #333;
-}
-
-.comment-meta {
-  font-size: 12px;
-  color: #777;
-}
-
-.status-badge {
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 10px;
-  text-transform: capitalize;
-}
-
-.status-badge.approved {
-  background-color: #52c41a;
-  color: white;
-}
-
-.status-badge.pending {
-  background-color: #faad14;
-  color: white;
-}
-
-.status-badge.flagged {
-  background-color: #ff4d4f;
-  color: white;
-}
-
-.comment-content {
-  margin-bottom: 15px;
-  line-height: 1.5;
-}
-
-.comment-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.comment-actions button {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s;
-}
-
-.approve {
-  background-color: #52c41a;
-  color: white;
-}
-
-.flag {
-  background-color: #faad14;
-  color: white;
-}
-
-.delete {
-  background-color: #ff4d4f;
-  color: white;
-}
-
-.reply {
-  background-color: #1890ff;
-  color: white;
-}
-
-.comment-actions button:hover {
-  opacity: 0.9;
-}
-
-.no-results {
-  text-align: center;
-  padding: 20px;
-  color: #777;
-}
-
-.pagination {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.pagination button {
-  padding: 8px 16px;
-  border: 1px solid #ddd;
-  background-color: white;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.pagination button:disabled {
-  color: #ccc;
-  cursor: not-allowed;
-}
-
-.pagination span {
-  color: #666;
-}
-
-@media (max-width: 768px) {
-  .filter-section {
-    flex-direction: column;
-  }
-
-  .search-box input {
-    width: 100%;
-  }
-
-  .filters {
-    width: 100%;
-  }
-
-  .filters select {
-    flex: 1;
-  }
-}
-</style>
