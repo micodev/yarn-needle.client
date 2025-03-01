@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import userService from '../services/userService';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -13,7 +12,7 @@ export const useUserStore = defineStore('user', {
       this.loading = true;
       this.error = null;
       try {
-        this.users = await userService.getUsers();
+
       } catch (err) {
         this.error = 'Failed to load users. Please try again later.';
         console.error('Error fetching users:', err);
@@ -24,7 +23,7 @@ export const useUserStore = defineStore('user', {
 
     async deleteUser(userId) {
       try {
-        await userService.deleteUser(userId);
+
         this.users = this.users.filter(user => user.id !== userId);
         return true;
       } catch (err) {
