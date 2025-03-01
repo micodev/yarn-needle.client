@@ -86,9 +86,6 @@ export const useAuthStore = defineStore('auth', {
           // Use router if it's available through this.$router
           if (this.$router) {
             this.$router.push('/admin');
-          } else {
-            // Fallback to window.location if router isn't available
-            window.location.href = '/admin';
           }
         }
 
