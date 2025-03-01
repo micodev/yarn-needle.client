@@ -63,22 +63,7 @@
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
-import {
-  OhVueFaUsers,
-  OhVueFaBook,
-  OhVueFaShoppingCart,
-  OhVueFaChalkboardTeacher,
-  OhVueFaComments
-} from "oh-vue-icons/icons";
-import { addIcons } from "oh-vue-icons";
 
-addIcons(
-  OhVueFaUsers,
-  OhVueFaBook,
-  OhVueFaShoppingCart,
-  OhVueFaChalkboardTeacher,
-  OhVueFaComments
-);
 
 const authStore = useAuthStore();
 const router = useRouter();
