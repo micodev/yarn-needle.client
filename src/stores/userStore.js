@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 
 // Base API URL - adjust this as needed for your environment
-const API_URL = '/api/users';
+const API_URL = '/api/user/';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
