@@ -114,8 +114,6 @@ import Dropdown from 'primevue/dropdown';
 import Dialog from 'primevue/dialog';
 import ProgressSpinner from 'primevue/progressspinner';
 import Message from 'primevue/message';
-
-// Initialize the store
 const userStore = useUserStore();
 
 // State variables
