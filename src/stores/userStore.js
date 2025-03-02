@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
 
 // Base API URL - adjust this as needed for your environment
 const API_URL = '/api/users';
@@ -41,7 +40,7 @@ export const useUserStore = defineStore('user', {
       this.loading = true;
       this.error = null;
       try {
-        const response = await axios.get(API_URL, {
+        const response = await this.$axios.get(API_URL, {
           params: {
             page: this.pagination.currentPage,
             pageSize: this.pagination.limit,
@@ -90,7 +89,7 @@ export const useUserStore = defineStore('user', {
       this.loading = true;
       this.error = null;
       try {
-        const response = await axios.get(`${API_URL}/${userId}`);
+        const response = await this.$axios.get(`${API_URL}/${userId}`);
         this.currentUser = response.data;
         return this.currentUser;
       } catch (err) {
@@ -119,7 +118,7 @@ export const useUserStore = defineStore('user', {
         // Clean up undefined/null values
         Object.keys(params).forEach(key => params[key] === undefined && delete params[key]);
 
-        const response = await axios.get(`${API_URL}/${userId}/orders`, { params });
+        const response = await this.$axios.get(`${API_URL}/${userId}/orders`, { params });
 
         const { items, totalCount, currentPage, pageCount } = response.data;
 
@@ -153,7 +152,7 @@ export const useUserStore = defineStore('user', {
 
     async deleteUser(userId) {
       try {
-        await axios.delete(`${API_URL}/${userId}`);
+        await this.$axios.delete(`${API_URL}/${userId}`);
         this.users = this.users.filter(user => user.id !== userId);
         return true;
       } catch (err) {
@@ -167,7 +166,7 @@ export const useUserStore = defineStore('user', {
       this.loading = true;
       this.error = null;
       try {
-        const response = await axios.put(`${API_URL}/${userId}`, userData);
+        const response = await this.$axios.put(`${API_URL}/${userId}`, userData);
 
         // Update the user in the users array
         const index = this.users.findIndex(user => user.id === userId);
@@ -189,7 +188,7 @@ export const useUserStore = defineStore('user', {
       this.loading = true;
       this.error = null;
       try {
-        const response = await axios.post(API_URL, userData);
+        const response = await this.$axios.post(API_URL, userData);
         this.users.push(response.data);
         return response.data;
       } catch (err) {
