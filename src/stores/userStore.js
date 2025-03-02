@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 
 // Base API URL - adjust this as needed for your environment
-const API_URL = '/api/user/';
+const API_URL = '/api/user';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -40,7 +40,7 @@ export const useUserStore = defineStore('user', {
       this.loading = true;
       this.error = null;
       try {
-        const response = await this.$axios.get(API_URL, {
+        const response = await this.$axios.get(API_URL + "/users", {
           params: {
             page: this.pagination.currentPage,
             pageSize: this.pagination.limit,
