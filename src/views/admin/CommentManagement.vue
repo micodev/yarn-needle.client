@@ -32,13 +32,18 @@
 
           <div class="mb-4 leading-relaxed">
             <template v-if="hasMoreThan3Lines(comment.content)">
-              <pre class="whitespace-pre-wrap">{{ getFirstThreeLines(comment.content) }}</pre>
-              <button
-                @click="openDialog(comment)"
-                class="text-blue-600 underline text-sm"
-              >
-                أظهر المزيد
-              </button>
+              <div v-if="expandedComments[comment.id]">
+                <div class="whitespace-pre-wrap">{{ comment.content }}</div>
+                <button @click="toggleExpand(comment)" class="text-blue-600 underline text-sm">
+                  اخفاء
+                </button>
+              </div>
+              <div v-else>
+                <div class="whitespace-pre-wrap">{{ getFirstThreeLines(comment.content) }}</div>
+                <button @click="toggleExpand(comment)" class="text-blue-600 underline text-sm">
+                  عرض المزيد
+                </button>
+              </div>
             </template>
             <template v-else>
               {{ comment.content }}
@@ -79,20 +84,14 @@
         </button>
       </div>
     </div>
-    <!-- Dialog to show full comment content -->
-    <Dialog v-model:visible="dialogVisible" header="تفاصيل التعليق" modal>
-      <div class="p-4 whitespace-pre-wrap">
-        {{ dialogComment?.content }}
-      </div>
-    </Dialog>
+    <!-- Removed Dialog component -->
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, reactive } from 'vue'
 import { useCommentManagementStore } from '../../stores/commentManagementStore.js'
 import Badge from 'primevue/badge'
-import Dialog from 'primevue/dialog'
 
 const commentStore = useCommentManagementStore()
 
@@ -111,14 +110,16 @@ function gotoPage(page) {
   }
 }
 
-// Added hide operation: call the store action to hide a comment by id.
 const hideComment = (commentId) => {
   commentStore.hideComment(commentId)
 }
 
-// New reactive states for dialog
-const dialogVisible = ref(false)
-const dialogComment = ref(null)
+// Add reactive state for expanded comments
+const expandedComments = reactive({})
+
+function toggleExpand(comment) {
+  expandedComments[comment.id] = !expandedComments[comment.id]
+}
 
 // Helper function: check if comment has more than 3 lines
 function hasMoreThan3Lines(content) {
@@ -139,11 +140,5 @@ function getFirstThreeLines(content) {
     // Return first approx 300 characters as three lines
     return content.slice(0, 300);
   }
-}
-
-// Open dialog with full comment content
-function openDialog(comment) {
-  dialogComment.value = comment
-  dialogVisible.value = true
 }
 </script>
