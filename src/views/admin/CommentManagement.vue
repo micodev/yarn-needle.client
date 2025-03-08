@@ -82,7 +82,7 @@ onMounted(() => {
 
 // Removed searchQuery, courseFilter, statusFilter, uniqueCourses and formatDate
 
-const currentPage = computed(() => commentStore.pagination.page || 1)
+const currentPage = computed(() => commentStore.pagination.pageIndex || 1)
 const totalPages = computed(() => commentStore.pagination.totalPages || 1)
 
 function gotoPage(page) {
