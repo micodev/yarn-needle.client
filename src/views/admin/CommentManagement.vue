@@ -31,7 +31,7 @@
 
           <div class="mb-4 leading-relaxed">
             {{ comment.content }}
-            <Badge v-if="comment.deletedAt" value="مخفى" severity="error" />
+            <Badge v-if="comment.deletedAt" value="مخفى" severity="danger" />
           </div>
 
           <div class="flex gap-2.5">
