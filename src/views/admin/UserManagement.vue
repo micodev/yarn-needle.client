@@ -91,7 +91,6 @@
         <!-- Suspended Column with toggle switch -->
         <Column header="Suspended">
           <template #body="slotProps">
-
             <ToggleSwitch v-model="slotProps.data.isSuspended" @change="e => toggleSuspended(slotProps.data, e.value)" />
           </template>
         </Column>
