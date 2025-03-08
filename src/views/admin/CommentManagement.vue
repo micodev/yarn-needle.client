@@ -51,6 +51,11 @@
             <Badge v-if="comment.deletedAt" class="mr-1" value="مخفى" severity="danger" />
           </div>
 
+          <!-- New rating display -->
+          <div class="mb-2">
+            <span>{{ getStars(comment.rating) }}</span>
+          </div>
+
           <div class="flex gap-2.5">
             <Button
               @click="hideComment(comment.id)"
@@ -141,5 +146,10 @@ function getFirstThreeLines(content) {
     // Return first approx 300 characters as three lines
     return content.slice(0, 300);
   }
+}
+
+// New helper to show rating as emoji stars
+function getStars(rating) {
+  return "⭐".repeat(rating)
 }
 </script>
