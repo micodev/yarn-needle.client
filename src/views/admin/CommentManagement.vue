@@ -48,7 +48,7 @@
             <template v-else>
               {{ comment.content }}
             </template>
-            <Badge v-if="comment.deletedAt" value="مخفى" severity="danger" />
+            <Badge v-if="comment.deletedAt" class="mr-1" value="مخفى" severity="danger" />
           </div>
 
           <div class="flex gap-2.5">
