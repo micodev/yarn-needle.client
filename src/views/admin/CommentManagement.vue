@@ -30,6 +30,11 @@
             </div>
           </div>
 
+          <!-- Moved rating display before content -->
+          <div class="mb-2">
+            <span>{{ getStars(comment.rating) }}</span>
+          </div>
+
           <div class="mb-4 leading-relaxed">
             <template v-if="hasMoreThan3Lines(comment.content)">
               <div v-if="expandedComments[comment.id]">
@@ -49,11 +54,6 @@
               {{ comment.content }}
             </template>
             <Badge v-if="comment.deletedAt" class="mr-1" value="مخفى" severity="danger" />
-          </div>
-
-          <!-- New rating display -->
-          <div class="mb-2">
-            <span>{{ getStars(comment.rating) }}</span>
           </div>
 
           <div class="flex gap-2.5">
