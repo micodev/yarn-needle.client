@@ -50,12 +50,12 @@ export const useUserStore = defineStore('user', {
           }
         });
 
-        const { items, totalCount, currentPage, pageCount } = response.data;
+        const users = response.data;
 
         if (append) {
-          this.users = [...this.users, ...(items || [])];
+          this.users = [...this.users, ...(users || [])];
         } else {
-          this.users = items || [];
+          this.users = users || [];
         }
 
         // Update pagination info based on response
