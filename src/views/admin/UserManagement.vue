@@ -88,11 +88,10 @@
             <Badge v-else value="Inactive" severity="secondary" />
           </template>
         </Column>
-        <!-- New Suspended Column -->
+        <!-- Suspended Column with toggle switch -->
         <Column header="Suspended">
           <template #body="slotProps">
-            <Badge v-if="slotProps.data.isSuspended" value="Suspended" severity="danger" />
-            <Badge v-else value="Active" severity="success" />
+            <InputSwitch :checked="slotProps.data.isSuspended" @change="e => toggleSuspended(slotProps.data, e.value)" />
           </template>
         </Column>
         <Column header="Courses">
@@ -155,6 +154,7 @@ import Dialog from 'primevue/dialog';
 import ProgressSpinner from 'primevue/progressspinner';
 import Message from 'primevue/message';
 import Badge from 'primevue/badge';
+import InputSwitch from 'primevue/inputswitch';
 
 const userStore = useUserStore();
 
@@ -204,5 +204,10 @@ function formatDate(dateString) {
 function viewGovernmentCard(user) {
   selectedUser.value = user;
   showCardModal.value = true;
+}
+
+// Action method for toggling suspended status
+async function toggleSuspended(user, newStatus) {
+  await userStore.changeSuspendedAction(user.id, newStatus);
 }
 </script>
