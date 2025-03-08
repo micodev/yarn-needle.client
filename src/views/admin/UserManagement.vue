@@ -93,10 +93,14 @@
         <!-- Suspended Column with toggle switch -->
         <Column header="معلق">
           <template #body="slotProps">
-            <ToggleSwitch
-              v-model="slotProps.data.isSuspended"
-              @change="handleToggleSuspended(slotProps)"
-            />
+            <div class="flex items-center gap-2">
+              <ToggleSwitch
+                v-model="slotProps.data.isSuspended"
+                @change="handleToggleSuspended(slotProps)"
+                :disabled="userStore.isSuspendedLoading"
+              />
+              <ProgressSpinner v-if="userStore.isSuspendedLoading" class="w-6 h-6" />
+            </div>
           </template>
         </Column>
         <Column header="الدورات">
