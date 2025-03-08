@@ -31,7 +31,7 @@
 
           <div class="mb-4 leading-relaxed">
             {{ comment.content }}
-            <span v-if="comment.deletedAt" class="ml-2 inline-block rounded px-2 py-0.5 text-xs">مخفى</span>
+            <Badge v-if="comment.deletedAt" value="مخفى" severity="warning" class="ml-2 inline-block" />
           </div>
 
           <div class="flex gap-2.5">
@@ -73,6 +73,7 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { useCommentManagementStore } from '../../stores/commentManagementStore.js'
+import Badge from 'primevue/badge'
 
 const commentStore = useCommentManagementStore()
 
