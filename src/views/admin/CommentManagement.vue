@@ -34,7 +34,6 @@
       <div class="flex flex-col gap-4">
         <div
           v-for="comment in commentStore.comments"
-          v-if="!comment.hidden"
           :key="comment.id"
           class="bg-white rounded-md p-4 shadow-sm"
         >
