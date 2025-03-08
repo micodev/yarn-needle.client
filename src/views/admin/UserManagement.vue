@@ -25,7 +25,7 @@
         class="p-datatable-sm"
         emptyMessage="No users found matching your search criteria."
       >
-        <Column header="Profile" style="width: 100px">
+        <Column header="الملف" style="width: 100px">
           <template #body="slotProps">
             <div class="flex justify-center">
               <img
@@ -40,17 +40,17 @@
             </div>
           </template>
         </Column>
-        <Column header="Full Name" sortable :sortField="getFullName">
+        <Column header="الاسم الكامل" sortable :sortField="getFullName">
           <template #body="slotProps">
             <div class="text-right" dir="rtl">{{ getFullName(slotProps.data) }}</div>
           </template>
         </Column>
-        <Column field="phoneNumber" header="Phone">
+        <Column field="phoneNumber" header="الهاتف">
           <template #body="slotProps">
             {{ slotProps.data.phoneNumber || 'N/A' }}
           </template>
         </Column>
-        <Column header="Education">
+        <Column header="التعليم">
           <template #body="slotProps">
             <div v-if="slotProps.data.degree" class="text-right" dir="rtl">
               {{ slotProps.data.degree }} - {{ slotProps.data.fieldOfStudy || '' }}
@@ -58,7 +58,7 @@
             <span v-else>N/A</span>
           </template>
         </Column>
-        <Column header="Job Title">
+        <Column header="الوظيفة">
           <template #body="slotProps">
             <div v-if="slotProps.data.jobTitle" class="text-right" dir="rtl">
               {{ slotProps.data.jobTitle }}
@@ -66,46 +66,46 @@
             <span v-else>N/A</span>
           </template>
         </Column>
-        <Column header="Birth Date">
+        <Column header="تاريخ الميلاد">
           <template #body="slotProps">
             {{ formatDate(slotProps.data.birthDate) }}
           </template>
         </Column>
-        <Column header="Note">
+        <Column header="ملاحظة">
           <template #body="slotProps">
             <span>{{ slotProps.data.note || 'N/A' }}</span>
           </template>
         </Column>
-        <Column header="Profile Status">
+        <Column header="حالة الملف">
           <template #body="slotProps">
             <Badge v-if="slotProps.data.hasProfile" value="Completed" severity="success" />
             <Badge v-else value="Incomplete" severity="warning" />
           </template>
         </Column>
-        <Column header="Membership">
+        <Column header="العضوية">
           <template #body="slotProps">
             <Badge v-if="slotProps.data.hasMembership" value="Active" severity="success" />
             <Badge v-else value="Inactive" severity="secondary" />
           </template>
         </Column>
         <!-- Suspended Column with toggle switch -->
-        <Column header="Suspended">
+        <Column header="معلق">
           <template #body="slotProps">
             <ToggleSwitch v-model="slotProps.data.isSuspended" @change="e => toggleSuspended(slotProps.data, e.value)" />
           </template>
         </Column>
-        <Column header="Courses">
+        <Column header="الدورات">
           <template #body="slotProps">
             <Badge v-if="slotProps.data.courseCount" :value="slotProps.data.courseCount" severity="info" />
             <span v-else>0</span>
           </template>
         </Column>
-        <Column header="Government ID">
+        <Column header="الهوية الحكومية">
           <template #body="slotProps">
             <span>{{ slotProps.data.governmentId || 'N/A' }}</span>
           </template>
         </Column>
-        <Column header="Actions">
+        <Column header="الإجراءات">
           <template #body="slotProps">
             <div class="flex gap-2">
               <Button
