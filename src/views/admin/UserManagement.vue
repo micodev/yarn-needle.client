@@ -113,7 +113,7 @@
                 class="p-button-sm p-button-danger"
               />
               <Button
-                v-if="slotProps.data.governmentCardFile"
+                :disabled="!slotProps.data.governmentCardFile"
                 icon="pi pi-id-card"
                 @click="viewGovernmentCard(slotProps.data)"
                 class="p-button-sm p-button-secondary"
