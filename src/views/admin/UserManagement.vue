@@ -103,16 +103,6 @@
           <template #body="slotProps">
             <div class="flex gap-2">
               <Button
-                icon="pi pi-pencil"
-                @click="editUser(slotProps.data)"
-                class="p-button-sm p-button-info"
-              />
-              <Button
-                icon="pi pi-trash"
-                @click="confirmDeleteUser(slotProps.data)"
-                class="p-button-sm p-button-danger"
-              />
-              <Button
                 :disabled="!slotProps.data.governmentCardFile"
                 icon="pi pi-id-card"
                 @click="viewGovernmentCard(slotProps.data)"
@@ -123,32 +113,6 @@
           </template>
         </Column>
       </DataTable>
-
-      <!-- Delete Confirmation Dialog -->
-      <Dialog
-        v-model:visible="showDeleteModal"
-        header="Confirm Deletion"
-        :style="{width: '400px'}"
-        :modal="true"
-      >
-        <div class="p-4">
-          <p>Are you sure you want to delete user: {{ selectedUser?.userName }}?</p>
-        </div>
-        <template #footer>
-          <Button
-            label="Cancel"
-            icon="pi pi-times"
-            @click="cancelDelete"
-            class="p-button-text"
-          />
-          <Button
-            label="Delete"
-            icon="pi pi-check"
-            @click="deleteUser"
-            class="p-button-danger"
-          />
-        </template>
-      </Dialog>
 
       <!-- Government Card Dialog -->
       <Dialog
@@ -189,7 +153,6 @@ const userStore = useUserStore();
 
 // State variables
 const searchQuery = ref('');
-const showDeleteModal = ref(false);
 const showCardModal = ref(false);
 const selectedUser = ref(null);
 
@@ -234,34 +197,9 @@ function formatDate(dateString) {
   }
 }
 
-// Action methods
-function editUser(user) {
-  // Implement edit logic, e.g., navigate to edit form or open modal
-  console.log('Editing user:', user);
-}
-
-function confirmDeleteUser(user) {
-  selectedUser.value = user;
-  showDeleteModal.value = true;
-}
-
+// Action method for viewing government card
 function viewGovernmentCard(user) {
   selectedUser.value = user;
   showCardModal.value = true;
-}
-
-async function deleteUser() {
-  if (!selectedUser.value) return;
-
-  const success = await userStore.deleteUser(selectedUser.value.id);
-  if (success) {
-    showDeleteModal.value = false;
-    selectedUser.value = null;
-  }
-}
-
-function cancelDelete() {
-  showDeleteModal.value = false;
-  selectedUser.value = null;
 }
 </script>
