@@ -12,9 +12,13 @@ export const useCommentManagementStore = defineStore('commentManagement', {
 			this.loading = true;
 			this.error = null;
 			try {
-				// using axios like in userStore.js
 				const response = await this.$axios.get(API_URL+"/comments");
-				this.comments = response.data;
+				// Check if response is successful and set comments accordingly
+				if (response.data && response.data.success) {
+					this.comments = response.data.data;
+				} else {
+					this.error = response.data.message || 'Failed to load comments. Please try again later.';
+				}
 			} catch (error) {
 				this.error = 'Failed to load comments. Please try again later.';
 				console.error('Fetching comments failed:', error);
