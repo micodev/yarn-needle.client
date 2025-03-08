@@ -1,11 +1,11 @@
 <template>
   <div class="p-5">
-    <h1 class="text-2xl font-bold mb-5">User Management</h1>
+    <h1 class="text-2xl font-bold mb-5">إدارة المستخدمين</h1>
     <div class="bg-white rounded-lg shadow-md p-5 relative">
       <div class="flex gap-3 mb-5">
         <InputText
           v-model="searchQuery"
-          placeholder="Search users..."
+          placeholder="ابحث عن المستخدمين..."
           class="flex-1"
           type="text"
         />
@@ -25,7 +25,7 @@
         :rowsPerPageOptions="[5, 10, 20]"
         tableClass="min-w-full"
         class="p-datatable-sm"
-        emptyMessage="No users found matching your search criteria."
+        emptyMessage="لم يتم العثور على مستخدمين يطابقون معايير البحث."
       >
         <Column header="الملف" style="width: 100px">
           <template #body="slotProps">
@@ -49,7 +49,7 @@
         </Column>
         <Column field="phoneNumber" header="الهاتف">
           <template #body="slotProps">
-            {{ slotProps.data.phoneNumber || 'N/A' }}
+            {{ slotProps.data.phoneNumber || 'غير متاح' }}
           </template>
         </Column>
         <Column header="التعليم">
@@ -57,7 +57,7 @@
             <div v-if="slotProps.data.degree" class="text-right" dir="rtl">
               {{ slotProps.data.degree }} - {{ slotProps.data.fieldOfStudy || '' }}
             </div>
-            <span v-else>N/A</span>
+            <span v-else>غير متاح</span>
           </template>
         </Column>
         <Column header="الوظيفة">
@@ -65,7 +65,7 @@
             <div v-if="slotProps.data.jobTitle" class="text-right" dir="rtl">
               {{ slotProps.data.jobTitle }}
             </div>
-            <span v-else>N/A</span>
+            <span v-else>غير متاح</span>
           </template>
         </Column>
         <Column header="تاريخ الميلاد">
@@ -75,19 +75,19 @@
         </Column>
         <Column header="ملاحظة">
           <template #body="slotProps">
-            <span>{{ slotProps.data.note || 'N/A' }}</span>
+            <span>{{ slotProps.data.note || 'غير متاح' }}</span>
           </template>
         </Column>
         <Column header="حالة الملف">
           <template #body="slotProps">
-            <Badge v-if="slotProps.data.hasProfile" value="Completed" severity="success" />
-            <Badge v-else value="Incomplete" severity="warning" />
+            <Badge v-if="slotProps.data.hasProfile" value="مكتمل" severity="success" />
+            <Badge v-else value="غير مكتمل" severity="warning" />
           </template>
         </Column>
         <Column header="العضوية">
           <template #body="slotProps">
-            <Badge v-if="slotProps.data.hasMembership" value="Active" severity="success" />
-            <Badge v-else value="Inactive" severity="secondary" />
+            <Badge v-if="slotProps.data.hasMembership" value="نشط" severity="success" />
+            <Badge v-else value="غير نشط" severity="secondary" />
           </template>
         </Column>
         <!-- Suspended Column with toggle switch -->
@@ -111,7 +111,7 @@
         </Column>
         <Column header="الهوية الحكومية">
           <template #body="slotProps">
-            <span>{{ slotProps.data.governmentId || 'N/A' }}</span>
+            <span>{{ slotProps.data.governmentId || 'غير متاح' }}</span>
           </template>
         </Column>
         <Column header="الإجراءات">
@@ -122,7 +122,7 @@
                 icon="pi pi-id-card"
                 @click="viewGovernmentCard(slotProps.data)"
                 class="p-button-sm p-button-secondary"
-                tooltip="View ID Card"
+                tooltip="عرض بطاقة الهوية"
               />
             </div>
           </template>
@@ -132,7 +132,7 @@
       <!-- Government Card Dialog -->
       <Dialog
         v-model:visible="showCardModal"
-        header="Government ID Card"
+        header="بطاقة الهوية الحكومية"
         :style="{width: '600px'}"
         :modal="true"
       >
@@ -140,12 +140,12 @@
           <img
             v-if="selectedUser?.governmentCardFile"
             :src="selectedUser.governmentCardFile"
-            alt="Government ID Card"
+            alt="بطاقة الهوية الحكومية"
             class="max-w-full max-h-96 object-contain"
           />
-          <p v-else class="text-red-500">No ID card available</p>
-          <p class="mt-3 font-semibold">ID Number: {{ selectedUser?.governmentId || 'N/A' }}</p>
-          <p v-if="selectedUser?.note" class="mt-2 text-gray-600">Notes: {{ selectedUser.note }}</p>
+          <p v-else class="text-red-500">لا تتوفر بطاقة الهوية</p>
+          <p class="mt-3 font-semibold">رقم الهوية: {{ selectedUser?.governmentId || 'غير متاح' }}</p>
+          <p v-if="selectedUser?.note" class="mt-2 text-gray-600">ملاحظات: {{ selectedUser.note }}</p>
         </div>
       </Dialog>
     </div>
@@ -204,12 +204,12 @@ function getFullName(user) {
   if (firstName) {
     return [firstName, secondName, thirdName].filter(Boolean).join(' ');
   }
-  return 'N/A';
+  return 'غير متاح';
 }
 
 
 function formatDate(dateString) {
-  if (!dateString) return 'N/A';
+  if (!dateString) return 'غير متاح';
 
   try {
     const date = new Date(dateString);
