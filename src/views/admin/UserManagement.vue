@@ -93,7 +93,7 @@
           <template #body="slotProps">
             <ToggleSwitch
               v-model="slotProps.data.isSuspended"
-              @change="handleToggleSuspended(slotProps, $event)"
+              @change="handleToggleSuspended(slotProps)"
             />
           </template>
         </Column>
@@ -215,7 +215,7 @@ async function toggleSuspended(user, newStatus) {
 }
 
 // New handler to replace the inline arrow function:
-function handleToggleSuspended(slotProps, event) {
+function handleToggleSuspended(slotProps) {
   console.log('Toggling suspended status for:', slotProps.data.id, 'New status:', event);
   toggleSuspended(slotProps.data, event.value);
 }
