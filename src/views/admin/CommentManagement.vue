@@ -31,7 +31,18 @@
           </div>
 
           <div class="mb-4 leading-relaxed">
-            {{ comment.content }}
+            <template v-if="hasMoreThan3Lines(comment.content)">
+              <pre class="whitespace-pre-wrap">{{ getFirstThreeLines(comment.content) }}</pre>
+              <button
+                @click="openDialog(comment)"
+                class="text-blue-600 underline text-sm"
+              >
+                أظهر المزيد
+              </button>
+            </template>
+            <template v-else>
+              {{ comment.content }}
+            </template>
             <Badge v-if="comment.deletedAt" value="مخفى" severity="danger" />
           </div>
 
@@ -68,13 +79,20 @@
         </button>
       </div>
     </div>
+    <!-- Dialog to show full comment content -->
+    <Dialog v-model:visible="dialogVisible" header="تفاصيل التعليق" modal>
+      <div class="p-4 whitespace-pre-wrap">
+        {{ dialogComment?.content }}
+      </div>
+    </Dialog>
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useCommentManagementStore } from '../../stores/commentManagementStore.js'
 import Badge from 'primevue/badge'
+import Dialog from 'primevue/dialog'
 
 const commentStore = useCommentManagementStore()
 
@@ -96,5 +114,25 @@ function gotoPage(page) {
 // Added hide operation: call the store action to hide a comment by id.
 const hideComment = (commentId) => {
   commentStore.hideComment(commentId)
+}
+
+// New reactive states for dialog
+const dialogVisible = ref(false)
+const dialogComment = ref(null)
+
+// Helper function: check if comment has more than 3 lines
+function hasMoreThan3Lines(content) {
+  return content.split('\n').length > 3
+}
+
+// Helper function: get first three lines of comment
+function getFirstThreeLines(content) {
+  return content.split('\n').slice(0, 3).join('\n')
+}
+
+// Open dialog with full comment content
+function openDialog(comment) {
+  dialogComment.value = comment
+  dialogVisible.value = true
 }
 </script>
