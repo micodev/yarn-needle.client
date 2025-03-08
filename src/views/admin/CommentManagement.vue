@@ -4,7 +4,8 @@
     <div class="rounded-lg p-5 shadow-md">
       <!-- Removed search and filter controls -->
 
-      <div class="flex flex-col gap-4">
+      <!-- Updated comment view to grid layout -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <div
           v-for="comment in commentStore.comments"
           :key="comment.id"
