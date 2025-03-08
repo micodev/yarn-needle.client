@@ -13,7 +13,8 @@ export const useUserStore = defineStore('user', {
     pagination: {
       currentPage: 1,
       limit: 10,
-      hasMore: true
+      hasMore: true,
+      totalPages: 0 // Added totalPages state data
     },
     ordersPagination: {
       currentPage: 1,
