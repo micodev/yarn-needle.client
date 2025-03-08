@@ -74,15 +74,27 @@
             {{ formatDate(slotProps.data.birthDate) }}
           </template>
         </Column>
-        <Column header="Role">
+        <Column header="Profile Status">
           <template #body="slotProps">
-            {{ getRoleName(slotProps.data) }}
+            <Badge v-if="slotProps.data.hasProfile" value="Completed" severity="success" />
+            <Badge v-else value="Incomplete" severity="warning" />
+          </template>
+        </Column>
+        <Column header="Membership">
+          <template #body="slotProps">
+            <Badge v-if="slotProps.data.hasMembership" value="Active" severity="success" />
+            <Badge v-else value="Inactive" severity="secondary" />
           </template>
         </Column>
         <Column header="Courses">
           <template #body="slotProps">
             <Badge v-if="slotProps.data.courseCount" :value="slotProps.data.courseCount" severity="info" />
             <span v-else>0</span>
+          </template>
+        </Column>
+        <Column header="Government ID">
+          <template #body="slotProps">
+            <span>{{ slotProps.data.governmentId || 'N/A' }}</span>
           </template>
         </Column>
         <Column header="Actions">
@@ -152,6 +164,7 @@
           />
           <p v-else class="text-red-500">No ID card available</p>
           <p class="mt-3 font-semibold">ID Number: {{ selectedUser?.governmentId || 'N/A' }}</p>
+          <p v-if="selectedUser?.note" class="mt-2 text-gray-600">Notes: {{ selectedUser.note }}</p>
         </div>
       </Dialog>
     </div>
@@ -190,7 +203,8 @@ const filteredUsers = computed(() => {
     return user.userName?.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       user.email?.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       fullName.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      (user.phoneNumber && user.phoneNumber.includes(searchQuery.value));
+      (user.phoneNumber && user.phoneNumber.includes(searchQuery.value)) ||
+      (user.governmentId && user.governmentId.includes(searchQuery.value));
   });
 });
 
