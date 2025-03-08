@@ -58,7 +58,7 @@
 
           <div class="mb-4 leading-relaxed">
             {{ comment.content }}
-            <span v-if="comment.hidden" class="ml-2 inline-block bg-gray-300 text-gray-800 rounded px-2 py-0.5 text-xs">Hidden</span>
+            <span v-if="comment.deletedAt" class="ml-2 inline-block bg-gray-300 text-gray-800 rounded px-2 py-0.5 text-xs">Hidden</span>
           </div>
 
           <div class="flex gap-2.5">
