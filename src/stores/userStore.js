@@ -9,6 +9,7 @@ export const useUserStore = defineStore('user', {
     currentUser: null,
     userOrders: [],
     loading: false,
+    isSuspendedLoading: false,
     error: null,
     pagination: {
       currentPage: 1,
@@ -202,7 +203,10 @@ export const useUserStore = defineStore('user', {
 
     async changeSuspendedAction(userId, isSuspended) {
 
-      this.loading = true;
+      if (this.isSuspendedLoading) {
+        return;
+      }
+      this.isSuspendedLoading = true;
       this.error = null;
       try {
         const response = await this.$axios.put(`${API_URL}/${userId}/suspend`, { isSuspended });
@@ -217,7 +221,7 @@ export const useUserStore = defineStore('user', {
         console.error('Error updating suspension:', err);
         return null;
       } finally {
-        this.loading = false;
+        this.isSuspendedLoading = false;
       }
     }
   }
