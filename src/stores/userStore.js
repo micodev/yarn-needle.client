@@ -58,9 +58,6 @@ export const useUserStore = defineStore('user', {
           this.users = users || [];
         }
 
-        // Update pagination info based on response
-        this.pagination.hasMore = currentPage < pageCount;
-        this.pagination.currentPage = currentPage;
 
         return this.users;
       } catch (err) {
