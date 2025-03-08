@@ -216,7 +216,7 @@ async function toggleSuspended(user, newStatus) {
 
 // New handler to replace the inline arrow function:
 function handleToggleSuspended(slotProps) {
-  console.log('Toggling suspended status for:', slotProps.data.id, 'New status:', event);
+  console.log('Toggling suspended status for:', slotProps.data.id, 'New status:', slotProps.data.isSuspended);
   toggleSuspended(slotProps.data, event.value);
 }
 </script>
