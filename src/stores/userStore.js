@@ -198,6 +198,8 @@ export const useUserStore = defineStore('user', {
     },
 
     async changeSuspendedAction(userId, isSuspended) {
+      console.log("userId", userId);
+      console.log("isSuspended", isSuspended);
       this.loading = true;
       this.error = null;
       try {
