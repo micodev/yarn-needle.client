@@ -34,6 +34,7 @@
       <div class="flex flex-col gap-4">
         <div
           v-for="comment in commentStore.comments"
+          v-if="!comment.hidden"
           :key="comment.id"
           class="bg-white rounded-md p-4 shadow-sm"
         >
@@ -62,28 +63,10 @@
 
           <div class="flex gap-2.5">
             <button
-              @click="approveComment(comment.id)"
-              class="px-3 py-1.5 bg-green-500 text-white rounded text-sm hover:bg-opacity-90 transition"
+              @click="hideComment(comment.id)"
+              class="px-3 py-1.5 bg-gray-500 text-white rounded text-sm hover:bg-opacity-90 transition"
             >
-              Approve
-            </button>
-            <button
-              @click="flagComment(comment.id)"
-              class="px-3 py-1.5 bg-yellow-500 text-white rounded text-sm hover:bg-opacity-90 transition"
-            >
-              Flag
-            </button>
-            <button
-              @click="deleteComment(comment.id)"
-              class="px-3 py-1.5 bg-red-500 text-white rounded text-sm hover:bg-opacity-90 transition"
-            >
-              Delete
-            </button>
-            <button
-              @click="replyToComment(comment.id)"
-              class="px-3 py-1.5 bg-blue-500 text-white rounded text-sm hover:bg-opacity-90 transition"
-            >
-              Reply
+              Hide
             </button>
           </div>
         </div>
@@ -147,29 +130,14 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString(undefined, options)
 }
 
-// Comment management methods
-const approveComment = (commentId) => {
-  const commentIndex = commentStore.comments.findIndex(c => c.id === commentId)
-  if (commentIndex !== -1) {
-    console.log(`Approve action triggered for comment ${commentId}`)
-  }
-}
+// Removed previous operations: approveComment, flagComment, deleteComment, replyToComment
 
-const flagComment = (commentId) => {
-  const commentIndex = commentStore.comments.findIndex(c => c.id === commentId)
-  if (commentIndex !== -1) {
-    console.log(`Flag action triggered for comment ${commentId}`)
+// Added hide operation
+const hideComment = (commentId) => {
+  const comment = commentStore.comments.find(c => c.id === commentId)
+  if (comment) {
+    comment.hidden = true
+    console.log(`Hide action triggered for comment ${commentId}`)
   }
-}
-
-const deleteComment = (commentId) => {
-  if (confirm('Are you sure you want to delete this comment?')) {
-    commentStore.comments = commentStore.comments.filter(c => c.id !== commentId)
-    console.log(`Deleted comment ${commentId}`)
-  }
-}
-
-const replyToComment = (commentId) => {
-  console.log(`Replying to comment ${commentId}`)
 }
 </script>
