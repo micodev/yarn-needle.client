@@ -5,7 +5,8 @@ export const useCommentManagementStore = defineStore('commentManagement', {
 	state: () => ({
 		comments: [],
 		loading: false,   // added loading state
-		error: null       // added error state
+		error: null,      // added error state
+		pagination: {}    // added pagination state
 	}),
 	actions: {
 		async fetchComments() {
@@ -13,9 +14,10 @@ export const useCommentManagementStore = defineStore('commentManagement', {
 			this.error = null;
 			try {
 				const response = await this.$axios.get(API_URL+"/comments");
-				// Check if response is successful and set comments accordingly
+				// Check if response is successful and set comments and pagination accordingly
 				if (response.data && response.data.success) {
 					this.comments = response.data.data;
+					this.pagination = response.data.pagination;  // update pagination
 				} else {
 					this.error = response.data.message || 'Failed to load comments. Please try again later.';
 				}
