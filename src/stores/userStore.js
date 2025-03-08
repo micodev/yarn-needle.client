@@ -50,14 +50,16 @@ export const useUserStore = defineStore('user', {
           }
         });
 
-        const users = response.data;
-
+        // Updated to handle new response structure
+        const users = response.data.data;
         if (append) {
           this.users = [...this.users, ...(users || [])];
         } else {
           this.users = users || [];
         }
 
+        // Update pagination based on new response structure
+        this.pagination.hasMore = response.data.pagination.pageIndex < response.data.pagination.totalPages;
 
         return this.users;
       } catch (err) {
