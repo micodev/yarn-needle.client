@@ -91,7 +91,7 @@
         <!-- Suspended Column with toggle switch -->
         <Column header="Suspended">
           <template #body="slotProps">
-            <InputSwitch :checked="slotProps.data.isSuspended" @change="e => toggleSuspended(slotProps.data, e.value)" />
+            <ToggleSwitch :checked="slotProps.data.isSuspended" @change="e => toggleSuspended(slotProps.data, e.value)" />
           </template>
         </Column>
         <Column header="Courses">
@@ -154,7 +154,7 @@ import Dialog from 'primevue/dialog';
 import ProgressSpinner from 'primevue/progressspinner';
 import Message from 'primevue/message';
 import Badge from 'primevue/badge';
-import InputSwitch from 'primevue/inputswitch';
+import ToggleSwitch from 'primevue/toggleswitch';
 
 const userStore = useUserStore();
 
