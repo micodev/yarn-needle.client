@@ -122,12 +122,23 @@ const dialogComment = ref(null)
 
 // Helper function: check if comment has more than 3 lines
 function hasMoreThan3Lines(content) {
-  return content.split('\n').length > 3
+  if (content.includes('\n')) {
+    return content.split('\n').length > 3;
+  } else {
+    // Estimate 100 characters per line for single-line content
+    const approxLines = Math.ceil(content.length / 100);
+    return approxLines > 3;
+  }
 }
 
 // Helper function: get first three lines of comment
 function getFirstThreeLines(content) {
-  return content.split('\n').slice(0, 3).join('\n')
+  if (content.includes('\n')) {
+    return content.split('\n').slice(0, 3).join('\n');
+  } else {
+    // Return first approx 300 characters as three lines
+    return content.slice(0, 300);
+  }
 }
 
 // Open dialog with full comment content
