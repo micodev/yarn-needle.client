@@ -209,14 +209,8 @@ function viewGovernmentCard(user) {
   showCardModal.value = true;
 }
 
-// Action method for toggling suspended status
-async function toggleSuspended(user, newStatus) {
-  await userStore.changeSuspendedAction(user.id, newStatus);
-}
-
 // New handler to replace the inline arrow function:
-function handleToggleSuspended(slotProps) {
-  console.log('Toggling suspended status for:', slotProps.data.id, 'New status:', slotProps.data.isSuspended);
-  toggleSuspended(slotProps.data, event.value);
+async function handleToggleSuspended(slotProps) {
+  await userStore.changeSuspendedAction(slotProps.data.id, slotProps.data.isSuspended);
 }
 </script>
