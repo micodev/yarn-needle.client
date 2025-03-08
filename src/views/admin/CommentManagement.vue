@@ -9,7 +9,7 @@
         <div
           v-for="comment in commentStore.comments"
           :key="comment.id"
-          class="rounded-md p-4 shadow-sm bg-slate-50"
+          class="rounded-md p-4 shadow-sm bg-white"
         >
           <div class="flex justify-between mb-2.5">
             <div class="flex items-center gap-2.5">
