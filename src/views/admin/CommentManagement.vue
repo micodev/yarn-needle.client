@@ -34,7 +34,7 @@
             <template v-if="hasMoreThan3Lines(comment.content)">
               <div v-if="expandedComments[comment.id]">
                 <div class="whitespace-pre-wrap">{{ comment.content }}</div>
-                <button @click="toggleExpand(comment)" class="text-sm">
+                <button @click="toggleExpand(comment)" class="text-sm" variant="text">
                   اخفاء
                 </button>
               </div>
