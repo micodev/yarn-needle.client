@@ -9,14 +9,6 @@
           class="flex-1"
           type="text"
         />
-        <Dropdown
-          v-model="filterRole"
-          :options="roleOptions"
-          optionLabel="label"
-          optionValue="value"
-          placeholder="All Roles"
-          class="w-48"
-        />
       </div>
 
       <ProgressSpinner v-if="userStore.loading" class="flex justify-center my-8" />
@@ -173,7 +165,6 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
-import Dropdown from 'primevue/dropdown';
 import Dialog from 'primevue/dialog';
 import ProgressSpinner from 'primevue/progressspinner';
 import Message from 'primevue/message';
@@ -183,18 +174,9 @@ const userStore = useUserStore();
 
 // State variables
 const searchQuery = ref('');
-const filterRole = ref('');
 const showDeleteModal = ref(false);
 const showCardModal = ref(false);
 const selectedUser = ref(null);
-
-// Role filter options
-const roleOptions = [
-  { label: 'All Roles', value: '' },
-  { label: 'Admin', value: 'M' },
-  { label: 'User', value: 'U' },
-  { label: 'Lecturer', value: 'L' }
-];
 
 // Fetch users on component mount
 onMounted(async () => {
@@ -205,15 +187,10 @@ onMounted(async () => {
 const filteredUsers = computed(() => {
   return userStore.users.filter(user => {
     const fullName = getFullName(user);
-    const matchesSearch =
-      user.userName?.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    return user.userName?.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       user.email?.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       fullName.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       (user.phoneNumber && user.phoneNumber.includes(searchQuery.value));
-
-    const matchesRole = filterRole.value === '' || user.roleCode === filterRole.value;
-
-    return matchesSearch && matchesRole;
   });
 });
 
