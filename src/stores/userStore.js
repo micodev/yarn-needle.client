@@ -195,6 +195,26 @@ export const useUserStore = defineStore('user', {
       } finally {
         this.loading = false;
       }
+    },
+
+    async changeSuspendedAction(userId, isSuspended) {
+      this.loading = true;
+      this.error = null;
+      try {
+        const response = await this.$axios.put(`${API_URL}/${userId}/suspend`, { isSuspended });
+        // update the user in local state
+        const index = this.users.findIndex(user => user.id === userId);
+        if (index !== -1) {
+          this.users[index].isSuspended = isSuspended;
+        }
+        return response.data;
+      } catch (err) {
+        this.error = `Failed to update suspension: ${err.message}`;
+        console.error('Error updating suspension:', err);
+        return null;
+      } finally {
+        this.loading = false;
+      }
     }
   }
 });
