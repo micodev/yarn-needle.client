@@ -91,12 +91,8 @@ function gotoPage(page) {
   }
 }
 
-// Added hide operation
+// Added hide operation: call the store action to hide a comment by id.
 const hideComment = (commentId) => {
-  const comment = commentStore.comments.find(c => c.id === commentId)
-  if (comment) {
-    comment.hidden = true
-    console.log(`تم تفعيل إخفاء التعليق ${commentId}`)
-  }
+  commentStore.hideComment(commentId)
 }
 </script>
