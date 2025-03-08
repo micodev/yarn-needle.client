@@ -8,18 +8,6 @@ export const useCommentManagementStore = defineStore('commentManagement', {
 		error: null       // added error state
 	}),
 	actions: {
-		addComment(comment) {
-			this.comments.push(comment)
-		},
-		removeComment(commentId) {
-			this.comments = this.comments.filter(c => c.id !== commentId)
-		},
-		editComment(updatedComment) {
-			const index = this.comments.findIndex(c => c.id === updatedComment.id)
-			if (index !== -1) {
-				this.comments.splice(index, 1, updatedComment)
-			}
-		},
 		async fetchComments() {
 			this.loading = true;
 			this.error = null;
