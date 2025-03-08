@@ -31,13 +31,13 @@
 
           <div class="mb-4 leading-relaxed">
             {{ comment.content }}
-            <span v-if="comment.deletedAt" class="ml-2 inline-block bg-gray-300 text-gray-800 rounded px-2 py-0.5 text-xs">مخفى</span>
+            <span v-if="comment.deletedAt" class="ml-2 inline-block rounded px-2 py-0.5 text-xs">مخفى</span>
           </div>
 
           <div class="flex gap-2.5">
             <button
               @click="hideComment(comment.id)"
-              class="px-3 py-1.5 bg-gray-500 text-white rounded text-sm hover:bg-opacity-90 transition"
+              class="px-3 py-1.5 rounded text-sm hover:bg-opacity-90 transition"
             >
               إخفاء
             </button>
