@@ -23,7 +23,6 @@ export const useCommentManagementStore = defineStore('commentManagement', {
 						rating: comment.rating,
 						course: comment.course || '',
 						date: comment.date || new Date().toISOString(),
-						status: comment.status || 'pending'
 					}));
 					this.pagination = response.data.pagination;  // use API pagination
 				} else {
