@@ -91,7 +91,10 @@
         <!-- Suspended Column with toggle switch -->
         <Column header="معلق">
           <template #body="slotProps">
-            <ToggleSwitch v-model="slotProps.data.isSuspended" @change="e => toggleSuspended(slotProps, e.value)" />
+            <ToggleSwitch
+              v-model="slotProps.data.isSuspended"
+              @change="handleToggleSuspended(slotProps, $event)"
+            />
           </template>
         </Column>
         <Column header="الدورات">
@@ -209,5 +212,10 @@ function viewGovernmentCard(user) {
 // Action method for toggling suspended status
 async function toggleSuspended(user, newStatus) {
   await userStore.changeSuspendedAction(user.id, newStatus);
+}
+
+// New handler to replace the inline arrow function:
+function handleToggleSuspended(slotProps, event) {
+  toggleSuspended(slotProps.data, event.value);
 }
 </script>
