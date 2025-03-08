@@ -33,7 +33,7 @@
 
       <div class="flex flex-col gap-4">
         <div
-          v-for="comment in paginatedComments"
+          v-for="comment in commentStore.comments"
           :key="comment.id"
           class="bg-white rounded-md p-4 shadow-sm"
           :class="{
@@ -104,7 +104,7 @@
           </div>
         </div>
 
-        <div v-if="filteredComments.length === 0" class="text-center py-5 text-gray-500">
+        <div v-if="commentStore.comments.length === 0" class="text-center py-5 text-gray-500">
           No comments match your search criteria
         </div>
       </div>
@@ -112,7 +112,7 @@
       <div class="mt-5 flex justify-center items-center gap-2.5">
         <button
           :disabled="currentPage === 1"
-          @click="currentPage--"
+          @click="gotoPage(currentPage - 1)"
           class="px-4 py-2 border border-gray-300 bg-white rounded disabled:text-gray-300 disabled:cursor-not-allowed"
         >
           Previous
@@ -120,7 +120,7 @@
         <span class="text-gray-600">Page {{ currentPage }} of {{ totalPages }}</span>
         <button
           :disabled="currentPage === totalPages"
-          @click="currentPage++"
+          @click="gotoPage(currentPage + 1)"
           class="px-4 py-2 border border-gray-300 bg-white rounded disabled:text-gray-300 disabled:cursor-not-allowed"
         >
           Next
@@ -137,45 +137,25 @@ import { useCommentManagementStore } from '../../stores/commentManagementStore.j
 const commentStore = useCommentManagementStore()
 
 onMounted(() => {
-  commentStore.fetchComments()
+  commentStore.fetchComments() // initial fetch will set pagination info
 })
 
 const searchQuery = ref('')
 const courseFilter = ref('')
 const statusFilter = ref('')
-const currentPage = ref(1)
-const itemsPerPage = 5
 
 const uniqueCourses = computed(() => {
   return [...new Set(commentStore.comments.map(comment => comment.course))]
 })
 
-const filteredComments = computed(() => {
-  return commentStore.comments.filter(comment => {
-    // Search filter
-    const matchesSearch = searchQuery.value === '' ||
-      comment.content.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      comment.userName.toLowerCase().includes(searchQuery.value.toLowerCase())
+const currentPage = computed(() => commentStore.pagination.page || 1)
+const totalPages = computed(() => commentStore.pagination.totalPages || 1)
 
-    // Course filter
-    const matchesCourse = courseFilter.value === '' || comment.course === courseFilter.value
-
-    // Status filter
-    const matchesStatus = statusFilter.value === '' || comment.status === statusFilter.value
-
-    return matchesSearch && matchesCourse && matchesStatus
-  })
-})
-
-const totalPages = computed(() => {
-  return Math.ceil(filteredComments.value.length / itemsPerPage) || 1
-})
-
-const paginatedComments = computed(() => {
-  const startIndex = (currentPage.value - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage
-  return filteredComments.value.slice(startIndex, endIndex)
-})
+function gotoPage(page) {
+  if (page >= 1 && page <= totalPages.value) {
+    commentStore.fetchComments(page)
+  }
+}
 
 // Format date to a more readable form
 const formatDate = (dateString) => {
@@ -204,9 +184,6 @@ const deleteComment = (commentId) => {
   if (confirm('Are you sure you want to delete this comment?')) {
     commentStore.comments = commentStore.comments.filter(c => c.id !== commentId)
     console.log(`Deleted comment ${commentId}`)
-    if (paginatedComments.value.length === 0 && currentPage.value > 1) {
-      currentPage.value--
-    }
   }
 }
 
