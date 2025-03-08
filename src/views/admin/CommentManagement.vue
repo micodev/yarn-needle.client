@@ -2,34 +2,7 @@
   <div class="max-w-7xl mx-auto p-5">
     <h1 class="text-2xl mb-5 text-gray-800">Comment Management</h1>
     <div class="bg-gray-50 rounded-lg p-5 shadow-md">
-      <div class="flex flex-wrap justify-between items-center gap-2.5 mb-5">
-        <div class="search-box">
-          <input
-            type="text"
-            placeholder="Search comments..."
-            v-model="searchQuery"
-            class="p-2.5 border border-gray-300 rounded-md w-72 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        <div class="flex gap-2.5">
-          <select
-            v-model="courseFilter"
-            class="p-2.5 border border-gray-300 rounded-md bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">All Courses</option>
-            <option v-for="course in uniqueCourses" :key="course" :value="course">{{ course }}</option>
-          </select>
-          <select
-            v-model="statusFilter"
-            class="p-2.5 border border-gray-300 rounded-md bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">All Statuses</option>
-            <option value="approved">Approved</option>
-            <option value="pending">Pending Review</option>
-            <option value="flagged">Flagged</option>
-          </select>
-        </div>
-      </div>
+      <!-- Removed search and filter controls -->
 
       <div class="flex flex-col gap-4">
         <div
@@ -47,7 +20,7 @@
               <div>
                 <div class="font-bold text-gray-800">{{ comment.userName }}</div>
                 <div class="text-xs text-gray-500">
-                  <span>{{ formatDate(comment.date) }}</span> |
+                  <!-- Removed date display -->
                   <span>Course: {{ comment.course }}</span>
                 </div>
               </div>
@@ -107,13 +80,7 @@ onMounted(() => {
   commentStore.fetchComments() // initial fetch will set pagination info
 })
 
-const searchQuery = ref('')
-const courseFilter = ref('')
-const statusFilter = ref('')
-
-const uniqueCourses = computed(() => {
-  return [...new Set(commentStore.comments.map(comment => comment.course))]
-})
+// Removed searchQuery, courseFilter, statusFilter, uniqueCourses and formatDate
 
 const currentPage = computed(() => commentStore.pagination.page || 1)
 const totalPages = computed(() => commentStore.pagination.totalPages || 1)
@@ -123,14 +90,6 @@ function gotoPage(page) {
     commentStore.fetchComments(page)
   }
 }
-
-// Format date to a more readable form
-const formatDate = (dateString) => {
-  const options = { year: 'numeric', month: 'short', day: 'numeric' }
-  return new Date(dateString).toLocaleDateString(undefined, options)
-}
-
-// Removed previous operations: approveComment, flagComment, deleteComment, replyToComment
 
 // Added hide operation
 const hideComment = (commentId) => {
