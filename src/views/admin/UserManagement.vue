@@ -88,6 +88,13 @@
             <Badge v-else value="Inactive" severity="secondary" />
           </template>
         </Column>
+        <!-- New Suspended Column -->
+        <Column header="Suspended">
+          <template #body="slotProps">
+            <Badge v-if="slotProps.data.isSuspended" value="Suspended" severity="danger" />
+            <Badge v-else value="Active" severity="success" />
+          </template>
+        </Column>
         <Column header="Courses">
           <template #body="slotProps">
             <Badge v-if="slotProps.data.courseCount" :value="slotProps.data.courseCount" severity="info" />
@@ -181,10 +188,6 @@ function getFullName(user) {
   return 'N/A';
 }
 
-function getRoleName(user) {
-  if (!user.roleCodeNavigation) return user.roleCode || 'N/A';
-  return `${user.roleCodeNavigation.name} (${user.roleCode})`;
-}
 
 function formatDate(dateString) {
   if (!dateString) return 'N/A';
