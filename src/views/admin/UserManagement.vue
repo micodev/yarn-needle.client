@@ -25,8 +25,6 @@
         class="p-datatable-sm"
         emptyMessage="No users found matching your search criteria."
       >
-        <Column field="id" header="ID" sortable />
-        <Column field="userName" header="Username" sortable />
         <Column header="Profile" style="width: 100px">
           <template #body="slotProps">
             <div class="flex justify-center">
@@ -47,7 +45,6 @@
             <div class="text-right" dir="rtl">{{ getFullName(slotProps.data) }}</div>
           </template>
         </Column>
-        <Column field="email" header="Email" sortable />
         <Column field="phoneNumber" header="Phone">
           <template #body="slotProps">
             {{ slotProps.data.phoneNumber || 'N/A' }}
@@ -72,6 +69,11 @@
         <Column header="Birth Date">
           <template #body="slotProps">
             {{ formatDate(slotProps.data.birthDate) }}
+          </template>
+        </Column>
+        <Column header="Note">
+          <template #body="slotProps">
+            <span>{{ slotProps.data.note || 'N/A' }}</span>
           </template>
         </Column>
         <Column header="Profile Status">
@@ -200,11 +202,10 @@ onMounted(async () => {
 const filteredUsers = computed(() => {
   return userStore.users.filter(user => {
     const fullName = getFullName(user);
-    return user.userName?.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      user.email?.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      fullName.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    return fullName.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       (user.phoneNumber && user.phoneNumber.includes(searchQuery.value)) ||
-      (user.governmentId && user.governmentId.includes(searchQuery.value));
+      (user.governmentId && user.governmentId.includes(searchQuery.value)) ||
+      (user.note && user.note.toLowerCase().includes(searchQuery.value.toLowerCase()));
   });
 });
 
