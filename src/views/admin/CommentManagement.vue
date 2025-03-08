@@ -52,12 +52,12 @@
           </div>
 
           <div class="flex gap-2.5">
-            <button
+            <Button
               @click="hideComment(comment.id)"
               class="px-3 py-1.5 rounded text-sm hover:bg-opacity-90 transition"
             >
               إخفاء
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -67,21 +67,21 @@
       </div>
 
       <div class="mt-5 flex justify-center items-center gap-2.5">
-        <button
+        <Button
           :disabled="currentPage === 1"
           @click="gotoPage(currentPage - 1)"
           class="px-4 py-2 border rounded disabled:cursor-not-allowed"
         >
           السابق
-        </button>
+        </Button>
         <span>الصفحة {{ currentPage }} من {{ totalPages }}</span>
-        <button
+        <Button
           :disabled="currentPage === totalPages"
           @click="gotoPage(currentPage + 1)"
           class="px-4 py-2 border rounded disabled:cursor-not-allowed"
         >
           التالي
-        </button>
+        </Button>
       </div>
     </div>
     <!-- Removed Dialog component -->
