@@ -1,14 +1,14 @@
 <template>
   <div class="max-w-7xl mx-auto p-5">
-    <h1 class="text-2xl mb-5 text-gray-800">إدارة التعليقات</h1>
-    <div class="bg-gray-50 rounded-lg p-5 shadow-md">
+    <h1 class="text-2xl mb-5">إدارة التعليقات</h1>
+    <div class="rounded-lg p-5 shadow-md">
       <!-- Removed search and filter controls -->
 
       <div class="flex flex-col gap-4">
         <div
           v-for="comment in commentStore.comments"
           :key="comment.id"
-          class="bg-white rounded-md p-4 shadow-sm"
+          class="rounded-md p-4 shadow-sm"
         >
           <div class="flex justify-between mb-2.5">
             <div class="flex items-center gap-2.5">
@@ -18,8 +18,8 @@
                 class="w-10 h-10 rounded-full object-cover"
               />
               <div>
-                <div class="font-bold text-gray-800">{{ comment.userName }}</div>
-                <div class="text-xs text-gray-500">
+                <div class="font-bold">{{ comment.userName }}</div>
+                <div class="text-xs">
                   <!-- Removed date display -->
                   <span>الدورة: {{ comment.course }}</span>
                 </div>
@@ -44,7 +44,7 @@
           </div>
         </div>
 
-        <div v-if="commentStore.comments.length === 0" class="text-center py-5 text-gray-500">
+        <div v-if="commentStore.comments.length === 0" class="text-center py-5">
           لا توجد تعليقات تطابق معايير البحث
         </div>
       </div>
@@ -53,15 +53,15 @@
         <button
           :disabled="currentPage === 1"
           @click="gotoPage(currentPage - 1)"
-          class="px-4 py-2 border border-gray-300 bg-white rounded disabled:text-gray-300 disabled:cursor-not-allowed"
+          class="px-4 py-2 border rounded disabled:cursor-not-allowed"
         >
           السابق
         </button>
-        <span class="text-gray-600">الصفحة {{ currentPage }} من {{ totalPages }}</span>
+        <span>الصفحة {{ currentPage }} من {{ totalPages }}</span>
         <button
           :disabled="currentPage === totalPages"
           @click="gotoPage(currentPage + 1)"
-          class="px-4 py-2 border border-gray-300 bg-white rounded disabled:text-gray-300 disabled:cursor-not-allowed"
+          class="px-4 py-2 border rounded disabled:cursor-not-allowed"
         >
           التالي
         </button>
