@@ -92,7 +92,7 @@
 import { computed, onMounted, reactive } from 'vue'
 import { useCommentManagementStore } from '../../stores/commentManagementStore.js'
 import Badge from 'primevue/badge'
-import Button from 'primevue'
+import {Button} from 'primevue'
 
 const commentStore = useCommentManagementStore()
 
