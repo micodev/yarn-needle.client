@@ -91,6 +91,7 @@
         <!-- Suspended Column with toggle switch -->
         <Column header="Suspended">
           <template #body="slotProps">
+            <p> {{ slotProps.data.isSuspended  }} </p>
             <ToggleSwitch :checked="slotProps.data.isSuspended" @change="e => toggleSuspended(slotProps.data, e.value)" />
           </template>
         </Column>
