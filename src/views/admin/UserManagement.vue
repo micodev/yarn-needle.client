@@ -35,25 +35,62 @@
       >
         <Column field="id" header="ID" sortable />
         <Column field="userName" header="Username" sortable />
+        <Column header="Profile" style="width: 100px">
+          <template #body="slotProps">
+            <div class="flex justify-center">
+              <img
+                v-if="slotProps.data.profileImage"
+                :src="slotProps.data.profileImage"
+                class="w-12 h-12 rounded-full object-cover"
+                :alt="getFullName(slotProps.data)"
+              />
+              <div v-else class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+                <i class="pi pi-user text-gray-500"></i>
+              </div>
+            </div>
+          </template>
+        </Column>
         <Column header="Full Name" sortable :sortField="getFullName">
           <template #body="slotProps">
-            {{ getFullName(slotProps.data) }}
+            <div class="text-right" dir="rtl">{{ getFullName(slotProps.data) }}</div>
           </template>
         </Column>
         <Column field="email" header="Email" sortable />
-        <Column header="Role" sortable :sortField="getRoleName">
+        <Column field="phoneNumber" header="Phone">
+          <template #body="slotProps">
+            {{ slotProps.data.phoneNumber || 'N/A' }}
+          </template>
+        </Column>
+        <Column header="Education">
+          <template #body="slotProps">
+            <div v-if="slotProps.data.degree" class="text-right" dir="rtl">
+              {{ slotProps.data.degree }} - {{ slotProps.data.fieldOfStudy || '' }}
+            </div>
+            <span v-else>N/A</span>
+          </template>
+        </Column>
+        <Column header="Job Title">
+          <template #body="slotProps">
+            <div v-if="slotProps.data.jobTitle" class="text-right" dir="rtl">
+              {{ slotProps.data.jobTitle }}
+            </div>
+            <span v-else>N/A</span>
+          </template>
+        </Column>
+        <Column header="Birth Date">
+          <template #body="slotProps">
+            {{ formatDate(slotProps.data.birthDate) }}
+          </template>
+        </Column>
+        <Column header="Role">
           <template #body="slotProps">
             {{ getRoleName(slotProps.data) }}
           </template>
         </Column>
-        <Column header="Membership">
+        <Column header="Courses">
           <template #body="slotProps">
-            {{ getActiveMembership(slotProps.data) }}
-          </template>
-        </Column>
-        <Column header="Created At" sortable :sortField="formatDate">
-          <template #body="slotProps">
-            {{ formatDate(slotProps.data.createdAt) }}
+            <Badge v-if="slotProps.data.courseCount" :value="slotProps.data.courseCount" severity="info" />
+            <span v-else>0</span>
           </template>
         </Column>
         <Column header="Actions">
@@ -68,6 +105,13 @@
                 icon="pi pi-trash"
                 @click="confirmDeleteUser(slotProps.data)"
                 class="p-button-sm p-button-danger"
+              />
+              <Button
+                v-if="slotProps.data.governmentCardFile"
+                icon="pi pi-id-card"
+                @click="viewGovernmentCard(slotProps.data)"
+                class="p-button-sm p-button-secondary"
+                tooltip="View ID Card"
               />
             </div>
           </template>
@@ -99,6 +143,25 @@
           />
         </template>
       </Dialog>
+
+      <!-- Government Card Dialog -->
+      <Dialog
+        v-model:visible="showCardModal"
+        header="Government ID Card"
+        :style="{width: '600px'}"
+        :modal="true"
+      >
+        <div class="p-4 flex flex-col items-center">
+          <img
+            v-if="selectedUser?.governmentCardFile"
+            :src="selectedUser.governmentCardFile"
+            alt="Government ID Card"
+            class="max-w-full max-h-96 object-contain"
+          />
+          <p v-else class="text-red-500">No ID card available</p>
+          <p class="mt-3 font-semibold">ID Number: {{ selectedUser?.governmentId || 'N/A' }}</p>
+        </div>
+      </Dialog>
     </div>
   </div>
 </template>
@@ -114,12 +177,15 @@ import Dropdown from 'primevue/dropdown';
 import Dialog from 'primevue/dialog';
 import ProgressSpinner from 'primevue/progressspinner';
 import Message from 'primevue/message';
+import Badge from 'primevue/badge';
+
 const userStore = useUserStore();
 
 // State variables
 const searchQuery = ref('');
 const filterRole = ref('');
 const showDeleteModal = ref(false);
+const showCardModal = ref(false);
 const selectedUser = ref(null);
 
 // Role filter options
@@ -142,7 +208,8 @@ const filteredUsers = computed(() => {
     const matchesSearch =
       user.userName?.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       user.email?.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      fullName.toLowerCase().includes(searchQuery.value.toLowerCase());
+      fullName.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      (user.phoneNumber && user.phoneNumber.includes(searchQuery.value));
 
     const matchesRole = filterRole.value === '' || user.roleCode === filterRole.value;
 
@@ -152,26 +219,16 @@ const filteredUsers = computed(() => {
 
 // Helper functions
 function getFullName(user) {
-  if (!user.hasProfile || !user.profile) return 'N/A';
-
-  const { firstName, secondName, thirdName } = user.profile;
-  return [firstName, secondName, thirdName].filter(Boolean).join(' ');
+  const { firstName, secondName, thirdName } = user;
+  if (firstName) {
+    return [firstName, secondName, thirdName].filter(Boolean).join(' ');
+  }
+  return 'N/A';
 }
 
 function getRoleName(user) {
   if (!user.roleCodeNavigation) return user.roleCode || 'N/A';
   return `${user.roleCodeNavigation.name} (${user.roleCode})`;
-}
-
-function getActiveMembership(user) {
-  if (!user.membershipUsers || user.membershipUsers.length === 0) return 'None';
-
-  const activeMembership = user.membershipUsers.find(m => m.stateCode === 'ACTIVE');
-  if (activeMembership) {
-    return activeMembership.membershipCodeNavigation?.name || activeMembership.membershipCode;
-  }
-
-  return 'None';
 }
 
 function formatDate(dateString) {
@@ -194,6 +251,11 @@ function editUser(user) {
 function confirmDeleteUser(user) {
   selectedUser.value = user;
   showDeleteModal.value = true;
+}
+
+function viewGovernmentCard(user) {
+  selectedUser.value = user;
+  showCardModal.value = true;
 }
 
 async function deleteUser() {
