@@ -38,16 +38,13 @@ export const useCommentManagementStore = defineStore('commentManagement', {
 		},
 		async hideComment(commentId) {
 			try {
-				const response = await this.$axios.post(`${API_URL}/hide/${commentId}`);
-				if (response.data && response.data.success) {
-					// Optionally update the comment's deletedAt property locally.
+				  await this.$axios.post(`${API_URL}/hide/${commentId}`);
+
 					const comment = this.comments.find(c => c.id === commentId);
 					if (comment) {
 						comment.deletedAt = new Date().toISOString();
-					}
-				} else {
-					this.error = response.data.message || 'Failed to hide comment.';
-				}
+          }
+
 			} catch (error) {
 				this.error = 'Failed to hide comment.';
 				console.error('Hiding comment failed:', error);
