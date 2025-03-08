@@ -17,7 +17,9 @@
       <DataTable
         v-else
         :value="filteredUsers"
-        stripedRows
+        lazy
+        @page="handlePageChange"
+        :totalRecords="totalRecords"
         paginator
         :rows="10"
         :rowsPerPageOptions="[5, 10, 20]"
@@ -181,6 +183,16 @@ const filteredUsers = computed(() => {
       (user.note && user.note.toLowerCase().includes(searchQuery.value.toLowerCase()));
   });
 });
+
+// Add computed property for total records based on pagination data
+const totalRecords = computed(() => userStore.pagination.totalPages * userStore.pagination.limit);
+
+// New page handler that updates the current page and fetches users.
+async function handlePageChange(event) {
+  // event.page is 0-indexed; convert it to 1-indexed.
+  userStore.pagination.currentPage = event.page + 1;
+  await userStore.fetchUsers(false);
+}
 
 // Helper functions
 function getFullName(user) {
