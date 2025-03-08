@@ -92,7 +92,7 @@
         <Column header="Suspended">
           <template #body="slotProps">
             <p> {{ slotProps.data.isSuspended  }} </p>
-            <ToggleSwitch :value="slotProps.data.isSuspended" @change="e => toggleSuspended(slotProps.data, e.value)" />
+            <ToggleSwitch v-model="slotProps.data.isSuspended" @change="e => toggleSuspended(slotProps.data, e.value)" />
           </template>
         </Column>
         <Column header="Courses">
