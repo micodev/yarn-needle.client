@@ -40,7 +40,7 @@
               </div>
               <div v-else>
                 <div class="whitespace-pre-wrap">{{ getFirstThreeLines(comment.content) }}</div>
-                <button @click="toggleExpand(comment)" class=" text-sm">
+                <button @click="toggleExpand(comment)" class="text-sm" severity="text">
                   عرض المزيد
                 </button>
               </div>
