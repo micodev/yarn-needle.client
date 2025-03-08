@@ -25,7 +25,7 @@ export const useCommentManagementStore = defineStore('commentManagement', {
 			this.error = null;
 			try {
 				// using axios like in userStore.js
-				const response = await this.$axios.get(API_URL)+"/comments");
+				const response = await this.$axios.get(API_URL+"/comments");
 				this.comments = response.data;
 			} catch (error) {
 				this.error = 'Failed to load comments. Please try again later.';
