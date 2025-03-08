@@ -75,7 +75,10 @@
         </Column>
         <Column header="ملاحظة">
           <template #body="slotProps">
-            <span>{{ slotProps.data.note || 'غير متاح' }}</span>
+            <div v-if="slotProps.data.note">
+              <Button icon="pi pi-eye" class="p-button-text" @click="viewNote(slotProps.data.note)" tooltip="عرض الملاحظة" />
+            </div>
+            <span v-else>غير متاح</span>
           </template>
         </Column>
         <Column header="حالة الملف">
@@ -148,6 +151,17 @@
           <p v-if="selectedUser?.note" class="mt-2 text-gray-600">ملاحظات: {{ selectedUser.note }}</p>
         </div>
       </Dialog>
+      <!-- New Note Dialog -->
+      <Dialog
+        v-model:visible="showNoteModal"
+        header="الملاحظة"
+        :style="{width: '400px'}"
+        :modal="true"
+      >
+        <div class="p-4">
+          <p>{{ selectedNote }}</p>
+        </div>
+      </Dialog>
     </div>
   </div>
 </template>
@@ -171,6 +185,10 @@ const userStore = useUserStore();
 const searchQuery = ref('');
 const showCardModal = ref(false);
 const selectedUser = ref(null);
+
+// NEW reactive state for note dialog
+const showNoteModal = ref(false);
+const selectedNote = ref('');
 
 // Fetch users on component mount
 onMounted(async () => {
@@ -223,6 +241,12 @@ function formatDate(dateString) {
 function viewGovernmentCard(user) {
   selectedUser.value = user;
   showCardModal.value = true;
+}
+
+// NEW handler for displaying the note dialog.
+function viewNote(note) {
+  selectedNote.value = note;
+  showNoteModal.value = true;
 }
 
 // New handler to replace the inline arrow function:
