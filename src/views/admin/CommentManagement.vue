@@ -36,10 +36,6 @@
           v-for="comment in commentStore.comments"
           :key="comment.id"
           class="bg-white rounded-md p-4 shadow-sm"
-          :class="{
-            'border-l-4 border-red-500': comment.status === 'flagged',
-            'border-l-4 border-yellow-500': comment.status === 'pending'
-          }"
         >
           <div class="flex justify-between mb-2.5">
             <div class="flex items-center gap-2.5">
@@ -57,16 +53,6 @@
               </div>
             </div>
             <div>
-              <span
-                class="text-xs px-2 py-1 rounded-full capitalize"
-                :class="{
-                  'bg-green-500 text-white': comment.status === 'approved',
-                  'bg-yellow-500 text-white': comment.status === 'pending',
-                  'bg-red-500 text-white': comment.status === 'flagged'
-                }"
-              >
-                {{ comment.status }}
-              </span>
             </div>
           </div>
 
@@ -76,14 +62,12 @@
 
           <div class="flex gap-2.5">
             <button
-              v-if="comment.status !== 'approved'"
               @click="approveComment(comment.id)"
               class="px-3 py-1.5 bg-green-500 text-white rounded text-sm hover:bg-opacity-90 transition"
             >
               Approve
             </button>
             <button
-              v-if="comment.status !== 'flagged'"
               @click="flagComment(comment.id)"
               class="px-3 py-1.5 bg-yellow-500 text-white rounded text-sm hover:bg-opacity-90 transition"
             >
@@ -167,16 +151,14 @@ const formatDate = (dateString) => {
 const approveComment = (commentId) => {
   const commentIndex = commentStore.comments.findIndex(c => c.id === commentId)
   if (commentIndex !== -1) {
-    commentStore.comments[commentIndex].status = 'approved'
-    console.log(`Approved comment ${commentId}`)
+    console.log(`Approve action triggered for comment ${commentId}`)
   }
 }
 
 const flagComment = (commentId) => {
   const commentIndex = commentStore.comments.findIndex(c => c.id === commentId)
   if (commentIndex !== -1) {
-    commentStore.comments[commentIndex].status = 'flagged'
-    console.log(`Flagged comment ${commentId}`)
+    console.log(`Flag action triggered for comment ${commentId}`)
   }
 }
 
