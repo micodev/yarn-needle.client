@@ -22,7 +22,8 @@ export const useCommentManagementStore = defineStore('commentManagement', {
 						content: comment.text,
 						rating: comment.rating,
 						course: comment.course || '',
-						date: comment.date || new Date().toISOString(),
+						deletedAt: comment.deletedAt || null,
+
 					}));
 					this.pagination = response.data.pagination;  // use API pagination
 				} else {
