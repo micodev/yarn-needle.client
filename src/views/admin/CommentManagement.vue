@@ -131,47 +131,14 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useCommentManagementStore } from '../../stores/commentManagementStore.js'
 
-// Mock data for demonstration
-const comments = ref([
-  {
-    id: 1,
-    userName: 'Alice Johnson',
-    userAvatar: 'https://randomuser.me/api/portraits/women/12.jpg',
-    date: '2023-06-28',
-    course: 'Vue.js Masterclass',
-    content: 'Great course! I learned so much about Vue 3 composition API.',
-    status: 'approved'
-  },
-  {
-    id: 2,
-    userName: 'Bob Smith',
-    userAvatar: 'https://randomuser.me/api/portraits/men/22.jpg',
-    date: '2023-06-27',
-    course: 'UI/UX Design Principles',
-    content: 'The instructor explains the concepts very clearly.',
-    status: 'pending'
-  },
-  {
-    id: 3,
-    userName: 'Charlie Brown',
-    userAvatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-    date: '2023-06-26',
-    course: 'Business Analytics',
-    content: 'This course contains some inappropriate content. Please check module 3.',
-    status: 'flagged'
-  },
-  {
-    id: 4,
-    userName: 'Diana Miller',
-    userAvatar: 'https://randomuser.me/api/portraits/women/42.jpg',
-    date: '2023-06-25',
-    course: 'Vue.js Masterclass',
-    content: 'I wish there were more practice exercises, but overall it was helpful.',
-    status: 'approved'
-  },
-])
+const commentStore = useCommentManagementStore()
+
+onMounted(() => {
+  commentStore.fetchComments()
+})
 
 const searchQuery = ref('')
 const courseFilter = ref('')
@@ -180,76 +147,70 @@ const currentPage = ref(1)
 const itemsPerPage = 5
 
 const uniqueCourses = computed(() => {
-  return [...new Set(comments.value.map(comment => comment.course))]
+  return [...new Set(commentStore.comments.map(comment => comment.course))]
 })
 
 const filteredComments = computed(() => {
-  return comments.value.filter(comment => {
+  return commentStore.comments.filter(comment => {
     // Search filter
     const matchesSearch = searchQuery.value === '' ||
       comment.content.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      comment.userName.toLowerCase().includes(searchQuery.value.toLowerCase());
+      comment.userName.toLowerCase().includes(searchQuery.value.toLowerCase())
 
     // Course filter
-    const matchesCourse = courseFilter.value === '' || comment.course === courseFilter.value;
+    const matchesCourse = courseFilter.value === '' || comment.course === courseFilter.value
 
     // Status filter
-    const matchesStatus = statusFilter.value === '' || comment.status === statusFilter.value;
+    const matchesStatus = statusFilter.value === '' || comment.status === statusFilter.value
 
-    return matchesSearch && matchesCourse && matchesStatus;
-  });
+    return matchesSearch && matchesCourse && matchesStatus
+  })
 })
 
 const totalPages = computed(() => {
-  return Math.ceil(filteredComments.value.length / itemsPerPage) || 1;
+  return Math.ceil(filteredComments.value.length / itemsPerPage) || 1
 })
 
 const paginatedComments = computed(() => {
-  const startIndex = (currentPage.value - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  return filteredComments.value.slice(startIndex, endIndex);
+  const startIndex = (currentPage.value - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  return filteredComments.value.slice(startIndex, endIndex)
 })
 
 // Format date to a more readable form
 const formatDate = (dateString) => {
-  const options = { year: 'numeric', month: 'short', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString(undefined, options);
+  const options = { year: 'numeric', month: 'short', day: 'numeric' }
+  return new Date(dateString).toLocaleDateString(undefined, options)
 }
 
 // Comment management methods
 const approveComment = (commentId) => {
-  const commentIndex = comments.value.findIndex(c => c.id === commentId);
+  const commentIndex = commentStore.comments.findIndex(c => c.id === commentId)
   if (commentIndex !== -1) {
-    comments.value[commentIndex].status = 'approved';
-    // In a real app: API call to update the comment status
-    console.log(`Approved comment ${commentId}`);
+    commentStore.comments[commentIndex].status = 'approved'
+    console.log(`Approved comment ${commentId}`)
   }
 }
 
 const flagComment = (commentId) => {
-  const commentIndex = comments.value.findIndex(c => c.id === commentId);
+  const commentIndex = commentStore.comments.findIndex(c => c.id === commentId)
   if (commentIndex !== -1) {
-    comments.value[commentIndex].status = 'flagged';
-    // In a real app: API call to update the comment status
-    console.log(`Flagged comment ${commentId}`);
+    commentStore.comments[commentIndex].status = 'flagged'
+    console.log(`Flagged comment ${commentId}`)
   }
 }
 
 const deleteComment = (commentId) => {
   if (confirm('Are you sure you want to delete this comment?')) {
-    comments.value = comments.value.filter(c => c.id !== commentId);
-    // In a real app: API call to delete the comment
-    console.log(`Deleted comment ${commentId}`);
-
-    // Handle pagination when deleting the last item on a page
+    commentStore.comments = commentStore.comments.filter(c => c.id !== commentId)
+    console.log(`Deleted comment ${commentId}`)
     if (paginatedComments.value.length === 0 && currentPage.value > 1) {
-      currentPage.value--;
+      currentPage.value--
     }
   }
 }
 
 const replyToComment = (commentId) => {
-  // In a real app: Open a modal or navigate to a reply form
-  console.log(`Replying to comment ${commentId}`);
+  console.log(`Replying to comment ${commentId}`)
 }
 </script>
