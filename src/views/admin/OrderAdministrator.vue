@@ -1,6 +1,6 @@
 <template>
   <div class="p-5">
-    <h1 class="text-2xl font-bold mb-4">مسؤول الطلبات</h1>
+    <h1 class="text-2xl font-bold mb-4">إدارة الطلبات</h1>
     <div class="bg-white rounded-lg shadow-md p-5">
       <div class="mb-5">
         <div class="flex flex-wrap gap-4 items-center">
