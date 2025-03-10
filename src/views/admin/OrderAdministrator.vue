@@ -7,7 +7,7 @@
           <InputText
             v-model="searchQuery"
             placeholder="البحث بمعرف الطلب أو العميل..."
-            class="w-64 p-2.5 border border-gray-300 rounded-md"
+            class="flex-1 p-2.5 border border-gray-300 rounded-md"
           />
           <Dropdown
             v-model="paymentStateFilter"
