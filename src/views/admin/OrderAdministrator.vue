@@ -63,9 +63,14 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useOrdersStore } from '../../stores/orders'
 
-// Mock data for demonstration
+const ordersStore = useOrdersStore()
+onMounted(() => {
+  ordersStore.fetchDashboardOrders()
+})
+
 const orders = ref([
   { id: '10001', customer: 'John Smith', products: 'Vue.js Masterclass', date: '2023-06-15', total: 79.99, status: 'completed' },
   { id: '10002', customer: 'Jane Doe', products: 'UI/UX Design Principles', date: '2023-06-20', total: 89.99, status: 'pending' },
