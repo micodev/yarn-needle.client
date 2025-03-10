@@ -28,11 +28,19 @@ export const useOrdersStore = defineStore('orders', {
       }
     },
 
-    async fetchDashboardOrders() {
+    async fetchDashboardOrders(paymentStateCode = null, startDate = null, endDate = null, page = 1, pageSize = 10) {
       this.isLoading = true
       this.error = null
       try {
-        const response = await this.$axios.get('/api/order/orders')
+        // Build query parameters
+        const params = new URLSearchParams();
+        if (paymentStateCode) params.append('paymentStateCode', paymentStateCode);
+        if (startDate) params.append('startDate', startDate.toISOString());
+        if (endDate) params.append('endDate', endDate.toISOString());
+        params.append('page', page.toString());
+        params.append('pageSize', pageSize.toString());
+
+        const response = await this.$axios.get(`/api/order/orders?${params.toString()}`);
         // Store all relevant parts of the response
         const { pagination, success, message, data, errors } = response.data
         this.dashboardOrders = data
