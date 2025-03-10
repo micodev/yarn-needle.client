@@ -5,7 +5,12 @@ export const useOrdersStore = defineStore('orders', {
     orders: [],
     dashboardOrders: [], // new state property for dashboard orders
     isLoading: false,
-    error: null
+    error: null,
+    // Add new state for dashboard response data
+    pagination: null,
+    dashboardMessage: '',
+    dashboardSuccess: false,
+    dashboardErrors: []
   }),
 
   actions: {
@@ -24,15 +29,20 @@ export const useOrdersStore = defineStore('orders', {
     },
 
     async fetchDashboardOrders() {
-      // new action to fetch dashboard orders from the new endpoint
       this.isLoading = true
       this.error = null
       try {
         const response = await this.$axios.get('/api/order/orders')
-        // Assign dashboardOrders using the data field from the response
-        this.dashboardOrders = response.data.data
+        // Store all relevant parts of the response
+        const { pagination, success, message, data, errors } = response.data
+        this.dashboardOrders = data
+        this.pagination = pagination
+        this.dashboardMessage = message
+        this.dashboardSuccess = success
+        this.dashboardErrors = errors || []
       } catch (err) {
         this.error = err.message || 'Failed to fetch dashboard orders'
+        this.dashboardSuccess = false
       } finally {
         this.isLoading = false
       }
@@ -46,7 +56,13 @@ export const useOrdersStore = defineStore('orders', {
         if (b.orderState === 'قيد الانتظار' && a.orderState !== 'قيد الانتظار') return 1
         return new Date(b.date) - new Date(a.date)
       })
-    }
+    },
+
+    // New getters for pagination
+    currentPage: (state) => state.pagination?.pageIndex || 1,
+    totalPages: (state) => state.pagination?.totalPages || 0,
+    hasPreviousPage: (state) => state.pagination?.hasPreviousPage || false,
+    hasNextPage: (state) => state.pagination?.hasNextPage || false
   }
 })
 
