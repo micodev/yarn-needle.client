@@ -62,7 +62,11 @@
             #{{ slotProps.data.id }}
           </template>
         </Column>
-        <Column field="orderType" header="نوع الطلب" />
+        <Column field="orderType" header="نوع الطلب">
+          <template #body="slotProps">
+            {{ translateOrderType(slotProps.data.orderType) }}
+          </template>
+        </Column>
         <Column header="العنوان">
           <template #body="slotProps">
             {{ getOrderTitle(slotProps.data) }}
@@ -187,6 +191,13 @@ function getStatusSeverity(status) {
   };
 
   return statusMapping[status] || 'info';
+}
+
+// Translate order type to Arabic
+function translateOrderType(orderType) {
+  if (orderType === 'Membership') return 'عضوية';
+  if (orderType === 'Course') return 'دورة';
+  return orderType;
 }
 
 // Load orders on component mount
