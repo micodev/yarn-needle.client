@@ -38,7 +38,6 @@
             <Button
               label="تطبيق المرشحات"
               @click="loadOrders"
-              class="bg-green-500 hover:bg-green-600"
             />
           </div>
         </div>
@@ -49,7 +48,7 @@
         <div>جاري تحميل الطلبات...</div>
       </div>
 
-      <div v-else-if="ordersStore.error" class="bg-red-100 text-red-800 p-4 rounded-md border border-red-300 my-5 text-center">
+      <div v-else-if="ordersStore.error" class="p-4 rounded-md border my-5 text-center">
         {{ ordersStore.error }}
       </div>
 
