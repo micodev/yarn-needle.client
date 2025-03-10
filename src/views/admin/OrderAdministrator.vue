@@ -3,14 +3,12 @@
     <h1 class="text-2xl font-bold mb-4">مسؤول الطلبات</h1>
     <div class="bg-white rounded-lg shadow-md p-5">
       <div class="mb-5">
-        <div class="mb-3">
+        <div class="flex flex-wrap gap-4 items-center">
           <InputText
             v-model="searchQuery"
             placeholder="البحث بمعرف الطلب أو العميل..."
-            class="w-full p-2.5 border border-gray-300 rounded-md"
+            class="w-64 p-2.5 border border-gray-300 rounded-md"
           />
-        </div>
-        <div class="flex flex-wrap gap-4 items-center">
           <Dropdown
             v-model="paymentStateFilter"
             :options="paymentStatusOptions"
@@ -21,25 +19,23 @@
             @change="loadOrders"
           />
 
-          <div class="flex items-center gap-2">
-            <Calendar
-              v-model="startDate"
-              dateFormat="yy-mm-dd"
-              placeholder="تاريخ البدء"
-              class="w-40"
-            />
-            <span>إلى</span>
-            <Calendar
-              v-model="endDate"
-              dateFormat="yy-mm-dd"
-              placeholder="تاريخ الانتهاء"
-              class="w-40"
-            />
-            <Button
-              label="تطبيق المرشحات"
-              @click="loadOrders"
-            />
-          </div>
+          <Calendar
+            v-model="startDate"
+            dateFormat="yy-mm-dd"
+            placeholder="تاريخ البدء"
+            class="w-40"
+          />
+          <span>إلى</span>
+          <Calendar
+            v-model="endDate"
+            dateFormat="yy-mm-dd"
+            placeholder="تاريخ الانتهاء"
+            class="w-40"
+          />
+          <Button
+            label="تطبيق المرشحات"
+            @click="loadOrders"
+          />
         </div>
       </div>
 
