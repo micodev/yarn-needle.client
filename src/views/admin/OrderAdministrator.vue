@@ -7,111 +7,131 @@
           <input type="text" placeholder="Search by order ID or customer..." v-model="searchQuery" />
         </div>
         <div class="filter-options">
-          <select v-model="statusFilter">
-            <option value="">All Statuses</option>
+          <select v-model="paymentStateFilter" @change="loadOrders">
+            <option value="">All Payment Statuses</option>
             <option value="pending">Pending</option>
-            <option value="completed">Completed</option>
-            <option value="cancelled">Cancelled</option>
-            <option value="refunded">Refunded</option>
+            <option value="authorized">Authorized</option>
+            <option value="declined">Declined</option>
           </select>
 
           <div class="date-range">
-            <input type="date" v-model="startDate" />
+            <input type="date" v-model="startDateInput" @change="updateStartDate" />
             <span>to</span>
-            <input type="date" v-model="endDate" />
+            <input type="date" v-model="endDateInput" @change="updateEndDate" />
+            <button @click="loadOrders" class="apply-filters">Apply Filters</button>
           </div>
         </div>
       </div>
 
-      <table class="order-table">
+      <div v-if="ordersStore.isLoading" class="loading">
+        Loading orders...
+      </div>
+
+      <div v-else-if="ordersStore.error" class="error">
+        {{ ordersStore.error }}
+      </div>
+
+      <table v-else class="order-table">
         <thead>
           <tr>
             <th>Order ID</th>
-            <th>Customer</th>
-            <th>Products</th>
+            <th>Type</th>
+            <th>Title</th>
             <th>Date</th>
             <th>Total</th>
-            <th>Status</th>
+            <th>Order Status</th>
+            <th>Payment Status</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="order in filteredOrders" :key="order.id">
+          <tr v-for="order in ordersStore.dashboardOrders" :key="order.id">
             <td>#{{ order.id }}</td>
-            <td>{{ order.customer }}</td>
-            <td>{{ order.products }}</td>
+            <td>{{ order.type }}</td>
+            <td>{{ order.title }}</td>
             <td>{{ formatDate(order.date) }}</td>
-            <td>${{ order.total.toFixed(2) }}</td>
+            <td>${{ order.price?.toFixed(2) }}</td>
             <td>
-              <span class="status-badge" :class="order.status">{{ order.status }}</span>
+              <span class="status-badge" :class="order.orderState">{{ order.orderState }}</span>
+            </td>
+            <td>
+              <span class="status-badge" :class="order.paymentState">{{ order.paymentState }}</span>
             </td>
             <td class="actions">
               <button @click="viewDetails(order.id)">Details</button>
               <button @click="updateStatus(order)" class="update">Update Status</button>
             </td>
           </tr>
+          <tr v-if="ordersStore.dashboardOrders.length === 0">
+            <td colspan="8" class="no-data">No orders found</td>
+          </tr>
         </tbody>
       </table>
 
       <div class="pagination">
-        <button :disabled="currentPage === 1" @click="currentPage--">Previous</button>
-        <span>Page {{ currentPage }} of {{ totalPages }}</span>
-        <button :disabled="currentPage === totalPages" @click="currentPage++">Next</button>
+        <button
+          :disabled="!ordersStore.hasPreviousPage"
+          @click="changePage(ordersStore.currentPage - 1)"
+        >
+          Previous
+        </button>
+        <span>Page {{ ordersStore.currentPage }} of {{ ordersStore.totalPages }}</span>
+        <button
+          :disabled="!ordersStore.hasNextPage"
+          @click="changePage(ordersStore.currentPage + 1)"
+        >
+          Next
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useOrdersStore } from '../../stores/orders'
 
 const ordersStore = useOrdersStore()
-onMounted(() => {
-  ordersStore.fetchDashboardOrders()
-})
 
-const orders = ref([
-  { id: '10001', customer: 'John Smith', products: 'Vue.js Masterclass', date: '2023-06-15', total: 79.99, status: 'completed' },
-  { id: '10002', customer: 'Jane Doe', products: 'UI/UX Design Principles', date: '2023-06-20', total: 89.99, status: 'pending' },
-  { id: '10003', customer: 'Mike Johnson', products: 'Business Analytics', date: '2023-06-25', total: 99.99, status: 'cancelled' },
-  { id: '10004', customer: 'Sarah Williams', products: 'Flutter Development', date: '2023-06-28', total: 129.99, status: 'refunded' },
-])
-
+// Filter states
 const searchQuery = ref('')
-const statusFilter = ref('')
-const startDate = ref('')
-const endDate = ref('')
-const currentPage = ref(1)
-const itemsPerPage = 10
+const paymentStateFilter = ref('')
+const startDateInput = ref('')
+const endDateInput = ref('')
+const startDate = ref(null)
+const endDate = ref(null)
+const pageSize = ref(10)
 
-const filteredOrders = computed(() => {
-  return orders.value.filter(order => {
-    // Search filter
-    const matchesSearch = searchQuery.value === '' ||
-      order.id.includes(searchQuery.value) ||
-      order.customer.toLowerCase().includes(searchQuery.value.toLowerCase())
+// Convert string date inputs to Date objects
+function updateStartDate() {
+  startDate.value = startDateInput.value ? new Date(startDateInput.value) : null
+}
 
-    // Status filter
-    const matchesStatus = statusFilter.value === '' || order.status === statusFilter.value
+function updateEndDate() {
+  endDate.value = endDateInput.value ? new Date(endDateInput.value) : null
+}
 
-    // Date filter
-    let matchesDate = true
-    if (startDate.value && endDate.value) {
-      const orderDate = new Date(order.date)
-      const start = new Date(startDate.value)
-      const end = new Date(endDate.value)
-      end.setHours(23, 59, 59) // Include the entire end day
-      matchesDate = orderDate >= start && orderDate <= end
-    }
+// Load orders with current filters
+function loadOrders() {
+  ordersStore.fetchDashboardOrders(
+    paymentStateFilter.value || null,
+    startDate.value,
+    endDate.value,
+    ordersStore.currentPage,
+    pageSize.value
+  )
+}
 
-    return matchesSearch && matchesStatus && matchesDate
-  })
-})
-
-const totalPages = computed(() => {
-  return Math.ceil(filteredOrders.value.length / itemsPerPage) || 1
-})
+// Change page and reload orders
+function changePage(newPage) {
+  ordersStore.fetchDashboardOrders(
+    paymentStateFilter.value || null,
+    startDate.value,
+    endDate.value,
+    newPage,
+    pageSize.value
+  )
+}
 
 function formatDate(dateString) {
   return new Date(dateString).toLocaleDateString()
@@ -124,6 +144,17 @@ function viewDetails(orderId) {
 function updateStatus(order) {
   console.log('Updating status for order:', order.id)
 }
+
+// Load orders on component mount
+onMounted(() => {
+  loadOrders()
+})
+
+// Watch for search query changes to filter locally
+watch(searchQuery, (newVal) => {
+  // Local filtering for search query
+  // Implement if API doesn't support search filtering
+})
 </script>
 
 <style scoped>
@@ -252,5 +283,28 @@ function updateStatus(order) {
 .pagination button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
+}
+
+.loading, .error, .no-data {
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+}
+
+.apply-filters {
+  padding: 8px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
 }
 </style>
