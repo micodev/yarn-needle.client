@@ -4,89 +4,95 @@
     <div class="rounded-lg p-5 shadow-md">
       <!-- Removed search and filter controls -->
 
-      <!-- Updated comment view to grid layout -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <div
-          v-for="comment in commentStore.comments"
-          :key="comment.id"
-          class="rounded-md p-4 shadow-sm bg-white"
-        >
-          <div class="flex justify-between mb-2.5">
-            <div class="flex items-center gap-2.5">
-              <img
-                :src="comment.userAvatar"
-                :alt="comment.userName"
-                class="w-10 h-10 rounded-full object-cover"
-              />
-              <div>
-                <div class="font-bold">{{ comment.userName }}</div>
-                <div class="text-xs">
-                  <!-- Removed date display -->
-                  <span>الدورة: {{ comment.course }}</span>
+      <!-- Loading indicator -->
+      <div v-if="commentStore.loading" class="text-center py-5">
+        Loading...
+      </div>
+      <div v-else>
+        <!-- Updated comment view to grid layout -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div
+            v-for="comment in commentStore.comments"
+            :key="comment.id"
+            class="rounded-md p-4 shadow-sm bg-white"
+          >
+            <div class="flex justify-between mb-2.5">
+              <div class="flex items-center gap-2.5">
+                <img
+                  :src="comment.userAvatar"
+                  :alt="comment.userName"
+                  class="w-10 h-10 rounded-full object-cover"
+                />
+                <div>
+                  <div class="font-bold">{{ comment.userName }}</div>
+                  <div class="text-xs">
+                    <!-- Removed date display -->
+                    <span>الدورة: {{ comment.course }}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div>
-            </div>
-          </div>
-
-          <!-- Moved rating display before content -->
-          <div class="mb-2">
-            <span>{{ getStars(comment.rating) }}</span>
-          </div>
-
-          <div class="mb-4 leading-relaxed">
-            <template v-if="hasMoreThan3Lines(comment.content)">
-              <div v-if="expandedComments[comment.id]">
-                <div class="whitespace-pre-wrap">{{ comment.content }}</div>
-                <Button @click="toggleExpand(comment)" class="text-sm" variant="text">
-                  اخفاء
-                </Button>
+              <div>
               </div>
-              <div v-else>
-                <div class="whitespace-pre-wrap">{{ getFirstThreeLines(comment.content) }}</div>
-                <Button @click="toggleExpand(comment)" class="text-sm" variant="text">
-                  عرض المزيد
-                </Button>
-              </div>
-            </template>
-            <template v-else>
-              {{ comment.content }}
-            </template>
-            <Badge v-if="comment.deletedAt" class="mr-1" value="مخفى" severity="danger" />
+            </div>
+
+            <!-- Moved rating display before content -->
+            <div class="mb-2">
+              <span>{{ getStars(comment.rating) }}</span>
+            </div>
+
+            <div class="mb-4 leading-relaxed">
+              <template v-if="hasMoreThan3Lines(comment.content)">
+                <div v-if="expandedComments[comment.id]">
+                  <div class="whitespace-pre-wrap">{{ comment.content }}</div>
+                  <Button @click="toggleExpand(comment)" class="text-sm" variant="text">
+                    اخفاء
+                  </Button>
+                </div>
+                <div v-else>
+                  <div class="whitespace-pre-wrap">{{ getFirstThreeLines(comment.content) }}</div>
+                  <Button @click="toggleExpand(comment)" class="text-sm" variant="text">
+                    عرض المزيد
+                  </Button>
+                </div>
+              </template>
+              <template v-else>
+                {{ comment.content }}
+              </template>
+              <Badge v-if="comment.deletedAt" class="mr-1" value="مخفى" severity="danger" />
+            </div>
+
+            <div class="flex gap-2.5">
+              <Button
+                @click="hideComment(comment.id)"
+                class="px-3 py-1.5 rounded text-sm hover:bg-opacity-90 transition"
+              >
+                إخفاء
+              </Button>
+            </div>
           </div>
 
-          <div class="flex gap-2.5">
-            <Button
-              @click="hideComment(comment.id)"
-              class="px-3 py-1.5 rounded text-sm hover:bg-opacity-90 transition"
-            >
-              إخفاء
-            </Button>
+          <div v-if="commentStore.comments.length === 0" class="text-center py-5">
+            لا توجد تعليقات تطابق معايير البحث
           </div>
         </div>
 
-        <div v-if="commentStore.comments.length === 0" class="text-center py-5">
-          لا توجد تعليقات تطابق معايير البحث
+        <div class="mt-5 flex justify-center items-center gap-2.5">
+          <Button
+            :disabled="currentPage === 1"
+            @click="gotoPage(currentPage - 1)"
+            class="px-4 py-2 border rounded disabled:cursor-not-allowed"
+          >
+            السابق
+          </Button>
+          <span>الصفحة {{ currentPage }} من {{ totalPages }}</span>
+          <Button
+            :disabled="currentPage === totalPages"
+            @click="gotoPage(currentPage + 1)"
+            class="px-4 py-2 border rounded disabled:cursor-not-allowed"
+          >
+            التالي
+          </Button>
         </div>
-      </div>
-
-      <div class="mt-5 flex justify-center items-center gap-2.5">
-        <Button
-          :disabled="currentPage === 1"
-          @click="gotoPage(currentPage - 1)"
-          class="px-4 py-2 border rounded disabled:cursor-not-allowed"
-        >
-          السابق
-        </Button>
-        <span>الصفحة {{ currentPage }} من {{ totalPages }}</span>
-        <Button
-          :disabled="currentPage === totalPages"
-          @click="gotoPage(currentPage + 1)"
-          class="px-4 py-2 border rounded disabled:cursor-not-allowed"
-        >
-          التالي
-        </Button>
       </div>
     </div>
     <!-- Removed Dialog component -->
