@@ -35,10 +35,10 @@
         <thead>
           <tr>
             <th>Order ID</th>
-            <th>Type</th>
+            <th>Order Type</th>
             <th>Title</th>
             <th>Date</th>
-            <th>Total</th>
+            <th>Price</th>
             <th>Order Status</th>
             <th>Payment Status</th>
             <th>Actions</th>
@@ -47,15 +47,19 @@
         <tbody>
           <tr v-for="order in ordersStore.dashboardOrders" :key="order.id">
             <td>#{{ order.id }}</td>
-            <td>{{ order.type }}</td>
-            <td>{{ order.title }}</td>
-            <td>{{ formatDate(order.date) }}</td>
-            <td>${{ order.price?.toFixed(2) }}</td>
+            <td>{{ order.orderType }}</td>
+            <td>{{ getOrderTitle(order) }}</td>
+            <td>{{ formatDate(order.orderDate) }}</td>
+            <td>{{ formatPrice(order.purchasePrice) }}</td>
             <td>
-              <span class="status-badge" :class="order.orderState">{{ order.orderState }}</span>
+              <span class="status-badge" :class="getStatusClass(order.orderState)">
+                {{ order.orderState }}
+              </span>
             </td>
             <td>
-              <span class="status-badge" :class="order.paymentState">{{ order.paymentState }}</span>
+              <span class="status-badge" :class="getStatusClass(order.paymentState)">
+                {{ order.paymentState }}
+              </span>
             </td>
             <td class="actions">
               <button @click="viewDetails(order.id)">Details</button>
@@ -133,8 +137,38 @@ function changePage(newPage) {
   )
 }
 
+// Get title based on order type
+function getOrderTitle(order) {
+  if (order.orderType === 'Membership' && order.membership) {
+    return order.membership.name
+  } else if (order.orderType === 'Course' && order.course) {
+    return order.course.title
+  } else {
+    return `${order.orderType} #${order.itemId}`
+  }
+}
+
 function formatDate(dateString) {
+  if (!dateString) return 'N/A'
   return new Date(dateString).toLocaleDateString()
+}
+
+function formatPrice(price) {
+  if (price == null) return 'N/A'
+  return `${price.toFixed(2)} ريال`
+}
+
+// Map Arabic status to CSS class names
+function getStatusClass(status) {
+  const statusMapping = {
+    'تمت': 'completed',
+    'مصرح': 'authorized',
+    'قيد الانتظار': 'pending',
+    'ملغى': 'cancelled',
+    'مرفوض': 'declined'
+  }
+
+  return statusMapping[status] || 'default'
 }
 
 function viewDetails(orderId) {
@@ -306,5 +340,21 @@ watch(searchQuery, (newVal) => {
   border-radius: 4px;
   cursor: pointer;
   margin-left: 10px;
+}
+
+/* Additional status badge classes for Arabic statuses */
+.status-badge.authorized {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-badge.declined {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.status-badge.default {
+  background-color: #e2e3e5;
+  color: #383d41;
 }
 </style>
