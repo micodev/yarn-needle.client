@@ -29,7 +29,8 @@ export const useOrdersStore = defineStore('orders', {
       this.error = null
       try {
         const response = await this.$axios.get('/api/order/orders')
-        this.dashboardOrders = response.data
+        // Assign dashboardOrders using the data field from the response
+        this.dashboardOrders = response.data.data
       } catch (err) {
         this.error = err.message || 'Failed to fetch dashboard orders'
       } finally {
