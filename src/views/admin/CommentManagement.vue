@@ -6,7 +6,7 @@
 
       <!-- Loading indicator -->
       <div v-if="commentStore.loading" class="text-center py-5">
-        Loading...
+        <ProgressSpinner class="mx-auto" />
       </div>
       <div v-else>
         <!-- Updated comment view to grid layout -->
@@ -103,7 +103,8 @@
 import { computed, onMounted, reactive } from 'vue'
 import { useCommentManagementStore } from '../../stores/commentManagementStore.js'
 import Badge from 'primevue/badge'
-import {Button} from 'primevue'
+import { Button } from 'primevue'
+import ProgressSpinner from 'primevue/progressspinner'  // added import for progress loading
 
 const commentStore = useCommentManagementStore()
 
