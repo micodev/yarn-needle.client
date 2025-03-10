@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export const useOrdersStore = defineStore('orders', {
   state: () => ({
     orders: [],
+    dashboardOrders: [], // new state property for dashboard orders
     isLoading: false,
     error: null
   }),
@@ -22,6 +23,19 @@ export const useOrdersStore = defineStore('orders', {
       }
     },
 
+    async fetchDashboardOrders() {
+      // new action to fetch dashboard orders from the new endpoint
+      this.isLoading = true
+      this.error = null
+      try {
+        const response = await this.$axios.get('/api/order/orders')
+        this.dashboardOrders = response.data
+      } catch (err) {
+        this.error = err.message || 'Failed to fetch dashboard orders'
+      } finally {
+        this.isLoading = false
+      }
+    },
   },
 
   getters: {
