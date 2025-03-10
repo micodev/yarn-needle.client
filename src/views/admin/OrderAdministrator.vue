@@ -1,12 +1,12 @@
 <template>
   <div class="p-5">
-    <h1 class="text-2xl font-bold mb-4">Order Administrator</h1>
+    <h1 class="text-2xl font-bold mb-4">مسؤول الطلبات</h1>
     <div class="bg-white rounded-lg shadow-md p-5">
       <div class="mb-5">
         <div class="mb-3">
           <InputText
             v-model="searchQuery"
-            placeholder="Search by order ID or customer..."
+            placeholder="البحث بمعرف الطلب أو العميل..."
             class="w-full p-2.5 border border-gray-300 rounded-md"
           />
         </div>
@@ -16,7 +16,7 @@
             :options="paymentStatusOptions"
             optionLabel="label"
             optionValue="value"
-            placeholder="All Payment Statuses"
+            placeholder="جميع حالات الدفع"
             class="w-48"
             @change="loadOrders"
           />
@@ -25,18 +25,18 @@
             <Calendar
               v-model="startDate"
               dateFormat="yy-mm-dd"
-              placeholder="Start Date"
+              placeholder="تاريخ البدء"
               class="w-40"
             />
-            <span>to</span>
+            <span>إلى</span>
             <Calendar
               v-model="endDate"
               dateFormat="yy-mm-dd"
-              placeholder="End Date"
+              placeholder="تاريخ الانتهاء"
               class="w-40"
             />
             <Button
-              label="Apply Filters"
+              label="تطبيق المرشحات"
               @click="loadOrders"
               class="bg-green-500 hover:bg-green-600"
             />
@@ -46,7 +46,7 @@
 
       <div v-if="ordersStore.isLoading" class="text-center py-5">
         <ProgressSpinner />
-        <div>Loading orders...</div>
+        <div>جاري تحميل الطلبات...</div>
       </div>
 
       <div v-else-if="ordersStore.error" class="bg-red-100 text-red-800 p-4 rounded-md border border-red-300 my-5 text-center">
@@ -60,35 +60,35 @@
         responsiveLayout="scroll"
         :paginator="false"
         stripedRows
-        :emptyMessage="'No orders found'"
+        :emptyMessage="'لم يتم العثور على طلبات'"
       >
-        <Column field="id" header="Order ID">
+        <Column field="id" header="رقم الطلب">
           <template #body="slotProps">
             #{{ slotProps.data.id }}
           </template>
         </Column>
-        <Column field="orderType" header="Order Type" />
-        <Column header="Title">
+        <Column field="orderType" header="نوع الطلب" />
+        <Column header="العنوان">
           <template #body="slotProps">
             {{ getOrderTitle(slotProps.data) }}
           </template>
         </Column>
-        <Column header="Date">
+        <Column header="التاريخ">
           <template #body="slotProps">
             {{ formatDate(slotProps.data.orderDate) }}
           </template>
         </Column>
-        <Column header="Price">
+        <Column header="السعر">
           <template #body="slotProps">
             {{ formatPrice(slotProps.data.purchasePrice) }}
           </template>
         </Column>
-        <Column header="Order Status">
+        <Column header="حالة الطلب">
           <template #body="slotProps">
             <Tag :severity="getStatusSeverity(slotProps.data.orderState)" :value="slotProps.data.orderState" />
           </template>
         </Column>
-        <Column header="Payment Status">
+        <Column header="حالة الدفع">
           <template #body="slotProps">
             <Tag :severity="getStatusSeverity(slotProps.data.paymentState)" :value="slotProps.data.paymentState" />
           </template>
@@ -131,10 +131,10 @@ const pageSize = ref(10);
 
 // Options for the payment status dropdown
 const paymentStatusOptions = [
-  { label: 'All Payment Statuses', value: '' },
-  { label: 'Pending', value: 'pending' },
-  { label: 'Authorized', value: 'authorized' },
-  { label: 'Declined', value: 'declined' }
+  { label: 'جميع حالات الدفع', value: '' },
+  { label: 'قيد الانتظار', value: 'pending' },
+  { label: 'مصرح به', value: 'authorized' },
+  { label: 'مرفوض', value: 'declined' }
 ];
 
 // Load orders with current filters
@@ -172,12 +172,12 @@ function getOrderTitle(order) {
 }
 
 function formatDate(dateString) {
-  if (!dateString) return 'N/A';
+  if (!dateString) return 'غير متاح';
   return new Date(dateString).toLocaleDateString();
 }
 
 function formatPrice(price) {
-  if (price == null) return 'N/A';
+  if (price == null) return 'غير متاح';
   return `${price.toFixed(2)} ريال`;
 }
 
