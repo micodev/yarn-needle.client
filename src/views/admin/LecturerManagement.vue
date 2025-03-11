@@ -31,7 +31,7 @@
 
             <template #body="{data}">
               <div class="flex items-center">
-                <Avatar :image="data.profilePicture || defaultAvatar" :alt="data.name" class="ml-2" size="normal" />
+                <Avatar :image="data.profilePicture || defaultAvatar" :alt="data.name" class="ml-2 custom-avatar" size="normal" />
                 <div>
                   <div class="font-semibold">{{ data.name }}</div>
                   <div class="text-sm text-gray-500">{{ data.email }}</div>
@@ -91,7 +91,7 @@
       <div class="p-4">
         <div v-if="selectedLecturer" class="mb-4">
           <div class="flex items-center mb-4">
-            <Avatar :image="selectedLecturer.profilePicture || defaultAvatar" :alt="selectedLecturer.name" class="ml-3" size="xlarge" />
+            <Avatar :image="selectedLecturer.profilePicture || defaultAvatar" :alt="selectedLecturer.name" class="ml-3 custom-avatar" size="xlarge" />
             <div>
               <h2 class="text-xl font-bold">{{ selectedLecturer.name }}</h2>
               <p class="text-gray-600">{{ selectedLecturer.email }}</p>
@@ -262,5 +262,11 @@ async function handleImageUpload(event, lecturer) {
   .p-datatable-column-title,.p-datatable-column-body {
     width: 100%;
     text-align: center;
+  }
+  /* New: Ensure the Avatar image displays with proper dimensions */
+  .custom-avatar img {
+    width: 64px; /* set desired width */
+    height: 64px; /* set desired height */
+    object-fit: cover;
   }
 </style>
