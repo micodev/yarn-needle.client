@@ -197,7 +197,17 @@ export const useLecturerStore = defineStore('lecturer', {
     /**
      * Upload a lecturer's image using base64 string
      */
-    async uploadLecturerImage(id, base64Image) {
+    async uploadLecturerImage(id, file) {
+      var base64Image = null;
+      if (file) {
+        // Convert the file to base64 string
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        base64Image = await new Promise((resolve, reject) => {
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = error => reject(error);
+        });
+      }
       try {
         this.loading = true;
         this.error = null;
