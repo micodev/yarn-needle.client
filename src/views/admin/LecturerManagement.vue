@@ -269,6 +269,5 @@ async function handleImageUpload(event, lecturer) {
     height: 64px; /* set desired height */
     object-fit: cover;
     max-width: fit-content;
-    max-height: fit-content;
   }
 </style>
