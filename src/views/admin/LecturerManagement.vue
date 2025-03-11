@@ -268,5 +268,9 @@ async function handleImageUpload(event, lecturer) {
     text-align: center;
   }
   /* New: Ensure the Avatar image displays with proper dimensions */
-
+  .custom-avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+  }
 </style>
