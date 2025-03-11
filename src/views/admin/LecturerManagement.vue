@@ -127,7 +127,8 @@
                 <i class="pi pi-user text-gray-500"></i>
               </div>
             </div>
-            <div class="ml-3">
+            <!-- increased margin class "ml-5" -->
+            <div class="ml-5">
               <h2 class="text-xl font-bold">{{ selectedLecturer.name }}</h2>
               <p class="text-gray-600">{{ selectedLecturer.email }}</p>
             </div>
