@@ -27,7 +27,7 @@
           responsiveLayout="scroll"
         >
           <Column field="id" header="الرقم التعريفي" class="text-center"></Column>
-          <Column header="الاسم" header-style="width: 100%;text-align: center;">
+          <Column header="الاسم" header-class="w-100">
 
             <template #body="{data}">
               <div class="flex items-center">
