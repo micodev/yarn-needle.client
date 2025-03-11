@@ -31,7 +31,7 @@
 
             <template #body="{data}">
               <div class="flex items-center">
-                <Avatar :image="data.profilePicture || defaultAvatar" :alt="data.name" class="ml-2 custom-avatar" size="normal" />
+                <Avatar :image="data.profilePicture || defaultAvatar" :alt="data.name" class="ml-3 custom-avatar" size="normal" />
                 <div>
                   <div class="font-semibold">{{ data.name }}</div>
                   <div class="text-sm text-gray-500">{{ data.email }}</div>
