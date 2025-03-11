@@ -183,7 +183,6 @@ import Column from 'primevue/column';
 import Card from 'primevue/card';
 import ProgressSpinner from 'primevue/progressspinner';
 import Message from 'primevue/message';
-import Avatar from 'primevue/avatar';
 import Rating from 'primevue/rating';
 import DataTable from 'primevue/datatable';
 import Paginator from 'primevue/paginator';
@@ -196,7 +195,6 @@ const lecturerStore = useLecturerStore();
 const route = useRoute();
 const router = useRouter();
 const searchQuery = ref('');
-const defaultAvatar = 'https://randomuser.me/api/portraits/lego/1.jpg'; // صورة افتراضية احتياطية
 
 // Dialog related refs
 const aboutDialogVisible = ref(false);
