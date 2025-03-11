@@ -42,7 +42,6 @@
               <Button
                 label="عرض النبذة"
                 severity="primary"
-                text
                 @click="showAboutDialog(data)"
                 class="p-button-sm"
               />
