@@ -37,30 +37,23 @@
               </div>
             </template>
           </Column>
-          <Column field="about" header="نبذة تعريفية"></Column>
+          <Column header="نبذة تعريفية">
+            <template #body="{data}">
+              <Button
+                label="عرض النبذة"
+                severity="secondary"
+                text
+                @click="showAboutDialog(data)"
+                class="p-button-sm"
+              />
+            </template>
+          </Column>
           <Column field="courseCount" header="الدورات"></Column>
           <Column header="التقييم">
             <template #body="{data}">
               <div class="flex items-center gap-1">
                 {{ data.lecutrerRate || 'غير متاح' }}/5
                 <Rating :modelValue="data.lecutrerRate || 0" readonly :cancel="false" />
-              </div>
-            </template>
-          </Column>
-          <Column header="الحالة">
-            <template #body="{data}">
-              <Tag
-                :value="data.status === 'active' ? 'نشط' : 'غير نشط'"
-                :severity="data.status === 'active' ? 'success' : 'danger'"
-              />
-            </template>
-          </Column>
-          <Column header="الإجراءات">
-            <template #body="{data}">
-              <div class="flex gap-2">
-                <Button icon="pi pi-pencil" severity="info" text @click="editLecturer(data)" />
-                <Button icon="pi pi-list" text @click="viewCourses(data.id)" />
-                <Button icon="pi pi-trash" severity="danger" text @click="deleteLecturer(data.id)" />
               </div>
             </template>
           </Column>
@@ -78,7 +71,33 @@
       </template>
     </Card>
 
-    <!-- Modal for adding/editing lecturer will be implemented with Dialog component -->
+    <!-- Dialog for showing about information -->
+    <Dialog
+      v-model:visible="aboutDialogVisible"
+      :header="selectedLecturer?.name || 'نبذة تعريفية'"
+      :style="{ width: '50vw' }"
+      :modal="true"
+    >
+      <div class="p-4">
+        <div v-if="selectedLecturer" class="mb-4">
+          <div class="flex items-center mb-4">
+            <Avatar :image="selectedLecturer.profilePicture || defaultAvatar" :alt="selectedLecturer.name" class="ml-3" size="xlarge" />
+            <div>
+              <h2 class="text-xl font-bold">{{ selectedLecturer.name }}</h2>
+              <p class="text-gray-600">{{ selectedLecturer.email }}</p>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <h3 class="text-lg font-semibold mb-2">النبذة التعريفية</h3>
+            <p class="whitespace-pre-line">{{ selectedLecturer.about || 'لا توجد معلومات متاحة' }}</p>
+          </div>
+        </div>
+      </div>
+      <template #footer>
+        <Button label="إغلاق" @click="aboutDialogVisible = false" />
+      </template>
+    </Dialog>
   </div>
 </template>
 
@@ -95,15 +114,19 @@ import Card from 'primevue/card';
 import ProgressSpinner from 'primevue/progressspinner';
 import Message from 'primevue/message';
 import Avatar from 'primevue/avatar';
-import Tag from 'primevue/tag';
 import Rating from 'primevue/rating';
 import Paginator from 'primevue/paginator';
+import Dialog from 'primevue/dialog';
 
 const lecturerStore = useLecturerStore();
 const route = useRoute();
 const router = useRouter();
 const searchQuery = ref('');
 const defaultAvatar = 'https://randomuser.me/api/portraits/lego/1.jpg'; // صورة افتراضية احتياطية
+
+// Dialog related refs
+const aboutDialogVisible = ref(false);
+const selectedLecturer = ref(null);
 
 // تهيئة البيانات
 onMounted(async () => {
@@ -152,11 +175,16 @@ function updateRouteQuery(query) {
   });
 }
 
-
 // Handle PrimeVue paginator event
 function onPageChange(event) {
   const page = Math.floor(event.first / event.rows) + 1;
   updateRouteQuery({ page });
+}
+
+// Show about dialog
+function showAboutDialog(lecturer) {
+  selectedLecturer.value = lecturer;
+  aboutDialogVisible.value = true;
 }
 
 // إضافة محاضر جديد
@@ -165,28 +193,9 @@ function addNewLecturer() {
   console.log('إضافة محاضر جديد');
 }
 
-// تعديل بيانات محاضر
-function editLecturer(lecturer) {
-  // سيتم التنفيذ حسب تصميم واجهة المستخدم
-  console.log('تعديل المحاضر:', lecturer);
-}
-
 // عرض دورات محاضر معين
 function viewCourses(lecturerId) {
   // الانتقال إلى صفحة الدورات مع تصفية حسب المحاضر
   router.push(`/admin/courses?lecturerId=${lecturerId}`);
-}
-
-// حذف محاضر
-async function deleteLecturer(lecturerId) {
-  if (confirm('هل أنت متأكد من رغبتك في حذف هذا المحاضر؟')) {
-    const success = await lecturerStore.deleteLecturer(lecturerId);
-    if (success) {
-      // إذا كنا في صفحة لم تعد موجودة بعد الحذف، انتقل إلى الصفحة الأخيرة
-      if (lecturerStore.lecturers.length === 0 && lecturerStore.pagination.currentPage > 1) {
-        updateRouteQuery({ page: lecturerStore.pagination.currentPage - 1 });
-      }
-    }
-  }
 }
 </script>
