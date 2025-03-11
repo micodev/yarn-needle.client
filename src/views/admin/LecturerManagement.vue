@@ -1,86 +1,84 @@
 <template>
-  <div class="lecturer-management">
-    <h1>إدارة المحاضرين</h1>
-    <div class="admin-panel">
-      <div class="actions-bar">
-        <button @click="addNewLecturer" class="add-btn">إضافة محاضر جديد</button>
-        <div class="search-box">
-          <input
-            type="text"
-            placeholder="البحث عن محاضرين..."
-            v-model="searchQuery"
-            @input="handleSearch"
-          />
+  <div class="p-5 rtl" dir="rtl">
+    <h1 class="text-2xl font-bold mb-4">إدارة المحاضرين</h1>
+    <Card class="shadow-md">
+      <template #content>
+        <div class="flex justify-between mb-5">
+          <Button label="إضافة محاضر جديد" icon="pi pi-plus" severity="success" @click="addNewLecturer" />
+          <span class="p-input-icon-left w-72">
+            <i class="pi pi-search" />
+            <InputText
+              v-model="searchQuery"
+              placeholder="البحث عن محاضرين..."
+              class="w-full"
+              @input="handleSearch"
+            />
+          </span>
         </div>
-      </div>
 
-      <div v-if="lecturerStore.loading" class="loading">جاري التحميل...</div>
-      <div v-else-if="lecturerStore.hasError" class="error-message">
-        {{ lecturerStore.error }}
-      </div>
-      <table v-else class="lecturer-table">
-        <thead>
-          <tr>
-            <th>الرقم التعريفي</th>
-            <th>الاسم</th>
-            <th>نبذة تعريفية</th>
-            <th>الدورات</th>
-            <th>التقييم</th>
-            <th>الحالة</th>
-            <th>الإجراءات</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="lecturer in lecturerStore.lecturers" :key="lecturer.id">
-            <td>{{ lecturer.id }}</td>
-            <td>
-              <div class="lecturer-info">
-                <img :src="lecturer.profilePicture || defaultAvatar" :alt="lecturer.name" class="lecturer-avatar" />
+        <ProgressSpinner v-if="lecturerStore.loading" class="mx-auto my-5" />
+        <Message v-else-if="lecturerStore.hasError" severity="error" :text="lecturerStore.error" class="w-full mb-3" />
+        <DataTable
+          v-else
+          :value="lecturerStore.lecturers"
+          stripedRows
+          class="w-full"
+          responsiveLayout="scroll"
+        >
+          <Column field="id" header="الرقم التعريفي"></Column>
+          <Column header="الاسم">
+            <template #body="{data}">
+              <div class="flex items-center">
+                <Avatar :image="data.profilePicture || defaultAvatar" :alt="data.name" class="ml-2" size="normal" />
                 <div>
-                  <div class="lecturer-name">{{ lecturer.name }}</div>
-                  <div class="lecturer-email">{{ lecturer.email }}</div>
+                  <div class="font-semibold">{{ data.name }}</div>
+                  <div class="text-sm text-gray-500">{{ data.email }}</div>
                 </div>
               </div>
-            </td>
-            <td>{{ lecturer.about }}</td>
-            <td>{{ lecturer.courseCount }}</td>
-            <td>
-              <div class="rating">
-                {{ lecturer.rating || 'غير متاح' }}/5
-                <span class="stars">★★★★★</span>
+            </template>
+          </Column>
+          <Column field="about" header="نبذة تعريفية"></Column>
+          <Column field="courseCount" header="الدورات"></Column>
+          <Column header="التقييم">
+            <template #body="{data}">
+              <div class="flex items-center gap-1">
+                {{ data.lecutrerRate || 'غير متاح' }}/5
+                <Rating :modelValue="data.lecutrerRate || 0" readonly :cancel="false" />
               </div>
-            </td>
-            <td>
-              <span class="status-badge" :class="lecturer.status">{{ lecturer.status === 'active' ? 'نشط' : 'غير نشط' }}</span>
-            </td>
-            <td class="actions">
-              <button @click="editLecturer(lecturer)">تعديل</button>
-              <button @click="viewCourses(lecturer.id)">الدورات</button>
-              <button @click="deleteLecturer(lecturer.id)" class="delete">حذف</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            </template>
+          </Column>
+          <Column header="الحالة">
+            <template #body="{data}">
+              <Tag
+                :value="data.status === 'active' ? 'نشط' : 'غير نشط'"
+                :severity="data.status === 'active' ? 'success' : 'danger'"
+              />
+            </template>
+          </Column>
+          <Column header="الإجراءات">
+            <template #body="{data}">
+              <div class="flex gap-2">
+                <Button icon="pi pi-pencil" severity="info" text @click="editLecturer(data)" />
+                <Button icon="pi pi-list" text @click="viewCourses(data.id)" />
+                <Button icon="pi pi-trash" severity="danger" text @click="deleteLecturer(data.id)" />
+              </div>
+            </template>
+          </Column>
+        </DataTable>
 
-      <!-- Pagination controls -->
-      <div class="pagination" v-if="lecturerStore.pagination.totalPages > 1">
-        <button
-          :disabled="lecturerStore.pagination.currentPage === 1"
-          @click="changePage(lecturerStore.pagination.currentPage - 1)"
-        >
-          السابق
-        </button>
-        <span>الصفحة {{ lecturerStore.pagination.currentPage }} من {{ lecturerStore.pagination.totalPages }}</span>
-        <button
-          :disabled="lecturerStore.pagination.currentPage >= lecturerStore.pagination.totalPages"
-          @click="changePage(lecturerStore.pagination.currentPage + 1)"
-        >
-          التالي
-        </button>
-      </div>
-    </div>
+        <!-- Pagination controls -->
+        <Paginator
+          v-if="lecturerStore.pagination.totalPages > 1"
+          :rows="10"
+          :totalRecords="lecturerStore.pagination.totalItems"
+          :first="(lecturerStore.pagination.currentPage - 1) * 10"
+          @page="onPageChange($event)"
+          class="mt-5"
+        />
+      </template>
+    </Card>
 
-    <!-- Modal for adding/editing lecturer would go here -->
+    <!-- Modal for adding/editing lecturer will be implemented with Dialog component -->
   </div>
 </template>
 
@@ -88,16 +86,28 @@
 import { ref, onMounted, watch } from 'vue';
 import { useLecturerStore } from '../../stores/lecturerStore';
 import { useRoute, useRouter } from 'vue-router';
+// PrimeVue components
+import Button from 'primevue/button';
+import InputText from 'primevue/inputtext';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import Card from 'primevue/card';
+import ProgressSpinner from 'primevue/progressspinner';
+import Message from 'primevue/message';
+import Avatar from 'primevue/avatar';
+import Tag from 'primevue/tag';
+import Rating from 'primevue/rating';
+import Paginator from 'primevue/paginator';
 
 const lecturerStore = useLecturerStore();
 const route = useRoute();
 const router = useRouter();
 const searchQuery = ref('');
-const defaultAvatar = 'https://randomuser.me/api/portraits/lego/1.jpg'; // Fallback avatar
+const defaultAvatar = 'https://randomuser.me/api/portraits/lego/1.jpg'; // صورة افتراضية احتياطية
 
-// Initialize data
+// تهيئة البيانات
 onMounted(async () => {
-  // Get page from route query or default to 1
+  // الحصول على رقم الصفحة من الرابط أو استخدام الصفحة الأولى افتراضياً
   const page = route.query.page ? parseInt(route.query.page) : 1;
   const search = route.query.search || '';
 
@@ -108,7 +118,7 @@ onMounted(async () => {
   await lecturerStore.fetchLecturers(page, 10, search);
 });
 
-// Watch for route changes to update data
+// مراقبة تغييرات الرابط لتحديث البيانات
 watch(
   () => route.query,
   async (query) => {
@@ -123,7 +133,7 @@ watch(
   }
 );
 
-// Debounced search handler
+// معالجة البحث مع تأخير
 let searchTimeout;
 function handleSearch() {
   clearTimeout(searchTimeout);
@@ -132,7 +142,7 @@ function handleSearch() {
   }, 500);
 }
 
-// Update route with query parameters
+// تحديث معلمات الرابط
 function updateRouteQuery(query) {
   router.push({
     query: {
@@ -142,36 +152,41 @@ function updateRouteQuery(query) {
   });
 }
 
-// Change page
+// تغيير الصفحة
 function changePage(page) {
   updateRouteQuery({ page });
 }
 
-// Add new lecturer
+// Handle PrimeVue paginator event
+function onPageChange(event) {
+  const page = Math.floor(event.first / event.rows) + 1;
+  updateRouteQuery({ page });
+}
+
+// إضافة محاضر جديد
 function addNewLecturer() {
-  // Implementation would depend on your UI design
-  // Could open a modal or navigate to a form page
+  // سيتم التنفيذ حسب تصميم واجهة المستخدم
   console.log('إضافة محاضر جديد');
 }
 
-// Edit lecturer
+// تعديل بيانات محاضر
 function editLecturer(lecturer) {
-  // Implementation would depend on your UI design
+  // سيتم التنفيذ حسب تصميم واجهة المستخدم
   console.log('تعديل المحاضر:', lecturer);
 }
 
-// View courses for a lecturer
+// عرض دورات محاضر معين
 function viewCourses(lecturerId) {
-  // Navigate to courses page filtered by lecturer
+  // الانتقال إلى صفحة الدورات مع تصفية حسب المحاضر
   router.push(`/admin/courses?lecturerId=${lecturerId}`);
 }
 
-// Delete a lecturer
+// حذف محاضر
 async function deleteLecturer(lecturerId) {
   if (confirm('هل أنت متأكد من رغبتك في حذف هذا المحاضر؟')) {
     const success = await lecturerStore.deleteLecturer(lecturerId);
     if (success) {
-      // If we're on a page that no longer exists after deletion, go to the last page
+      // إذا كنا في صفحة لم تعد موجودة بعد الحذف، انتقل إلى الصفحة الأخيرة
       if (lecturerStore.lecturers.length === 0 && lecturerStore.pagination.currentPage > 1) {
         updateRouteQuery({ page: lecturerStore.pagination.currentPage - 1 });
       }
@@ -179,150 +194,3 @@ async function deleteLecturer(lecturerId) {
   }
 }
 </script>
-
-<style scoped>
-.lecturer-management {
-  padding: 20px;
-  direction: rtl; /* Added for Arabic text direction */
-  text-align: right;
-}
-
-.admin-panel {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-}
-
-.actions-bar {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.add-btn {
-  padding: 10px 16px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.search-box input {
-  padding: 10px;
-  width: 300px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.lecturer-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.lecturer-table th, .lecturer-table td {
-  padding: 12px;
-  text-align: right; /* Changed from left to right for Arabic */
-  border-bottom: 1px solid #eee;
-}
-
-.lecturer-table th {
-  background-color: #f8f9fa;
-}
-
-.lecturer-info {
-  display: flex;
-  align-items: center;
-}
-
-.lecturer-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.lecturer-name {
-  font-weight: bold;
-}
-
-.lecturer-email {
-  font-size: 12px;
-  color: #666;
-}
-
-.rating {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.stars {
-  color: gold;
-  letter-spacing: -3px;
-}
-
-.status-badge {
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.status-badge.active {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.status-badge.inactive {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-
-.actions button {
-  margin-right: 5px;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #2196F3;
-  color: white;
-}
-
-.actions button.delete {
-  background-color: #f44336;
-}
-
-.loading, .error-message {
-  padding: 20px;
-  text-align: center;
-}
-
-.error-message {
-  color: #f44336;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  gap: 10px;
-}
-
-.pagination button {
-  padding: 8px 12px;
-  background-color: #2196F3;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.pagination button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-</style>
