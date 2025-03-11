@@ -66,7 +66,7 @@
           <Column header="تحميل صورة" headerClass="text-center">
             <template #body="{ data }">
               <label :for="'upload_' + data.id" class="cursor-pointer">
-                <i class="pi pi-upload text-xl p-button-info"></i>
+                <i class="pi pi-upload text-xl"></i>
               </label>
               <input type="file" :id="'upload_' + data.id" style="display:none" @change="handleImageUpload($event, data)" />
             </template>
