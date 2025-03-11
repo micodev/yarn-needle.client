@@ -202,10 +202,13 @@ export const useLecturerStore = defineStore('lecturer', {
         this.loading = true;
         this.error = null;
 
-        const response = await this.$axios.post(`/api/Lecturer/${id}/upload-image`, {
-          id,
-          base64Image
-        });
+        // Updated payload to use Id and Base64Image based on provided parameters
+        const payload = {
+          Id: id,
+          Base64Image: base64Image
+        };
+
+        const response = await this.$axios.post(`/api/Lecturer/${id}/upload-image`, payload);
 
         if (response.data.success) {
           // After successful image upload, refresh the lecturer data
