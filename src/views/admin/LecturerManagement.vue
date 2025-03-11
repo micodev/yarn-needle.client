@@ -197,7 +197,7 @@ function addNewLecturer() {
 
 </script>
 
-<style scoped>
+<style>
   .p-datatable-column-title {
     width: 100%;
     text-align: center;
