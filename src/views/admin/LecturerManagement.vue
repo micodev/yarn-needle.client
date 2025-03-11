@@ -91,7 +91,7 @@
       <div class="p-4">
         <div v-if="selectedLecturer" class="mb-4">
           <div class="flex items-center mb-4">
-            <Avatar :image="selectedLecturer.profilePicture || defaultAvatar" :alt="selectedLecturer.name" class="ml-3 custom-avatar" size="xlarge" />
+            <Avatar :image="selectedLecturer.profilePicture || defaultAvatar" :alt="selectedLecturer.name" class="ml-3"/>
             <div>
               <h2 class="text-xl font-bold">{{ selectedLecturer.name }}</h2>
               <p class="text-gray-600">{{ selectedLecturer.email }}</p>
