@@ -34,7 +34,7 @@
           class="w-full"
           responsiveLayout="scroll"
         >
-          <Column field="id" header="ت" class="text-center" style="width: auto;"></Column>
+          <Column field="id" header="ت" headerClass="text-center" bodyClass="text-center" style="width: auto;"></Column>
 
           <!-- Updated profile column using the provided template snippet -->
           <Column header="الصورة" headerClass="text-center">
