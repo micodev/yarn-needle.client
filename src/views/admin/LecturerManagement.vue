@@ -5,15 +5,18 @@
       <template #content>
         <div class="flex justify-between mb-5">
           <Button label="إضافة محاضر جديد" icon="pi pi-plus" severity="success" class="rounded-lg p-3 text-lg" @click="addNewLecturer" />
-          <span class="p-input-icon-left w-72">
-            <i class="pi pi-search text-gray-500" />
+          <!-- Modified search component -->
+          <InputGroup class="w-72">
+            <InputGroupAddon>
+              <i class="pi pi-search text-gray-500"></i>
+            </InputGroupAddon>
             <InputText
               v-model="searchQuery"
               placeholder="البحث عن محاضرين..."
               class="w-full rounded-lg border border-gray-300 p-2"
               @input="handleSearch"
             />
-          </span>
+          </InputGroup>
         </div>
 
         <ProgressSpinner v-if="lecturerStore.loading" class="mx-auto my-5" />
@@ -157,6 +160,9 @@ import Rating from 'primevue/rating';
 import DataTable from 'primevue/datatable';
 import Paginator from 'primevue/paginator';
 import Dialog from 'primevue/dialog';
+// New imports for InputGroup components:
+import InputGroup from 'primevue/inputgroup';
+import InputGroupAddon from 'primevue/inputgroupaddon';
 
 const lecturerStore = useLecturerStore();
 const route = useRoute();
