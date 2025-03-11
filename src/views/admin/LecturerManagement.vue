@@ -25,8 +25,8 @@
           class="w-full"
           responsiveLayout="scroll"
         >
-          <Column field="id" header="الرقم التعريفي"></Column>
-          <Column header="الاسم">
+          <Column field="id" header="الرقم التعريفي" headerClass="text-center"></Column>
+          <Column header="الاسم" headerClass="text-center">
             <template #body="{data}">
               <div class="flex items-center">
                 <Avatar :image="data.profilePicture || defaultAvatar" :alt="data.name" class="ml-2" size="normal" />
@@ -37,7 +37,7 @@
               </div>
             </template>
           </Column>
-          <Column header="نبذة تعريفية">
+          <Column header="نبذة تعريفية" headerClass="text-center">
             <template #body="{data}">
               <Button
                 label="عرض النبذة"
@@ -47,8 +47,8 @@
               />
             </template>
           </Column>
-          <Column field="courseCount" header="الدورات"></Column>
-          <Column header="التقييم">
+          <Column field="courseCount" header="الدورات" headerClass="text-center"></Column>
+          <Column header="التقييم" headerClass="text-center">
             <template #body="{data}">
               <div class="flex items-center gap-1">
                 {{ data.lecutrerRate || 'غير متاح' }}/5
