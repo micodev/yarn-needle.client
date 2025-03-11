@@ -196,3 +196,10 @@ function addNewLecturer() {
 
 
 </script>
+
+<style scoped>
+  .p-treetable-column-title {
+    width: 100%;
+    text-align: center;
+  }
+</style>
