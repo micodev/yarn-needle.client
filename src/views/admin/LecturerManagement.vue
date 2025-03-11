@@ -5,11 +5,20 @@
       <div class="actions-bar">
         <button @click="addNewLecturer" class="add-btn">Add New Lecturer</button>
         <div class="search-box">
-          <input type="text" placeholder="Search lecturers..." v-model="searchQuery" />
+          <input
+            type="text"
+            placeholder="Search lecturers..."
+            v-model="searchQuery"
+            @input="handleSearch"
+          />
         </div>
       </div>
 
-      <table class="lecturer-table">
+      <div v-if="lecturerStore.loading" class="loading">Loading...</div>
+      <div v-else-if="lecturerStore.hasError" class="error-message">
+        {{ lecturerStore.error }}
+      </div>
+      <table v-else class="lecturer-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -22,11 +31,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="lecturer in filteredLecturers" :key="lecturer.id">
+          <tr v-for="lecturer in lecturerStore.lecturers" :key="lecturer.id">
             <td>{{ lecturer.id }}</td>
             <td>
               <div class="lecturer-info">
-                <img :src="lecturer.avatar" :alt="lecturer.name" class="lecturer-avatar" />
+                <img :src="lecturer.avatar || defaultAvatar" :alt="lecturer.name" class="lecturer-avatar" />
                 <div>
                   <div class="lecturer-name">{{ lecturer.name }}</div>
                   <div class="lecturer-email">{{ lecturer.email }}</div>
@@ -37,7 +46,7 @@
             <td>{{ lecturer.coursesCount }}</td>
             <td>
               <div class="rating">
-                {{ lecturer.rating }}/5
+                {{ lecturer.rating || 'N/A' }}/5
                 <span class="stars">★★★★★</span>
               </div>
             </td>
@@ -52,74 +61,122 @@
           </tr>
         </tbody>
       </table>
+
+      <!-- Pagination controls -->
+      <div class="pagination" v-if="lecturerStore.pagination.totalPages > 1">
+        <button
+          :disabled="lecturerStore.pagination.currentPage === 1"
+          @click="changePage(lecturerStore.pagination.currentPage - 1)"
+        >
+          Previous
+        </button>
+        <span>Page {{ lecturerStore.pagination.currentPage }} of {{ lecturerStore.pagination.totalPages }}</span>
+        <button
+          :disabled="lecturerStore.pagination.currentPage >= lecturerStore.pagination.totalPages"
+          @click="changePage(lecturerStore.pagination.currentPage + 1)"
+        >
+          Next
+        </button>
+      </div>
     </div>
+
+    <!-- Modal for adding/editing lecturer would go here -->
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue';
+import { useLecturerStore } from '../../stores/lecturerStore';
+import { useRoute, useRouter } from 'vue-router';
 
-// Mock data for demonstration
-const lecturers = ref([
-  {
-    id: 1,
-    name: 'Dr. John Smith',
-    email: 'john.smith@example.com',
-    expertise: 'Web Development',
-    coursesCount: 5,
-    rating: 4.8,
-    status: 'active',
-    avatar: 'https://randomuser.me/api/portraits/men/1.jpg'
-  },
-  {
-    id: 2,
-    name: 'Prof. Jane Doe',
-    email: 'jane.doe@example.com',
-    expertise: 'UI/UX Design',
-    coursesCount: 3,
-    rating: 4.7,
-    status: 'active',
-    avatar: 'https://randomuser.me/api/portraits/women/2.jpg'
-  },
-  {
-    id: 3,
-    name: 'Dr. Robert Johnson',
-    email: 'robert.johnson@example.com',
-    expertise: 'Data Science',
-    coursesCount: 4,
-    rating: 4.5,
-    status: 'inactive',
-    avatar: 'https://randomuser.me/api/portraits/men/3.jpg'
-  },
-])
+const lecturerStore = useLecturerStore();
+const route = useRoute();
+const router = useRouter();
+const searchQuery = ref('');
+const defaultAvatar = 'https://randomuser.me/api/portraits/lego/1.jpg'; // Fallback avatar
 
-const searchQuery = ref('')
+// Initialize data
+onMounted(async () => {
+  // Get page from route query or default to 1
+  const page = route.query.page ? parseInt(route.query.page) : 1;
+  const search = route.query.search || '';
 
-const filteredLecturers = computed(() => {
-  return lecturers.value.filter(lecturer => {
-    return (
-      lecturer.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      lecturer.expertise.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      lecturer.email.toLowerCase().includes(searchQuery.value.toLowerCase())
-    )
-  })
-})
+  if (search) {
+    searchQuery.value = search;
+  }
 
+  await lecturerStore.fetchLecturers(page, 10, search);
+});
+
+// Watch for route changes to update data
+watch(
+  () => route.query,
+  async (query) => {
+    const page = query.page ? parseInt(query.page) : 1;
+    const search = query.search || '';
+
+    if (search !== searchQuery.value) {
+      searchQuery.value = search;
+    }
+
+    await lecturerStore.fetchLecturers(page, 10, search);
+  }
+);
+
+// Debounced search handler
+let searchTimeout;
+function handleSearch() {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    updateRouteQuery({ page: 1, search: searchQuery.value });
+  }, 500);
+}
+
+// Update route with query parameters
+function updateRouteQuery(query) {
+  router.push({
+    query: {
+      ...route.query,
+      ...query
+    }
+  });
+}
+
+// Change page
+function changePage(page) {
+  updateRouteQuery({ page });
+}
+
+// Add new lecturer
 function addNewLecturer() {
-  console.log('Adding new lecturer')
+  // Implementation would depend on your UI design
+  // Could open a modal or navigate to a form page
+  console.log('Adding new lecturer');
 }
 
+// Edit lecturer
 function editLecturer(lecturer) {
-  console.log('Editing lecturer:', lecturer)
+  // Implementation would depend on your UI design
+  console.log('Editing lecturer:', lecturer);
 }
 
+// View courses for a lecturer
 function viewCourses(lecturerId) {
-  console.log('Viewing courses for lecturer ID:', lecturerId)
+  // Navigate to courses page filtered by lecturer
+  router.push(`/admin/courses?lecturerId=${lecturerId}`);
 }
 
-function deleteLecturer(lecturerId) {
-  console.log('Deleting lecturer with ID:', lecturerId)
-  lecturers.value = lecturers.value.filter(lecturer => lecturer.id !== lecturerId)
+// Delete a lecturer
+async function deleteLecturer(lecturerId) {
+  if (confirm('Are you sure you want to delete this lecturer?')) {
+    const success = await lecturerStore.deleteLecturer(lecturerId);
+    if (success) {
+      // If we're on a page that no longer exists after deletion, go to the last page
+      if (lecturerStore.lecturers.length === 0 && lecturerStore.pagination.currentPage > 1) {
+        updateRouteQuery({ page: lecturerStore.pagination.currentPage - 1 });
+      }
+    }
+  }
 }
 </script>
 
@@ -234,5 +291,36 @@ function deleteLecturer(lecturerId) {
 
 .actions button.delete {
   background-color: #f44336;
+}
+
+.loading, .error-message {
+  padding: 20px;
+  text-align: center;
+}
+
+.error-message {
+  color: #f44336;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
 </style>
