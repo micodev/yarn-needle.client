@@ -8,10 +8,9 @@
             label="إضافة محاضر جديد"
             icon="pi pi-plus"
             severity="success"
-            class="rounded-lg p-1 text-sm h-8"  <!-- updated to small height -->
+            class="rounded-lg p-1 text-sm h-8"
             @click="addNewLecturer"
           />
-          <!-- Modified search component with small height -->
           <InputGroup class="w-72">
             <InputGroupAddon>
               <i class="pi pi-search text-gray-500"></i>
@@ -19,7 +18,7 @@
             <InputText
               v-model="searchQuery"
               placeholder="البحث عن محاضرين..."
-              class="w-full rounded-lg border border-gray-300 p-1 h-8"  <!-- updated to small height -->
+              class="w-full rounded-lg border border-gray-300 p-1 h-8"
               @input="handleSearch"
             />
           </InputGroup>
