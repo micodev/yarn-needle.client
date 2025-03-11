@@ -193,9 +193,5 @@ function addNewLecturer() {
   console.log('إضافة محاضر جديد');
 }
 
-// عرض دورات محاضر معين
-function viewCourses(lecturerId) {
-  // الانتقال إلى صفحة الدورات مع تصفية حسب المحاضر
-  router.push(`/admin/courses?lecturerId=${lecturerId}`);
-}
+
 </script>
