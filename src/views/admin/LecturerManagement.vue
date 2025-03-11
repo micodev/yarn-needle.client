@@ -113,13 +113,10 @@
           <InputText v-model="createLecturerData.name" placeholder="الاسم" class="w-full" />
         </div>
         <div class="mb-3">
-          <label class="block mb-1">البريد الإلكتروني</label>
-          <InputText v-model="createLecturerData.email" placeholder="البريد الإلكتروني" class="w-full" />
-        </div>
-        <div class="mb-3">
           <label class="block mb-1">نبذة تعريفية</label>
           <textarea v-model="createLecturerData.about" placeholder="نبذة تعريفية" class="w-full p-inputtext" rows="3"></textarea>
         </div>
+        <!-- Email input removed as only Name and About are required -->
       </div>
       <template #footer>
         <div class="flex justify-end gap-3">
@@ -158,9 +155,9 @@ const defaultAvatar = 'https://randomuser.me/api/portraits/lego/1.jpg'; // صو�
 const aboutDialogVisible = ref(false);
 const selectedLecturer = ref(null);
 
-// NEW: Create Lecturer dialog controls and form data
+// NEW: Create Lecturer dialog controls and form data updated to only include name and about
 const createLecturerDialogVisible = ref(false);
-const createLecturerData = ref({ name: '', email: '', about: '', profilePicture: '' });
+const createLecturerData = ref({ name: '', about: '' });
 
 // تهيئة البيانات
 onMounted(async () => {
@@ -231,8 +228,8 @@ async function submitCreateLecturer() {
   const newLecturer = await lecturerStore.createLecturer(createLecturerData.value);
   if (newLecturer) {
     createLecturerDialogVisible.value = false;
-    // Optionally, reset the form data
-    createLecturerData.value = { name: '', email: '', about: '', profilePicture: '' };
+    // Reset the form data
+    createLecturerData.value = { name: '', about: '' };
   } else {
     console.error("Creation failed.");
   }

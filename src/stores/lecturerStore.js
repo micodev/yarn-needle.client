@@ -101,7 +101,13 @@ export const useLecturerStore = defineStore('lecturer', {
         this.loading = true;
         this.error = null;
 
-        const response = await this.$axios.post('/api/Lecturer', lecturer);
+        // Build payload with only the required properties: Name and About
+        const payload = {
+          Name: lecturer.name,
+          About: lecturer.about
+        };
+
+        const response = await this.$axios.post('/api/Lecturer', payload);
 
         if (response.data.success) {
           // Add the new lecturer to the collection if it's not already fetched
