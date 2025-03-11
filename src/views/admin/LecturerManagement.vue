@@ -152,10 +152,6 @@ function updateRouteQuery(query) {
   });
 }
 
-// تغيير الصفحة
-function changePage(page) {
-  updateRouteQuery({ page });
-}
 
 // Handle PrimeVue paginator event
 function onPageChange(event) {
