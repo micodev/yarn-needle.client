@@ -120,7 +120,7 @@
               <img
                 v-if="selectedLecturer.profilePicture"
                 :src="selectedLecturer.profilePicture"
-                class="w-12 h-12 rounded-full object-cover"
+                class="w-12 h-12 rounded-full object-cover ml-2"
                 :alt="selectedLecturer.name"
               />
               <div v-else class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
