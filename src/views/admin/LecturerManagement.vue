@@ -4,13 +4,13 @@
     <Card class="shadow-md">
       <template #content>
         <div class="flex justify-between mb-5">
-          <Button label="إضافة محاضر جديد" icon="pi pi-plus" severity="success" @click="addNewLecturer" />
+          <Button label="إضافة محاضر جديد" icon="pi pi-plus" severity="success" class="rounded-lg p-3 text-lg" @click="addNewLecturer" />
           <span class="p-input-icon-left w-72">
-            <i class="pi pi-search" />
+            <i class="pi pi-search text-gray-500" />
             <InputText
               v-model="searchQuery"
               placeholder="البحث عن محاضرين..."
-              class="w-full"
+              class="w-full rounded-lg border border-gray-300 p-2"
               @input="handleSearch"
             />
           </span>
