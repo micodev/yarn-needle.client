@@ -58,6 +58,15 @@
               </div>
             </template>
           </Column>
+          <!-- New: Upload Image column -->
+          <Column header="تحميل صورة" headerClass="text-center">
+            <template #body="{ data }">
+              <label :for="'upload_' + data.id" class="cursor-pointer">
+                <i class="pi pi-upload text-xl p-button-info"></i>
+              </label>
+              <input type="file" :id="'upload_' + data.id" style="display:none" @change="handleImageUpload($event, data)" />
+            </template>
+          </Column>
         </DataTable>
 
         <!-- Pagination controls -->
@@ -232,6 +241,18 @@ async function submitCreateLecturer() {
     createLecturerData.value = { name: '', about: '' };
   } else {
     console.error("Creation failed.");
+  }
+}
+
+// New: Handle image upload for a lecturer
+async function handleImageUpload(event, lecturer) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const result = await lecturerStore.uploadLecturerImage(lecturer.id, file);
+  if(result && result.imageUrl) {
+    lecturer.profilePicture = result.imageUrl;
+  } else {
+    console.error("Image upload failed");
   }
 }
 
