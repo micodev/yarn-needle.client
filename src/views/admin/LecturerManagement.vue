@@ -24,7 +24,11 @@
           </InputGroup>
         </div>
 
-        <ProgressSpinner v-if="lecturerStore.loading" class="mx-auto my-5" />
+        <!-- Updated loading state -->
+        <div v-if="lecturerStore.loading" class="flex items-center justify-center h-64">
+          <ProgressSpinner />
+        </div>
+
         <Message v-else-if="lecturerStore.hasError" severity="error" :text="lecturerStore.error" class="w-full mb-3" />
         <DataTable
         showGridlines
