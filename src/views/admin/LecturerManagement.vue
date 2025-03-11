@@ -41,7 +41,7 @@
             <template #body="{data}">
               <Button
                 label="عرض النبذة"
-                severity="secondary"
+                severity="primary"
                 text
                 @click="showAboutDialog(data)"
                 class="p-button-sm"
