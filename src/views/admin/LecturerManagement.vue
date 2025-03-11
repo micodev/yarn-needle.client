@@ -19,6 +19,7 @@
         <ProgressSpinner v-if="lecturerStore.loading" class="mx-auto my-5" />
         <Message v-else-if="lecturerStore.hasError" severity="error" :text="lecturerStore.error" class="w-full mb-3" />
         <DataTable
+        showGridlines
           v-else
           :value="lecturerStore.lecturers"
           stripedRows
