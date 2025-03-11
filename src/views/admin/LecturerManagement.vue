@@ -63,12 +63,14 @@
           </Column>
           <Column header="نبذة تعريفية" class="justify-center">
             <template #body="{data}">
-              <Button
-                label="عرض النبذة"
-                severity="primary"
-                @click="showAboutDialog(data)"
-                class="p-button-sm"
-              />
+              <div class="flex justify-center">
+                <Button
+                  label="عرض النبذة"
+                  severity="primary"
+                  @click="showAboutDialog(data)"
+                  class="p-button-sm"
+                />
+              </div>
             </template>
           </Column>
           <Column field="courseCount" header="الدورات" headerClass="text-center"></Column>
