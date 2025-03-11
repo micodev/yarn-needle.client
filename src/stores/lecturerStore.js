@@ -53,7 +53,7 @@ export const useLecturerStore = defineStore('lecturer', {
           this.pagination.currentPage = page;
           this.pagination.pageSize = pageSize;
           this.pagination.totalCount = response.data.totalCount || 0;
-          this.pagination.totalPages = Math.ceil(this.pagination.totalCount / pageSize);
+          this.pagination.totalPages = response.data.totalPages || 0;
           this.searchQuery = search;
           return true;
         } else {
