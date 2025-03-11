@@ -1,33 +1,33 @@
 <template>
   <div class="lecturer-management">
-    <h1>Lecturer Management</h1>
+    <h1>إدارة المحاضرين</h1>
     <div class="admin-panel">
       <div class="actions-bar">
-        <button @click="addNewLecturer" class="add-btn">Add New Lecturer</button>
+        <button @click="addNewLecturer" class="add-btn">إضافة محاضر جديد</button>
         <div class="search-box">
           <input
             type="text"
-            placeholder="Search lecturers..."
+            placeholder="البحث عن محاضرين..."
             v-model="searchQuery"
             @input="handleSearch"
           />
         </div>
       </div>
 
-      <div v-if="lecturerStore.loading" class="loading">Loading...</div>
+      <div v-if="lecturerStore.loading" class="loading">جاري التحميل...</div>
       <div v-else-if="lecturerStore.hasError" class="error-message">
         {{ lecturerStore.error }}
       </div>
       <table v-else class="lecturer-table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Expertise</th>
-            <th>Courses</th>
-            <th>Rating</th>
-            <th>Status</th>
-            <th>Actions</th>
+            <th>الرقم التعريفي</th>
+            <th>الاسم</th>
+            <th>نبذة تعريفية</th>
+            <th>الدورات</th>
+            <th>التقييم</th>
+            <th>الحالة</th>
+            <th>الإجراءات</th>
           </tr>
         </thead>
         <tbody>
@@ -35,28 +35,28 @@
             <td>{{ lecturer.id }}</td>
             <td>
               <div class="lecturer-info">
-                <img :src="lecturer.avatar || defaultAvatar" :alt="lecturer.name" class="lecturer-avatar" />
+                <img :src="lecturer.profilePicture || defaultAvatar" :alt="lecturer.name" class="lecturer-avatar" />
                 <div>
                   <div class="lecturer-name">{{ lecturer.name }}</div>
                   <div class="lecturer-email">{{ lecturer.email }}</div>
                 </div>
               </div>
             </td>
-            <td>{{ lecturer.expertise }}</td>
-            <td>{{ lecturer.coursesCount }}</td>
+            <td>{{ lecturer.about }}</td>
+            <td>{{ lecturer.courseCount }}</td>
             <td>
               <div class="rating">
-                {{ lecturer.rating || 'N/A' }}/5
+                {{ lecturer.rating || 'غير متاح' }}/5
                 <span class="stars">★★★★★</span>
               </div>
             </td>
             <td>
-              <span class="status-badge" :class="lecturer.status">{{ lecturer.status }}</span>
+              <span class="status-badge" :class="lecturer.status">{{ lecturer.status === 'active' ? 'نشط' : 'غير نشط' }}</span>
             </td>
             <td class="actions">
-              <button @click="editLecturer(lecturer)">Edit</button>
-              <button @click="viewCourses(lecturer.id)">Courses</button>
-              <button @click="deleteLecturer(lecturer.id)" class="delete">Delete</button>
+              <button @click="editLecturer(lecturer)">تعديل</button>
+              <button @click="viewCourses(lecturer.id)">الدورات</button>
+              <button @click="deleteLecturer(lecturer.id)" class="delete">حذف</button>
             </td>
           </tr>
         </tbody>
@@ -68,14 +68,14 @@
           :disabled="lecturerStore.pagination.currentPage === 1"
           @click="changePage(lecturerStore.pagination.currentPage - 1)"
         >
-          Previous
+          السابق
         </button>
-        <span>Page {{ lecturerStore.pagination.currentPage }} of {{ lecturerStore.pagination.totalPages }}</span>
+        <span>الصفحة {{ lecturerStore.pagination.currentPage }} من {{ lecturerStore.pagination.totalPages }}</span>
         <button
           :disabled="lecturerStore.pagination.currentPage >= lecturerStore.pagination.totalPages"
           @click="changePage(lecturerStore.pagination.currentPage + 1)"
         >
-          Next
+          التالي
         </button>
       </div>
     </div>
@@ -151,13 +151,13 @@ function changePage(page) {
 function addNewLecturer() {
   // Implementation would depend on your UI design
   // Could open a modal or navigate to a form page
-  console.log('Adding new lecturer');
+  console.log('إضافة محاضر جديد');
 }
 
 // Edit lecturer
 function editLecturer(lecturer) {
   // Implementation would depend on your UI design
-  console.log('Editing lecturer:', lecturer);
+  console.log('تعديل المحاضر:', lecturer);
 }
 
 // View courses for a lecturer
@@ -168,7 +168,7 @@ function viewCourses(lecturerId) {
 
 // Delete a lecturer
 async function deleteLecturer(lecturerId) {
-  if (confirm('Are you sure you want to delete this lecturer?')) {
+  if (confirm('هل أنت متأكد من رغبتك في حذف هذا المحاضر؟')) {
     const success = await lecturerStore.deleteLecturer(lecturerId);
     if (success) {
       // If we're on a page that no longer exists after deletion, go to the last page
@@ -183,6 +183,8 @@ async function deleteLecturer(lecturerId) {
 <style scoped>
 .lecturer-management {
   padding: 20px;
+  direction: rtl; /* Added for Arabic text direction */
+  text-align: right;
 }
 
 .admin-panel {
@@ -222,7 +224,7 @@ async function deleteLecturer(lecturerId) {
 
 .lecturer-table th, .lecturer-table td {
   padding: 12px;
-  text-align: left;
+  text-align: right; /* Changed from left to right for Arabic */
   border-bottom: 1px solid #eee;
 }
 
