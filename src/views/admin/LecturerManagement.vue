@@ -18,7 +18,7 @@
 
         <ProgressSpinner v-if="lecturerStore.loading" class="mx-auto my-5" />
         <Message v-else-if="lecturerStore.hasError" severity="error" :text="lecturerStore.error" class="w-full mb-3" />
-        <DataTable
+        <TreeTable
           v-else
           :value="lecturerStore.lecturers"
           stripedRows
@@ -56,7 +56,7 @@
               </div>
             </template>
           </Column>
-        </DataTable>
+        </TreeTable>
 
         <!-- Pagination controls -->
         <Paginator
@@ -107,13 +107,13 @@ import { useRoute, useRouter } from 'vue-router';
 // PrimeVue components
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
-import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Card from 'primevue/card';
 import ProgressSpinner from 'primevue/progressspinner';
 import Message from 'primevue/message';
 import Avatar from 'primevue/avatar';
 import Rating from 'primevue/rating';
+import TreeTable from 'primevue/treetable';
 import Paginator from 'primevue/paginator';
 import Dialog from 'primevue/dialog';
 
