@@ -37,7 +37,7 @@
               </div>
             </template>
           </Column>
-          <Column header="نبذة تعريفية" headerClass="justify-center">
+          <Column header="نبذة تعريفية" class="justify-center">
             <template #body="{data}">
               <Button
                 label="عرض النبذة"
