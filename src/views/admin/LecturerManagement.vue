@@ -29,7 +29,7 @@
           <Column field="id" header="الرقم التعريفي" class="text-center"></Column>
           <Column  headerClass="text-center">
             <template #header>
-      <div style="text-align: center;">الاسم</div>
+      <div style="justify-content: center;">الاسم</div>
     </template>
             <template #body="{data}">
               <div class="flex items-center">
