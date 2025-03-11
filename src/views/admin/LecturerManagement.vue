@@ -85,7 +85,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useLecturerStore } from '../../stores/lecturerStore';
 import { useRoute, useRouter } from 'vue-router';
 
