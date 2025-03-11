@@ -27,15 +27,19 @@
           responsiveLayout="scroll"
         >
           <Column field="id" header="الرقم التعريفي" class="text-center"></Column>
-          <Column header="الاسم">
 
-            <template #body="{data}">
-              <div class="flex items-center">
-                <Avatar shape="circle" :image="data.profilePicture || defaultAvatar" :alt="data.name" class="ml-3 custom-avatar" size="normal" />
-                <div>
-                  <div class="font-semibold">{{ data.name }}</div>
-                  <div class="text-sm text-gray-500">{{ data.email }}</div>
-                </div>
+          <!-- NEW: Separate Avatar column -->
+          <Column header="الصورة" headerClass="text-center">
+            <template #body="{ data }">
+              <Avatar shape="circle" :image="data.profilePicture || defaultAvatar" :alt="data.name" class="custom-avatar" />
+            </template>
+          </Column>
+
+          <Column header="الاسم">
+            <template #body="{ data }">
+              <div>
+                <div class="font-semibold">{{ data.name }}</div>
+                <div class="text-sm text-gray-500">{{ data.email }}</div>
               </div>
             </template>
           </Column>
