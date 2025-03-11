@@ -27,10 +27,8 @@
           responsiveLayout="scroll"
         >
           <Column field="id" header="الرقم التعريفي" class="text-center"></Column>
-          <Column  headerClass="text-center">
-            <template #header>
-      <div style="width: 100%;text-align: center;">الاسم</div>
-    </template>
+          <Column header="الاسم" style="width: 100%;text-align: center;">
+
             <template #body="{data}">
               <div class="flex items-center">
                 <Avatar :image="data.profilePicture || defaultAvatar" :alt="data.name" class="ml-2" size="normal" />
