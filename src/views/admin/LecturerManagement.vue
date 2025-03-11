@@ -28,6 +28,9 @@
         >
           <Column field="id" header="الرقم التعريفي" class="text-center"></Column>
           <Column header="الاسم" headerClass="text-center">
+            <template #header>
+      <div style="text-align: center;">Name</div>
+    </template>
             <template #body="{data}">
               <div class="flex items-center">
                 <Avatar :image="data.profilePicture || defaultAvatar" :alt="data.name" class="ml-2" size="normal" />
