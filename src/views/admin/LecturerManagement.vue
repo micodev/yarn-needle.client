@@ -36,10 +36,20 @@
         >
           <Column field="id" header="الرقم التعريفي" class="text-center"></Column>
 
-          <!-- NEW: Separate Avatar column -->
+          <!-- Updated profile column using the provided template snippet -->
           <Column header="الصورة" headerClass="text-center">
-            <template #body="{ data }">
-              <Avatar shape="circle" :image="data.profilePicture || defaultAvatar" :alt="data.name" class="custom-avatar" />
+            <template #body="slotProps">
+              <div class="flex justify-center">
+                <img
+                  v-if="slotProps.data.profilePicture"
+                  :src="slotProps.data.profilePicture"
+                  class="w-12 h-12 rounded-full object-cover"
+                  :alt="slotProps.data.name"
+                />
+                <div v-else class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+                  <i class="pi pi-user text-gray-500"></i>
+                </div>
+              </div>
             </template>
           </Column>
 
