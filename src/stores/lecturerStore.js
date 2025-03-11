@@ -49,6 +49,7 @@ export const useLecturerStore = defineStore('lecturer', {
         });
 
         if (response.data.success) {
+          console.log(response.data);
           this.lecturers = response.data.data;
           this.pagination.currentPage = page;
           this.pagination.pageSize = pageSize;
