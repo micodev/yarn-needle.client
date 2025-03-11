@@ -99,6 +99,35 @@
         <Button label="إغلاق" @click="aboutDialogVisible = false" />
       </template>
     </Dialog>
+
+    <!-- New Create Lecturer Dialog -->
+    <Dialog
+      v-model:visible="createLecturerDialogVisible"
+      header="إضافة محاضر جديد"
+      :style="{ width: '50vw' }"
+      :modal="true"
+    >
+      <div class="p-4">
+        <div class="mb-3">
+          <label class="block mb-1">الاسم</label>
+          <InputText v-model="createLecturerData.name" placeholder="الاسم" class="w-full" />
+        </div>
+        <div class="mb-3">
+          <label class="block mb-1">البريد الإلكتروني</label>
+          <InputText v-model="createLecturerData.email" placeholder="البريد الإلكتروني" class="w-full" />
+        </div>
+        <div class="mb-3">
+          <label class="block mb-1">نبذة تعريفية</label>
+          <textarea v-model="createLecturerData.about" placeholder="نبذة تعريفية" class="w-full p-inputtext" rows="3"></textarea>
+        </div>
+      </div>
+      <template #footer>
+        <div class="flex justify-end gap-3">
+          <Button label="إلغاء" severity="secondary" @click="createLecturerDialogVisible = false" />
+          <Button label="إضافة" severity="success" @click="submitCreateLecturer" />
+        </div>
+      </template>
+    </Dialog>
   </div>
 </template>
 
@@ -128,6 +157,10 @@ const defaultAvatar = 'https://randomuser.me/api/portraits/lego/1.jpg'; // صو�
 // Dialog related refs
 const aboutDialogVisible = ref(false);
 const selectedLecturer = ref(null);
+
+// NEW: Create Lecturer dialog controls and form data
+const createLecturerDialogVisible = ref(false);
+const createLecturerData = ref({ name: '', email: '', about: '', profilePicture: '' });
 
 // تهيئة البيانات
 onMounted(async () => {
@@ -188,12 +221,22 @@ function showAboutDialog(lecturer) {
   aboutDialogVisible.value = true;
 }
 
-// إضافة محاضر جديد
+// Modify addNewLecturer to open the create lecturer dialog instead of logging to console
 function addNewLecturer() {
-  // سيتم التنفيذ حسب تصميم واجهة المستخدم
-  console.log('إضافة محاضر جديد');
+  createLecturerDialogVisible.value = true;
 }
 
+// New: Submit create lecturer function
+async function submitCreateLecturer() {
+  const newLecturer = await lecturerStore.createLecturer(createLecturerData.value);
+  if (newLecturer) {
+    createLecturerDialogVisible.value = false;
+    // Optionally, reset the form data
+    createLecturerData.value = { name: '', email: '', about: '', profilePicture: '' };
+  } else {
+    console.error("Creation failed.");
+  }
+}
 
 </script>
 
