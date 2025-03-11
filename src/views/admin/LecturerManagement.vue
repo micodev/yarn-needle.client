@@ -114,14 +114,24 @@
     >
       <div class="p-4">
         <div v-if="selectedLecturer" class="mb-4">
+          <!-- updated profile display to match table -->
           <div class="flex items-center mb-4">
-            <Avatar :image="selectedLecturer.profilePicture || defaultAvatar" :alt="selectedLecturer.name" class="ml-3"/>
-            <div>
+            <div class="flex justify-center">
+              <img
+                v-if="selectedLecturer.profilePicture"
+                :src="selectedLecturer.profilePicture"
+                class="w-12 h-12 rounded-full object-cover"
+                :alt="selectedLecturer.name"
+              />
+              <div v-else class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+                <i class="pi pi-user text-gray-500"></i>
+              </div>
+            </div>
+            <div class="ml-3">
               <h2 class="text-xl font-bold">{{ selectedLecturer.name }}</h2>
               <p class="text-gray-600">{{ selectedLecturer.email }}</p>
             </div>
           </div>
-
           <div class="bg-gray-50 p-4 rounded-lg">
             <h3 class="text-lg font-semibold mb-2">النبذة التعريفية</h3>
             <p class="whitespace-pre-line">{{ selectedLecturer.about || 'لا توجد معلومات متاحة' }}</p>
