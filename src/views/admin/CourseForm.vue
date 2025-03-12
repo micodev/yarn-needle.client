@@ -116,7 +116,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, watchEffect } from 'vue'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import FileUpload from 'primevue/fileupload'
@@ -169,7 +169,10 @@ const subscriptionOptions = computed(() =>
     value: m.code
   })).toArray()
 )
-
+//console log subscriptionOptions when changes
+watchEffect(() => {
+  console.log(subscriptionOptions.value)
+})
 // Default course state to optimize resetForm
 const defaultCourse = {
   title: '',
