@@ -135,7 +135,11 @@
           <Column field="students" header="الطلاب" sortable />
           <Column header="الإشتراكات">
             <template #body="slotProps">
-              <Button label="عرض الإشتراكات" @click="showSubscriptionDialog(slotProps.data.subscriptionIncludedNames)" size="small" />
+              <Button v-if="slotProps.data.subscriptionIncludedNames && slotProps.data.subscriptionIncludedNames.length > 0"
+                label="عرض الإشتراكات"
+                @click="showSubscriptionDialog(slotProps.data.subscriptionIncludedNames)"
+                size="small" />
+              <span v-else class="text-gray-500">غير متصل بعضوية</span>
             </template>
           </Column>
           <Column header="الحالة">
