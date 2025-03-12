@@ -173,6 +173,186 @@
       </div>
     </div>
 
+    <!-- Add Course Dialog -->
+    <Dialog v-model:visible="courseDialogVisible" modal header="إضافة دورة جديدة"
+           :style="{ width: '90vw', maxWidth: '800px' }" :closable="!submitting">
+      <div class="flex flex-col gap-4 max-h-[70vh] overflow-y-auto p-2">
+        <!-- Form Sections -->
+        <div class="surface-card p-4 shadow-2 border-round">
+          <div class="text-xl font-medium mb-3">معلومات أساسية</div>
+          <div class="grid formgrid">
+            <div class="field col-12 md:col-6">
+              <label for="title" class="block mb-2">العنوان*</label>
+              <InputText id="title" v-model="newCourse.title" class="w-full"
+                         :class="{'p-invalid': v$.title.$invalid && v$.title.$dirty}" />
+              <small v-if="v$.title.$invalid && v$.title.$dirty" class="p-error">
+                هذا الحقل مطلوب
+              </small>
+            </div>
+
+            <div class="field col-12 md:col-6">
+              <label for="image" class="block mb-2">رابط الصورة*</label>
+              <InputText id="image" v-model="newCourse.image" class="w-full"
+                         :class="{'p-invalid': v$.image.$invalid && v$.image.$dirty}" />
+              <small v-if="v$.image.$invalid && v$.image.$dirty" class="p-error">
+                هذا الحقل مطلوب
+              </small>
+            </div>
+
+            <div class="field col-12">
+              <label for="description" class="block mb-2">الوصف*</label>
+              <Textarea id="description" v-model="newCourse.description" rows="5" class="w-full"
+                        :class="{'p-invalid': v$.description.$invalid && v$.description.$dirty}" />
+              <small v-if="v$.description.$invalid && v$.description.$dirty" class="p-error">
+                هذا الحقل مطلوب
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="surface-card p-4 shadow-2 border-round">
+          <div class="text-xl font-medium mb-3">تفاصيل الدورة</div>
+          <div class="grid formgrid">
+            <div class="field col-12 md:col-4">
+              <label for="type" class="block mb-2">نوع الدورة*</label>
+              <Select id="type" v-model="newCourse.type" :options="courseTypeStore.getCourseTypes"
+                     optionLabel="name" optionValue="code" class="w-full"
+                     :class="{'p-invalid': v$.type.$invalid && v$.type.$dirty}" />
+              <small v-if="v$.type.$invalid && v$.type.$dirty" class="p-error">
+                هذا الحقل مطلوب
+              </small>
+            </div>
+
+            <div class="field col-12 md:col-4">
+              <label for="level" class="block mb-2">المستوى*</label>
+              <Select id="level" v-model="newCourse.level" :options="levelOptionsStore.getLevels"
+                     optionLabel="name" optionValue="value" class="w-full"
+                     :class="{'p-invalid': v$.level.$invalid && v$.level.$dirty}" />
+              <small v-if="v$.level.$invalid && v$.level.$dirty" class="p-error">
+                هذا الحقل مطلوب
+              </small>
+            </div>
+
+            <div class="field col-12 md:col-4">
+              <label for="categorySelect" class="block mb-2">المجال*</label>
+              <MultiSelect id="categorySelect" v-model="selectedCategories"
+                         :options="categoryOptionsStore.getCategories" optionLabel="name"
+                         :class="{'p-invalid': v$.category.$invalid && v$.category.$dirty}"
+                         placeholder="اختر المجالات" display="chip" class="w-full" />
+              <small v-if="v$.category.$invalid && v$.category.$dirty" class="p-error">
+                هذا الحقل مطلوب
+              </small>
+            </div>
+
+            <div class="field col-12 md:col-4">
+              <label for="originalPrice" class="block mb-2">السعر الأصلي*</label>
+              <InputNumber id="originalPrice" v-model="newCourse.originalPrice" class="w-full"
+                         :min="0" :class="{'p-invalid': v$.originalPrice.$invalid && v$.originalPrice.$dirty}" />
+              <small v-if="v$.originalPrice.$invalid && v$.originalPrice.$dirty" class="p-error">
+                هذا الحقل مطلوب
+              </small>
+            </div>
+
+            <div class="field col-12 md:col-4">
+              <label for="discount" class="block mb-2">الخصم (%)</label>
+              <InputNumber id="discount" v-model="newCourse.discount" class="w-full"
+                         :min="0" :max="100" />
+            </div>
+
+            <div class="field col-12 md:col-4">
+              <label for="currency" class="block mb-2">العملة</label>
+              <InputText id="currency" v-model="newCourse.currency" class="w-full" />
+            </div>
+
+            <div class="field col-12 md:col-6">
+              <label for="duration" class="block mb-2">مدة الدورة (بالدقائق)*</label>
+              <InputNumber id="duration" v-model="newCourse.duration" class="w-full"
+                         :min="0" :class="{'p-invalid': v$.duration.$invalid && v$.duration.$dirty}" />
+              <small v-if="v$.duration.$invalid && v$.duration.$dirty" class="p-error">
+                هذا الحقل مطلوب
+              </small>
+            </div>
+
+            <div class="field col-12 md:col-6">
+              <label for="lessonCount" class="block mb-2">عدد الدروس*</label>
+              <InputNumber id="lessonCount" v-model="newCourse.lessonCount" class="w-full"
+                         :min="0" :class="{'p-invalid': v$.lessonCount.$invalid && v$.lessonCount.$dirty}" />
+              <small v-if="v$.lessonCount.$invalid && v$.lessonCount.$dirty" class="p-error">
+                هذا الحقل مطلوب
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="surface-card p-4 shadow-2 border-round">
+          <div class="text-xl font-medium mb-3">معلومات المدرب والمحتوى</div>
+          <div class="grid formgrid">
+            <div class="field col-12 md:col-6">
+              <label for="instructor" class="block mb-2">اسم المدرب</label>
+              <InputText id="instructor" v-model="newCourse.instructor" class="w-full" />
+            </div>
+
+            <div class="field col-12 md:col-6">
+              <label for="instructorImage" class="block mb-2">صورة المدرب (رابط)</label>
+              <InputText id="instructorImage" v-model="newCourse.instructorImage" class="w-full" />
+            </div>
+
+            <div class="field col-12 md:col-6">
+              <label for="topics" class="block mb-2">المواضيع (قائمة مفصولة بفواصل)</label>
+              <Chips id="topics" v-model="topicsArray" class="w-full" separator="," />
+            </div>
+
+            <div class="field col-12 md:col-6">
+              <label for="results" class="block mb-2">النتائج المتوقعة (قائمة مفصولة بفواصل)</label>
+              <Chips id="results" v-model="resultsArray" class="w-full" separator="," />
+            </div>
+
+            <div class="field col-12">
+              <label for="targetAudience" class="block mb-2">الجمهور المستهدف (قائمة مفصولة بفواصل)</label>
+              <Chips id="targetAudience" v-model="targetAudienceArray" class="w-full" separator="," />
+            </div>
+          </div>
+        </div>
+
+        <div class="surface-card p-4 shadow-2 border-round">
+          <div class="text-xl font-medium mb-3">الإعدادات الإضافية</div>
+          <div class="grid formgrid">
+            <div class="field col-12 md:col-6">
+              <label for="organizations" class="block mb-2">المؤسسات (قائمة مفصولة بفواصل)</label>
+              <Chips id="organizations" v-model="newCourse.organizations" class="w-full" separator="," />
+            </div>
+
+            <div class="field col-12 md:col-6">
+              <label for="awards" class="block mb-2">الجوائز (قائمة مفصولة بفواصل)</label>
+              <Chips id="awards" v-model="awardsArray" class="w-full" separator="," />
+            </div>
+
+            <div class="field col-12 md:col-6">
+              <label for="subscriptions" class="block mb-2">العضويات المتضمنة</label>
+              <MultiSelect id="subscriptions" v-model="newCourse.subscriptionIncludedNames"
+                           :options="subscriptionOptions" class="w-full" display="chip" />
+            </div>
+
+            <div class="field-checkbox col-12 md:col-6 flex align-items-center">
+              <Checkbox id="isActive" v-model="newCourse.isActive" :binary="true" />
+              <label for="isActive" class="mr-2">نشط</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <template #footer>
+        <div class="flex justify-between">
+          <Button label="إلغاء" icon="pi pi-times" @click="closeCourseDialog" :disabled="submitting" />
+          <Button label="حفظ" icon="pi pi-check" @click="submitCourse" :loading="submitting" />
+        </div>
+      </template>
+    </Dialog>
+
+    <!-- Success/Error Message -->
+    <Toast position="bottom-center" />
+
+    <!-- Existing Dialogs -->
     <Dialog v-model:visible="categoryDialogVisible" modal header="Course Categories" :style="{ width: '50vw' }">
       <ul>
         <li v-for="category in selectedCategories" :key="category.id">{{ category.name }}</li>
@@ -189,12 +369,15 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch, reactive } from 'vue'
 import { useCourseAdminStore } from '@/stores/courseManagementStore'
 import { useLevelOptionsStore } from '@/stores/levelOptions.js'
 import { useCategoryOptionsStore } from '@/stores/categoryOptions.js'
 import { useCourseTypeStore } from '@/stores/courseType.js'
 import { useRouter } from 'vue-router' // Add router import
+import { useToast } from 'primevue/usetoast'
+import { useVuelidate } from '@vuelidate/core'
+import { required, minValue } from '@vuelidate/validators'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import InputGroup from 'primevue/inputgroup'
@@ -208,6 +391,12 @@ import Slider from 'primevue/slider'
 import Popover from 'primevue/popover'
 import Rating from 'primevue/rating'
 import Tag from 'primevue/tag'
+import Textarea from 'primevue/textarea'
+import InputNumber from 'primevue/inputnumber'
+import MultiSelect from 'primevue/multiselect'
+import Checkbox from 'primevue/checkbox'
+import Chips from 'primevue/chips'
+import Toast from 'primevue/toast'
 
 const courseAdminStore = useCourseAdminStore()
 const router = useRouter() // Initialize router
@@ -306,7 +495,8 @@ function parseCategoryJson(categoryStr) {
 }
 
 function addNewCourse() {
-  console.log('إضافة دورة جديدة')
+  resetForm();
+  courseDialogVisible.value = true;
 }
 
 function editCourse(course) {
@@ -441,6 +631,158 @@ const applyFiltersAndSort = async () => {
   const queryParams = buildQueryParams();
   await courseAdminStore.fetchAllCourses(queryParams);
 };
+
+// New Course Dialog
+const courseDialogVisible = ref(false);
+const submitting = ref(false);
+const toast = useToast();
+const topicsArray = ref([]);
+const resultsArray = ref([]);
+const targetAudienceArray = ref([]);
+const awardsArray = ref([]);
+
+// Example subscription options - replace with your actual data source
+const subscriptionOptions = ref(['العضوية الذهبية', 'العضوية الفضية', 'العضوية البرونزية']);
+
+// Define new course model
+const newCourse = reactive({
+  title: '',
+  description: '',
+  image: '',
+  originalPrice: 0,
+  rating: 0,
+  students: 0,
+  duration: 0,
+  level: '',
+  currency: 'ريال سعودي',
+  lessonCount: 0,
+  category: '',
+  type: '',
+  discount: null,
+  instructor: '',
+  instructorImage: '',
+  organizations: [],
+  awards: [],
+  subscriptionIncludedNames: [],
+  isSubscribtionIncluded: false,
+  purchased: false,
+  topics: [],
+  results: [],
+  targetAudience: [],
+  isActive: true,
+  socials: []
+});
+
+// Form validation rules
+const rules = computed(() => {
+  return {
+    title: { required },
+    description: { required },
+    image: { required },
+    originalPrice: { required, minValue: minValue(0) },
+    duration: { required, minValue: minValue(0) },
+    level: { required },
+    lessonCount: { required, minValue: minValue(0) },
+    category: { required },
+    type: { required }
+  }
+});
+
+// Computed property to handle category array to string conversion
+const v$ = useVuelidate(rules, {
+  ...newCourse,
+  category: computed({
+    get: () => selectedCategories.value.length > 0 ? 'valid' : '',
+    set: () => {}
+  })
+});
+
+// Initialize form for a new course
+function addNewCourse() {
+  resetForm();
+  courseDialogVisible.value = true;
+}
+
+// Close dialog and reset form
+function closeCourseDialog() {
+  courseDialogVisible.value = false;
+  setTimeout(() => resetForm(), 300);
+}
+
+// Reset all form fields
+function resetForm() {
+  Object.keys(newCourse).forEach(key => {
+    if (Array.isArray(newCourse[key])) {
+      newCourse[key] = [];
+    } else if (typeof newCourse[key] === 'boolean') {
+      newCourse[key] = key === 'isActive'; // isActive is true by default, others false
+    } else if (typeof newCourse[key] === 'number') {
+      newCourse[key] = 0;
+    } else {
+      newCourse[key] = key === 'currency' ? 'ريال سعودي' : '';
+    }
+  });
+
+  selectedCategories.value = [];
+  topicsArray.value = [];
+  resultsArray.value = [];
+  targetAudienceArray.value = [];
+  awardsArray.value = [];
+  v$.value.$reset();
+}
+
+// Handle form submission
+async function submitCourse() {
+  // First validate the form
+  const isFormValid = await v$.value.$validate();
+  if (!isFormValid) {
+    toast.add({ severity: 'error', summary: 'خطأ', detail: 'الرجاء إكمال جميع الحقول الإلزامية', life: 3000 });
+    return;
+  }
+
+  try {
+    submitting.value = true;
+
+    // Prepare data for submission
+    const courseData = { ...newCourse };
+
+    // Convert category from selected objects to JSON string array
+    courseData.category = JSON.stringify(selectedCategories.value.map(cat => cat.name));
+
+    // Set arrays from chips component
+    courseData.topics = topicsArray.value;
+    courseData.results = resultsArray.value;
+    courseData.targetAudience = targetAudienceArray.value;
+    courseData.awards = awardsArray.value;
+
+    // Set subscription included flag
+    courseData.isSubscribtionIncluded = courseData.subscriptionIncludedNames.length > 0;
+
+    // Send data to API
+    await courseAdminStore.createCourse(courseData);
+
+    // Check for errors
+    if (courseAdminStore.error) {
+      throw new Error(courseAdminStore.error);
+    }
+
+    // Show success message
+    toast.add({ severity: 'success', summary: 'تم بنجاح', detail: 'تم إنشاء الدورة بنجاح', life: 3000 });
+
+    // Close dialog
+    courseDialogVisible.value = false;
+
+    // Refresh course list
+    applyFiltersAndSort();
+
+    // Reset form after successful submission
+    resetForm();
+  } catch (error) {
+    toast.add({ severity: 'error', summary: 'خطأ', detail: error.message || 'حدث خطأ أثناء إنشاء الدورة', life: 3000 });
+  } finally {
+    submitting.value = false;
+  }
+}
 </script>
 
 <style>
@@ -469,5 +811,20 @@ const applyFiltersAndSort = async () => {
 :deep(.p-dialog-footer) {
   padding: 1.5rem;
   text-align: left;
+}
+
+/* Add styles for form validation */
+:deep(.p-invalid) {
+  border-color: #f44336;
+}
+
+/* Add styles for form sections */
+.surface-card {
+  background-color: #ffffff;
+}
+
+/* Make sure dialog form is scrollable */
+:deep(.p-dialog-content) {
+  overflow-y: visible;
 }
 </style>
