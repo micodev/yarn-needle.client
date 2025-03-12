@@ -2,7 +2,7 @@
   <Dialog :visible="visible" @update:visible="handleVisibleUpdate" modal header="إضافة دورة جديدة" :style="{ width: '90vw', maxWidth: '800px' }" :closable="!submitting">
     <div class="flex flex-col gap-4 max-h-[70vh] overflow-y-auto p-2">
       <!-- Basic Information Section -->
-      <div class="surface-card p-4 shadow-2 border-round">
+      <div class="surface-card p-4 shadow-2 border-round mb-4">
         <div class="text-xl font-medium mb-3">معلومات أساسية</div>
         <div class="grid formgrid">
           <div class="field col-12 md:col-6">
@@ -20,16 +20,12 @@
         </div>
       </div>
       <!-- Course Details Section -->
-      <div class="surface-card p-4 shadow-2 border-round">
+      <div class="surface-card p-4 shadow-2 border-round mb-4">
         <div class="text-xl font-medium mb-3">تفاصيل الدورة</div>
         <div class="grid formgrid">
           <div class="field col-12 md:col-4">
             <label for="type" class="block mb-2">نوع الدورة*</label>
             <Select id="type" v-model="newCourse.type" :options="courseTypeOptions" optionLabel="name" optionValue="code" class="w-full" />
-          </div>
-          <div class="field col-12 md:col-4">
-            <label for="level" class="block mb-2">المستوى*</label>
-            <Select id="level" v-model="newCourse.level" :options="levelOptions" optionLabel="name" optionValue="value" class="w-full" />
           </div>
           <div class="field col-12 md:col-4">
             <label for="categorySelect" class="block mb-2">المجال*</label>
@@ -47,6 +43,10 @@
                 }
               }"
             />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="level" class="block mb-2">المستوى*</label>
+            <Select id="level" v-model="newCourse.level" :options="levelOptions" optionLabel="name" optionValue="value" class="w-full" />
           </div>
           <div class="field col-12 md:col-4">
             <label for="originalPrice" class="block mb-2">السعر الأصلي*</label>
@@ -71,7 +71,7 @@
         </div>
       </div>
       <!-- Instructor & Content Section -->
-      <div class="surface-card p-4 shadow-2 border-round">
+      <div class="surface-card p-4 shadow-2 border-round mb-4">
         <div class="text-xl font-medium mb-3">معلومات المدرب والمحتوى</div>
         <div class="grid formgrid">
           <div class="field col-12 md:col-6">
@@ -97,7 +97,7 @@
         </div>
       </div>
       <!-- Additional Settings Section -->
-      <div class="surface-card p-4 shadow-2 border-round">
+      <div class="surface-card p-4 shadow-2 border-round mb-4">
         <div class="text-xl font-medium mb-3">الإعدادات الإضافية</div>
         <div class="grid formgrid">
           <div class="field col-12 md:col-6">
