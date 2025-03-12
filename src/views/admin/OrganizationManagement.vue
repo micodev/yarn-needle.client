@@ -7,7 +7,10 @@
       <Button label="إضافة منظمة" icon="pi pi-plus" @click="dialogVisible = true" />
     </div>
 
-    <div v-if="organizationStore.loading" class="text-blue-500">جاري تحميل المنظمات...</div>
+    <!-- Replace loading indicator with centered spinner -->
+    <div v-if="organizationStore.loading" class="flex justify-center items-center" style="min-height: 200px;">
+      <ProgressSpinner style="width:50px; height:50px" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s" />
+    </div>
     <div v-if="organizationStore.error" class="text-red-500">{{ organizationStore.error }}</div>
     <div v-if="organizationStore.organizations && organizationStore.organizations.length" class="flex flex-wrap gap-4">
       <Card v-for="org in organizationStore.organizations" :key="org.id" class="max-w-xs shadow-lg">
@@ -48,6 +51,7 @@ import Card from 'primevue/card'
 import Button from 'primevue/button'
 import Dialog from 'primevue/dialog'
 import InputText from 'primevue/inputtext'
+import ProgressSpinner from 'primevue/progressspinner'
 
 const organizationStore = useOrganizationStore()
 onMounted(async () => {
