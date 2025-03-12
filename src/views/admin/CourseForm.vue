@@ -152,15 +152,15 @@ const courseTypeStore = useCourseTypeStore()
 const membershipStore = useMembershipStore()
 
 const levelOptions = computed(() => [
-	{ name: 'جميع المستويات', value: null },
+	{ name: 'غير مصنف', value: null },
 	...levelOptionsStore.getLevels
 ])
 const categoryOptions = computed(() => [
-	{ name: 'جميع المجالات', code: null },
+{ name: 'غير مصنف', value: null },
 	...categoryOptionsStore.getCategories
 ])
 const courseTypeOptions = computed(() => [
-	{ name: 'جميع الأنواع', code: null },
+{ name: 'غير مصنف', value: null },
 	...courseTypeStore.getCourseTypes
 ])
 // use  console.log(subscriptionOptions.value) inside computed to check the value
@@ -169,6 +169,7 @@ const subscriptionOptions = computed(() => {
     label: m.title,
     value: m.code
   }))
+  arr.unshift({ label: 'غير مصنف', value: null })
   return arr
 })
 
