@@ -87,7 +87,14 @@
               <AccordionPanel>
                 <AccordionHeader>المواضيع</AccordionHeader>
                 <AccordionContent>
-                  <Chips id="topics" v-model="topicsArray" class="w-full" placeholder="أدخل الموضوع واضغط Enter" />
+                  <!-- Replaced the Chips component -->
+                  <div class="flex align-items-center gap-2 mb-2">
+                    <InputText v-model="newTopic" placeholder="أدخل الموضوع" class="w-full" />
+                    <Button icon="pi pi-plus" label="إضافة" @click="addTopic" />
+                  </div>
+                  <ul>
+                    <li v-for="(topic, index) in topicsArray" :key="index">{{ topic }}</li>
+                  </ul>
                 </AccordionContent>
               </AccordionPanel>
               <AccordionPanel>
@@ -178,6 +185,7 @@ const resultsArray = ref([])
 const targetAudienceArray = ref([])
 const awardsArray = ref([])
 const selectedCategories = ref([])  // Added missing property
+const newTopic = ref('')
 
 const levelOptionsStore = useLevelOptionsStore()
 const categoryOptionsStore = useCategoryOptionsStore()
@@ -276,6 +284,13 @@ function handleImageUpload(event) {
 // New handler to update visible prop
 function handleVisibleUpdate(val) {
   emits('update:visible', val)
+}
+
+function addTopic() {
+  if (newTopic.value.trim()) {
+    topicsArray.value.push(newTopic.value.trim())
+    newTopic.value = ''
+  }
 }
 
 onMounted(async () => {
