@@ -146,7 +146,8 @@ const levelOptions = ref([])
 const categoryOptions = ref([])
 const subscriptionOptions = ref(['العضوية الذهبية', 'العضوية الفضية', 'العضوية البرونزية'])
 
-const newCourse = reactive({
+// Default course state to optimize resetForm
+const defaultCourse = {
   title: '',
   description: '',
   image: '',
@@ -163,9 +164,10 @@ const newCourse = reactive({
   instructorImage: '',
   organizations: [],
   awards: [],
-  isActive: true,
-  // ...other properties if needed...
-})
+  isActive: true
+}
+
+const newCourse = reactive({ ...defaultCourse })
 
 // Close dialog and reset form
 function closeDialog() {
@@ -174,17 +176,7 @@ function closeDialog() {
 }
 
 function resetForm() {
-  Object.keys(newCourse).forEach(key => {
-    if (Array.isArray(newCourse[key])) {
-      newCourse[key] = []
-    } else if (typeof newCourse[key] === 'boolean') {
-      newCourse[key] = key === 'isActive'
-    } else if (typeof newCourse[key] === 'number') {
-      newCourse[key] = 0
-    } else {
-      newCourse[key] = key === 'currency' ? 'ريال سعودي' : ''
-    }
-  })
+  Object.assign(newCourse, defaultCourse)
   topicsArray.value = []
   resultsArray.value = []
   targetAudienceArray.value = []
