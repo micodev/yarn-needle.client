@@ -31,7 +31,11 @@
             <Button label="عرض الفئات" @click="showCategoryDialog(parseCategoryJson(slotProps.data.category))" size="small" />
           </template>
         </Column>
-        <Column field="duration" header="المدة (دقيقة)" sortable />
+        <Column field="duration" header="المدة" sortable>
+          <template #body="slotProps">
+            {{ formatDuration(slotProps.data.duration) }}
+          </template>
+        </Column>
         <Column header="السعر" sortable>
           <template #body="slotProps">
             {{ slotProps.data.originalPrice }} {{ slotProps.data.currency }}
@@ -135,6 +139,21 @@ async function deleteCourse(courseId) {
 function showCategoryDialog(categories) {
   selectedCategories.value = categories.map(cat => ({ id: Date.now(), name: cat }))
   categoryDialogVisible.value = true
+}
+
+function formatDuration(minutes) {
+  if (!minutes) return '0 دقيقة'
+
+  const hours = Math.floor(minutes / 60)
+  const remainingMinutes = minutes % 60
+
+  if (hours === 0) {
+    return `${remainingMinutes} دقيقة`
+  } else if (remainingMinutes === 0) {
+    return `${hours} ساعة`
+  } else {
+    return `${hours} ساعة ${remainingMinutes} دقيقة`
+  }
 }
 </script>
 
