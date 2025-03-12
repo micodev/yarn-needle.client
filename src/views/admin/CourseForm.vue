@@ -168,8 +168,8 @@
           <!-- Replaced organizations Chips with a Select -->
           <div class="field col-12 md:col-6">
             <label for="organization" class="block mb-2">المؤسسة</label>
-            <Select id="organization" v-model="newCourse.organization"
-              :options="organizationOptions" optionLabel="name" optionValue="id" class="w-full" />
+            <MultiSelect id="organization" v-model="newCourse.organization"
+              :options="organizationOptions" optionLabel="name" optionValue="id" class="w-full" display="chip" />
           </div>
           <!-- ...existing subscriptions field... -->
           <div class="field col-12 md:col-6">
@@ -278,9 +278,7 @@ const defaultCourse = {
   discount: null,
   instructor: '',
   instructorImage: '',
-  // Remove or ignore organizations if not needed:
-  // organizations: [],
-  organization: null,  // new property for selected organization
+  organization: [], // updated for multiple selections
   awards: [],
   isActive: true
 }
