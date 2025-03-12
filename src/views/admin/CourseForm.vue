@@ -152,10 +152,6 @@
             <Chips id="organizations" v-model="newCourse.organizations" class="w-full" separator="," />
           </div>
           <div class="field col-12 md:col-6">
-            <label for="awards" class="block mb-2">الجوائز (قائمة مفصولة بفواصل)</label>
-            <Chips id="awards" v-model="awardsArray" class="w-full" separator="," />
-          </div>
-          <div class="field col-12 md:col-6">
             <label for="subscriptions" class="block mb-2">العضويات المتضمنة</label>
             <MultiSelect id="subscriptions"
             :pt="{
