@@ -73,7 +73,7 @@
           </div>
           <div class="w-full">
             <h2 class="text-xl font-semibold text-gray-800 mb-3">إدارة المؤسسات</h2>
-            <p class="text-gray-600">إدارة معلومات المؤسسة والتنظيم</p>
+            <p class="text-gray-600">إدارة معلومات المؤسسات الراعية للدورات</p>
           </div>
         </div>
       </router-link>
