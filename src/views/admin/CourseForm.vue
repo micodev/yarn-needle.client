@@ -165,19 +165,18 @@
       <div class="surface-card p-4 shadow-2 border-round mb-4">
         <div class="text-xl font-medium mb-3">الإعدادات الإضافية</div>
         <div class="grid formgrid">
+          <!-- Replaced organizations Chips with a Select -->
           <div class="field col-12 md:col-6">
-            <label for="organizations" class="block mb-2">المؤسسات (قائمة مفصولة بفواصل)</label>
-            <Chips id="organizations" v-model="newCourse.organizations" class="w-full" separator="," />
+            <label for="organization" class="block mb-2">المؤسسة</label>
+            <Select id="organization" v-model="newCourse.organization"
+              :options="organizationOptions" optionLabel="name" optionValue="id" class="w-full" />
           </div>
+          <!-- ...existing subscriptions field... -->
           <div class="field col-12 md:col-6">
             <label for="subscriptions" class="block mb-2">العضويات المتضمنة</label>
             <MultiSelect id="subscriptions"
-            :pt="{
-                header: {
-                    style: { display: 'none' }
-                }
-              }"
-            v-model="newCourse.subscriptionIncludedNames" :options="subscriptionOptions" optionLabel="label" class="w-full" display="chip" />
+              :pt="{ header: { style: { display: 'none' } } }"
+              v-model="newCourse.subscriptionIncludedNames" :options="subscriptionOptions" optionLabel="label" class="w-full" display="chip" />
           </div>
           <div class="field-checkbox col-12 md:col-6 flex align-items-center mt-1">
             <Checkbox id="isActive" v-model="newCourse.isActive" :binary="true" />
@@ -217,6 +216,7 @@ import { useLevelOptionsStore } from '@/stores/levelOptions.js'
 import { useCategoryOptionsStore } from '@/stores/categoryOptions.js'
 import { useCourseTypeStore } from '@/stores/courseType.js'
 import { useMembershipStore } from '@/stores/membership.js'
+import { useOrganizationStore } from '@/stores/organizationStore.js'  // added import
 
 // v-model binding for dialog visibility
 const { visible } = defineProps({
@@ -239,6 +239,8 @@ const levelOptionsStore = useLevelOptionsStore()
 const categoryOptionsStore = useCategoryOptionsStore()
 const courseTypeStore = useCourseTypeStore()
 const membershipStore = useMembershipStore()
+const organizationStore = useOrganizationStore()  // initialize organizationStore
+const organizationOptions = computed(() => organizationStore.organizations)  // computed organizations
 
 const levelOptions = computed(() => [
 	{ name: 'غير مصنف', value: null },
@@ -277,7 +279,9 @@ const defaultCourse = {
   discount: null,
   instructor: '',
   instructorImage: '',
-  organizations: [],
+  // Remove or ignore organizations if not needed:
+  // organizations: [],
+  organization: null,  // new property for selected organization
   awards: [],
   isActive: true
 }
@@ -383,7 +387,8 @@ onMounted(async () => {
 		levelOptionsStore.fetchLevels(),
 		categoryOptionsStore.fetchCategories(),
 		courseTypeStore.fetchCourseTypes(),
-    membershipStore.fetchMemberships()
+    membershipStore.fetchMemberships(),
+    organizationStore.fetchOrganizations()  // added fetchOrganizations
 	])
 })
 </script>
