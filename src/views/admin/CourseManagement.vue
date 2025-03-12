@@ -223,7 +223,7 @@ import Tag from 'primevue/tag'
 // removed: import Chips from 'primevue/chips'
 import Toast from 'primevue/toast'
 // removed: import FileUpload from 'primevue/fileupload'
-import CourseForm from 'CourseForm.vue'
+import CourseForm from './CourseForm.vue'
 
 const courseAdminStore = useCourseAdminStore()
 const router = useRouter() // Initialize router
