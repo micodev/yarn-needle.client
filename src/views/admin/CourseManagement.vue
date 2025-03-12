@@ -268,6 +268,7 @@ watch([searchQuery, selectedSort], () => {
 function parseCategoryJson(categoryStr) {
   if (!categoryStr) return []
   try {
+    // Handle the JSON string array format: "[ \"category1\", \"category2\" ]"
     return JSON.parse(categoryStr)
   } catch (e) {
     console.error('Error parsing category JSON:', e)
@@ -292,7 +293,7 @@ async function deleteCourse(courseId) {
 }
 
 function showCategoryDialog(categories) {
-  selectedCategories.value = categories.map(cat => ({ id: Date.now(), name: cat }))
+  selectedCategories.value = categories.map(cat => ({ id: Date.now() + Math.random(), name: cat }))
   categoryDialogVisible.value = true
 }
 
