@@ -1,10 +1,10 @@
 <template>
-  <div class="course-management">
+  <div class="p-5">
     <h1>إدارة الدورات</h1>
-    <div class="admin-panel">
-      <div class="actions-bar">
+    <div class="bg-white rounded-lg shadow-md p-5">
+      <div class="flex justify-between mb-5">
         <Button @click="addNewCourse" icon="pi pi-plus" label="إضافة دورة جديدة" severity="success" />
-        <div class="search-filter">
+        <div class="flex gap-2.5">
           <InputGroup>
             <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..." type="text" size="small" />
             <InputGroupAddon class="h-9">
@@ -92,7 +92,7 @@
         </div>
       </div>
 
-      <div v-if="courseAdminStore.loading" class="loading-container">
+      <div v-if="courseAdminStore.loading" class="flex justify-center items-center min-h-[300px] w-full">
         <ProgressSpinner />
       </div>
       <div v-else-if="filteredCourses.length > 0">
@@ -135,8 +135,9 @@
           <Column field="students" header="الطلاب" sortable />
           <Column header="الإشتراكات">
             <template #body="slotProps">
-              <div v-if="slotProps.data.isSubscribtionIncluded" class="subscription-badges">
-                <span v-for="sub in slotProps.data.subscriptionIncludedNames" :key="sub" class="subscription-badge">
+              <div v-if="slotProps.data.isSubscribtionIncluded" class="flex flex-col gap-1">
+                <span v-for="sub in slotProps.data.subscriptionIncludedNames" :key="sub"
+                      class="bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded-full inline-block">
                   {{ sub }}
                 </span>
               </div>
@@ -150,7 +151,7 @@
           </Column>
           <Column header="الإجراءات">
             <template #body="slotProps">
-              <div class="action-buttons">
+              <div class="flex gap-1.5">
                 <Button icon="pi pi-pencil" @click="editCourse(slotProps.data)" severity="info" size="small" />
                 <Button icon="pi pi-eye" @click="viewDetails(slotProps.data.id)" severity="secondary" size="small" class="mx-2" />
                 <Button icon="pi pi-trash" @click="deleteCourse(slotProps.data.id)" severity="danger" size="small" />
@@ -425,87 +426,19 @@ const applyFiltersAndSort = async () => {
 };
 </script>
 
-<style scoped>
-.course-management {
-  padding: 20px;
-}
-
-.admin-panel {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-}
-
-.actions-bar {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.search-filter {
-  display: flex;
-  gap: 10px;
-}
-
-.action-buttons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 300px;
-  width: 100%;
-}
-
-.subscription-badges {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.subscription-badge {
-  background-color: #e3f2fd;
-  color: #1976d2;
-  font-size: 0.8rem;
-  padding: 2px 8px;
-  border-radius: 12px;
-  display: inline-block;
-}
-
-:deep(.p-inputgroup) {
-  direction: rtl;
-}
-
-:deep(.p-popover .p-popover-content) {
-  direction: rtl;
-}
-
-:deep(.p-popover) {
-  direction: rtl;
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-:deep(.p-select) {
-  width: 100%;
-  direction: rtl;
-}
-
-:deep(.p-select-panel) {
+<style>
+/* These utility classes enable RTL (right-to-left) support for PrimeVue components */
+:deep(.p-inputgroup),
+:deep(.p-popover .p-popover-content),
+:deep(.p-popover),
+:deep(.p-select),
+:deep(.p-select-panel),
+:deep(.p-dialog) {
   direction: rtl;
 }
 
 :deep(.p-slider) {
   direction: ltr;
-}
-
-:deep(.p-dialog) {
-  direction: rtl;
 }
 
 :deep(.p-dialog-header) {
