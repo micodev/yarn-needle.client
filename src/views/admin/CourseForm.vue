@@ -167,7 +167,7 @@ const subscriptionOptions = computed(() =>
   membershipStore.getMemberships.map(m => ({
     label: m.name,
     value: m.code
-  }))
+  })).toArray()
 )
 
 // Default course state to optimize resetForm
