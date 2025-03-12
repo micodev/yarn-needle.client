@@ -187,8 +187,9 @@
             </div>
 
             <div class="field col-12 md:col-6">
-              <label for="image" class="block mb-2">رابط الصورة*</label>
-              <InputText id="image" v-model="newCourse.image" class="w-full" />
+              <label for="image" class="block mb-2">الصورة (اختيار ملف)</label>
+              <!-- Replace InputText with a file input -->
+              <input id="image" type="file" accept="image/*" @change="handleImageUpload" class="w-full" />
             </div>
 
             <div class="field col-12">
@@ -265,8 +266,9 @@
             </div>
 
             <div class="field col-12 md:col-6">
-              <label for="topics" class="block mb-2">المواضيع (قائمة مفصولة بفواصل)</label>
-              <Chips id="topics" v-model="topicsArray" class="w-full" separator="," />
+              <label for="topics" class="block mb-2">المواضيع</label>
+              <!-- Removed the separator attribute for dynamic list input -->
+              <Chips id="topics" v-model="topicsArray" class="w-full" />
             </div>
 
             <div class="field col-12 md:col-6">
@@ -709,6 +711,17 @@ async function submitCourse() {
   } finally {
     submitting.value = false;
   }
+}
+
+// Add a new method to handle file upload conversion to base64
+function handleImageUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    newCourse.image = reader.result; // newCourse.image will now be a base64 string
+  };
+  reader.readAsDataURL(file);
 }
 </script>
 
