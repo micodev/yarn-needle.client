@@ -169,7 +169,6 @@ const subscriptionOptions = computed(() => {
     label: m.title,
     value: m.code
   }))
-  arr.unshift({ label: 'غير مصنف', value: null })
   return arr
 })
 
