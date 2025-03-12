@@ -169,7 +169,6 @@ const subscriptionOptions = computed(() => {
     label: m.title,
     value: m.code
   }))
-  console.log(arr)
   return arr
 })
 
