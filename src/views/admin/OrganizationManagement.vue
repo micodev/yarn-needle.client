@@ -22,7 +22,7 @@ import { useOrganizationStore } from '@/stores/organizationStore'
 import Card from 'primevue/card'
 
 const organizationStore = useOrganizationStore()
-onMounted(() => {
-  organizationStore.fetchOrganizations()
+onMounted(async () => {
+  await organizationStore.fetchOrganizations()
 })
 </script>
