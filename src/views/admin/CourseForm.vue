@@ -83,18 +83,26 @@
             <InputText id="instructorImage" v-model="newCourse.instructorImage" class="w-full" />
           </div>
           <div class="col-12 md:col-12 flex gap-3">
-            <div class="field col-12 md:col-6">
-              <label for="topics" class="block mb-2">المواضيع</label>
-              <Chips id="topics" v-model="topicsArray" class="w-full" placeholder="أدخل الموضوع واضغط Enter" />
-            </div>
-            <div class="field col-12 md:col-6">
-              <label for="results" class="block mb-2">النتائج المتوقعة (قائمة مفصولة بفواصل)</label>
-              <Chips id="results" v-model="resultsArray" class="w-full" separator="," placeholder="أدخل النتيجة واضغط Enter" />
-            </div>
-          </div>
-          <div class="field col-12">
-            <label for="targetAudience" class="block mb-2">الجمهور المستهدف (قائمة مفصولة بفواصل)</label>
-            <Chips id="targetAudience" v-model="targetAudienceArray" class="w-full" separator="," placeholder="أدخل الجمهور واضغط Enter" />
+            <Accordion>
+              <AccordionPanel>
+                <AccordionHeader>المواضيع</AccordionHeader>
+                <AccordionContent>
+                  <Chips id="topics" v-model="topicsArray" class="w-full" placeholder="أدخل الموضوع واضغط Enter" />
+                </AccordionContent>
+              </AccordionPanel>
+              <AccordionPanel>
+                <AccordionHeader>النتائج المتوقعة</AccordionHeader>
+                <AccordionContent>
+                  <Chips id="results" v-model="resultsArray" class="w-full" separator="," placeholder="أدخل النتيجة واضغط Enter" />
+                </AccordionContent>
+              </AccordionPanel>
+              <AccordionPanel>
+                <AccordionHeader>الجمهور المستهدف</AccordionHeader>
+                <AccordionContent>
+                  <Chips id="targetAudience" v-model="targetAudienceArray" class="w-full" separator="," placeholder="أدخل الجمهور واضغط Enter" />
+                </AccordionContent>
+              </AccordionPanel>
+            </Accordion>
           </div>
         </div>
       </div>
@@ -148,6 +156,10 @@ import MultiSelect from 'primevue/multiselect'
 import Chips from 'primevue/chips'
 import Checkbox from 'primevue/checkbox'
 import Dialog from 'primevue/dialog'
+import Accordion from 'primevue/accordion'
+import AccordionPanel from 'primevue/accordionpanel'
+import AccordionHeader from 'primevue/accordionheader'
+import AccordionContent from 'primevue/accordioncontent'
 
 import { useLevelOptionsStore } from '@/stores/levelOptions.js'
 import { useCategoryOptionsStore } from '@/stores/categoryOptions.js'
