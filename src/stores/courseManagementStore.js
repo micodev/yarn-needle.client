@@ -61,12 +61,8 @@ export const useCourseAdminStore = defineStore('courseAdmin', {
 			this.loading = true
 			this.error = null
 			try {
-				const response = await this.$axios.delete(`/api/CourseAdminstrator/${id}`)
-				if(response.data && response.data.success) {
-					this.courses = this.courses.filter(course => course.id !== id);
-				} else {
-					this.error = response.data.message || 'Error deleting course'
-				}
+			 await this.$axios.delete(`/api/CourseAdminstrator/${id}`)
+
 			} catch (err) {
 				this.error = err.message
 			} finally {
