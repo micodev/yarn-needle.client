@@ -246,7 +246,7 @@ const lecturerStore = useLecturerStore()  // initialize lecturerStore
 const organizationOptions = computed(() => organizationStore.organizations)  // computed organizations
 const lecturerOptions = computed(() =>
   lecturerStore.lecturers.map(l => ({
-    label: l.Name, // assuming lecturer property is Name
+    label: l.name, // assuming lecturer property is Name
     value: l.id
   }))
 )
