@@ -10,7 +10,7 @@
             <InputText id="title" v-model="newCourse.title" class="my-2 w-full" />
           </div>
           <div class="field col-12 md:col-6">
-            <label for="file-upload" class="block mb-2">الصورة (اختيار ملف)</label>
+            <label for="file-upload" class="block mb-2">{{ fileName || 'الصورة (اختيار ملف)' }}</label>
             <!-- Custom element for file upload -->
             <label for="file-upload" class="cursor-pointer block w-full text-center py-2 bg-blue-50 text-blue-700 rounded">
               اختر ملف
@@ -239,6 +239,7 @@ const newTopic = ref('')
 const newResult = ref('')
 const newTarget = ref('')
 const newAward = ref('')  // New reactive property for الجوائز
+const fileName = ref('') // new reactive variable for file name
 
 const levelOptionsStore = useLevelOptionsStore()
 const categoryOptionsStore = useCategoryOptionsStore()
@@ -336,6 +337,7 @@ async function submitCourse() {
 function handleImageUpload(event) {
   const file = event.target.files[0]
   if (!file) return
+  fileName.value = file.name  // update fileName with selected file's name
   const reader = new FileReader()
   reader.onload = () => {
     newCourse.image = reader.result
