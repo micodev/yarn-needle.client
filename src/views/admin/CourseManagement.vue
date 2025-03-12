@@ -145,8 +145,9 @@
             </template>
           </Column>
           <Column header="الحالة">
-            <template #body>
-              <Tag severity="info" value="نشط" />
+            <template #body="slotProps">
+              <Tag :severity="slotProps.data.isActive ? 'info' : 'danger'"
+                  :value="slotProps.data.isActive ? 'نشط' : 'غير نشط'" />
             </template>
           </Column>
           <Column header="الإجراءات">
