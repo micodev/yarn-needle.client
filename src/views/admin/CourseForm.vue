@@ -11,7 +11,9 @@
           </div>
           <div class="field col-12 md:col-6">
             <label for="image" class="block mb-2">الصورة (اختيار ملف)</label>
-            <FileUpload mode="basic" accept="image/*" customUpload :uploadHandler="handleImageUpload" chooseLabel="اختر صورة" class="w-full" />
+            <input type="file" accept="image/*"
+                   @change="handleImageUpload"
+                   class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700" />
           </div>
           <div class="field col-12">
             <label for="description" class="block mb-2">الوصف*</label>
@@ -200,7 +202,6 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
-import FileUpload from 'primevue/fileupload'
 import Textarea from 'primevue/textarea'
 import InputNumber from 'primevue/inputnumber'
 import Select from 'primevue/select'
@@ -331,7 +332,7 @@ async function submitCourse() {
 }
 
 function handleImageUpload(event) {
-  const file = event.files[0]
+  const file = event.target.files[0]
   if (!file) return
   const reader = new FileReader()
   reader.onload = () => {
