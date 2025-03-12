@@ -35,9 +35,7 @@
             <td>{{ course.title }}</td>
             <td>{{ course.lecturer }}</td>
             <td>
-              <ul>
-                <li v-for="cat in course.category" :key="cat.id">{{ cat.name }}</li>
-              </ul>
+              <button @click="showCategoryDialog(course.category)">عرض الفئات</button>
             </td>
             <td>${{ course.price }}</td>
             <td>{{ course.status }}</td>
@@ -50,16 +48,25 @@
         </tbody>
       </table>
     </div>
+
+    <Dialog v-model:visible="categoryDialogVisible" modal header="Course Categories" :style="{ width: '50vw' }">
+      <ul>
+        <li v-for="category in selectedCategories" :key="category.id">{{ category.name }}</li>
+      </ul>
+    </Dialog>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useCourseAdminStore } from '@/stores/courseManagementStore'
+import Dialog from 'primevue/dialog'
 
 const courseAdminStore = useCourseAdminStore()
 const searchQuery = ref('')
 const filterCategory = ref('')
+const categoryDialogVisible = ref(false)
+const selectedCategories = ref([])
 
 const filteredCourses = computed(() => {
   return courseAdminStore.courses.filter(course => {
@@ -92,6 +99,11 @@ function viewDetails(courseId) {
 
 async function deleteCourse(courseId) {
   await courseAdminStore.deleteCourse(courseId)
+}
+
+function showCategoryDialog(categories) {
+  selectedCategories.value = categories
+  categoryDialogVisible.value = true
 }
 </script>
 
