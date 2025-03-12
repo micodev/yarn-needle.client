@@ -135,11 +135,8 @@
           <Column field="students" header="الطلاب" sortable />
           <Column header="الإشتراكات">
             <template #body="slotProps">
-              <div v-if="slotProps.data.isSubscribtionIncluded" class="flex flex-col gap-1">
-                <span v-for="sub in slotProps.data.subscriptionIncludedNames" :key="sub"
-                      class="bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded-full inline-block">
-                  {{ sub }}
-                </span>
+              <div v-if="slotProps.data.isSubscribtionIncluded">
+                <Button label="عرض الإشتراكات" @click="showSubscriptionDialog(slotProps.data.subscriptionIncludedNames)" size="small" />
               </div>
               <span v-else>-</span>
             </template>
@@ -178,6 +175,13 @@
         <li v-for="category in selectedCategories" :key="category.id">{{ category.name }}</li>
       </ul>
     </Dialog>
+
+    <!-- Add new dialog for subscriptions -->
+    <Dialog v-model:visible="subscriptionDialogVisible" modal header="الإشتراكات" :style="{ width: '50vw' }">
+      <ul>
+        <li v-for="subscription in selectedSubscriptions" :key="subscription">{{ subscription }}</li>
+      </ul>
+    </Dialog>
   </div>
 </template>
 
@@ -205,6 +209,8 @@ const courseAdminStore = useCourseAdminStore()
 const searchQuery = ref('')
 const categoryDialogVisible = ref(false)
 const selectedCategories = ref([])
+const subscriptionDialogVisible = ref(false)
+const selectedSubscriptions = ref([])
 
 // Initialize filter states
 const levelFilter = ref(null);
@@ -313,6 +319,11 @@ async function deleteCourse(courseId) {
 function showCategoryDialog(categories) {
   selectedCategories.value = categories.map(cat => ({ id: Date.now() + Math.random(), name: cat }))
   categoryDialogVisible.value = true
+}
+
+function showSubscriptionDialog(subscriptions) {
+  selectedSubscriptions.value = subscriptions || []
+  subscriptionDialogVisible.value = true
 }
 
 function formatDuration(minutes) {
