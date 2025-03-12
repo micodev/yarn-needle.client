@@ -169,6 +169,11 @@
           <div class="field col-12 md:col-6">
             <label for="organization" class="block mb-2">المؤسسة</label>
             <MultiSelect id="organization" v-model="newCourse.organization"
+            :pt="{
+                header: {
+                    style: { display: 'none' }
+                }
+              }"
               :options="organizationOptions" optionLabel="name" optionValue="id" class="w-full" display="chip" />
           </div>
           <!-- ...existing subscriptions field... -->
