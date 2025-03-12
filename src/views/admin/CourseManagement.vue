@@ -136,7 +136,7 @@
           <Column header="العضويات">
             <template #body="slotProps">
               <Button v-if="slotProps.data.subscriptionIncludedNames && slotProps.data.subscriptionIncludedNames.length > 0"
-                label="عرض"
+                icon="pi pi-eye"
                 @click="showSubscriptionDialog(slotProps.data.subscriptionIncludedNames)"
                 size="small" />
               <span v-else class="text-gray-500">غير متصل بعضوية</span>
