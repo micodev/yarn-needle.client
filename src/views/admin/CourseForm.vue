@@ -165,7 +165,7 @@ const courseTypeOptions = computed(() => [
 ])
 const subscriptionOptions = computed(() =>
   membershipStore.getMemberships.map(m => ({
-    label: m.title,
+    label: m.name,
     value: m.code
   }))
 )
