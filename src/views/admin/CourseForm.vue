@@ -116,7 +116,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted, watchEffect } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import FileUpload from 'primevue/fileupload'
