@@ -24,6 +24,7 @@ export const useOrganizationStore = defineStore('organization', {
     async createOrganization(organization) {
       this.loading = true;
       this.error = null;
+      organization.logo = organization.base64image || null;
       try {
         const response = await this.$axios.post('/api/meta/organizations', organization);
         // ...existing code...
