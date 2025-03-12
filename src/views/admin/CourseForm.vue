@@ -74,9 +74,10 @@
       <div class="surface-card p-4 shadow-2 border-round mb-4">
         <div class="text-xl font-medium mb-3">معلومات المدرب والمحتوى</div>
         <div class="grid formgrid">
+          <!-- Replace the instructor input with a Select dropdown -->
           <div class="field col-12 md:col-6">
             <label for="instructor" class="block mb-2">اسم المدرب</label>
-            <InputText id="instructor" v-model="newCourse.instructor" class="w-full my-2" />
+            <Select id="instructor" v-model="newCourse.instructor" :options="lecturerOptions" optionLabel="label" optionValue="value" class="w-full my-2" />
           </div>
           <div class="field col-12 md:col-6">
             <label for="instructorImage" class="block mb-2">صورة المدرب (رابط)</label>
@@ -221,6 +222,7 @@ import { useCategoryOptionsStore } from '@/stores/categoryOptions.js'
 import { useCourseTypeStore } from '@/stores/courseType.js'
 import { useMembershipStore } from '@/stores/membership.js'
 import { useOrganizationStore } from '@/stores/organizationStore.js'  // added import
+import { useLecturerStore } from '@/stores/lecturerStore.js'  // added import
 
 // v-model binding for dialog visibility
 const { visible } = defineProps({
@@ -244,7 +246,14 @@ const categoryOptionsStore = useCategoryOptionsStore()
 const courseTypeStore = useCourseTypeStore()
 const membershipStore = useMembershipStore()
 const organizationStore = useOrganizationStore()  // initialize organizationStore
+const lecturerStore = useLecturerStore()  // initialize lecturerStore
 const organizationOptions = computed(() => organizationStore.organizations)  // computed organizations
+const lecturerOptions = computed(() =>
+  lecturerStore.lecturers.map(l => ({
+    label: l.Name, // assuming lecturer property is Name
+    value: l.id
+  }))
+)
 
 const levelOptions = computed(() => [
 	{ name: 'غير مصنف', value: null },
@@ -281,7 +290,7 @@ const defaultCourse = {
   lessonCount: 0,
   subscriptionIncludedNames: [],
   discount: null,
-  instructor: '',
+  instructor: null, // updated default
   instructorImage: '',
   organization: [], // updated for multiple selections
   awards: [],
@@ -390,7 +399,8 @@ onMounted(async () => {
 		categoryOptionsStore.fetchCategories(),
 		courseTypeStore.fetchCourseTypes(),
     membershipStore.fetchMemberships(),
-    organizationStore.fetchOrganizations()  // added fetchOrganizations
+    organizationStore.fetchOrganizations(),  // added fetchOrganizations
+    lecturerStore.fetchLecturers()  // added fetchLecturers
 	])
 })
 </script>
