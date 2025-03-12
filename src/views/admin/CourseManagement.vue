@@ -145,7 +145,7 @@
             </template>
           </Column>
           <Column header="الحالة">
-            <template #body="slotProps">
+            <template #body>
               <Tag severity="info" value="نشط" />
             </template>
           </Column>
