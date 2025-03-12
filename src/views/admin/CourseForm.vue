@@ -166,7 +166,7 @@ const courseTypeOptions = computed(() => [
 // use  console.log(subscriptionOptions.value) inside computed to check the value
 const subscriptionOptions = computed(() => {
   const arr = membershipStore.getMemberships.map(m => ({
-    label: m.name,
+    label: m.title,
     value: m.code
   }))
   console.log(arr)
