@@ -323,7 +323,7 @@ async function submitCourse() {
     courseData.targetAudience = targetAudienceArray.value
     courseData.awards = awardsArray.value
     console.log('categories:', selectedCategories.value)
-    courseData.categories = selectedCategories.value.map(c => c.value) // added selectedCategories to course data
+    courseData.categories = selectedCategories.value.map(c => c.code) // added selectedCategories to course data
     courseData.subscriptionIncludedNames = newCourse.subscriptionIncludedNames.map(s => s.value)
     // Use createCourse from courseManagementStore instead of simulated API call
     await courseAdminStore.createCourse(courseData)
