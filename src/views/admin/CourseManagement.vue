@@ -99,7 +99,7 @@
         <DataTable
           :value="filteredCourses"
           stripedRows
-          show-gridlines="true"
+          :show-gridlines="true"
           paginator
           :rows="10"
           tableStyle="min-width: 50rem"
