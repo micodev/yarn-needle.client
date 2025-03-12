@@ -194,6 +194,7 @@ import { useCourseAdminStore } from '@/stores/courseManagementStore'
 import { useLevelOptionsStore } from '@/stores/levelOptions.js'
 import { useCategoryOptionsStore } from '@/stores/categoryOptions.js'
 import { useCourseTypeStore } from '@/stores/courseType.js'
+import { useRouter } from 'vue-router' // Add router import
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import InputGroup from 'primevue/inputgroup'
@@ -209,6 +210,7 @@ import Rating from 'primevue/rating'
 import Tag from 'primevue/tag'
 
 const courseAdminStore = useCourseAdminStore()
+const router = useRouter() // Initialize router
 const searchQuery = ref('')
 const categoryDialogVisible = ref(false)
 const selectedCategories = ref([])
@@ -312,7 +314,7 @@ function editCourse(course) {
 }
 
 function viewDetails(courseId) {
-  console.log('عرض تفاصيل الدورة:', courseId)
+  router.push({ name: 'course', params: { id: courseId }})
 }
 
 async function deleteCourse(courseId) {
