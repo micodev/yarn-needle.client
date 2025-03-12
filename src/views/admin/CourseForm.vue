@@ -319,7 +319,7 @@ async function submitCourse() {
     courseData.awards = awardsArray.value
     courseData.isSubscribtionIncluded = courseData.subscriptionIncludedNames.length > 0
     // Simulate API call; replace with actual API call as needed
-    console.log(newCourse)
+    console.log(courseData)
     await new Promise(resolve => setTimeout(resolve, 1000))
     emits('course-submitted')
     closeDialog()
