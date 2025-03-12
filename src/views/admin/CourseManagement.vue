@@ -159,7 +159,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useCourseAdminStore } from '@/stores/courseManagementStore'
 import { useLevelOptionsStore } from '@/stores/levelOptions.js'
 import { useCategoryOptionsStore } from '@/stores/categoryOptions.js'
@@ -237,78 +237,25 @@ const priceRangeOptions = ref([
   { name: 'أكثر من 200 ريال', value: 'above200', min: 200, max: Infinity }
 ]);
 
+// Modified to simply return courses from the store instead of filtering locally
 const filteredCourses = computed(() => {
-  return courseAdminStore.courses.filter(course => {
-    // Search filtering
-    if (searchQuery.value && !course.title.toLowerCase().includes(searchQuery.value.toLowerCase())) {
-      return false;
-    }
-
-    // Level filtering
-    if (levelFilter.value && course.level !== levelFilter.value) {
-      return false;
-    }
-
-    // Category filtering
-    if (categoryFilter.value) {
-      const categories = parseCategoryJson(course.category);
-      if (!categories.some(cat => cat === categoryFilter.value)) {
-        return false;
-      }
-    }
-
-    // Course type filtering
-    if (courseTypeFilter.value && course.type !== courseTypeFilter.value) {
-      return false;
-    }
-
-    // Lesson range filtering
-    if (lessonRangeFilter.value) {
-      const option = lessonRangeOptions.value.find(opt => opt.value === lessonRangeFilter.value);
-      if (option && (course.lessons < option.min || course.lessons > option.max)) {
-        return false;
-      }
-    }
-
-    // Price range filtering
-    if (priceRangeFilter.value) {
-      const option = priceRangeOptions.value.find(opt => opt.value === priceRangeFilter.value);
-      if (option && (course.originalPrice < option.min || course.originalPrice > option.max)) {
-        return false;
-      }
-    }
-
-    // Duration range filtering
-    const courseDurationHours = course.duration ? Math.floor(course.duration / 60) : 0;
-    if (courseDurationHours < durationRange.value[0] || courseDurationHours > durationRange.value[1]) {
-      return false;
-    }
-
-    // Sorting is handled separately
-    return true;
-  }).sort((a, b) => {
-    if (!selectedSort.value) return 0;
-
-    switch (selectedSort.value.value) {
-      case 'newest':
-        return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
-      case 'popular':
-        return (b.students || 0) - (a.students || 0);
-      case 'top-rated':
-        return (b.rating || 0) - (a.rating || 0);
-      default:
-        return 0;
-    }
-  });
+  return courseAdminStore.courses;
 });
 
 onMounted(async () => {
   await Promise.all([
-    courseAdminStore.fetchAllCourses(),
     levelOptionsStore.fetchLevels(),
     categoryOptionsStore.fetchCategories(),
     courseTypeStore.fetchCourseTypes()
   ]);
+
+  // Initial fetch of courses with no filters
+  applyFiltersAndSort();
+});
+
+// Watch for changes in filters and automatically apply them
+watch([searchQuery, selectedSort], () => {
+  applyFiltersAndSort();
 });
 
 function parseCategoryJson(categoryStr) {
@@ -364,6 +311,7 @@ const showFilterDialog = () => {
 
 const applyFiltersAndClose = () => {
   filterDialogVisible.value = false;
+  applyFiltersAndSort();
 };
 
 const clearFilters = () => {
@@ -375,6 +323,65 @@ const clearFilters = () => {
   durationRange.value = [0, maxDuration];
   searchQuery.value = '';
   selectedSort.value = null;
+
+  // Fetch courses with cleared filters
+  applyFiltersAndSort();
+};
+
+// Build query parameters from current filters
+const buildQueryParams = () => {
+  const params = {};
+
+  // Search query
+  if (searchQuery.value) {
+    params.search = searchQuery.value;
+  }
+
+  // Level filter
+  if (levelFilter.value) {
+    params.level = levelFilter.value;
+  }
+
+  // Category filter
+  if (categoryFilter.value) {
+    params.category = categoryFilter.value;
+  }
+
+  // Course type filter
+  if (courseTypeFilter.value) {
+    params.type = courseTypeFilter.value;
+  }
+
+  // Lesson range filter
+  if (lessonRangeFilter.value) {
+    const option = lessonRangeOptions.value.find(opt => opt.value === lessonRangeFilter.value);
+    if (option) {
+      params.lessonsMin = option.min;
+      params.lessonsMax = option.max !== Infinity ? option.max : undefined;
+    }
+  }
+
+  // Price range filter
+  if (priceRangeFilter.value) {
+    const option = priceRangeOptions.value.find(opt => opt.value === priceRangeFilter.value);
+    if (option) {
+      params.priceMin = option.min;
+      params.priceMax = option.max !== Infinity ? option.max : undefined;
+    }
+  }
+
+  // Duration range filter
+  if (durationRange.value[0] > 0 || durationRange.value[1] < maxDuration) {
+    params.durationMin = durationRange.value[0] * 60; // Convert hours to minutes
+    params.durationMax = durationRange.value[1] * 60; // Convert hours to minutes
+  }
+
+  // Sorting
+  if (selectedSort.value) {
+    params.sortBy = selectedSort.value.value;
+  }
+
+  return params;
 };
 
 // Sorting methods
@@ -385,12 +392,12 @@ const toggleSort = (event) => {
 const selectSort = (option) => {
   selectedSort.value = option;
   sortPopover.value.hide();
+  applyFiltersAndSort();
 };
 
-const applyFiltersAndSort = () => {
-  // This is just to trigger a re-calculation of filteredCourses
-  // since we're using client-side filtering in this component
-  console.log('Applying filters and sorting');
+const applyFiltersAndSort = async () => {
+  const queryParams = buildQueryParams();
+  await courseAdminStore.fetchAllCourses(queryParams);
 };
 </script>
 
