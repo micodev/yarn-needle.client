@@ -192,8 +192,8 @@
     </div>
     <template #footer>
       <div class="flex justify-between gap-1">
-        <Button label="حفظ" icon="pi pi-check" severity="secondary" @click="submitCourse" :loading="submitting" />
-        <Button label="إلغاء" icon="pi pi-times" @click="closeDialog" :disabled="submitting" />
+        <Button label="حفظ" icon="pi pi-check"  @click="submitCourse" :loading="submitting" />
+        <Button label="إلغاء" icon="pi pi-times" severity="secondary" @click="closeDialog" :disabled="submitting" />
       </div>
     </template>
   </Dialog>
