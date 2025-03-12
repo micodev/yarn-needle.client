@@ -173,60 +173,60 @@
       </div>
     </div>
 
-    <!-- Add Course Dialog -->
-    <Dialog v-model:visible="courseDialogVisible" modal header="إضافة دورة جديدة"
-           :style="{ width: '90vw', maxWidth: '800px' }" :closable="!submitting">
-      <div class="flex flex-col gap-4 max-h-[70vh] overflow-y-auto p-2">
-        <!-- Form Sections -->
-        <div class="surface-card p-4 shadow-2 border-round">
-          <div class="text-xl font-medium mb-3">معلومات أساسية</div>
-          <div class="grid formgrid">
-            <div class="field col-12 md:col-6">
-              <label for="title" class="block mb-2">العنوان*</label>
-              <InputText id="title" v-model="newCourse.title" class="w-full" />
-            </div>
+    <!-- Replace New Course Dialog with CourseForm component -->
+    <CourseForm v-model:visible="courseDialogVisible" @course-submitted="onCourseSubmitted" />
 
-            <div class="field col-12 md:col-6">
-              <label for="image" class="block mb-2">الصورة (اختيار ملف)</label>
-              <!-- Changed from native input to PrimeVue FileUpload -->
-              <FileUpload mode="basic" accept="image/*" customUpload :uploadHandler="handleImageUpload" chooseLabel="اختر صورة" class="w-full" />
-            </div>
+    <!-- Success/Error Message -->
+    <Toast position="bottom-center" />
 
-            <div class="field col-12">
-              <label for="description" class="block mb-2">الوصف*</label>
-              <Textarea id="description" v-model="newCourse.description" rows="5" class="w-full" />
-            </div>
-          </div>
-        </div>
+    <!-- Existing Dialogs -->
+    <Dialog v-model:visible="categoryDialogVisible" modal header="Course Categories" :style="{ width: '50vw' }">
+      <ul>
+        <li v-for="category in selectedCategories" :key="category.id">{{ category.name }}</li>
+      </ul>
+    </Dialog>
 
-        <div class="surface-card p-4 shadow-2 border-round">
-          <div class="text-xl font-medium mb-3">تفاصيل الدورة</div>
-          <div class="grid formgrid">
-            <div class="field col-12 md:col-4">
-              <label for="type" class="block mb-2">نوع الدورة*</label>
-              <Select id="type" v-model="newCourse.type" :options="courseTypeStore.getCourseTypes"
-                     optionLabel="name" optionValue="code" class="w-full" />
-            </div>
+    <!-- Add new dialog for subscriptions -->
+    <Dialog v-model:visible="subscriptionDialogVisible" modal header="الإشتراكات" :style="{ width: '50vw' }">
+      <ul>
+        <li v-for="subscription in selectedSubscriptions" :key="subscription">{{ subscription }}</li>
+      </ul>
+    </Dialog>
+  </div>
+</template>
 
-            <div class="field col-12 md:col-4">
-              <label for="level" class="block mb-2">المستوى*</label>
-              <Select id="level" v-model="newCourse.level" :options="levelOptionsStore.getLevels"
-                     optionLabel="name" optionValue="value" class="w-full" />
-            </div>
+<script setup>
+import { ref, computed, onMounted, watch, reactive } from 'vue'
+import { useCourseAdminStore } from '@/stores/courseManagementStore'
+import { useLevelOptionsStore } from '@/stores/levelOptions.js'
+import { useCategoryOptionsStore } from '@/stores/categoryOptions.js'
+import { useCourseTypeStore } from '@/stores/courseType.js'
+import { useRouter } from 'vue-router' // Add router import
+import { useToast } from 'primevue/usetoast'
+import Button from 'primevue/button'
+import InputText from 'primevue/inputtext'
+import InputGroup from 'primevue/inputgroup'
+import InputGroupAddon from 'primevue/inputgroupaddon'
+import Select from 'primevue/select'
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
+import Dialog from 'primevue/dialog'
+import ProgressSpinner from 'primevue/progressspinner'
+import Slider from 'primevue/slider'
+import Popover from 'primevue/popover'
+import Rating from 'primevue/rating'
+import Tag from 'primevue/tag'
+import Textarea from 'primevue/textarea'
+import InputNumber from 'primevue/inputnumber'
+import MultiSelect from 'primevue/multiselect'
+import Checkbox from 'primevue/checkbox'
+import Chips from 'primevue/chips'
+import Toast from 'primevue/toast'
+import FileUpload from 'primevue/fileupload' // <-- added import
+import CourseForm from './CourseForm.vue'
 
-            <div class="field col-12 md:col-4">
-              <label for="categorySelect" class="block mb-2">المجال*</label>
-              <MultiSelect id="categorySelect" v-model="selectedCategories"
-                         :options="categoryOptionsStore.getCategories" optionLabel="name"
-                         placeholder="اختر المجالات" display="chip" class="w-full" />
-            </div>
-
-            <div class="field col-12 md:col-4">
-              <label for="originalPrice" class="block mb-2">السعر الأصلي*</label>
-              <InputNumber id="originalPrice" v-model="newCourse.originalPrice" class="w-full"
-                         :min="0" />
-            </div>
-
+const courseAdminStore = useCourseAdminStore()
+const router = useRouter() // Initialize router
             <div class="field col-12 md:col-4">
               <label for="discount" class="block mb-2">الخصم (%)</label>
               <InputNumber id="discount" v-model="newCourse.discount" class="w-full"
