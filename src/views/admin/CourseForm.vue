@@ -83,7 +83,7 @@
             <InputText id="instructorImage" v-model="newCourse.instructorImage" class="w-full" />
           </div>
           <div class="col-12 md:col-12 flex gap-3">
-            <Accordion>
+            <Accordion class="w-full">
               <AccordionPanel>
                 <AccordionHeader>المواضيع</AccordionHeader>
                 <AccordionContent>
