@@ -320,7 +320,8 @@ async function submitCourse() {
     courseData.results = resultsArray.value
     courseData.targetAudience = targetAudienceArray.value
     courseData.awards = awardsArray.value
-    courseData.isSubscribtionIncluded = courseData.subscriptionIncludedNames.length > 0
+    //SubscriptionIncludedNames get only value
+    courseData.subscriptionIncludedNames = newCourse.subscriptionIncludedNames.map(s => s.value)
     // Simulate API call; replace with actual API call as needed
     console.log(courseData)
     await new Promise(resolve => setTimeout(resolve, 1000))
