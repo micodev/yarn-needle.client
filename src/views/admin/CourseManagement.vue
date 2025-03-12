@@ -107,6 +107,7 @@
           <Column field="id" header="المعرف" sortable />
           <Column field="title" header="العنوان" sortable />
           <Column field="type" header="النوع" sortable />
+          <Column field="level" header="المستوى" sortable />
           <Column header="الفئات">
             <template #body="slotProps">
               <Button label="عرض الفئات" @click="showCategoryDialog(parseCategoryJson(slotProps.data.category))" size="small" />
@@ -117,16 +118,21 @@
               {{ formatDuration(slotProps.data.duration) }}
             </template>
           </Column>
+          <Column field="lessonCount" header="عدد الدروس" sortable />
           <Column header="السعر" sortable>
             <template #body="slotProps">
               {{ slotProps.data.originalPrice }} {{ slotProps.data.currency }}
             </template>
           </Column>
-          <Column field="discount" header="الخصم" sortable>
+          <Column field="rating" header="التقييم" sortable>
             <template #body="slotProps">
-              {{ slotProps.data.discount }}%
+              <div class="flex align-items-center">
+                <Rating v-model="slotProps.data.rating" readonly :cancel="false" />
+                <span class="ml-2">({{ slotProps.data.rating.toFixed(1) }})</span>
+              </div>
             </template>
           </Column>
+          <Column field="students" header="الطلاب" sortable />
           <Column header="الإجراءات">
             <template #body="slotProps">
               <div class="action-buttons">
@@ -175,6 +181,7 @@ import Dialog from 'primevue/dialog'
 import ProgressSpinner from 'primevue/progressspinner'
 import Slider from 'primevue/slider'
 import Popover from 'primevue/popover'
+import Rating from 'primevue/rating'
 
 const courseAdminStore = useCourseAdminStore()
 const searchQuery = ref('')
