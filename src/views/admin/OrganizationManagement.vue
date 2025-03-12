@@ -13,7 +13,7 @@
       <Card v-for="org in organizationStore.organizations" :key="org.id" class="max-w-xs shadow-lg">
 
         <template #content>
-          <img v-if="org.logo" :src="org.logo" alt="Logo" class="h-16 w-16 object-contain mx-auto rounded-full"/>
+          <img v-if="org.logo" :src="org.logo" alt="Logo" class="w-full h-full object-cover mx-auto"/>
           <div class="p-4">
             <h2 class="text-xl font-semibold">{{ org.name  }}</h2>
           </div>
