@@ -116,7 +116,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import FileUpload from 'primevue/fileupload'
@@ -127,6 +127,10 @@ import MultiSelect from 'primevue/multiselect'
 import Chips from 'primevue/chips'
 import Checkbox from 'primevue/checkbox'
 import Dialog from 'primevue/dialog'
+
+import { useLevelOptionsStore } from '@/stores/levelOptions.js'
+import { useCategoryOptionsStore } from '@/stores/categoryOptions.js'
+import { useCourseTypeStore } from '@/stores/courseType.js'
 
 // v-model binding for dialog visibility
 const { visible } = defineProps({
@@ -141,11 +145,22 @@ const targetAudienceArray = ref([])
 const awardsArray = ref([])
 const selectedCategories = ref([])  // Added missing property
 
-// Dummy options (adjust to use your stores or props as needed)
-const courseTypeOptions = ref([])
-const levelOptions = ref([])
-const categoryOptions = ref([])
-const subscriptionOptions = ref(['العضوية الذهبية', 'العضوية الفضية', 'العضوية البرونزية'])
+const levelOptionsStore = useLevelOptionsStore()
+const categoryOptionsStore = useCategoryOptionsStore()
+const courseTypeStore = useCourseTypeStore()
+
+const levelOptions = computed(() => [
+	{ name: 'جميع المستويات', value: null },
+	...levelOptionsStore.getLevels
+])
+const categoryOptions = computed(() => [
+	{ name: 'جميع المجالات', code: null },
+	...categoryOptionsStore.getCategories
+])
+const courseTypeOptions = computed(() => [
+	{ name: 'جميع الأنواع', code: null },
+	...courseTypeStore.getCourseTypes
+])
 
 // Default course state to optimize resetForm
 const defaultCourse = {
@@ -219,4 +234,12 @@ function handleImageUpload(event) {
 function handleVisibleUpdate(val) {
   emits('update:visible', val)
 }
+
+onMounted(async () => {
+	await Promise.all([
+		levelOptionsStore.fetchLevels(),
+		categoryOptionsStore.fetchCategories(),
+		courseTypeStore.fetchCourseTypes()
+	])
+})
 </script>
