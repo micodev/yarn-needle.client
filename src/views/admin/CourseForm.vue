@@ -82,17 +82,19 @@
             <label for="instructorImage" class="block mb-2">صورة المدرب (رابط)</label>
             <InputText id="instructorImage" v-model="newCourse.instructorImage" class="w-full" />
           </div>
-          <div class="field col-12 md:col-6">
-            <label for="topics" class="block mb-2">المواضيع</label>
-            <Chips id="topics" v-model="topicsArray" class="w-full" />
-          </div>
-          <div class="field col-12 md:col-6">
-            <label for="results" class="block mb-2">النتائج المتوقعة (قائمة مفصولة بفواصل)</label>
-            <Chips id="results" v-model="resultsArray" class="w-full" separator="," />
+          <div class="col-12 md:col-12 flex gap-3">
+            <div class="field col-12 md:col-6">
+              <label for="topics" class="block mb-2">المواضيع</label>
+              <Chips id="topics" v-model="topicsArray" class="w-full" placeholder="أدخل الموضوع واضغط Enter" />
+            </div>
+            <div class="field col-12 md:col-6">
+              <label for="results" class="block mb-2">النتائج المتوقعة (قائمة مفصولة بفواصل)</label>
+              <Chips id="results" v-model="resultsArray" class="w-full" separator="," placeholder="أدخل النتيجة واضغط Enter" />
+            </div>
           </div>
           <div class="field col-12">
             <label for="targetAudience" class="block mb-2">الجمهور المستهدف (قائمة مفصولة بفواصل)</label>
-            <Chips id="targetAudience" v-model="targetAudienceArray" class="w-full" separator="," />
+            <Chips id="targetAudience" v-model="targetAudienceArray" class="w-full" separator="," placeholder="أدخل الجمهور واضغط Enter" />
           </div>
         </div>
       </div>
