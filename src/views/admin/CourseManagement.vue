@@ -133,6 +133,22 @@
             </template>
           </Column>
           <Column field="students" header="الطلاب" sortable />
+          <Column header="الإشتراكات">
+            <template #body="slotProps">
+              <div v-if="slotProps.data.isSubscribtionIncluded" class="subscription-badges">
+                <span v-for="sub in slotProps.data.subscriptionIncludedNames" :key="sub" class="subscription-badge">
+                  {{ sub }}
+                </span>
+              </div>
+              <span v-else>-</span>
+            </template>
+          </Column>
+          <Column header="الحالة">
+            <template #body="slotProps">
+              <Tag :severity="slotProps.data.purchased ? 'success' : 'info'"
+                  :value="slotProps.data.purchased ? 'تم الشراء' : 'غير مشترى'" />
+            </template>
+          </Column>
           <Column header="الإجراءات">
             <template #body="slotProps">
               <div class="action-buttons">
@@ -182,6 +198,7 @@ import ProgressSpinner from 'primevue/progressspinner'
 import Slider from 'primevue/slider'
 import Popover from 'primevue/popover'
 import Rating from 'primevue/rating'
+import Tag from 'primevue/tag'
 
 const courseAdminStore = useCourseAdminStore()
 const searchQuery = ref('')
@@ -443,6 +460,21 @@ const applyFiltersAndSort = async () => {
   align-items: center;
   min-height: 300px;
   width: 100%;
+}
+
+.subscription-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.subscription-badge {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: inline-block;
 }
 
 :deep(.p-inputgroup) {
