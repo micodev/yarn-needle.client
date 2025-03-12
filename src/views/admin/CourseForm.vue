@@ -221,6 +221,7 @@ import { useCourseTypeStore } from '@/stores/courseType.js'
 import { useMembershipStore } from '@/stores/membership.js'
 import { useOrganizationStore } from '@/stores/organizationStore.js'  // added import
 import { useLecturerStore } from '@/stores/lecturerStore.js'  // added import
+import { useCourseAdminStore } from '@/stores/courseManagementStore.js'  // new import
 
 // v-model binding for dialog visibility
 const { visible } = defineProps({
@@ -246,6 +247,7 @@ const courseTypeStore = useCourseTypeStore()
 const membershipStore = useMembershipStore()
 const organizationStore = useOrganizationStore()  // initialize organizationStore
 const lecturerStore = useLecturerStore()  // initialize lecturerStore
+const courseAdminStore = useCourseAdminStore()  // new instance
 const organizationOptions = computed(() => organizationStore.organizations)  // computed organizations
 const lecturerOptions = computed(() =>
   lecturerStore.lecturers.map(l => ({
@@ -320,11 +322,10 @@ async function submitCourse() {
     courseData.results = resultsArray.value
     courseData.targetAudience = targetAudienceArray.value
     courseData.awards = awardsArray.value
-    //SubscriptionIncludedNames get only value
+    courseData.categories = selectedCategories.value.map(c => c.value) // added selectedCategories to course data
     courseData.subscriptionIncludedNames = newCourse.subscriptionIncludedNames.map(s => s.value)
-    // Simulate API call; replace with actual API call as needed
-    console.log(courseData)
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    // Use createCourse from courseManagementStore instead of simulated API call
+    await courseAdminStore.createCourse(courseData)
     emits('course-submitted')
     closeDialog()
   } catch {
