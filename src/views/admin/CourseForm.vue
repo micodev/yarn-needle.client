@@ -163,16 +163,16 @@ const courseTypeOptions = computed(() => [
 	{ name: 'جميع الأنواع', code: null },
 	...courseTypeStore.getCourseTypes
 ])
-const subscriptionOptions = computed(() =>
-  membershipStore.getMemberships.map(m => ({
+// use  console.log(subscriptionOptions.value) inside computed to check the value
+const subscriptionOptions = computed(() => {
+  const arr = membershipStore.getMemberships.map(m => ({
     label: m.name,
     value: m.code
   }))
-)
-//console log subscriptionOptions when changes
-watchEffect(() => {
-  console.log(subscriptionOptions.value)
+  console.log(arr)
+  return arr
 })
+
 // Default course state to optimize resetForm
 const defaultCourse = {
   title: '',
