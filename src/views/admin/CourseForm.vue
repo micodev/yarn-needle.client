@@ -189,6 +189,13 @@
           </div>
         </div>
       </div>
+      <div v-if="newCourse.sponsorLogos && newCourse.sponsorLogos.length > 0" class="surface-card p-4 shadow-2 border-round mb-4">
+        <div class="text-xl font-medium mb-3">الشعارات الراعية</div>
+        <div class="flex flex-wrap gap-2">
+          <!-- Render each sponsor logo -->
+          <img v-for="(logo, index) in newCourse.sponsorLogos" :key="index" :src="logo.url" alt="Sponsor logo" class="h-12" />
+        </div>
+      </div>
     </div>
     <template #footer>
       <div class="flex justify-between gap-1">
@@ -294,7 +301,8 @@ const defaultCourse = {
   instructor: null, // updated default
   organization: [], // updated for multiple selections
   awards: [],
-  isActive: true
+  isActive: true,
+  sponsorLogos: [] // added property for sponsor logos
 }
 
 const newCourse = reactive({ ...defaultCourse })
