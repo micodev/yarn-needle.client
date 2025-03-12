@@ -106,13 +106,37 @@
               <AccordionPanel>
                 <AccordionHeader>النتائج المتوقعة</AccordionHeader>
                 <AccordionContent>
-                  <Chips id="results" v-model="resultsArray" class="w-full" separator="," placeholder="أدخل النتيجة واضغط Enter" />
+                  <div class="flex align-items-center gap-2  my-2">
+                    <InputText v-model="newResult" placeholder="أدخل النتيجة" class="w-full shadow-none" />
+                    <Button icon="pi pi-plus" label="إضافة" @click="addResult" />
+                  </div>
+                  <div class="flex flex-wrap gap-2">
+                    <Chip
+                      v-for="(result, index) in resultsArray"
+                      :key="index"
+                      :label="result"
+                      class="cursor-pointer"
+                      @click="removeResult(index)"
+                    />
+                  </div>
                 </AccordionContent>
               </AccordionPanel>
               <AccordionPanel>
                 <AccordionHeader>الجمهور المستهدف</AccordionHeader>
                 <AccordionContent>
-                  <Chips id="targetAudience" v-model="targetAudienceArray" class="w-full" separator="," placeholder="أدخل الجمهور واضغط Enter" />
+                  <div class="flex align-items-center gap-2  my-2">
+                    <InputText v-model="newTarget" placeholder="أدخل الجمهور" class="w-full shadow-none" />
+                    <Button icon="pi pi-plus" label="إضافة" @click="addTarget" />
+                  </div>
+                  <div class="flex flex-wrap gap-2">
+                    <Chip
+                      v-for="(target, index) in targetAudienceArray"
+                      :key="index"
+                      :label="target"
+                      class="cursor-pointer"
+                      @click="removeTarget(index)"
+                    />
+                  </div>
                 </AccordionContent>
               </AccordionPanel>
             </Accordion>
@@ -193,6 +217,8 @@ const targetAudienceArray = ref([])
 const awardsArray = ref([])
 const selectedCategories = ref([])  // Added missing property
 const newTopic = ref('')
+const newResult = ref('')
+const newTarget = ref('')
 
 const levelOptionsStore = useLevelOptionsStore()
 const categoryOptionsStore = useCategoryOptionsStore()
@@ -302,6 +328,28 @@ function addTopic() {
 
 function removeTopic(index) {
   topicsArray.value.splice(index, 1)
+}
+
+// New functions for النتائج المتوقعة
+function addResult() {
+  if (newResult.value.trim()) {
+    resultsArray.value.push(newResult.value.trim())
+    newResult.value = ''
+  }
+}
+function removeResult(index) {
+  resultsArray.value.splice(index, 1)
+}
+
+// New functions for الجمهور المستهدف
+function addTarget() {
+  if (newTarget.value.trim()){
+    targetAudienceArray.value.push(newTarget.value.trim())
+    newTarget.value = ''
+  }
+}
+function removeTarget(index) {
+  targetAudienceArray.value.splice(index, 1)
 }
 
 onMounted(async () => {
