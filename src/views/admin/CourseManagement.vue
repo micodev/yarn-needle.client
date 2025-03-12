@@ -234,44 +234,44 @@ const subscriptionDialogVisible = ref(false)
 const selectedSubscriptions = ref([])
 
 // Initialize filter states
-const levelFilter = ref(null);
-const categoryFilter = ref(null);
-const courseTypeFilter = ref(null);
-const lessonRangeFilter = ref(null);
-const priceRangeFilter = ref(null);
-const durationRange = ref([0, 50]);
-const maxDuration = 60; // Maximum course duration in hours
-const filterDialogVisible = ref(false);
-const sortPopover = ref();
-const selectedSort = ref(null);
-const isLevelOptionsLoading = ref(false);
+const levelFilter = ref(null)
+const categoryFilter = ref(null)
+const courseTypeFilter = ref(null)
+const lessonRangeFilter = ref(null)
+const priceRangeFilter = ref(null)
+const durationRange = ref([0, 50])
+const maxDuration = 60 // Maximum course duration in hours
+const filterDialogVisible = ref(false)
+const sortPopover = ref()
+const selectedSort = ref(null)
+const isLevelOptionsLoading = ref(false)
 
 // Initialize stores
-const levelOptionsStore = useLevelOptionsStore();
-const categoryOptionsStore = useCategoryOptionsStore();
-const courseTypeStore = useCourseTypeStore();
+const levelOptionsStore = useLevelOptionsStore()
+const categoryOptionsStore = useCategoryOptionsStore()
+const courseTypeStore = useCourseTypeStore()
 
 // Update computed options to include a default option
 const levelOptions = computed(() => [
   { name: 'جميع المستويات', value: null },
   ...levelOptionsStore.getLevels
-]);
+])
 
 const categoryOptions = computed(() => [
   { name: 'جميع المجالات', code: null },
   ...categoryOptionsStore.getCategories
-]);
+])
 
 const courseTypeOptions = computed(() => [
   { name: 'جميع الأنواع', code: null },
   ...courseTypeStore.getCourseTypes
-]);
+])
 
 const sortOptions = ref([
   { name: 'الأحدث', value: 'newest', icon: 'pi pi-clock' },
   { name: 'الأكثر شعبية', value: 'popular', icon: 'pi pi-hashtag' },
   { name: 'الأعلى تقييماً', value: 'top-rated', icon: 'pi pi-star' }
-]);
+])
 
 const lessonRangeOptions = ref([
   { name: 'جميع الدروس', value: null },
@@ -279,7 +279,7 @@ const lessonRangeOptions = ref([
   { name: '6-10 دروس', value: 'range2', min: 6, max: 10 },
   { name: '11-15 درس', value: 'range3', min: 11, max: 15 },
   { name: 'أكثر من 15 درس', value: 'range4', min: 16, max: Infinity }
-]);
+])
 
 const priceRangeOptions = ref([
   { name: 'جميع الأسعار', value: null },
@@ -287,28 +287,28 @@ const priceRangeOptions = ref([
   { name: 'أقل من 75 ريال', value: 'under75', min: 1, max: 75 },
   { name: '75-200 ريال', value: 'mid', min: 75, max: 200 },
   { name: 'أكثر من 200 ريال', value: 'above200', min: 200, max: Infinity }
-]);
+])
 
 // Modified to simply return courses from the store instead of filtering locally
 const filteredCourses = computed(() => {
-  return courseAdminStore.courses;
-});
+  return courseAdminStore.courses
+})
 
 onMounted(async () => {
   await Promise.all([
     levelOptionsStore.fetchLevels(),
     categoryOptionsStore.fetchCategories(),
     courseTypeStore.fetchCourseTypes()
-  ]);
+  ])
 
   // Initial fetch of courses with no filters
-  applyFiltersAndSort();
-});
+  applyFiltersAndSort()
+})
 
 // Watch for changes in filters and automatically apply them
 watch([searchQuery, selectedSort], () => {
-  applyFiltersAndSort();
-});
+  applyFiltersAndSort()
+})
 
 function parseCategoryJson(categoryStr) {
   if (!categoryStr) return []
@@ -322,7 +322,7 @@ function parseCategoryJson(categoryStr) {
 }
 
 function addNewCourse() {
-  courseDialogVisible.value = true;
+  courseDialogVisible.value = true
 }
 
 function editCourse(course) {
@@ -364,99 +364,102 @@ function formatDuration(minutes) {
 
 // Filter methods
 const showFilterDialog = () => {
-  filterDialogVisible.value = true;
-};
+  filterDialogVisible.value = true
+}
 
 const applyFiltersAndClose = () => {
-  filterDialogVisible.value = false;
-  applyFiltersAndSort();
-};
+  filterDialogVisible.value = false
+  applyFiltersAndSort()
+}
+
+// New helper to reset filters
+const resetFilters = () => {
+  levelFilter.value = null
+  categoryFilter.value = null
+  courseTypeFilter.value = null
+  lessonRangeFilter.value = null
+  priceRangeFilter.value = null
+  durationRange.value = [0, maxDuration]
+  searchQuery.value = ''
+  selectedSort.value = null
+}
 
 const clearFilters = () => {
-  levelFilter.value = null;
-  categoryFilter.value = null;
-  courseTypeFilter.value = null;
-  lessonRangeFilter.value = null;
-  priceRangeFilter.value = null;
-  durationRange.value = [0, maxDuration];
-  searchQuery.value = '';
-  selectedSort.value = null;
-
-  // Fetch courses with cleared filters
-  applyFiltersAndSort();
-};
+  resetFilters()
+  applyFiltersAndSort()
+}
 
 // Build query parameters from current filters
 const buildQueryParams = () => {
-  const params = {};
+  const params = {}
 
   // Search query
   if (searchQuery.value) {
-    params.search = searchQuery.value;
+    params.search = searchQuery.value
   }
 
   // Level filter
   if (levelFilter.value) {
-    params.level = levelFilter.value;
+    params.level = levelFilter.value
   }
 
   // Category filter
   if (categoryFilter.value) {
-    params.category = categoryFilter.value;
+    params.category = categoryFilter.value
   }
 
   // Course type filter
   if (courseTypeFilter.value) {
-    params.type = courseTypeFilter.value;
+    params.type = courseTypeFilter.value
   }
 
   // Lesson range filter
   if (lessonRangeFilter.value) {
-    const option = lessonRangeOptions.value.find(opt => opt.value === lessonRangeFilter.value);
+    const option = lessonRangeOptions.value.find(opt => opt.value === lessonRangeFilter.value)
     if (option) {
-      params.lessonsMin = option.min;
-      params.lessonsMax = option.max !== Infinity ? option.max : undefined;
+      params.lessonsMin = option.min
+      params.lessonsMax = option.max !== Infinity ? option.max : undefined
     }
   }
 
   // Price range filter
   if (priceRangeFilter.value) {
-    const option = priceRangeOptions.value.find(opt => opt.value === priceRangeFilter.value);
+    const option = priceRangeOptions.value.find(opt => opt.value === priceRangeFilter.value)
     if (option) {
-      params.priceMin = option.min;
-      params.priceMax = option.max !== Infinity ? option.max : undefined;
+      params.priceMin = option.min
+      params.priceMax = option.max !== Infinity ? option.max : undefined
     }
   }
 
   // Duration range filter
   if (durationRange.value[0] > 0 || durationRange.value[1] < maxDuration) {
-    params.durationMin = durationRange.value[0] * 60; // Convert hours to minutes
-    params.durationMax = durationRange.value[1] * 60; // Convert hours to minutes
+    params.durationMin = durationRange.value[0] * 60 // Convert hours to minutes
+    params.durationMax = durationRange.value[1] * 60 // Convert hours to minutes
   }
 
   // Sorting
   if (selectedSort.value) {
-    params.sortBy = selectedSort.value.value;
+    params.sortBy = selectedSort.value.value
   }
 
-  return params;
-};
+  return params
+}
 
 // Sorting methods
 const toggleSort = (event) => {
-  sortPopover.value.toggle(event);
-};
+  sortPopover.value.toggle(event)
+}
 
 const selectSort = (option) => {
-  selectedSort.value = option;
-  sortPopover.value.hide();
-  applyFiltersAndSort();
-};
+  selectedSort.value = option
+  sortPopover.value.hide()
+  applyFiltersAndSort()
+}
 
 const applyFiltersAndSort = async () => {
-  const queryParams = buildQueryParams();
-  await courseAdminStore.fetchAllCourses(queryParams);
-};
+  const queryParams = buildQueryParams()
+  await courseAdminStore.fetchAllCourses(queryParams)
+}
 
 // Keep courseDialogVisible to control the dialog from this parent
 const courseDialogVisible = ref(false)
