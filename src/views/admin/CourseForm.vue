@@ -83,32 +83,18 @@
             <InputText id="instructorImage" v-model="newCourse.instructorImage" class="w-full" />
           </div>
           <div class="col-12 md:col-12 flex gap-3">
-            <Accordion value="0">
-              <AccordionPanel value="0">
-                <AccordionHeader>Header I</AccordionHeader>
-                <AccordionContent>
-                  <p class="m-0">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  </p>
-                </AccordionContent>
-              </AccordionPanel>
-              <AccordionPanel value="1">
-                <AccordionHeader>Header II</AccordionHeader>
-                <AccordionContent>
-                  <p class="m-0">
-                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
-                  </p>
-                </AccordionContent>
-              </AccordionPanel>
-              <AccordionPanel value="2">
-                <AccordionHeader>Header III</AccordionHeader>
-                <AccordionContent>
-                  <p class="m-0">
-                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.
-                  </p>
-                </AccordionContent>
-              </AccordionPanel>
-            </Accordion>
+            <div class="field col-12 md:col-6">
+              <label for="topics" class="block mb-2">المواضيع</label>
+              <Chips id="topics" v-model="topicsArray" class="w-full" placeholder="أدخل الموضوع واضغط Enter" />
+            </div>
+            <div class="field col-12 md:col-6">
+              <label for="results" class="block mb-2">النتائج المتوقعة (قائمة مفصولة بفواصل)</label>
+              <Chips id="results" v-model="resultsArray" class="w-full" separator="," placeholder="أدخل النتيجة واضغط Enter" />
+            </div>
+          </div>
+          <div class="field col-12">
+            <label for="targetAudience" class="block mb-2">الجمهور المستهدف (قائمة مفصولة بفواصل)</label>
+            <Chips id="targetAudience" v-model="targetAudienceArray" class="w-full" separator="," placeholder="أدخل الجمهور واضغط Enter" />
           </div>
         </div>
       </div>
