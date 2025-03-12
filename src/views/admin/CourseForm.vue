@@ -139,6 +139,7 @@ const topicsArray = ref([])
 const resultsArray = ref([])
 const targetAudienceArray = ref([])
 const awardsArray = ref([])
+const selectedCategories = ref([])  // Added missing property
 
 // Dummy options (adjust to use your stores or props as needed)
 const courseTypeOptions = ref([])
