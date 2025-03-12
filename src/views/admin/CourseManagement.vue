@@ -34,7 +34,11 @@
             <td>{{ course.id }}</td>
             <td>{{ course.title }}</td>
             <td>{{ course.lecturer }}</td>
-            <td>{{ course.category }}</td>
+            <td>
+              <ul>
+                <li v-for="cat in course.category" :key="cat.id">{{ cat.name }}</li>
+              </ul>
+            </td>
             <td>${{ course.price }}</td>
             <td>{{ course.status }}</td>
             <td class="actions">
@@ -63,7 +67,8 @@ const filteredCourses = computed(() => {
       course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       course.lecturer.toLowerCase().includes(searchQuery.value.toLowerCase())
 
-    const matchesCategory = filterCategory.value === '' || course.category === filterCategory.value
+    const matchesCategory =
+      filterCategory.value === '' || course.category.some(cat => cat.name === filterCategory.value)
 
     return matchesSearch && matchesCategory
   })
