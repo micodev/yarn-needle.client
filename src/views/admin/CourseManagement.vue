@@ -15,7 +15,9 @@
         </div>
       </div>
 
-      <table class="course-table">
+      <div v-if="courseAdminStore.loading">Loading...</div>
+
+      <table v-else class="course-table">
         <thead>
           <tr>
             <th>المعرف</th>
