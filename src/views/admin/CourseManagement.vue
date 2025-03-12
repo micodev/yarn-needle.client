@@ -3,52 +3,55 @@
     <h1>إدارة الدورات</h1>
     <div class="admin-panel">
       <div class="actions-bar">
-        <button @click="addNewCourse" class="add-btn">إضافة دورة جديدة</button>
+        <Button @click="addNewCourse" icon="pi pi-plus" label="إضافة دورة جديدة" severity="success" />
         <div class="search-filter">
-          <input type="text" placeholder="ابحث عن دورات..." v-model="searchQuery" />
-          <select v-model="filterCategory">
-            <option value="">جميع الفئات</option>
-            <option value="development">تطوير</option>
-            <option value="design">تصميم</option>
-            <option value="business">أعمال</option>
-          </select>
+          <InputText v-model="searchQuery" placeholder="ابحث عن دورات..." />
+          <Dropdown v-model="filterCategory" :options="categoryOptions" optionLabel="label" optionValue="value" placeholder="جميع الفئات" />
         </div>
       </div>
 
-      <div v-if="courseAdminStore.loading">Loading...</div>
+      <div v-if="courseAdminStore.loading">
+        <ProgressSpinner />
+      </div>
 
-      <table v-else class="course-table">
-        <thead>
-          <tr>
-            <th>المعرف</th>
-            <th>العنوان</th>
-            <th>النوع</th>
-            <th>الفئات</th>
-            <th>المدة (دقيقة)</th>
-            <th>السعر</th>
-            <th>الخصم</th>
-            <th>الإجراءات</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="course in filteredCourses" :key="course.id">
-            <td>{{ course.id }}</td>
-            <td>{{ course.title }}</td>
-            <td>{{ course.type }}</td>
-            <td>
-              <button @click="showCategoryDialog(parseCategoryJson(course.category))">عرض الفئات</button>
-            </td>
-            <td>{{ course.duration }}</td>
-            <td>{{ course.originalPrice }} {{ course.currency }}</td>
-            <td>{{ course.discount }}%</td>
-            <td class="actions">
-              <button @click="editCourse(course)">تعديل</button>
-              <button @click="viewDetails(course.id)">تفاصيل</button>
-              <button @click="deleteCourse(course.id)" class="delete">حذف</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <DataTable
+        v-else
+        :value="filteredCourses"
+        stripedRows
+        paginator
+        :rows="10"
+        tableStyle="min-width: 50rem"
+        :rowsPerPageOptions="[5, 10, 20, 50]"
+      >
+        <Column field="id" header="المعرف" sortable />
+        <Column field="title" header="العنوان" sortable />
+        <Column field="type" header="النوع" sortable />
+        <Column header="الفئات">
+          <template #body="slotProps">
+            <Button label="عرض الفئات" @click="showCategoryDialog(parseCategoryJson(slotProps.data.category))" size="small" />
+          </template>
+        </Column>
+        <Column field="duration" header="المدة (دقيقة)" sortable />
+        <Column header="السعر" sortable>
+          <template #body="slotProps">
+            {{ slotProps.data.originalPrice }} {{ slotProps.data.currency }}
+          </template>
+        </Column>
+        <Column field="discount" header="الخصم" sortable>
+          <template #body="slotProps">
+            {{ slotProps.data.discount }}%
+          </template>
+        </Column>
+        <Column header="الإجراءات">
+          <template #body="slotProps">
+            <div class="action-buttons">
+              <Button icon="pi pi-pencil" @click="editCourse(slotProps.data)" severity="info" size="small" />
+              <Button icon="pi pi-eye" @click="viewDetails(slotProps.data.id)" severity="secondary" size="small" class="mx-2" />
+              <Button icon="pi pi-trash" @click="deleteCourse(slotProps.data.id)" severity="danger" size="small" />
+            </div>
+          </template>
+        </Column>
+      </DataTable>
     </div>
 
     <Dialog v-model:visible="categoryDialogVisible" modal header="Course Categories" :style="{ width: '50vw' }">
@@ -62,13 +65,26 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useCourseAdminStore } from '@/stores/courseManagementStore'
+import Button from 'primevue/button'
+import InputText from 'primevue/inputtext'
+import Dropdown from 'primevue/dropdown'
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
 import Dialog from 'primevue/dialog'
+import ProgressSpinner from 'primevue/progressspinner'
 
 const courseAdminStore = useCourseAdminStore()
 const searchQuery = ref('')
 const filterCategory = ref('')
 const categoryDialogVisible = ref(false)
 const selectedCategories = ref([])
+
+const categoryOptions = [
+  { label: 'جميع الفئات', value: '' },
+  { label: 'تطوير', value: 'development' },
+  { label: 'تصميم', value: 'design' },
+  { label: 'أعمال', value: 'business' }
+]
 
 const filteredCourses = computed(() => {
   return courseAdminStore.courses.filter(course => {
@@ -140,55 +156,15 @@ function showCategoryDialog(categories) {
   margin-bottom: 20px;
 }
 
-.add-btn {
-  padding: 10px 16px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
 .search-filter {
   display: flex;
   gap: 10px;
 }
 
-.search-filter input,
-.search-filter select {
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
 }
 
-.course-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.course-table th,
-.course-table td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #eee;
-}
-
-.course-table th {
-  background-color: #f8f9fa;
-}
-
-.actions button {
-  margin-right: 5px;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #2196F3;
-  color: white;
-}
-
-.actions button.delete {
-  background-color: #f44336;
-}
+/* Additional styles can be removed since PrimeVue components have their own styling */
 </style>
