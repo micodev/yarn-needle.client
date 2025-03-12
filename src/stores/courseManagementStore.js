@@ -3,8 +3,10 @@ import { defineStore } from 'pinia'
 export const useCourseAdminStore = defineStore('courseAdmin', {
 	state: () => ({
 		course: null, // holds a single course
+		courses: [],  // added to hold multiple courses
 		loading: false,
 		error: null,
+        pagination: null,
 	}),
 	actions: {
 		async fetchCourseById(id) {
@@ -70,6 +72,23 @@ export const useCourseAdminStore = defineStore('courseAdmin', {
 			} finally {
 				this.loading = false
 			}
-		}
+		},
+        async fetchAllCourses(queryParams) {
+            this.loading = true
+            this.error = null
+            try {
+                const response = await this.$axios.get('/api/CourseAdminstrator', { params: queryParams })
+                if(response.data && response.data.success) {
+                    this.courses = response.data.data
+                    this.pagination = response.data.pagination
+                } else {
+                    this.error = response.data.message || 'Error fetching courses'
+                }
+            } catch (err) {
+                this.error = err.message
+            } finally {
+                this.loading = false
+            }
+        }
 	}
 })
