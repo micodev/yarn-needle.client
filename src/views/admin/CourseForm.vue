@@ -92,9 +92,13 @@
                     <InputText v-model="newTopic" placeholder="أدخل الموضوع" class="w-full" />
                     <Button icon="pi pi-plus" label="إضافة" @click="addTopic" />
                   </div>
-                  <ul>
-                    <li v-for="(topic, index) in topicsArray" :key="index">{{ topic }}</li>
-                  </ul>
+                  <div class="flex flex-wrap gap-2">
+                    <Chip
+                      v-for="(topic, index) in topicsArray"
+                      :key="index"
+                      :label="topic"
+                    />
+                  </div>
                 </AccordionContent>
               </AccordionPanel>
               <AccordionPanel>
@@ -167,6 +171,7 @@ import Accordion from 'primevue/accordion'
 import AccordionPanel from 'primevue/accordionpanel'
 import AccordionHeader from 'primevue/accordionheader'
 import AccordionContent from 'primevue/accordioncontent'
+import Chip from 'primevue/chip'
 
 import { useLevelOptionsStore } from '@/stores/levelOptions.js'
 import { useCategoryOptionsStore } from '@/stores/categoryOptions.js'
