@@ -697,11 +697,7 @@ const v$ = useVuelidate(rules, {
   })
 });
 
-// Initialize form for a new course
-function addNewCourse() {
-  resetForm();
-  courseDialogVisible.value = true;
-}
+
 
 // Close dialog and reset form
 function closeCourseDialog() {
