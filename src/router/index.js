@@ -4,7 +4,6 @@ import AppLayout from '@/layout/AppLayout.vue'
 import CourseView from '@/views/CourseView.vue'
 import UpdatePasswordView from '@/views/UpdatePasswordView.vue'
 import ProfileView from '@/views/ProfileView.vue'
-import RoutesList from '@/components/RoutesList.vue'
 import CoursesView from '../views/CoursesView.vue'
 import OrderHistoryView from '../views/OrderHistoryView.vue'
 import MyCourseView from '../views/MyCourseView.vue'
@@ -51,11 +50,6 @@ const router = createRouter({
           meta: {
             requiresAuth: true
           }
-        },
-        {
-          path: '/routes',
-          name: 'RoutesList',
-          component: RoutesList
         },
         {
           path: '/courses',
