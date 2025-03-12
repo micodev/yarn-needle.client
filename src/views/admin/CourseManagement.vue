@@ -331,11 +331,10 @@ function viewDetails(courseId) {
 }
 
 
+
 // New deactivate method
-function deactivateCourse(courseId) {
-  console.log('Deactivating course:', courseId)
-  // For example, you may call a store method:
-  // await courseAdminStore.deactivateCourse(courseId)
+async function deactivateCourse(courseId) {
+  await courseAdminStore.deleteCourse(courseId)
 }
 
 function showCategoryDialog(categories) {
