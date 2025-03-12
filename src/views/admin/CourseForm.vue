@@ -167,7 +167,7 @@
                       :options="socialMediaOptions"
                       optionLabel="name"
                       optionValue="code"
-                      class="w-auto"
+                      class="w-full"
                       placeholder="اختر وسيلة تواصل" />
                     <InputText
                       v-model="socialMediaUsername"
