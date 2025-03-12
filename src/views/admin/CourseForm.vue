@@ -172,7 +172,7 @@
                     <InputText
                       v-model="socialMediaUsername"
                       placeholder="اسم المستخدم"
-                      class="w-full" />
+                      class="w-1/2" />
                     <Button icon="pi pi-plus" label="إضافة" @click="addSocialMedia" />
                   </div>
                   <div class="flex flex-wrap gap-2">
