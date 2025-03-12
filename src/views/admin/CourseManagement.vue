@@ -1,16 +1,16 @@
 <template>
   <div class="course-management">
-    <h1>Course Management</h1>
+    <h1>إدارة الدورات</h1>
     <div class="admin-panel">
       <div class="actions-bar">
-        <button @click="addNewCourse" class="add-btn">Add New Course</button>
+        <button @click="addNewCourse" class="add-btn">إضافة دورة جديدة</button>
         <div class="search-filter">
-          <input type="text" placeholder="Search courses..." v-model="searchQuery" />
+          <input type="text" placeholder="ابحث عن دورات..." v-model="searchQuery" />
           <select v-model="filterCategory">
-            <option value="">All Categories</option>
-            <option value="development">Development</option>
-            <option value="design">Design</option>
-            <option value="business">Business</option>
+            <option value="">جميع الفئات</option>
+            <option value="development">تطوير</option>
+            <option value="design">تصميم</option>
+            <option value="business">أعمال</option>
           </select>
         </div>
       </div>
@@ -18,13 +18,13 @@
       <table class="course-table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Lecturer</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Status</th>
-            <th>Actions</th>
+            <th>المعرف</th>
+            <th>العنوان</th>
+            <th>المحاضر</th>
+            <th>الفئة</th>
+            <th>السعر</th>
+            <th>الحالة</th>
+            <th>الإجراءات</th>
           </tr>
         </thead>
         <tbody>
@@ -36,9 +36,9 @@
             <td>${{ course.price }}</td>
             <td>{{ course.status }}</td>
             <td class="actions">
-              <button @click="editCourse(course)">Edit</button>
-              <button @click="viewDetails(course.id)">Details</button>
-              <button @click="deleteCourse(course.id)" class="delete">Delete</button>
+              <button @click="editCourse(course)">تعديل</button>
+              <button @click="viewDetails(course.id)">تفاصيل</button>
+              <button @click="deleteCourse(course.id)" class="delete">حذف</button>
             </td>
           </tr>
         </tbody>
@@ -48,20 +48,15 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useCourseAdminStore } from '@/stores/courseManagementStore'
 
-// Mock data for demonstration
-const courses = ref([
-  { id: 1, title: 'Vue.js Masterclass', lecturer: 'John Smith', category: 'development', price: 79.99, status: 'published' },
-  { id: 2, title: 'UI/UX Design Principles', lecturer: 'Jane Doe', category: 'design', price: 89.99, status: 'published' },
-  { id: 3, title: 'Business Analytics', lecturer: 'Robert Johnson', category: 'business', price: 99.99, status: 'draft' },
-])
-
+const courseAdminStore = useCourseAdminStore()
 const searchQuery = ref('')
 const filterCategory = ref('')
 
 const filteredCourses = computed(() => {
-  return courses.value.filter(course => {
+  return courseAdminStore.courses.filter(course => {
     const matchesSearch =
       course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       course.lecturer.toLowerCase().includes(searchQuery.value.toLowerCase())
@@ -72,25 +67,24 @@ const filteredCourses = computed(() => {
   })
 })
 
+onMounted(() => {
+  courseAdminStore.fetchAllCourses()
+})
+
 function addNewCourse() {
-  // Implement add new course logic
-  console.log('Adding new course')
+  console.log('إضافة دورة جديدة')
 }
 
 function editCourse(course) {
-  // Implement edit logic
-  console.log('Editing course:', course)
+  console.log('تعديل الدورة:', course)
 }
 
 function viewDetails(courseId) {
-  // Implement view details logic
-  console.log('Viewing details for course ID:', courseId)
+  console.log('عرض تفاصيل الدورة:', courseId)
 }
 
-function deleteCourse(courseId) {
-  // Implement delete logic
-  console.log('Deleting course with ID:', courseId)
-  courses.value = courses.value.filter(course => course.id !== courseId)
+async function deleteCourse(courseId) {
+  await courseAdminStore.deleteCourse(courseId)
 }
 </script>
 
@@ -127,7 +121,8 @@ function deleteCourse(courseId) {
   gap: 10px;
 }
 
-.search-filter input, .search-filter select {
+.search-filter input,
+.search-filter select {
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -138,7 +133,8 @@ function deleteCourse(courseId) {
   border-collapse: collapse;
 }
 
-.course-table th, .course-table td {
+.course-table th,
+.course-table td {
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid #eee;
