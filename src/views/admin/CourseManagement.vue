@@ -154,7 +154,8 @@
             <template #body="slotProps">
               <div class="flex gap-1.5">
                 <Button icon="pi pi-eye" @click="viewDetails(slotProps.data.id)" severity="secondary" size="small" class="mx-2" />
-                <Button icon="pi pi-trash" @click="deleteCourse(slotProps.data.id)" severity="danger" size="small" />
+                <!-- Changed from delete to deactivate -->
+                <Button icon="pi pi-ban" @click="deactivateCourse(slotProps.data.id)" severity="warning" size="small" />
               </div>
             </template>
           </Column>
@@ -334,6 +335,13 @@ function viewDetails(courseId) {
 
 async function deleteCourse(courseId) {
   await courseAdminStore.deleteCourse(courseId)
+}
+
+// New deactivate method
+function deactivateCourse(courseId) {
+  console.log('Deactivating course:', courseId)
+  // For example, you may call a store method:
+  // await courseAdminStore.deactivateCourse(courseId)
 }
 
 function showCategoryDialog(categories) {
