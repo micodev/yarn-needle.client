@@ -33,7 +33,11 @@
           </div>
           <div class="field col-12 md:col-4">
             <label for="categorySelect" class="block mb-2">المجال*</label>
-            <MultiSelect id="categorySelect" :header="true" v-model="selectedCategories" :options="categoryOptions" optionLabel="name" placeholder="اختر المجالات" display="chip" class="w-full" />
+            <MultiSelect id="categorySelect" v-model="selectedCategories" :options="categoryOptions" optionLabel="name" placeholder="اختر المجالات" display="chip" class="w-full" >
+              <template #header>
+                <div class="p-2">اختر المجالات</div>
+              </template>
+              </MultiSelect>
           </div>
           <div class="field col-12 md:col-4">
             <label for="originalPrice" class="block mb-2">السعر الأصلي*</label>
