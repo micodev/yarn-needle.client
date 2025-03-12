@@ -188,8 +188,8 @@
 
             <div class="field col-12 md:col-6">
               <label for="image" class="block mb-2">الصورة (اختيار ملف)</label>
-              <!-- Replace InputText with a file input -->
-              <input id="image" type="file" accept="image/*" @change="handleImageUpload" class="w-full" />
+              <!-- Changed from native input to PrimeVue FileUpload -->
+              <FileUpload mode="basic" accept="image/*" customUpload :uploadHandler="handleImageUpload" chooseLabel="اختر صورة" class="w-full" />
             </div>
 
             <div class="field col-12">
@@ -364,6 +364,7 @@ import MultiSelect from 'primevue/multiselect'
 import Checkbox from 'primevue/checkbox'
 import Chips from 'primevue/chips'
 import Toast from 'primevue/toast'
+import FileUpload from 'primevue/fileupload' // <-- added import
 
 const courseAdminStore = useCourseAdminStore()
 const router = useRouter() // Initialize router
@@ -715,13 +716,13 @@ async function submitCourse() {
 
 // Add a new method to handle file upload conversion to base64
 function handleImageUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
+  const file = event.files[0]
+  if (!file) return
+  const reader = new FileReader()
   reader.onload = () => {
-    newCourse.image = reader.result; // newCourse.image will now be a base64 string
-  };
-  reader.readAsDataURL(file);
+    newCourse.image = reader.result // newCourse.image now holds the base64 string
+  }
+  reader.readAsDataURL(file)
 }
 </script>
 
