@@ -88,8 +88,8 @@
                 <AccordionHeader>المواضيع</AccordionHeader>
                 <AccordionContent>
                   <!-- Replaced the Chips component -->
-                  <div class="flex align-items-center gap-2 mb-2">
-                    <InputText v-model="newTopic" placeholder="أدخل الموضوع" class="w-full shadow-none my-2" />
+                  <div class="flex align-items-center gap-2  my-2">
+                    <InputText v-model="newTopic" placeholder="أدخل الموضوع" class="w-full shadow-none" />
                     <Button icon="pi pi-plus" label="إضافة" @click="addTopic" />
                   </div>
                   <div class="flex flex-wrap gap-2">
