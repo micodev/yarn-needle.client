@@ -145,8 +145,7 @@
           </Column>
           <Column header="الحالة">
             <template #body="slotProps">
-              <Tag :severity="slotProps.data.purchased ? 'success' : 'info'"
-                  :value="slotProps.data.purchased ? 'تم الشراء' : 'غير مشترى'" />
+              <Tag severity="info" value="نشط" />
             </template>
           </Column>
           <Column header="الإجراءات">
