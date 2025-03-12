@@ -72,124 +72,115 @@ const selectedCategories = ref([])
 
 const filteredCourses = computed(() => {
   return courseAdminStore.courses.filter(course => {
-    const matchesSearch =LowerCase()))
+    const matchesSearch =
       course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      course.lecturer.toLowerCase().includes(searchQuery.value.toLowerCase())
+      (course.type && course.type.toLowerCase().includes(searchQuery.value.toLowerCase()))
 
-    const matchesCategory =      (course.category && parseCategoryJson(course.category).some(cat =>
-      filterCategory.value === '' || course.category.some(cat => cat.name === filterCategory.value)tegory.value.toLowerCase())
-  ))
+    const matchesCategory =
+      filterCategory.value === '' ||
+      (course.category && parseCategoryJson(course.category).some(cat =>
+        cat.toLowerCase().includes(filterCategory.value.toLowerCase())
+      ))
+
     return matchesSearch && matchesCategory
-  })    return matchesSearch && matchesCategory
+  })
 })
 
 onMounted(() => {
-  courseAdminStore.fetchAllCourses()onMounted(() => {
-})llCourses()
+  courseAdminStore.fetchAllCourses()
+})
+
+function parseCategoryJson(categoryStr) {
+  if (!categoryStr) return []
+  try {
+    return JSON.parse(categoryStr)
+  } catch (e) {
+    console.error('Error parsing category JSON:', e)
+    return []
+  }
+}
 
 function addNewCourse() {
-  console.log('إضافة دورة جديدة')function parseCategoryJson(categoryStr) {
+  console.log('إضافة دورة جديدة')
 }
 
-function editCourse(course) {   return JSON.parse(categoryStr)
-  console.log('تعديل الدورة:', course)  } catch (e) {
-} category JSON:', e)
-
-function viewDetails(courseId) { }
-  console.log('عرض تفاصيل الدورة:', courseId)}
+function editCourse(course) {
+  console.log('تعديل الدورة:', course)
 }
 
-async function deleteCourse(courseId) { console.log('إضافة دورة جديدة')
-  await courseAdminStore.deleteCourse(courseId)}
+function viewDetails(courseId) {
+  console.log('عرض تفاصيل الدورة:', courseId)
 }
 
-function showCategoryDialog(categories) {e)
-  selectedCategories.value = categories
+async function deleteCourse(courseId) {
+  await courseAdminStore.deleteCourse(courseId)
+}
+
+function showCategoryDialog(categories) {
+  selectedCategories.value = categories.map(cat => ({ id: Date.now(), name: cat }))
   categoryDialogVisible.value = true
-}function viewDetails(courseId) {
-'عرض تفاصيل الدورة:', courseId)
-function parseCategoryJson(categoryJson) {
-  try {
-    return JSON.parse(categoryJson)sync function deleteCourse(courseId) {
-  } catch (error) {  await courseAdminStore.deleteCourse(courseId)
-    console.error('Failed to parse category JSON:', error)
-    return []
-  }Dialog(categories) {
-}cat => ({ id: Date.now(), name: cat }))
-</script>Visible.value = true
+}
+</script>
 
-<style scoped></script>
+<style scoped>
 .course-management {
   padding: 20px;
 }
 
 .admin-panel {
   background: white;
-  border-radius: 8px;el {
+  border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
-} 2px 10px rgba(0, 0, 0, 0.1);
-;
+}
+
 .actions-bar {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px; display: flex;
-}  justify-content: space-between;
- 20px;
+  margin-bottom: 20px;
+}
+
 .add-btn {
   padding: 10px 16px;
-  background-color: #4CAF50;add-btn {
-  color: white;  padding: 10px 16px;
-  border: none;4CAF50;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
 }
- font-weight: bold;
-.search-filter {}
+
+.search-filter {
   display: flex;
-  gap: 10px; {
+  gap: 10px;
 }
- gap: 10px;
-.search-filter input,}
+
+.search-filter input,
 .search-filter select {
-  padding: 8px;ut,
-  border: 1px solid #ddd;elect {
+  padding: 8px;
+  border: 1px solid #ddd;
   border-radius: 4px;
 }
- border-radius: 4px;
-.course-table {}
+
+.course-table {
   width: 100%;
   border-collapse: collapse;
-} width: 100%;
-  border-collapse: collapse;
+}
+
 .course-table th,
 .course-table td {
   padding: 12px;
-  text-align: left;d {
+  text-align: left;
   border-bottom: 1px solid #eee;
-};
-eee;
+}
+
 .course-table th {
   background-color: #f8f9fa;
-}.course-table th {
-9fa;
+}
+
 .actions button {
   margin-right: 5px;
-  padding: 6px 12px; button {
-  border: none;  margin-right: 5px;
-
-
-
-
-
-
-
-
-
-
-
-</style>}  background-color: #f44336;.actions button.delete {}  color: white;  background-color: #2196F3;  cursor: pointer;  border-radius: 4px;  padding: 6px 12px;
+  padding: 6px 12px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
