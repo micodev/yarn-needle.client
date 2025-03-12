@@ -11,8 +11,8 @@
     <div v-if="organizationStore.loading" class="flex justify-center items-center" style="min-height: 200px;">
       <ProgressSpinner style="width:50px; height:50px" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s" />
     </div>
-    <div v-if="organizationStore.error" class="text-red-500">{{ organizationStore.error }}</div>
-    <div v-if="organizationStore.organizations && organizationStore.organizations.length" class="flex flex-wrap gap-4">
+    <div v-if="!organizationStore.loading && organizationStore.error" class="text-red-500">{{ organizationStore.error }}</div>
+    <div v-if="!organizationStore.loading && organizationStore.organizations && organizationStore.organizations.length" class="flex flex-wrap gap-4">
       <Card v-for="org in organizationStore.organizations" :key="org.id" class="max-w-xs shadow-lg">
         <template #content>
           <img v-if="org.logo" :src="org.logo" alt="شعار" class="h-16 w-16 object-cover mx-auto rounded-full"/>
