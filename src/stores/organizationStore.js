@@ -20,6 +20,20 @@ export const useOrganizationStore = defineStore('organization', {
       } finally {
         this.loading = false;
       }
+    },
+    async createOrganization(organization) {
+      this.loading = true;
+      this.error = null;
+      try {
+        const response = await this.$axios.post('/api/meta/organizations', organization);
+        // ...existing code...
+        this.organizations.push(response.data);
+      } catch (error) {
+        this.error = 'Failed to create organization.';
+        console.error('Create organization failed:', error);
+      } finally {
+        this.loading = false;
+      }
     }
   }
 });
