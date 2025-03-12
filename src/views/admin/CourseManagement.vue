@@ -1,6 +1,6 @@
 <template>
   <div class="p-5">
-    <h1 class="mb-2 text-3xl font-bold text-indigo-600 mb-10">إدارة الدورات</h1>
+    <h1 class=" text-3xl font-bold text-indigo-600 mb-10">إدارة الدورات</h1>
     <div class="bg-white rounded-lg shadow-md p-5">
       <div class="flex justify-between mb-5">
         <Button @click="addNewCourse" icon="pi pi-plus" label="إضافة دورة جديدة" severity="success" />
