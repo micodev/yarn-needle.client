@@ -118,7 +118,7 @@
               }"
             v-model="newCourse.subscriptionIncludedNames" :options="subscriptionOptions" optionLabel="label" class="w-full" display="chip" />
           </div>
-          <div class="field-checkbox col-12 md:col-6 flex align-items-center">
+          <div class="field-checkbox col-12 md:col-6 flex align-items-center mt-1">
             <Checkbox id="isActive" v-model="newCourse.isActive" :binary="true" />
             <label for="isActive" class="mr-2">نشط</label>
           </div>
