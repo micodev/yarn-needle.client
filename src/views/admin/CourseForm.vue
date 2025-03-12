@@ -131,6 +131,7 @@ import Dialog from 'primevue/dialog'
 import { useLevelOptionsStore } from '@/stores/levelOptions.js'
 import { useCategoryOptionsStore } from '@/stores/categoryOptions.js'
 import { useCourseTypeStore } from '@/stores/courseType.js'
+import { useMembershipStore } from '@/stores/membership.js'
 
 // v-model binding for dialog visibility
 const { visible } = defineProps({
@@ -148,6 +149,7 @@ const selectedCategories = ref([])  // Added missing property
 const levelOptionsStore = useLevelOptionsStore()
 const categoryOptionsStore = useCategoryOptionsStore()
 const courseTypeStore = useCourseTypeStore()
+const membershipStore = useMembershipStore()
 
 const levelOptions = computed(() => [
 	{ name: 'جميع المستويات', value: null },
@@ -161,6 +163,12 @@ const courseTypeOptions = computed(() => [
 	{ name: 'جميع الأنواع', code: null },
 	...courseTypeStore.getCourseTypes
 ])
+const subscriptionOptions = computed(() =>
+  membershipStore.getMemberships.map(m => ({
+    label: m.title,
+    value: m.code
+  }))
+)
 
 // Default course state to optimize resetForm
 const defaultCourse = {
@@ -239,7 +247,8 @@ onMounted(async () => {
 	await Promise.all([
 		levelOptionsStore.fetchLevels(),
 		categoryOptionsStore.fetchCategories(),
-		courseTypeStore.fetchCourseTypes()
+		courseTypeStore.fetchCourseTypes(),
+    membershipStore.fetchMemberships()
 	])
 })
 </script>
