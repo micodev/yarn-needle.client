@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <div v-if="courseAdminStore.loading">
+      <div v-if="courseAdminStore.loading" class="loading-container">
         <ProgressSpinner />
       </div>
 
@@ -183,6 +183,14 @@ function formatDuration(minutes) {
 .action-buttons {
   display: flex;
   gap: 0.5rem;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  width: 100%;
 }
 
 /* Additional styles can be removed since PrimeVue components have their own styling */
