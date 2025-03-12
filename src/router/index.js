@@ -18,6 +18,7 @@ import CourseManagement from '@/views/admin/CourseManagement.vue'
 import LecturerManagement from '@/views/admin/LecturerManagement.vue'
 import CommentManagement from '@/views/admin/CommentManagement.vue'
 import OrderAdministrator from '@/views/admin/OrderAdministrator.vue'
+import OrganizationManagement from '@/views/admin/OrganizationManagement.vue'
 
 const base = '/yarn-needle.client';
 
@@ -150,6 +151,17 @@ const router = createRouter({
             requiresAuth: true,
             requiresAdmin: true,
             title: 'Order Management'
+          }
+        },
+        // New organization route
+        {
+          path: '/admin/organization',
+          name: 'AdminOrganization',
+          component: OrganizationManagement,
+          meta: {
+            requiresAuth: true,
+            requiresAdmin: true,
+            title: 'Organization Management'
           }
         }
       ],
