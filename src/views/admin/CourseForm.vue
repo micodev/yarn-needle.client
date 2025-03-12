@@ -1,5 +1,5 @@
 <template>
-  <Dialog :visible="visible" @update:visible="handleVisibleUpdate" modal header="إضافة دورة جديدة" :style="{ width: '90vw', maxWidth: '800px' }" :closable="!submitting">
+  <Dialog :visible="visible" @update:visible="handleVisibleUpdate" modal header="إضافة دورة جديدة" :style="{ width: '95vw', maxWidth: '1200px' }" :closable="!submitting">
     <div class="flex flex-col gap-4 max-h-[70vh] overflow-y-auto p-2">
       <!-- Basic Information Section -->
       <div class="surface-card p-4 shadow-2 border-round mb-4">
