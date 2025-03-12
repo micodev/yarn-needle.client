@@ -139,6 +139,24 @@
                   </div>
                 </AccordionContent>
               </AccordionPanel>
+              <AccordionPanel>
+                <AccordionHeader>الجوائز</AccordionHeader>
+                <AccordionContent>
+                  <div class="flex align-items-center gap-2 my-2">
+                    <InputText v-model="newAward" placeholder="أدخل الجائزة" class="w-full shadow-none" />
+                    <Button icon="pi pi-plus" label="إضافة" @click="addAward" />
+                  </div>
+                  <div class="flex flex-wrap gap-2">
+                    <Chip
+                      v-for="(award, index) in awardsArray"
+                      :key="index"
+                      :label="award"
+                      class="cursor-pointer"
+                      @click="removeAward(index)"
+                    />
+                  </div>
+                </AccordionContent>
+              </AccordionPanel>
             </Accordion>
           </div>
         </div>
@@ -166,30 +184,6 @@
             <label for="isActive" class="mr-2">نشط</label>
           </div>
         </div>
-      </div>
-      <!-- Move awards input into a new AccordionPanel -->
-      <div class="surface-card p-4 shadow-2 border-round mb-4">
-        <div class="text-xl font-medium mb-3">محتويات إضافية</div>
-        <Accordion class="w-full">
-          <AccordionPanel>
-            <AccordionHeader>الجوائز</AccordionHeader>
-            <AccordionContent>
-              <div class="flex align-items-center gap-2 my-2">
-                <InputText v-model="newAward" placeholder="أدخل الجائزة" class="w-full shadow-none" />
-                <Button icon="pi pi-plus" label="إضافة" @click="addAward" />
-              </div>
-              <div class="flex flex-wrap gap-2">
-                <Chip
-                  v-for="(award, index) in awardsArray"
-                  :key="index"
-                  :label="award"
-                  class="cursor-pointer"
-                  @click="removeAward(index)"
-                />
-              </div>
-            </AccordionContent>
-          </AccordionPanel>
-        </Accordion>
       </div>
     </div>
     <template #footer>
