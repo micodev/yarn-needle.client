@@ -111,7 +111,7 @@
           <Column field="level" header="المستوى" sortable />
           <Column header="الفئات">
             <template #body="slotProps">
-              <Button label="عرض الفئات" @click="showCategoryDialog(parseCategoryJson(slotProps.data.category))" size="small" />
+              <Button icon="pi pi-eye" @click="showCategoryDialog(parseCategoryJson(slotProps.data.category))" size="small" />
             </template>
           </Column>
           <Column field="duration" header="المدة" sortable>
