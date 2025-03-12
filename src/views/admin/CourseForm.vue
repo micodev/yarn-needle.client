@@ -5,9 +5,9 @@
       <div class="surface-card p-4 shadow-2 border-round mb-4">
         <div class="text-xl font-medium mb-3">معلومات أساسية</div>
         <div class="grid formgrid">
-          <div class="field col-12 md:col-6">
+          <div class="field col-12">
             <label for="title" class="block mb-2">العنوان*</label>
-            <InputText id="title" v-model="newCourse.title" class="my-2" />
+            <InputText id="title" v-model="newCourse.title" class="my-2 w-full" />
           </div>
           <div class="field col-12 md:col-6">
             <label for="image" class="block mb-2">الصورة (اختيار ملف)</label>
