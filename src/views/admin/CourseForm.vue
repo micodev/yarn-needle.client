@@ -42,11 +42,9 @@
               display="chip"
               class="w-full"
               :pt="{
-                panel: {
-                  header: {
+                header: {
                     style: { display: 'none' }
                   }
-                }
               }"
             />
           </div>
