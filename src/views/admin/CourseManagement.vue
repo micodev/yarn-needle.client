@@ -324,17 +324,12 @@ function addNewCourse() {
   courseDialogVisible.value = true
 }
 
-function editCourse(course) {
-  console.log('تعديل الدورة:', course)
-}
+
 
 function viewDetails(courseId) {
   router.push({ name: 'course', params: { id: courseId }})
 }
 
-async function deleteCourse(courseId) {
-  await courseAdminStore.deleteCourse(courseId)
-}
 
 // New deactivate method
 function deactivateCourse(courseId) {
