@@ -6,7 +6,7 @@
         <Button @click="addNewCourse" icon="pi pi-plus" label="إضافة دورة جديدة" severity="success" />
         <div class="flex gap-2.5">
           <InputGroup>
-            <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..." type="text" size="small" />
+            <InputText  class="h-9" v-model="searchQuery" placeholder="ابحث عن الدورات..." type="text" size="small" />
             <InputGroupAddon class="h-9">
               <Button icon="pi pi-search" size="small" severity="secondary" variant="text" @click="applyFiltersAndSort" />
             </InputGroupAddon>
