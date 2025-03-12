@@ -9,7 +9,7 @@
             <label for="title" class="block mb-2">العنوان*</label>
             <InputText id="title" v-model="newCourse.title" class="my-2 w-full" />
           </div>
-          <div class="field col-12 md:col-6">
+          <div class="field col-12 md:col-6 mb-2">
             <label for="file-upload" class="block mb-2">الصورة (اختيار ملف) </label>
             <!-- Custom element for file upload -->
             <label for="file-upload" class="cursor-pointer block w-full text-center py-2 bg-blue-50 text-blue-700 rounded">
