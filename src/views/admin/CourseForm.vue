@@ -33,7 +33,7 @@
           </div>
           <div class="field col-12 md:col-4">
             <label for="categorySelect" class="block mb-2">المجال*</label>
-            <MultiSelect id="categorySelect" v-model="selectedCategories" :options="categoryOptions" optionLabel="name" placeholder="اختر المجالات" display="chip" class="w-full" />
+            <MultiSelect id="categorySelect" :header="false" v-model="selectedCategories" :options="categoryOptions" optionLabel="name" placeholder="اختر المجالات" display="chip" class="w-full" />
           </div>
           <div class="field col-12 md:col-4">
             <label for="originalPrice" class="block mb-2">السعر الأصلي*</label>
@@ -97,7 +97,7 @@
           </div>
           <div class="field col-12 md:col-6">
             <label for="subscriptions" class="block mb-2">العضويات المتضمنة</label>
-            <MultiSelect id="subscriptions" filter  v-model="newCourse.subscriptionIncludedNames" :options="subscriptionOptions" optionLabel="label" class="w-full" display="chip" />
+            <MultiSelect id="subscriptions" v-model="newCourse.subscriptionIncludedNames" :options="subscriptionOptions" optionLabel="label" class="w-full" display="chip" />
           </div>
           <div class="field-checkbox col-12 md:col-6 flex align-items-center">
             <Checkbox id="isActive" v-model="newCourse.isActive" :binary="true" />
