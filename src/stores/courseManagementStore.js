@@ -63,7 +63,7 @@ export const useCourseAdminStore = defineStore('courseAdmin', {
 			try {
 				const response = await this.$axios.delete(`/api/CourseAdminstrator/${id}`)
 				if(response.data && response.data.success) {
-					this.course = null
+					this.courses = this.courses.filter(course => course.id !== id);
 				} else {
 					this.error = response.data.message || 'Error deleting course'
 				}
