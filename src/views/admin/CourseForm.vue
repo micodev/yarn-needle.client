@@ -365,7 +365,10 @@ async function submitCourse() {
     courseData.categories = selectedCategories.value.map(c => c.code) // added selectedCategories to course data
     courseData.subscriptionIncludedNames = newCourse.subscriptionIncludedNames.map(s => s.value)
     // Use custom social media data
-    courseData.socialMedia = socialMediaData.value
+    courseData.socialMedia = socialMediaData.value.map(s => ({
+      socialMediaCode: [s.code],
+      value: s.username
+    }))
     // Use createCourse from courseManagementStore instead of simulated API call
     await courseAdminStore.createCourse(courseData)
     emits('course-submitted')
