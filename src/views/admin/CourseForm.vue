@@ -7,7 +7,7 @@
         <div class="grid formgrid">
           <div class="field col-12 md:col-6">
             <label for="title" class="block mb-2">العنوان*</label>
-            <InputText id="title" v-model="newCourse.title" />
+            <InputText id="title" v-model="newCourse.title" class="my-2" />
           </div>
           <div class="field col-12 md:col-6">
             <label for="image" class="block mb-2">الصورة (اختيار ملف)</label>
@@ -58,7 +58,7 @@
           </div>
           <div class="field col-12 md:col-4">
             <label for="currency" class="block mb-2">العملة</label>
-            <InputText id="currency" v-model="newCourse.currency" class="w-full" />
+            <InputText id="currency" v-model="newCourse.currency" class="w-full my-2" />
           </div>
           <div class="field col-12 md:col-6">
             <label for="duration" class="block mb-2">مدة الدورة (بالدقائق)*</label>
@@ -76,11 +76,11 @@
         <div class="grid formgrid">
           <div class="field col-12 md:col-6">
             <label for="instructor" class="block mb-2">اسم المدرب</label>
-            <InputText id="instructor" v-model="newCourse.instructor" class="w-full" />
+            <InputText id="instructor" v-model="newCourse.instructor" class="w-full my-2" />
           </div>
           <div class="field col-12 md:col-6">
             <label for="instructorImage" class="block mb-2">صورة المدرب (رابط)</label>
-            <InputText id="instructorImage" v-model="newCourse.instructorImage" class="w-full" />
+            <InputText id="instructorImage" v-model="newCourse.instructorImage" class="w-full my-2" />
           </div>
           <div class="col-12 md:col-12 flex gap-3">
             <Accordion class="w-full">
@@ -89,7 +89,7 @@
                 <AccordionContent>
                   <!-- Replaced the Chips component -->
                   <div class="flex align-items-center gap-2 mb-2">
-                    <InputText v-model="newTopic" placeholder="أدخل الموضوع" class="w-full shadow-none" />
+                    <InputText v-model="newTopic" placeholder="أدخل الموضوع" class="w-full shadow-none my-2" />
                     <Button icon="pi pi-plus" label="إضافة" @click="addTopic" />
                   </div>
                   <div class="flex flex-wrap gap-2">
