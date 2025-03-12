@@ -23,17 +23,18 @@
     </div>
 
     <!-- Organization Dialog -->
-    <Dialog header="Add Organization" v-model:visible="dialogVisible" modal>
-      <div class="p-4 space-y-4">
+    <Dialog header="Add Organization" v-model:visible="dialogVisible" modal :style="{ width: '50vw' }" :breakpoints="{ '960px': '75vw', '641px': '90vw' }">
+      <div class="p-5 flex flex-col gap-4">
+        <!-- Updated form fields with Tailwind styling -->
         <div>
-          <label>Name</label>
-          <InputText v-model="newOrganization.name" />
+          <label class="block font-medium mb-1">Name</label>
+          <InputText v-model="newOrganization.name" class="w-full" />
         </div>
         <div>
-          <label>Logo (Image File)</label>
-          <input type="file" accept="image/*" @change="handleImageUpload" />
+          <label class="block font-medium mb-1">Logo (Image File)</label>
+          <input type="file" accept="image/*" @change="handleImageUpload" class="w-full" />
         </div>
-        <div class="flex justify-end space-x-2">
+        <div class="flex justify-end gap-2">
           <Button label="Cancel" class="p-button-secondary" @click="dialogVisible = false" />
           <Button label="Save" @click="handleAddOrganization" />
         </div>
