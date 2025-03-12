@@ -71,11 +71,9 @@ function handleImageUpload(e) {
   }
 }
 
-function handleAddOrganization() {
-  // Your logic to save the new organization goes here
-  console.log('New organization', newOrganization.value)
-  // Reset form and close dialog
-  newOrganization.value = { name: '', base64image: '' }
-  dialogVisible.value = false
+async function handleAddOrganization() {
+	await organizationStore.createOrganization(newOrganization.value)
+	newOrganization.value = { name: '', base64image: '' }
+	dialogVisible.value = false
 }
 </script>
