@@ -336,6 +336,7 @@ function handleImageUpload(event) {
   const reader = new FileReader()
   reader.onload = () => {
     newCourse.image = reader.result
+    console.log('Image uploaded:', newCourse.image)
   }
   reader.readAsDataURL(file)
 }
