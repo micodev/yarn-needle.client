@@ -10,10 +10,12 @@
             <InputText id="title" v-model="newCourse.title" class="my-2 w-full" />
           </div>
           <div class="field col-12 md:col-6">
-            <label for="image" class="block mb-2">الصورة (اختيار ملف)</label>
-            <input type="file" accept="image/*"
-                   @change="handleImageUpload"
-                   class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700" />
+            <label for="file-upload" class="block mb-2">الصورة (اختيار ملف)</label>
+            <!-- Custom element for file upload -->
+            <label for="file-upload" class="cursor-pointer block w-full text-center py-2 bg-blue-50 text-blue-700 rounded">
+              اختر ملف
+            </label>
+            <input id="file-upload" type="file" accept="image/*" @change="handleImageUpload" class="hidden" />
           </div>
           <div class="field col-12">
             <label for="description" class="block mb-2">الوصف*</label>
