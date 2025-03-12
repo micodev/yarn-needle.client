@@ -160,14 +160,29 @@
               <AccordionPanel>
                 <AccordionHeader>وسائل التواصل الاجتماعي</AccordionHeader>
                 <AccordionContent>
-                  <MultiSelect
-                    id="socialMedia"
-                    v-model="selectedSocialMedia"
-                    :options="socialMediaOptions"
-                    optionLabel="name"
-                    optionValue="code"
-                    class="w-full"
-                    display="chip" />
+                  <!-- New input group for social media with username -->
+                  <div class="flex align-items-center gap-2 my-2">
+                    <Select
+                      v-model="socialMediaSelected"
+                      :options="socialMediaOptions"
+                      optionLabel="name"
+                      optionValue="code"
+                      class="w-full"
+                      placeholder="اختر وسيلة تواصل" />
+                    <InputText
+                      v-model="socialMediaUsername"
+                      placeholder="اسم المستخدم"
+                      class="w-full" />
+                    <Button icon="pi pi-plus" label="إضافة" @click="addSocialMedia" />
+                  </div>
+                  <div class="flex flex-wrap gap-2">
+                    <Chip
+                      v-for="(sm, index) in socialMediaData"
+                      :key="index"
+                      :label="`${sm.name}: ${sm.username}`"
+                      class="cursor-pointer"
+                      @click="removeSocialMedia(index)" />
+                  </div>
                 </AccordionContent>
               </AccordionPanel>
             </Accordion>
@@ -264,7 +279,13 @@ const lecturerStore = useLecturerStore()  // initialize lecturerStore
 const courseAdminStore = useCourseAdminStore()  // new instance
 const socialMediaStore = useSocialMediaStore() // new instance for social media
 const socialMediaOptions = computed(() => socialMediaStore.getSocialMedia) // computed options
-const selectedSocialMedia = ref([]) // new reactive property
+
+// Remove previous: const selectedSocialMedia = ref([])
+// New reactive properties for social media with username
+const socialMediaSelected = ref(null)
+const socialMediaUsername = ref('')
+const socialMediaData = ref([])
+
 const organizationOptions = computed(() => organizationStore.organizations)  // computed organizations
 const lecturerOptions = computed(() =>
   lecturerStore.lecturers.map(l => ({
@@ -343,8 +364,8 @@ async function submitCourse() {
     console.log('categories:', selectedCategories.value)
     courseData.categories = selectedCategories.value.map(c => c.code) // added selectedCategories to course data
     courseData.subscriptionIncludedNames = newCourse.subscriptionIncludedNames.map(s => s.value)
-    // Add social media data to the course
-    courseData.socialMedia = selectedSocialMedia.value
+    // Use custom social media data
+    courseData.socialMedia = socialMediaData.value
     // Use createCourse from courseManagementStore instead of simulated API call
     await courseAdminStore.createCourse(courseData)
     emits('course-submitted')
@@ -415,6 +436,23 @@ function addAward() {
 }
 function removeAward(index) {
   awardsArray.value.splice(index, 1)
+}
+
+// New functions for handling social media with username
+function addSocialMedia() {
+  if (!socialMediaSelected.value || !socialMediaUsername.value.trim()) return
+  const selected = socialMediaOptions.value.find(s => s.code === socialMediaSelected.value)
+  const entry = {
+    code: socialMediaSelected.value,
+    username: socialMediaUsername.value.trim(),
+    name: selected ? selected.name : ''
+  }
+  socialMediaData.value.push(entry)
+  socialMediaSelected.value = null
+  socialMediaUsername.value = ''
+}
+function removeSocialMedia(index) {
+  socialMediaData.value.splice(index, 1)
 }
 
 onMounted(async () => {
