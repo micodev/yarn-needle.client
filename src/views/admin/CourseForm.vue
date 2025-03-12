@@ -129,7 +129,7 @@ import Checkbox from 'primevue/checkbox'
 import Dialog from 'primevue/dialog'
 
 // v-model binding for dialog visibility
-const props = defineProps({
+const { visible } = defineProps({
   visible: Boolean
 })
 const emits = defineEmits(['update:visible', 'course-submitted'])
@@ -197,7 +197,7 @@ async function submitCourse() {
     await new Promise(resolve => setTimeout(resolve, 1000))
     emits('course-submitted')
     closeDialog()
-  } catch (error) {
+  } catch {
     // ...existing error handling...
   } finally {
     submitting.value = false
