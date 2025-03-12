@@ -10,8 +10,8 @@
         </template>
         <template #content>
           <div class="p-4">
-          <h2 class="text-xl font-semibold">{{ org.name  }}</h2>
-        </div>
+            <h2 class="text-xl font-semibold">{{ org.name  }}</h2>
+          </div>
         </template>
 
       </Card>
