@@ -79,10 +79,6 @@
             <label for="instructor" class="block mb-2">اسم المدرب</label>
             <Select id="instructor" v-model="newCourse.instructor" :options="lecturerOptions" optionLabel="label" optionValue="value" class="w-full my-2" />
           </div>
-          <div class="field col-12 md:col-6">
-            <label for="instructorImage" class="block mb-2">صورة المدرب (رابط)</label>
-            <InputText id="instructorImage" v-model="newCourse.instructorImage" class="w-full my-2" />
-          </div>
           <div class="col-12 md:col-12 flex gap-3">
             <Accordion class="w-full">
               <AccordionPanel>
@@ -291,7 +287,6 @@ const defaultCourse = {
   subscriptionIncludedNames: [],
   discount: null,
   instructor: null, // updated default
-  instructorImage: '',
   organization: [], // updated for multiple selections
   awards: [],
   isActive: true
