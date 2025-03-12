@@ -82,13 +82,7 @@ const items = ref([
       router.push('/order-history'); // Add navigation to order history page
     },
   },
-  {
-    label: 'المساعدة',
-    icon: 'pi pi-question-circle',
-    command: () => {
-      router.push('/help'); // Add navigation to help page
-    },
-  },
+
 ]);
 const menu = ref();
 const menuItems = ref([
