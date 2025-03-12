@@ -173,7 +173,7 @@
                       v-model="socialMediaUsername"
                       placeholder="اسم المستخدم"
                       class="w-1/2" />
-                    <Button icon="pi pi-plus" class="w-1/3" label="إضافة" @click="addSocialMedia" />
+                    <Button icon="pi pi-plus" class="w-1/4" label="إضافة" @click="addSocialMedia" />
                   </div>
                   <div class="flex flex-wrap gap-2">
                     <Chip
