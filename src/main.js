@@ -22,7 +22,8 @@ import {
   FaBook,
   FaShoppingCart,
   FaChalkboardTeacher,
-  FaComments
+  FaComments,
+  FaBuilding
 } from "oh-vue-icons/icons";
 
 addIcons(
@@ -35,6 +36,7 @@ addIcons(
   FaUsers,
   FaBook,
   FaShoppingCart,
+  FaBuilding,
   FaChalkboardTeacher,
   FaComments
 );
