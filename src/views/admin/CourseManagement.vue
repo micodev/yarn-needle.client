@@ -673,32 +673,6 @@ const newCourse = reactive({
   socials: []
 });
 
-// Form validation rules
-const rules = computed(() => {
-  return {
-    title: { required },
-    description: { required },
-    image: { required },
-    originalPrice: { required, minValue: minValue(0) },
-    duration: { required, minValue: minValue(0) },
-    level: { required },
-    lessonCount: { required, minValue: minValue(0) },
-    category: { required },
-    type: { required }
-  }
-});
-
-// Computed property to handle category array to string conversion
-const v$ = useVuelidate(rules, {
-  ...newCourse,
-  category: computed({
-    get: () => selectedCategories.value.length > 0 ? 'valid' : '',
-    set: () => {}
-  })
-});
-
-
-
 // Close dialog and reset form
 function closeCourseDialog() {
   courseDialogVisible.value = false;
