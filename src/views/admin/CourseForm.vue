@@ -110,11 +110,13 @@
           </div>
           <div class="field col-12 md:col-6">
             <label for="subscriptions" class="block mb-2">العضويات المتضمنة</label>
-            <MultiSelect id="subscriptions"               :pt="{
+            <MultiSelect id="subscriptions"
+            :pt="{
                 header: {
                     style: { display: 'none' }
                 }
-              }" v-model="newCourse.subscriptionIncludedNames" :options="subscriptionOptions" optionLabel="label" class="w-full" display="chip" />
+              }"
+            v-model="newCourse.subscriptionIncludedNames" :options="subscriptionOptions" optionLabel="label" class="w-full" display="chip" />
           </div>
           <div class="field-checkbox col-12 md:col-6 flex align-items-center">
             <Checkbox id="isActive" v-model="newCourse.isActive" :binary="true" />
