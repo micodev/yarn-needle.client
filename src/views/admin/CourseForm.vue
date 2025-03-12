@@ -97,6 +97,8 @@
                       v-for="(topic, index) in topicsArray"
                       :key="index"
                       :label="topic"
+                      class="cursor-pointer"
+                      @click="removeTopic(index)"
                     />
                   </div>
                 </AccordionContent>
@@ -296,6 +298,10 @@ function addTopic() {
     topicsArray.value.push(newTopic.value.trim())
     newTopic.value = ''
   }
+}
+
+function removeTopic(index) {
+  topicsArray.value.splice(index, 1)
 }
 
 onMounted(async () => {
