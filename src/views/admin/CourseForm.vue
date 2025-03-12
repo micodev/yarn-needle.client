@@ -35,7 +35,7 @@
             <label for="categorySelect" class="block mb-2">المجال*</label>
             <MultiSelect id="categorySelect" v-model="selectedCategories" :options="categoryOptions" optionLabel="name" placeholder="اختر المجالات" display="chip" class="w-full" >
               <template #header>
-                <div class="p-2">اختر المجالات</div>
+                <div></div>
               </template>
               </MultiSelect>
           </div>
