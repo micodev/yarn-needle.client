@@ -183,29 +183,17 @@
           <div class="grid formgrid">
             <div class="field col-12 md:col-6">
               <label for="title" class="block mb-2">العنوان*</label>
-              <InputText id="title" v-model="newCourse.title" class="w-full"
-                         :class="{'p-invalid': v$.title.$invalid && v$.title.$dirty}" />
-              <small v-if="v$.title.$invalid && v$.title.$dirty" class="p-error">
-                هذا الحقل مطلوب
-              </small>
+              <InputText id="title" v-model="newCourse.title" class="w-full" />
             </div>
 
             <div class="field col-12 md:col-6">
               <label for="image" class="block mb-2">رابط الصورة*</label>
-              <InputText id="image" v-model="newCourse.image" class="w-full"
-                         :class="{'p-invalid': v$.image.$invalid && v$.image.$dirty}" />
-              <small v-if="v$.image.$invalid && v$.image.$dirty" class="p-error">
-                هذا الحقل مطلوب
-              </small>
+              <InputText id="image" v-model="newCourse.image" class="w-full" />
             </div>
 
             <div class="field col-12">
               <label for="description" class="block mb-2">الوصف*</label>
-              <Textarea id="description" v-model="newCourse.description" rows="5" class="w-full"
-                        :class="{'p-invalid': v$.description.$invalid && v$.description.$dirty}" />
-              <small v-if="v$.description.$invalid && v$.description.$dirty" class="p-error">
-                هذا الحقل مطلوب
-              </small>
+              <Textarea id="description" v-model="newCourse.description" rows="5" class="w-full" />
             </div>
           </div>
         </div>
@@ -216,41 +204,26 @@
             <div class="field col-12 md:col-4">
               <label for="type" class="block mb-2">نوع الدورة*</label>
               <Select id="type" v-model="newCourse.type" :options="courseTypeStore.getCourseTypes"
-                     optionLabel="name" optionValue="code" class="w-full"
-                     :class="{'p-invalid': v$.type.$invalid && v$.type.$dirty}" />
-              <small v-if="v$.type.$invalid && v$.type.$dirty" class="p-error">
-                هذا الحقل مطلوب
-              </small>
+                     optionLabel="name" optionValue="code" class="w-full" />
             </div>
 
             <div class="field col-12 md:col-4">
               <label for="level" class="block mb-2">المستوى*</label>
               <Select id="level" v-model="newCourse.level" :options="levelOptionsStore.getLevels"
-                     optionLabel="name" optionValue="value" class="w-full"
-                     :class="{'p-invalid': v$.level.$invalid && v$.level.$dirty}" />
-              <small v-if="v$.level.$invalid && v$.level.$dirty" class="p-error">
-                هذا الحقل مطلوب
-              </small>
+                     optionLabel="name" optionValue="value" class="w-full" />
             </div>
 
             <div class="field col-12 md:col-4">
               <label for="categorySelect" class="block mb-2">المجال*</label>
               <MultiSelect id="categorySelect" v-model="selectedCategories"
                          :options="categoryOptionsStore.getCategories" optionLabel="name"
-                         :class="{'p-invalid': v$.category.$invalid && v$.category.$dirty}"
                          placeholder="اختر المجالات" display="chip" class="w-full" />
-              <small v-if="v$.category.$invalid && v$.category.$dirty" class="p-error">
-                هذا الحقل مطلوب
-              </small>
             </div>
 
             <div class="field col-12 md:col-4">
               <label for="originalPrice" class="block mb-2">السعر الأصلي*</label>
               <InputNumber id="originalPrice" v-model="newCourse.originalPrice" class="w-full"
-                         :min="0" :class="{'p-invalid': v$.originalPrice.$invalid && v$.originalPrice.$dirty}" />
-              <small v-if="v$.originalPrice.$invalid && v$.originalPrice.$dirty" class="p-error">
-                هذا الحقل مطلوب
-              </small>
+                         :min="0" />
             </div>
 
             <div class="field col-12 md:col-4">
@@ -267,19 +240,13 @@
             <div class="field col-12 md:col-6">
               <label for="duration" class="block mb-2">مدة الدورة (بالدقائق)*</label>
               <InputNumber id="duration" v-model="newCourse.duration" class="w-full"
-                         :min="0" :class="{'p-invalid': v$.duration.$invalid && v$.duration.$dirty}" />
-              <small v-if="v$.duration.$invalid && v$.duration.$dirty" class="p-error">
-                هذا الحقل مطلوب
-              </small>
+                         :min="0" />
             </div>
 
             <div class="field col-12 md:col-6">
               <label for="lessonCount" class="block mb-2">عدد الدروس*</label>
               <InputNumber id="lessonCount" v-model="newCourse.lessonCount" class="w-full"
-                         :min="0" :class="{'p-invalid': v$.lessonCount.$invalid && v$.lessonCount.$dirty}" />
-              <small v-if="v$.lessonCount.$invalid && v$.lessonCount.$dirty" class="p-error">
-                هذا الحقل مطلوب
-              </small>
+                         :min="0" />
             </div>
           </div>
         </div>
@@ -376,8 +343,6 @@ import { useCategoryOptionsStore } from '@/stores/categoryOptions.js'
 import { useCourseTypeStore } from '@/stores/courseType.js'
 import { useRouter } from 'vue-router' // Add router import
 import { useToast } from 'primevue/usetoast'
-import { useVuelidate } from '@vuelidate/core'
-import { required, minValue } from '@vuelidate/validators'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import InputGroup from 'primevue/inputgroup'
@@ -698,18 +663,10 @@ function resetForm() {
   resultsArray.value = [];
   targetAudienceArray.value = [];
   awardsArray.value = [];
-  v$.value.$reset();
 }
 
 // Handle form submission
 async function submitCourse() {
-  // First validate the form
-  const isFormValid = await v$.value.$validate();
-  if (!isFormValid) {
-    toast.add({ severity: 'error', summary: 'خطأ', detail: 'الرجاء إكمال جميع الحقول الإلزامية', life: 3000 });
-    return;
-  }
-
   try {
     submitting.value = true;
 
