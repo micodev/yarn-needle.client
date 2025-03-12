@@ -154,7 +154,6 @@
             <template #body="slotProps">
               <div class="flex gap-1.5">
                 <Button icon="pi pi-eye" @click="viewDetails(slotProps.data.id)" severity="secondary" size="small" class="mx-2" />
-                <!-- Changed from delete to deactivate -->
                 <Button icon="pi pi-ban" @click="deactivateCourse(slotProps.data.id)" severity="warning" size="small" />
               </div>
             </template>
