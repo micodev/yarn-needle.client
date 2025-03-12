@@ -1,42 +1,40 @@
 <template>
   <div class="p-6">
-    <h1 class="text-3xl font-bold mb-4">Organization Management</h1>
+    <h1 class="text-3xl font-bold mb-4">إدارة المنظمات</h1>
 
     <!-- Add Organization Button -->
     <div class="mb-4">
-      <Button label="Add Organization" icon="pi pi-plus" @click="dialogVisible = true" />
+      <Button label="إضافة منظمة" icon="pi pi-plus" @click="dialogVisible = true" />
     </div>
 
-    <div v-if="organizationStore.loading" class="text-blue-500">Loading organizations...</div>
+    <div v-if="organizationStore.loading" class="text-blue-500">جاري تحميل المنظمات...</div>
     <div v-if="organizationStore.error" class="text-red-500">{{ organizationStore.error }}</div>
     <div v-if="organizationStore.organizations && organizationStore.organizations.length" class="flex flex-wrap gap-4">
       <Card v-for="org in organizationStore.organizations" :key="org.id" class="max-w-xs shadow-lg">
-
         <template #content>
-          <img v-if="org.logo" :src="org.logo" alt="Logo" class="h-16 w-16 object-cover mx-auto rounded-full"/>
+          <img v-if="org.logo" :src="org.logo" alt="شعار" class="h-16 w-16 object-cover mx-auto rounded-full"/>
           <div class="p-4">
             <h2 class="text-xl font-semibold">{{ org.name  }}</h2>
           </div>
         </template>
-
       </Card>
     </div>
 
     <!-- Organization Dialog -->
-    <Dialog header="Add Organization" v-model:visible="dialogVisible" modal :style="{ width: '50vw' }" :breakpoints="{ '960px': '75vw', '641px': '90vw' }">
+    <Dialog header="إضافة منظمة" v-model:visible="dialogVisible" modal :style="{ width: '50vw' }" :breakpoints="{ '960px': '75vw', '641px': '90vw' }">
       <div class="p-5 flex flex-col gap-4">
         <!-- Updated form fields with Tailwind styling -->
         <div>
-          <label class="block font-medium mb-1">Name</label>
+          <label class="block font-medium mb-1">الاسم</label>
           <InputText v-model="newOrganization.name" class="w-full" />
         </div>
         <div>
-          <label class="block font-medium mb-1">Logo (Image File)</label>
+          <label class="block font-medium mb-1">الشعار (ملف الصورة)</label>
           <input type="file" accept="image/*" @change="handleImageUpload" class="w-full" />
         </div>
         <div class="flex justify-end gap-2">
-          <Button label="Cancel" class="p-button-secondary" @click="dialogVisible = false" />
-          <Button label="Save" @click="handleAddOrganization" />
+          <Button label="إلغاء" class="p-button-secondary" @click="dialogVisible = false" />
+          <Button label="حفظ" @click="handleAddOrganization" />
         </div>
       </div>
     </Dialog>
