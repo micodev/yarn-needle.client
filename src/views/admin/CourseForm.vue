@@ -157,6 +157,19 @@
                   </div>
                 </AccordionContent>
               </AccordionPanel>
+              <AccordionPanel>
+                <AccordionHeader>وسائل التواصل الاجتماعي</AccordionHeader>
+                <AccordionContent>
+                  <MultiSelect
+                    id="socialMedia"
+                    v-model="selectedSocialMedia"
+                    :options="socialMediaOptions"
+                    optionLabel="name"
+                    optionValue="code"
+                    class="w-full"
+                    display="chip" />
+                </AccordionContent>
+              </AccordionPanel>
             </Accordion>
           </div>
         </div>
@@ -222,6 +235,7 @@ import { useMembershipStore } from '@/stores/membership.js'
 import { useOrganizationStore } from '@/stores/organizationStore.js'  // added import
 import { useLecturerStore } from '@/stores/lecturerStore.js'  // added import
 import { useCourseAdminStore } from '@/stores/courseManagementStore.js'  // new import
+import { useSocialMediaStore } from '@/stores/socialMedia.js' // new import
 
 // v-model binding for dialog visibility
 const { visible } = defineProps({
@@ -248,6 +262,9 @@ const membershipStore = useMembershipStore()
 const organizationStore = useOrganizationStore()  // initialize organizationStore
 const lecturerStore = useLecturerStore()  // initialize lecturerStore
 const courseAdminStore = useCourseAdminStore()  // new instance
+const socialMediaStore = useSocialMediaStore() // new instance for social media
+const socialMediaOptions = computed(() => socialMediaStore.getSocialMedia) // computed options
+const selectedSocialMedia = ref([]) // new reactive property
 const organizationOptions = computed(() => organizationStore.organizations)  // computed organizations
 const lecturerOptions = computed(() =>
   lecturerStore.lecturers.map(l => ({
@@ -294,7 +311,8 @@ const defaultCourse = {
   instructor: null, // updated default
   organization: [], // updated for multiple selections
   awards: [],
-  isActive: true
+  isActive: true,
+  socialMedia: [] // new property for course social media
 }
 
 const newCourse = reactive({ ...defaultCourse })
@@ -325,6 +343,8 @@ async function submitCourse() {
     console.log('categories:', selectedCategories.value)
     courseData.categories = selectedCategories.value.map(c => c.code) // added selectedCategories to course data
     courseData.subscriptionIncludedNames = newCourse.subscriptionIncludedNames.map(s => s.value)
+    // Add social media data to the course
+    courseData.socialMedia = selectedSocialMedia.value
     // Use createCourse from courseManagementStore instead of simulated API call
     await courseAdminStore.createCourse(courseData)
     emits('course-submitted')
@@ -404,7 +424,8 @@ onMounted(async () => {
 		courseTypeStore.fetchCourseTypes(),
     membershipStore.fetchMemberships(),
     organizationStore.fetchOrganizations(),  // added fetchOrganizations
-    lecturerStore.fetchLecturers()  // added fetchLecturers
+    lecturerStore.fetchLecturers(),  // added fetchLecturers
+    socialMediaStore.fetchSocialMedia() // fetch social media options
 	])
 })
 </script>
