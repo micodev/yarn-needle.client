@@ -120,7 +120,7 @@
         </Fieldset>
       </div>
       <div class="w-full md:w-1/4 p-4 mt-4 md:mt-0">
-        <div class="mb-4" v-if="course != null && course.sponsorLogos.length > 0">
+        <div class="mb-4" v-if="course != null && course.sponsorLogos && course.sponsorLogos.length > 0">
           <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">الجهة الراعية</h3>
           <div class="flex space-x-2 gap-2">
             <img v-for="(logo, index) in course.sponsorLogos" :key="index" :src="logo" alt="Sponsor Logo"
