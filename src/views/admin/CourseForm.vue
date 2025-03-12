@@ -11,7 +11,7 @@
           </div>
           <div class="field col-12 md:col-6">
             <label for="image" class="block mb-2">الصورة (اختيار ملف)</label>
-            <FileUpload mode="basic" accept="image/*" customUpload :upload="handleImageUpload" chooseLabel="اختر صورة" class="w-full" />
+            <FileUpload mode="basic" accept="image/*" customUpload :uploadHandler="handleImageUpload" chooseLabel="اختر صورة" class="w-full" />
           </div>
           <div class="field col-12">
             <label for="description" class="block mb-2">الوصف*</label>
