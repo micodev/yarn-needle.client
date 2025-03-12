@@ -7,7 +7,7 @@
         <div class="grid formgrid">
           <div class="field col-12 md:col-6">
             <label for="title" class="block mb-2">العنوان*</label>
-            <InputText id="title" v-model="newCourse.title" class="w-full shadow-none" />
+            <InputText id="title" v-model="newCourse.title" />
           </div>
           <div class="field col-12 md:col-6">
             <label for="image" class="block mb-2">الصورة (اختيار ملف)</label>
