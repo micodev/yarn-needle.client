@@ -148,7 +148,7 @@ const handleConfirm = async () => {
 
 // Handle payment success message
 window.addEventListener('message', (event) => {
-  if (event.origin === 'https://localhost:44350') {
+  if (event.origin === 'https://localhost:5034') {
     handleClose()
     emit('purchase-success')
   }

@@ -33,7 +33,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL
 // Listen for messages from payment iframe
 window.addEventListener('message', (event) => {
   // Check if the message is from our API
-  if (event.origin === API_URL || event.origin === 'https://localhost:44350') {
+  if (event.origin === API_URL || event.origin === 'https://localhost:5034') {
        window.location.href = '/#/my-courses'
   }
 })
