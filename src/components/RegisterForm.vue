@@ -88,6 +88,9 @@ const registerUsername = ref('');
 const registerEmail = ref('');
 const registerPassword = ref('');
 
+// Expose showDialog to parent components
+defineExpose({ showDialog });
+
 const handleSubmit = async () => {
   loading.value = true;
   try {
