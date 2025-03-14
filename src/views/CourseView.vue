@@ -154,6 +154,9 @@
     v-model="showSocialDialog"
     :courseData="course"
   />
+
+  <!-- Add RegisterForm component -->
+  <RegisterForm ref="registerFormRef" />
 </template>
 
 <script setup>
@@ -165,6 +168,7 @@ import { useCourseStore } from '@/stores/course';
 import { useCommentsStore } from '@/stores/comments';
 import { useAuthStore } from '@/stores/auth';
 import SocialMediaDialog from '@/components/SocialMediaDialog.vue';
+import RegisterForm from '@/components/RegisterForm.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -172,6 +176,7 @@ const courseStore = useCourseStore();
 const commentsStore = useCommentsStore();
 const authStore = useAuthStore();
 const showSocialDialog = ref(false);
+const registerFormRef = ref(null);
 
 const course = computed(() => courseStore.course);
 const displayedComments = computed(() => commentsStore.displayedComments);
@@ -247,8 +252,8 @@ watch(
 
 const handleCourseAction = async () => {
   if (!authStore.isAuthenticated) {
-    // Redirect unauthenticated users to login page
-    router.push('/login');
+    // Open RegisterForm dialog instead of redirecting
+    registerFormRef.value.showDialog = true;
     return;
   }
 
