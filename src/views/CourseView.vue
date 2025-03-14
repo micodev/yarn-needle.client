@@ -171,7 +171,6 @@ import SocialMediaDialog from '@/components/SocialMediaDialog.vue';
 import RegisterForm from '@/components/RegisterForm.vue';
 
 const route = useRoute();
-const router = useRouter();
 const courseStore = useCourseStore();
 const commentsStore = useCommentsStore();
 const authStore = useAuthStore();
