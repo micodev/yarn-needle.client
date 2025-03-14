@@ -47,16 +47,21 @@
           <li v-for="award in course.awards" :key="award">{{ award }}</li>
         </ul>
 
-        <p v-if="!course.purchased" class="text-xl mb-2 text-gray-900 dark:text-gray-100">
+        <p v-if="!authStore.isAuthenticated" class="text-xl mb-2 text-gray-900 dark:text-gray-100">
+          سجل للحصول على الدورة
+        </p>
+        <p v-else-if="!course.purchased" class="text-xl mb-2 text-gray-900 dark:text-gray-100">
           {{ course.isSubscribtionIncluded ? 'أضف الدورة إلى حسابك' : 'امتلك الدورة بـ' }}
         </p>
         <p v-else class="text-xl mb-2 text-transparent">.</p>
         <Button
-          :label="course.purchased
-            ? 'معلومات التواصل'
-            : course.isSubscribtionIncluded
-              ? 'أضف الدورة'
-              : `${course.originalPrice} ${course.currency}`"
+          :label="!authStore.isAuthenticated
+            ? 'سجل للحصول على الدورة'
+            : course.purchased
+              ? 'معلومات التواصل'
+              : course.isSubscribtionIncluded
+                ? 'أضف الدورة'
+                : `${course.originalPrice} ${course.currency}`"
           :icon="course.purchased ? 'pi pi-arrow-left' : ''"
           @click="handleCourseAction" />
       </div>
@@ -153,7 +158,7 @@
 
 <script setup>
 import { computed, watch, onUnmounted, onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { Button, Fieldset, Rating, Textarea, ProgressSpinner, Toast } from 'primevue';
 import { useToast } from 'primevue/usetoast';
 import { useCourseStore } from '@/stores/course';
@@ -162,6 +167,7 @@ import { useAuthStore } from '@/stores/auth';
 import SocialMediaDialog from '@/components/SocialMediaDialog.vue';
 
 const route = useRoute();
+const router = useRouter();
 const courseStore = useCourseStore();
 const commentsStore = useCommentsStore();
 const authStore = useAuthStore();
@@ -240,6 +246,12 @@ watch(
 );
 
 const handleCourseAction = async () => {
+  if (!authStore.isAuthenticated) {
+    // Redirect unauthenticated users to login page
+    router.push('/login');
+    return;
+  }
+
   if (course.value.purchased) {
     // Show social media dialog for purchased courses
     showSocialDialog.value = true;
@@ -267,7 +279,6 @@ const handleCourseAction = async () => {
     // Add your purchase logic here
   }
 };
-
 </script>
 
 <style scoped>
