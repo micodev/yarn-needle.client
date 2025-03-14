@@ -58,7 +58,7 @@ export default defineConfig({
       },
     }
   ],
-  base: '/yarn-needle.client/',
+  base: '/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
