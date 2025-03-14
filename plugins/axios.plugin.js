@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 export const API_URL = import.meta.env.VITE_API_URL
+export const APP_ENV = import.meta.env.VITE_APP_ENV || 'development'
 
 const axiosInstance = axios.create({
     baseURL: API_URL,
@@ -33,5 +34,7 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error)
     }
 )
+
+console.log(`API is configured to use: ${API_URL} (${APP_ENV} environment)`)
 
 export default axiosInstance

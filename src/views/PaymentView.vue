@@ -24,10 +24,16 @@
 </template>
 
 <script>
-import { useOrderStore } from '../stores/orderStore'
+import { useOrderStore } from '@/stores/orderStore'
+import { onMounted, ref } from 'vue'
 
+const API_URL = import.meta.env.VITE_API_URL
+const BASE_URL = import.meta.env.VITE_BASE_URL
+
+// Listen for messages from payment iframe
 window.addEventListener('message', (event) => {
-  if (event.origin === 'https://localhost:44350') {
+  // Check if the message is from our API
+  if (event.origin === API_URL || event.origin === 'https://localhost:44350') {
        window.location.href = '/yarn-needle.client/#/my-courses'
   }
 })
