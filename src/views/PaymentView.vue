@@ -34,7 +34,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL
 window.addEventListener('message', (event) => {
   // Check if the message is from our API
   if (event.origin === API_URL || event.origin === 'https://localhost:44350') {
-       window.location.href = '/yarn-needle.client/#/my-courses'
+       window.location.href = '/#/my-courses'
   }
 })
 
