@@ -161,7 +161,7 @@
 
 <script setup>
 import { computed, watch, onUnmounted, onMounted, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { Button, Fieldset, Rating, Textarea, ProgressSpinner, Toast } from 'primevue';
 import { useToast } from 'primevue/usetoast';
 import { useCourseStore } from '@/stores/course';
