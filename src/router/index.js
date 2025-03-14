@@ -19,7 +19,7 @@ import CommentManagement from '@/views/admin/CommentManagement.vue'
 import OrderAdministrator from '@/views/admin/OrderAdministrator.vue'
 import OrganizationManagement from '@/views/admin/OrganizationManagement.vue'
 
-const base = '/yarn-needle.client';
+const base = '/';
 
 const router = createRouter({
   history: createWebHashHistory(base),
