@@ -231,7 +231,6 @@
                 <IftaLabel>
                   <Select v-model="social.socialMediaCode"
                            :options="availableSocialMedia"
-                           :selectionLimit="1"
                            optionLabel="name"
                            optionValue="code"
                            :placeholder="'اختر المنصة'"
