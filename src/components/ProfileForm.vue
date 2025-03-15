@@ -464,7 +464,7 @@ const handleSubmit = async () => {
 
   try {
     const dataToSave = { ...form };
-
+    console.log('Data to save:', dataToSave);
     // Format social media data with code
     dataToSave.socialMedia = form.socialMedia.map(sm => ({
       socialMediaCode: sm.code,
