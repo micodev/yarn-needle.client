@@ -88,7 +88,7 @@
         <Fieldset legend="التقييمات والتعليقات" :toggleable="true" :collapsed="true">
           <div v-for="comment in displayedComments" :key="comment.id" class="mb-4">
             <div class="flex items-center mb-2">
-              <img v-if="comment.avatar" :src="comment.avatar" alt="User Avatar" class="rounded-full w-8 h-8 ml-2">
+              <img v-if="isValidImageUrl(comment.avatar)" :src="comment.avatar" alt="User Avatar" class="rounded-full w-8 h-8 ml-2">
               <i v-else class="pi pi-user rounded-full w-8 h-8 ml-2 flex items-center justify-center bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300"></i>
               <div>
                 <p class="text-lg text-gray-900 dark:text-gray-100">{{ comment.name }}</p>
@@ -283,6 +283,13 @@ const handleCourseAction = async () => {
     // Handle purchase flow
     // Add your purchase logic here
   }
+};
+
+// Inside the <script setup> section, add the isValidImageUrl function
+const isValidImageUrl = (url) => {
+  if (!url) return false;
+  const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg'];
+  return imageExtensions.some(ext => url.toLowerCase().endsWith(ext));
 };
 </script>
 
