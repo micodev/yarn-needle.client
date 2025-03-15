@@ -475,7 +475,8 @@ const handleSubmit = async () => {
     if (!dataToSave.password) {
       delete dataToSave.password;
     }
-
+    // change birthDate to dateonly
+    dataToSave.birthDate = dataToSave.birthDate.toISOString().split('T')[0];
     const updatedProfile = await profileStore.submitProfile(dataToSave);
     profileData.value = updatedProfile;
     form.password = ''; // Clear password input
