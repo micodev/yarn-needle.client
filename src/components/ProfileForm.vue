@@ -420,6 +420,7 @@ onMounted(async () => {
   await membershipStore.fetchMemberships();
   await profileStore.fetchProfile();
   await socialMediaStore.fetchSocialMedia();
+  console.log('Profile Data:', availableSocialMedia);
   Object.assign(form, profileStore.getProfile || {});
 
 });
