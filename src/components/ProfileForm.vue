@@ -466,10 +466,10 @@ const handleSubmit = async () => {
     const dataToSave = { ...form };
     console.log('Data to save:', dataToSave);
     // Format social media data with code
-    // dataToSave.socialMedia = form.socialMedia.map(sm => ({
-    //   socialMediaCode: sm.value,
-    //   value: sm.username // Prepend the social media code to the value
-    // }));
+    dataToSave.socialMedia = form.socialMedia.map(sm => ({
+      socialMediaCode: sm.socialMediaCode,
+      value: sm.username // Prepend the social media code to the value
+    }));
 
     // Only include password if it was changed
     if (!dataToSave.password) {
@@ -523,10 +523,7 @@ const handlePurchaseSuccess = () => {
 
 // Add new methods
 const addSocialMedia = () => {
-  form.socialMedia.push({
-    type: null,
-    value: ''
-  });
+  form.socialMedia.push({});
 };
 
 const removeSocialMedia = (index) => {
