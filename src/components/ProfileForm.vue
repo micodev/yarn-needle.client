@@ -525,7 +525,7 @@ const handlePurchaseSuccess = () => {
 const addSocialMedia = () => {
   form.socialMedia.push({
     type: null,
-    value: ''
+    value: []
   });
 };
 
