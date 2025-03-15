@@ -464,13 +464,12 @@ const handleSubmit = async () => {
 
   try {
     const dataToSave = { ...form };
-    console.log('Data to save:', dataToSave);
     // Format social media data with code
     dataToSave.socialMedia = form.socialMedia.map(sm => ({
       socialMediaCode: sm.socialMediaCode,
       value: sm.username // Prepend the social media code to the value
     }));
-
+    console.log('Data to save:', dataToSave);
     // Only include password if it was changed
     if (!dataToSave.password) {
       delete dataToSave.password;
