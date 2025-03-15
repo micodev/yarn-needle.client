@@ -229,7 +229,7 @@
                  class="flex flex-wrap items-center gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
               <div class="flex">
                 <IftaLabel>
-                  <MultiSelect v-model="social.socialMediaCode"
+                  <Select v-model="social.socialMediaCode"
                            :options="availableSocialMedia"
                            :selectionLimit="1"
                            optionLabel="name"
