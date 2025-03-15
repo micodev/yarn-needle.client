@@ -242,7 +242,7 @@
 
               <div class="flex-1">
                 <IftaLabel>
-                  <InputText v-model="social.value"
+                  <InputText v-model="social.username"
                             :placeholder="social.code ? `أدخل ${social.name}` : 'أدخل الحساب'"
                             class="w-full" />
                   <label>الحساب</label>
