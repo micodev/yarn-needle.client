@@ -107,7 +107,7 @@
         >
           <Column field="id" header="المعرف" sortable />
           <Column field="title" header="العنوان" sortable />
-          <Column field="type" header="النوع" sortable />
+          <Column field="typeName" header="النوع" sortable />
           <Column field="level" header="المستوى" sortable />
           <Column header="الفئات">
             <template #body="slotProps">
