@@ -7,7 +7,7 @@ export const useCoursesStore = defineStore('courses', {
 		error: null,
 		currentPage: 1,
 		hasMore: true,
-		limit: 2,
+		limit: 10,
 		currentFilters: null,
 		recentCourses: []
 	}),
