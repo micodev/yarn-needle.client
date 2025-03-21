@@ -7,12 +7,17 @@
       <div class="relative w-full flex flex-col justify-center items-center rounded-md p-2 sm:p-1">
         <p class="text-lg sm:text-base font-bold mb-2 sm:mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
         <!-- Rating component - moved above description -->
-        <div class="flex items-center gap-2 w-full justify-center mb-2 sm:mb-1">
+        <div v-if="!enrolled" class="flex items-center gap-2 w-full justify-center mb-2 sm:mb-1">
           <Rating v-model="localRating" readonly disabled :cancel="false" class="cursor-default rtl-rating sm:scale-90" />
           <span class="text-gray-600 dark:text-gray-400 text-sm sm:text-xs flex items-center">
             <i class="pi pi-users ml-2"></i>
             {{ course.students || 0 }}
           </span>
+        </div>
+        <!-- Progress information for enrolled courses -->
+        <div v-if="enrolled" class="flex justify-between items-center w-full mb-2 text-xs sm:text-sm">
+          <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.completedLessons }}/{{ course.totalLessons }} درس</span>
+          <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.duration }} ساعات</span>
         </div>
         <div class="text-fade-container relative w-full h-[4.5rem] mb-2 sm:mb-1">
           <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-xs text-ellipsis">
@@ -24,7 +29,7 @@
         <!-- discount badge only -->
         <div class="flex justify-end">
           <span
-            v-if="course.discount"
+            v-if="course.discount && !enrolled"
             class="text-white font-bold text-center content-center rounded-md px-4 py-1 sm:px-2 sm:py-0.5 sm:text-sm bg-primary bg-opacity-45 backdrop-blur-md border border-primary border-opacity-50 shadow-md dark:bg-primary dark:bg-opacity-45 dark:text-white"
           >
             {{ course.discount }}%
@@ -33,7 +38,8 @@
       </div>
     </div>
     <div class="p-4 pt-2 sm:p-2 sm:pt-1">
-      <div class="flex flex-row justify-center mb-2 sm:mb-1" :class="{'opacity-0': course.purchased}">
+      <!-- Price section - only for non-enrolled courses -->
+      <div v-if="!enrolled" class="flex flex-row justify-center mb-2 sm:mb-1" :class="{'opacity-0': course.purchased}">
         <p class="text-black dark:text-white font-bold text-base sm:text-sm align-middle ml-2" v-if="course.discount">
           <SARSymbol :value="getDiscountedPrice(course)" />
         </p>
@@ -44,7 +50,9 @@
           <SARSymbol :value="course.originalPrice" :line-through="true" />
         </p>
       </div>
-      <div class="flex flex-row gap-1">
+
+      <!-- Buttons for regular course view -->
+      <div v-if="!enrolled" class="flex flex-row gap-1">
         <Button
           v-if="!course.purchased && !course.isSubscribtionIncluded"
           label="شراء"
@@ -76,6 +84,24 @@
           @click="onNavigateToDetails(course.id)"
         />
       </div>
+
+      <!-- Buttons for enrolled course view -->
+      <div v-if="enrolled" class="flex gap-2 flex-col sm:flex-row">
+        <Button
+          label="عرض التفاصيل"
+          icon="pi pi-eye"
+          class="w-full sm:flex-1"
+          severity="primary"
+          @click="onNavigateToDetails(course.id)"
+        />
+        <Button
+          label="معلومات إضافية"
+          icon="pi pi-info-circle"
+          class="w-full sm:flex-1"
+          severity="secondary"
+          @click="onShowSocials(course)"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -85,20 +111,24 @@ import { Button, Rating } from "primevue";
 import SARSymbol from './SARSymbol.vue';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 
-const { course } = defineProps({
+const props = defineProps({
   course: {
     type: Object,
     required: true
+  },
+  enrolled: {
+    type: Boolean,
+    default: false
   }
 });
 
 // Create a local copy of the rating to avoid mutating the prop
-const localRating = ref(course.rating);
+const localRating = ref(props.course.rating);
 const screenSize = ref('md'); // Default to medium
 
 // Computed property for truncated description based on screen size
 const truncatedDescription = computed(() => {
-  if (!course.description) return '';
+  if (!props.course.description) return '';
 
   const charLimits = {
     'xs': 200,
@@ -109,9 +139,9 @@ const truncatedDescription = computed(() => {
   };
 
   const limit = charLimits[screenSize.value];
-  return course.description.length > limit
-    ? course.description.substring(0, limit) + '...'
-    : course.description;
+  return props.course.description.length > limit
+    ? props.course.description.substring(0, limit) + '...'
+    : props.course.description;
 });
 
 // Update screen size based on window width
@@ -135,7 +165,7 @@ onUnmounted(() => {
   window.removeEventListener('resize', updateScreenSize);
 });
 
-const emit = defineEmits(['purchase', 'add-course', 'navigate-details']);
+const emit = defineEmits(['purchase', 'add-course', 'navigate-details', 'show-socials']);
 
 const getDiscountedPrice = (course) => {
   if (!course.discount) return course.originalPrice;
@@ -168,6 +198,9 @@ const onNavigateToDetails = (courseId) => {
   emit('navigate-details', courseId);
 };
 
+const onShowSocials = (course) => {
+  emit('show-socials', course);
+};
 </script>
 
 <style scoped>

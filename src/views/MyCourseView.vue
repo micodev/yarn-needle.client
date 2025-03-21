@@ -30,35 +30,14 @@
       <!-- Course Grid -->
       <div v-else-if="courseStore.hasCourses"
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        <div v-for="course in courseStore.courses" :key="course.id"
-          class="w-full rounded-lg shadow-md relative flex flex-col bg-surface-0 dark:bg-surface-900 transition-all duration-300 ease-in-out hover:shadow-xl sm:hover:-translate-y-1">
-          <div class="relative aspect-video">
-            <img :src="course.image" :alt="course.title" class="w-full h-full object-cover rounded-t-lg"
-              loading="lazy" />
-            <div
-              class="absolute inset-0 bg-gradient-to-b from-transparent via-white/60 via-100% to-surface-0 to-80% opacity-100 dark:via-gray-100/[0.2] dark:to-gray-800">
-            </div>
-          </div>
-
-          <div class="p-3 sm:p-4 flex flex-col flex-grow">
-            <h3 class="text-base sm:text-lg font-bold mb-2 text-gray-900 dark:text-gray-100">{{ course.title }}</h3>
-            <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 mb-4">{{ course.description }}</p>
-
-            <div class="mt-auto">
-              <div class="flex justify-between items-center mb-3 text-xs sm:text-sm">
-                <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.completedLessons }}/{{
-                  course.totalLessons }} درس</span>
-                <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.duration }} ساعات</span>
-              </div>
-              <div class="flex gap-2 flex-col sm:flex-row">
-                <Button label="عرض التفاصيل" icon="pi pi-eye" class="w-full sm:flex-1" severity="primary"
-                  @click="$router.push(`/course/${course.id}`)" />
-                <Button label="معلومات إضافية" icon="pi pi-info-circle" class="w-full sm:flex-1" severity="secondary"
-                  @click="showSocialsDialog(course)" />
-              </div>
-            </div>
-          </div>
-        </div>
+        <CourseCard
+          v-for="course in courseStore.courses"
+          :key="course.id"
+          :course="course"
+          :enrolled="true"
+          @navigate-details="$router.push(`/course/${$event}`)"
+          @show-socials="showSocialsDialog"
+        />
       </div>
 
       <!-- No Courses Message -->
@@ -84,6 +63,7 @@ import { onMounted } from 'vue';
 import { Button } from 'primevue';
 import { useMyCourseStore } from '@/stores/myCourses';
 import SocialMediaDialog from '@/components/SocialMediaDialog.vue';
+import CourseCard from '@/components/CourseCard.vue';
 
 const courseStore = useMyCourseStore();
 const isDialogVisible = ref(false);
