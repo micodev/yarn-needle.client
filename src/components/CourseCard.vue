@@ -5,7 +5,7 @@
     <div class="relative p-3 flex-grow">
       <img :src="course.image" alt="Course Image" class="w-full h-40 object-cover rounded" />
       <div class="relative w-full flex flex-col justify-center items-center rounded-md p-2">
-        <p class="text-xl font-bold mb-2 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
+        <p class="text-sm font-bold mb-2 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
         <p class="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">{{ course.description }}</p>
       </div>
       <div class="absolute top-5 left-4 px-2 w-full">
