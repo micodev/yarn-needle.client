@@ -1,5 +1,5 @@
 <template>
-  <span class="sar-symbol-wrapper" :class="{'inline-flex': inline}">
+  <span class="sar-symbol-wrapper" :class="{'inline-flex': inline, 'line-through': lineThrough}">
     <span v-if="showValue" class="sar-value">{{ value }}</span>
     <svg class="sar-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124.14 1256.39" :width="size" :height="size">
       <path class="sar-path" d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
@@ -34,6 +34,10 @@ defineProps({
   inline: {
     type: Boolean,
     default: true
+  },
+  lineThrough: {
+    type: Boolean,
+    default: false
   }
 });
 </script>
@@ -56,5 +60,9 @@ defineProps({
 
 .inline-flex {
   display: inline-flex;
+}
+
+.line-through {
+  text-decoration: line-through;
 }
 </style>
