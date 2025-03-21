@@ -121,6 +121,7 @@ const menuItems = ref([
 
 // Function to check if menu item matches current route
 const isActiveRoute = (itemRoute) => {
+  console.log(route.path, itemRoute);
   if (!itemRoute) return false;
   return route.path === itemRoute;
 };
