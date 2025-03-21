@@ -16,7 +16,7 @@
         </div>
         <!-- Progress information for enrolled courses -->
         <div v-if="enrolled" class="flex justify-between items-center w-full mb-2 text-xs sm:text-sm">
-          <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.completedLessons }}/{{ course.totalLessons }} درس</span>
+          <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.lessonCount }} درس</span>
           <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.duration }} ساعات</span>
         </div>
         <div class="text-fade-container relative w-full h-[4.5rem] mb-2 sm:mb-1">
