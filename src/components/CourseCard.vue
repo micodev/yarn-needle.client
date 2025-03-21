@@ -98,7 +98,7 @@
           label="معلومات إضافية"
           icon="pi pi-info-circle"
           class="w-full sm:flex-1"
-          severity="secondary"
+          severity="primary"
           outlined
           @click="onShowSocials(course)"
         />
