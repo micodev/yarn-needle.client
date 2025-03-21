@@ -68,21 +68,7 @@
           severity="success"
           @click="onAddCourse(course.id)"
         />
-        <Button
-          label="فتح الدورة"
-          v-if="course.purchased"
-          class="h-8 sm:h-7 flex-1 text-sm sm:text-xs"
-          severity="primary"
-          @click="onNavigateToDetails(course.id)"
-        />
-        <Button
-          v-if="!course.purchased"
-          label="التفاصيل"
-          class="h-8 sm:h-7 flex-1 text-sm sm:text-xs"
-          severity="primary"
-          outlined
-          @click="onNavigateToDetails(course.id)"
-        />
+
       </div>
 
       <!-- Buttons for enrolled course view -->
