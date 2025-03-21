@@ -103,7 +103,7 @@
             />
             <Button
               v-if="!course.purchased"
-              label="تفاصيل"
+              label="التفاصيل"
               class="h-8 flex-1"
               severity="secondary"
               @click="navigateToDetails(course.id)"
