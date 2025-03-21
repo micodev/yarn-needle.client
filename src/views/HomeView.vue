@@ -123,24 +123,7 @@ const authStore = useAuthStore();
 const router = useRouter();
 const toast = useToast();
 const purchaseType = ref('course');
-const getDiscountedPrice = (course) => {
-  if (!course.discount) return course.originalPrice;
 
-  let discountRate = course.discount;
-  let originalPrice = course.originalPrice;
-
-  if (discountRate > 1) {
-    discountRate /= 100; // Convert percentage to decimal
-  }
-
-  // Calculate discount amount
-  const discountAmount = originalPrice * discountRate;
-
-  // Calculate discounted price
-  const discountedPrice = originalPrice - discountAmount;
-
-  return Math.round(discountedPrice);
-};
 
 // Add these refs for purchase dialog
 const showPurchaseDialog = ref(false);
