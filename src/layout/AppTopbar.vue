@@ -12,7 +12,10 @@
       </template>
 
       <template #item="{ item, props, hasSubmenu, root }">
-        <a v-ripple class="flex items-center" v-bind="props.action">
+        <a v-ripple
+           class="flex items-center"
+           v-bind="props.action"
+           :class="{ 'active-link': isActiveRoute(item.route) }">
           <span>{{ item.label }}</span>
           <Badge v-if="item.badge" :class="{ 'ml-auto': !root, 'ml-2': root }" :value="item.badge" />
           <span v-if="item.shortcut"
@@ -46,40 +49,45 @@
 <script setup>
 import { ref } from "vue";
 import { useAuthStore } from '@/stores/auth';
-import { useRouter } from 'vue-router'; // Add this import
+import { useRouter, useRoute } from 'vue-router'; // Added useRoute
 import { Menubar, Menu, Avatar, Button, Badge } from "primevue";
 import RegisterForm from "@/components/RegisterForm.vue";
 
 const authStore = useAuthStore();
-const router = useRouter(); // Add router instance
+const router = useRouter();
+const route = useRoute(); // Get current route
 
 const items = ref([
 {
     label: 'الرئيسية',
     icon: 'pi pi-home',
+    route: '/', // Add route property
     command: () => {
-      router.push('/'); // Add navigation to home page
+      router.push('/');
     },
   },
   {
     label: 'الدورات',
     icon: 'pi pi-home',
+    route: '/courses', // Add route property
     command: () => {
-      router.push('/courses'); // Add navigation to home page
+      router.push('/courses');
     },
   },
   {
     label: 'دوراتي',
     icon: 'pi pi-book',
+    route: '/my-courses', // Add route property
     command: () => {
-      router.push('/my-courses'); // Add navigation to my courses page
+      router.push('/my-courses');
     },
   },
   {
     label: 'الطلبات',
     icon: 'pi pi-shopping-cart',
+    route: '/order-history', // Add route property
     command: () => {
-      router.push('/order-history'); // Add navigation to order history page
+      router.push('/order-history');
     },
   },
 
@@ -111,6 +119,12 @@ const menuItems = ref([
   }
 ]);
 
+// Function to check if menu item matches current route
+const isActiveRoute = (itemRoute) => {
+  if (!itemRoute) return false;
+  return route.path === itemRoute;
+};
+
 const toggleProfileMenu = (event) => {
   menu.value.toggle(event);
 };
@@ -131,5 +145,18 @@ const toggleDarkMode = () => {
 .p-menu-submenu-label {
   /* remove padding */
   padding: 0 !important;
+}
+
+/* Active link styling */
+.active-link {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+/* Ensure active state persists on hover */
+.p-menuitem-link:hover .active-link,
+.active-link:hover {
+  background-color: var(--primary-color) !important;
+  color: white !important;
 }
 </style>
