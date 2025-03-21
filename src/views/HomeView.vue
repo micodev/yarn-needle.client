@@ -61,7 +61,7 @@
             <!-- discount badge only -->
             <div class="flex justify-end">
               <span v-if="course.discount"
-                class="text-primary font-bold text-center content-center rounded-md px-4 py-1 bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 shadow-sm dark:bg-gray-800 dark:bg-opacity-30 ">{{
+                class="text-primary font-bold text-center content-center rounded-md px-4 py-1 bg-primary bg-opacity-10 backdrop-blur-md border border-primary border-opacity-50 shadow-md dark:bg-primary dark:bg-opacity-30 dark:text-white">{{
                   course.discount }}% </span>
             </div>
           </div>
