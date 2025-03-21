@@ -1,42 +1,42 @@
 <template>
   <div
-    :class="['card p-0 rounded-lg shadow-md relative flex flex-col h-[420px] min-h-[420px]', 'bg-slate-50 dark:bg-gray-800']"
+    :class="['card p-0 rounded-lg shadow-md relative flex flex-col h-[420px] min-h-[420px] sm:h-[400px] sm:min-h-[400px]', 'bg-slate-50 dark:bg-gray-800']"
   >
-    <div class="relative p-3 flex-grow">
-      <img :src="course.image" alt="Course Image" class="w-full h-40 object-cover rounded" />
-      <div class="relative w-full flex flex-col justify-center items-center rounded-md p-2">
-        <p class="text-lg font-bold mb-2 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
+    <div class="relative p-3 sm:p-2 flex-grow">
+      <img :src="course.image" alt="Course Image" class="w-full h-40 sm:h-36 object-cover rounded" />
+      <div class="relative w-full flex flex-col justify-center items-center rounded-md p-2 sm:p-1">
+        <p class="text-lg sm:text-base font-bold mb-2 sm:mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
         <!-- Rating component - moved above description -->
-        <div class="flex items-center gap-2 w-full justify-center mb-2">
-          <Rating v-model="localRating" readonly disabled :cancel="false" class="cursor-default rtl-rating" />
-          <span class="text-gray-600 dark:text-gray-400 text-sm flex items-center">
+        <div class="flex items-center gap-2 w-full justify-center mb-2 sm:mb-1">
+          <Rating v-model="localRating" readonly disabled :cancel="false" class="cursor-default rtl-rating sm:scale-90" />
+          <span class="text-gray-600 dark:text-gray-400 text-sm sm:text-xs flex items-center">
             <i class="pi pi-users ml-2"></i>
             {{ course.students || 0 }}
           </span>
         </div>
-        <p class="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">{{ course.description }}</p>
+        <p class="text-gray-700 dark:text-gray-300 mb-4 sm:mb-2 line-clamp-3 text-sm sm:text-xs">{{ course.description }}</p>
       </div>
       <div class="absolute top-5 left-4 px-2 w-full">
         <!-- discount badge only -->
         <div class="flex justify-end">
           <span
             v-if="course.discount"
-            class="text-white font-bold text-center content-center rounded-md px-4 py-1 bg-primary bg-opacity-45 backdrop-blur-md border border-primary border-opacity-50 shadow-md dark:bg-primary dark:bg-opacity-45 dark:text-white"
+            class="text-white font-bold text-center content-center rounded-md px-4 py-1 sm:px-2 sm:py-0.5 sm:text-sm bg-primary bg-opacity-45 backdrop-blur-md border border-primary border-opacity-50 shadow-md dark:bg-primary dark:bg-opacity-45 dark:text-white"
           >
             {{ course.discount }}%
           </span>
         </div>
       </div>
     </div>
-    <div class="p-4 mt-auto ">
-      <div class="flex flex-row justify-center mb-2" v-if="!course.purchased">
-        <p class="text-black dark:text-white font-bold text-base align-middle ml-2" v-if="course.discount">
+    <div class="p-4 sm:p-2 mt-auto">
+      <div class="flex flex-row justify-center mb-2 sm:mb-1" v-if="!course.purchased">
+        <p class="text-black dark:text-white font-bold text-base sm:text-sm align-middle ml-2" v-if="course.discount">
           <SARSymbol :value="getDiscountedPrice(course)" />
         </p>
-        <p class="text-black dark:text-white font-bold text-base" v-if="!course.discount">
+        <p class="text-black dark:text-white font-bold text-base sm:text-sm" v-if="!course.discount">
           <SARSymbol :value="course.originalPrice" />
         </p>
-        <p class="text-gray-500 dark:text-gray-400 line-through ml-2 content-center text-sm" v-if="course.discount">
+        <p class="text-gray-500 dark:text-gray-400 line-through ml-2 content-center text-sm sm:text-xs" v-if="course.discount">
           <SARSymbol :value="course.originalPrice" :line-through="true" />
         </p>
       </div>
@@ -45,28 +45,28 @@
           v-if="!course.purchased && !course.isSubscribtionIncluded"
           label="شراء"
           icon="pi pi-shopping-cart"
-          class="h-8 flex-1"
+          class="h-8 sm:h-7 flex-1 text-sm sm:text-xs"
           severity="primary"
           @click="onPurchaseClick(course.id)"
         />
         <Button
           v-if="course.isSubscribtionIncluded && !course.purchased"
           label="إضافة للمكتبة"
-          class="h-8 flex-1"
+          class="h-8 sm:h-7 flex-1 text-sm sm:text-xs"
           severity="success"
           @click="onAddCourse(course.id)"
         />
         <Button
           label="فتح الدورة"
           v-if="course.purchased"
-          class="h-8 flex-1"
+          class="h-8 sm:h-7 flex-1 text-sm sm:text-xs"
           severity="primary"
           @click="onNavigateToDetails(course.id)"
         />
         <Button
           v-if="!course.purchased"
           label="التفاصيل"
-          class="h-8 flex-1"
+          class="h-8 sm:h-7 flex-1 text-sm sm:text-xs"
           severity="primary"
           outlined
           @click="onNavigateToDetails(course.id)"
