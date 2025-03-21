@@ -9,8 +9,8 @@
         <p class="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">{{ course.description }}</p>
         <!-- Rating component -->
         <div class="flex items-center gap-2 w-full justify-center mb-2">
-          <Rating v-model="course.rating" readonly :cancel="false" />
-          <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.rating }}/5</span>
+          <Rating v-model="localRating" readonly :cancel="false" />
+          <span class="text-sm text-gray-600 dark:text-gray-400">{{ localRating }}/5</span>
         </div>
       </div>
       <div class="absolute top-5 left-4 px-2 w-full">
@@ -76,6 +76,7 @@
 <script setup>
 import { Button, Rating } from "primevue";
 import SARSymbol from './SARSymbol.vue';
+import { ref } from 'vue';
 
 const { course } = defineProps({
   course: {
@@ -83,6 +84,9 @@ const { course } = defineProps({
     required: true
   }
 });
+
+// Create a local copy of the rating to avoid mutating the prop
+const localRating = ref(course.rating);
 
 const emit = defineEmits(['purchase', 'add-course', 'navigate-details']);
 
