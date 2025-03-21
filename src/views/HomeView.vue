@@ -57,7 +57,7 @@
             <p class="text-xl font-bold mb-2 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
             <p class="text-gray-700 dark:text-gray-300 mb-4">{{ course.description }}</p>
           </div>
-          <div class="absolute top-4 px-2 w-full">
+          <div class="absolute top-4 left-4 px-2 w-full">
             <!-- discount badge only -->
             <div class="flex justify-end">
               <span v-if="course.discount"
