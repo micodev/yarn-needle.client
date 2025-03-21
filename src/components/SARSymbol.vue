@@ -48,6 +48,7 @@ defineProps({
   align-items: center;
   gap: 4px;
   text-decoration: inherit; /* Inherit text decoration from parent */
+  position: relative; /* Add position relative for absolute positioning */
 }
 
 .sar-icon {
@@ -64,6 +65,17 @@ defineProps({
 }
 
 .line-through {
-  text-decoration: line-through;
+  text-decoration: none; /* Remove default line-through */
+}
+
+.line-through::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  z-index: 1; /* Ensure the line appears on top */
 }
 </style>
