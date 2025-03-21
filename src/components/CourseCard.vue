@@ -14,8 +14,8 @@
             {{ course.students || 0 }}
           </span>
         </div>
-        <p class="text-gray-700 dark:text-gray-300 mb-2 sm:mb-1 line-clamp-3 text-sm sm:text-xs h-[4.5rem] overflow-hidden">
-          {{ course.description || '' }}
+        <p class="text-gray-700 dark:text-gray-300 mb-2 sm:mb-1 line-clamp-3 text-sm sm:text-xs h-[4.5rem] overflow-hidden text-ellipsis">
+          {{ course.description ? course.description.substring(0, 150) + (course.description.length > 150 ? '...' : '') : '' }}
         </p>
       </div>
       <div class="absolute top-5 left-4 px-2 w-full">
