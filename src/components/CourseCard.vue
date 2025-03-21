@@ -68,7 +68,6 @@
           severity="success"
           @click="onAddCourse(course.id)"
         />
-
       </div>
 
       <!-- Buttons for enrolled course view -->
