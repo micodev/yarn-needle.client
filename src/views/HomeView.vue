@@ -50,7 +50,7 @@
       </div>
       <div v-else v-for="(course, index) in coursesStore.getRecentCourses" :key="course.title"
         :class="['card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full', 'bg-slate-50 dark:bg-gray-800' ]">
-        <div class="relative">
+        <div class="relative p-3">
           <img :src="course.image" alt="Course Image" class="w-full rounded" />
           <div
             class="relative w-full flex flex-col justify-center items-center rounded-md p-2">
