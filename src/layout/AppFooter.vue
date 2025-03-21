@@ -1,5 +1,5 @@
 <template>
-  <footer class="py-4 dark:bg-gray-800 dark:text-white bg-gray-200 text-black transition-colors duration-300">
+  <footer class="py-4 dark:bg-gray-800 dark:text-white bg-gray-200 text-black transition-colors duration-300 mt-auto">
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
         <div class="text-sm text-center md:text-start">
