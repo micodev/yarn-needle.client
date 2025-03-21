@@ -2,7 +2,7 @@
   <div
     :class="['card p-0 rounded-lg shadow-md relative flex flex-col', 'bg-slate-50 dark:bg-gray-800']"
   >
-    <div class="relative p-3 sm:p-2 flex-grow h-100">
+    <div class="relative p-3 sm:p-2 flex-grow h-full">
       <img :src="course.image" alt="Course Image" class="w-full h-40 sm:h-36 object-cover rounded" />
       <div class="relative w-full flex flex-col justify-center items-center rounded-md p-2 sm:p-1">
         <p class="text-lg sm:text-base font-bold mb-2 sm:mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
