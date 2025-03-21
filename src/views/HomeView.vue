@@ -49,13 +49,13 @@
         {{ coursesStore.error }}
       </div>
       <div v-else v-for="(course) in coursesStore.getRecentCourses" :key="course.title"
-        :class="['w-full md:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full', 'bg-slate-50 dark:bg-gray-800' ]">
-        <div class="relative p-3">
-          <img :src="course.image" alt="Course Image" class="w-full rounded" />
+        :class="['w-full md:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] card p-0 rounded-lg shadow-md relative flex flex-col min-h-[420px]', 'bg-slate-50 dark:bg-gray-800' ]">
+        <div class="relative p-3 flex-grow">
+          <img :src="course.image" alt="Course Image" class="w-full h-40 object-cover rounded" />
           <div
             class="relative w-full flex flex-col justify-center items-center rounded-md p-2">
             <p class="text-xl font-bold mb-2 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
-            <p class="text-gray-700 dark:text-gray-300 mb-4">{{ course.description }}</p>
+            <p class="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">{{ course.description }}</p>
           </div>
           <div class="absolute top-5 left-4 px-2 w-full">
             <!-- discount badge only -->
@@ -66,7 +66,7 @@
             </div>
           </div>
         </div>
-        <div class="flex justify-between p-4 flex-col mt-auto">
+        <div class="p-4 mt-auto">
           <div class="flex flex-row justify-center mb-2">
             <p class="text-black dark:text-white font-bold text-base align-middle ml-2" v-if="course.discount">
               <SARSymbol :value="getDiscountedPrice(course)" />
