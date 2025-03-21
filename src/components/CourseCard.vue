@@ -14,7 +14,7 @@
             {{ course.students || 0 }}
           </span>
         </div>
-        <p class="text-gray-700 dark:text-gray-300 mb-4 sm:mb-2 line-clamp-3 text-sm sm:text-xs">{{ course.description }}</p>
+        <p class="text-gray-700 dark:text-gray-300 mb-2 sm:mb-1 line-clamp-3 text-sm sm:text-xs">{{ course.description }}</p>
       </div>
       <div class="absolute top-5 left-4 px-2 w-full">
         <!-- discount badge only -->
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div class="p-4 sm:p-2 mt-auto">
+    <div class="p-4 pt-2 sm:p-2 sm:pt-1">
       <div class="flex flex-row justify-center mb-2 sm:mb-1" v-if="!course.purchased">
         <p class="text-black dark:text-white font-bold text-base sm:text-sm align-middle ml-2" v-if="course.discount">
           <SARSymbol :value="getDiscountedPrice(course)" />
