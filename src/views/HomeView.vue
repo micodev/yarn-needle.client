@@ -41,15 +41,15 @@
       <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">أحدث الدورات التدريبية</h2>
       <p class="text-lg text-gray-600 dark:text-gray-400">دورات مصممة لتطوير مهاراتك في مجالات متعددة</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 relative justify-center">
-      <div v-if="coursesStore.isLoading" class="col-span-3 text-center">
+    <div class="flex flex-wrap gap-8 mb-12 relative justify-center">
+      <div v-if="coursesStore.isLoading" class="w-full text-center">
         <i class="pi pi-spin pi-spinner text-4xl"></i>
       </div>
-      <div v-else-if="coursesStore.error" class="col-span-3 text-center text-red-500">
+      <div v-else-if="coursesStore.error" class="w-full text-center text-red-500">
         {{ coursesStore.error }}
       </div>
       <div v-else v-for="(course) in coursesStore.getRecentCourses" :key="course.title"
-        :class="['card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full', 'bg-slate-50 dark:bg-gray-800' ]">
+        :class="['w-full md:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full', 'bg-slate-50 dark:bg-gray-800' ]">
         <div class="relative p-3">
           <img :src="course.image" alt="Course Image" class="w-full rounded" />
           <div
