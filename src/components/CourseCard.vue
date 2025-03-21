@@ -15,7 +15,7 @@
           </span>
         </div>
         <p class="text-gray-700 dark:text-gray-300 mb-2 sm:mb-1 line-clamp-3 text-sm sm:text-xs"
-           :class="{ 'min-h-[4.5rem]': isShortDescription(course.description) }">
+           :class="{ 'min-h-[4.3rem]': isShortDescription(course.description) }">
           {{ course.description }}
         </p>
       </div>
