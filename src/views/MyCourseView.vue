@@ -34,7 +34,6 @@
           v-for="course in courseStore.courses"
           :key="course.id"
           :course="course"
-          :enrolled="true"
           @navigate-details="$router.push(`/course/${$event}`)"
           @show-socials="showSocialsDialog"
         />
