@@ -68,9 +68,15 @@
         </div>
         <div class="flex justify-between p-4 flex-col mt-auto">
           <div class="flex flex-row justify-center mb-2">
-            <p class="text-black dark:text-white font-bold text-base align-middle ml-2" v-if="course.discount">{{ getDiscountedPrice(course) }} ريال سعودي</p>
-            <p class="text-black dark:text-white font-bold text-base" v-if="!course.discount">{{ course.originalPrice }} ريال سعودي</p>
-            <p class="text-gray-500 dark:text-gray-400 line-through ml-2 content-center text-xs" v-if="course.discount">{{ course.originalPrice }} ريال سعودي</p>
+            <p class="text-black dark:text-white font-bold text-base align-middle ml-2" v-if="course.discount">
+              <SARSymbol :value="getDiscountedPrice(course)" />
+            </p>
+            <p class="text-black dark:text-white font-bold text-base" v-if="!course.discount">
+              <SARSymbol :value="course.originalPrice" />
+            </p>
+            <p class="text-gray-500 dark:text-gray-400 line-through ml-2 content-center text-xs" v-if="course.discount">
+              <SARSymbol :value="course.originalPrice" />
+            </p>
           </div>
           <div class="flex flex-row gap-1">
             <Button
@@ -128,7 +134,9 @@
           </ul>
         </div>
         <div class="mt-auto">
-          <p class="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">{{ plan.price }} ريال سعودي / الشهر</p>
+          <p class="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">
+            <SARSymbol :value="plan.price" :showUnit="true" />
+          </p>
           <Button
             label="إشترك الآن"
             icon="pi pi-arrow-left"
@@ -159,6 +167,7 @@ import { useCoursesStore } from '@/stores/courses';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
 import PurchaseConfirmDialog from '../components/PurchaseConfirmDialog.vue';
+import SARSymbol from '../components/SARSymbol.vue';
 
 const membershipStore = useMembershipStore();
 const coursesStore = useCoursesStore();

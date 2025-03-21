@@ -136,11 +136,11 @@
           <div class="flex justify-between p-3 sm:p-4 flex-col mt-auto bg-white dark:bg-gray-900 rounded-b-lg">
             <div class="flex flex-col items-center mb-2">
               <p class="text-gray-500 dark:text-gray-400 line-through text-xs mb-1" v-if="course.discount"
-                v-tooltip="'ريال سعودي'">
-                {{ course.originalPrice }} SAR
+                v-tooltip="'Saudi Riyal'">
+                <SARSymbol :value="course.originalPrice" :size="12" />
               </p>
-              <p class="text-black dark:text-white font-bold text-sm" v-tooltip="'ريال سعودي'">
-                {{ computeDiscountedPrice(course.originalPrice, course.discount) }} SAR
+              <p class="text-black dark:text-white font-bold text-sm" v-tooltip="'Saudi Riyal'">
+                <SARSymbol :value="computeDiscountedPrice(course.originalPrice, course.discount)" />
               </p>
             </div>
             <div class="flex flex-row gap-1">
@@ -216,10 +216,12 @@ import { useCourseTypeStore } from '../stores/courseType.js';
 import PurchaseConfirmDialog from '../components/PurchaseConfirmDialog.vue'; // Add this import
 import { useCourseStore } from '../stores/course.js';
 import { useToast } from 'primevue/usetoast';
+import SARSymbol from '../components/SARSymbol.vue';
 const coursesStore = useCoursesStore(); // Use Pinia store
 const { isLoading, courses } = storeToRefs(coursesStore); // Use storeToRefs for reactive state
 
 const searchQuery = ref("");
+
 const sortPopover = ref();
 
 const sortOptions = ref([

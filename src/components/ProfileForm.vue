@@ -62,7 +62,9 @@
                 </ul>
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4">
                   <span class="text-base sm:text-lg font-bold text-gray-900 dark:text-white">
-                    {{ currentPlan.price ? `${currentPlan.price} ريال سعودي / الشهر` : '' }}
+                    {{ currentPlan.price ? 
+                      `${currentPlan.price}` : '' }}
+                    <SARSymbol v-if="currentPlan.price" :value="null" :showValue="false" :showUnit="true" />
                   </span>
                   <button
                     v-if="isExpired"
@@ -91,8 +93,8 @@
           </ul>
         </div>
                   <div class="mt-auto">
-                    <p class="text-lg font-bold mb-4 text-gray-900 dark:text-white">
-                      {{ plan.price }} ريال سعودي / الشهر
+                    <p class="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">
+                      <SARSymbol :value="plan.price" :showUnit="true" />
                     </p>
                     <button
                       @click="handleSubscription(plan)"
@@ -291,6 +293,7 @@ import { useMembershipStore } from '@/stores/membership'; // Add this import
 import { useSocialMediaStore } from '@/stores/socialMedia'; // Add this import
 import { useToast } from 'primevue/usetoast';
 import PurchaseConfirmDialog from './PurchaseConfirmDialog.vue';
+import SARSymbol from './SARSymbol.vue';
 const toast = useToast();
 
 
