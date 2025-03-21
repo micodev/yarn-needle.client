@@ -42,8 +42,7 @@
           <SARSymbol :value="course.originalPrice" :line-through="true" />
         </p>
       </div>
-      <div class="h-[25px]" v-else>
-      </div>
+
       <div class="flex flex-row gap-1">
         <Button
           v-if="!course.purchased && !course.isSubscribtionIncluded"
