@@ -47,6 +47,7 @@ defineProps({
   display: flex;
   align-items: center;
   gap: 4px;
+  text-decoration: inherit; /* Inherit text decoration from parent */
 }
 
 .sar-icon {
