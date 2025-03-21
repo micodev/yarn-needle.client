@@ -14,9 +14,8 @@
             {{ course.students || 0 }}
           </span>
         </div>
-        <p class="text-gray-700 dark:text-gray-300 mb-2 sm:mb-1 line-clamp-3 text-sm sm:text-xs"
-           :class="{ 'min-h-[4.5rem]': isShortDescription(course.description) }">
-          {{ course.description }}
+        <p class="text-gray-700 dark:text-gray-300 mb-2 sm:mb-1 line-clamp-3 text-sm sm:text-xs h-[4.5rem] overflow-hidden">
+          {{ course.description || '' }}
         </p>
       </div>
       <div class="absolute top-5 left-4 px-2 w-full">
@@ -127,10 +126,6 @@ const onNavigateToDetails = (courseId) => {
   emit('navigate-details', courseId);
 };
 
-// Check if description is short (less than ~120 characters which is roughly 3 lines)
-const isShortDescription = (description) => {
-  return description?.length < 120;
-};
 </script>
 
 <style scoped>
