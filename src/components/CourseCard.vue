@@ -99,10 +99,10 @@ const truncatedDescription = computed(() => {
   if (!course.description) return '';
 
   const charLimits = {
-    'xs': 80,
-    'sm': 120,
-    'md': 150,
-    'lg': 180,
+    'xs': 70,
+    'sm': 80,
+    'md': 90,
+    'lg': 100,
     'xl': 200
   };
 
