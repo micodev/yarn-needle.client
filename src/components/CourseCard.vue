@@ -99,7 +99,7 @@
           icon="pi pi-info-circle"
           class="w-full sm:flex-1"
           severity="secondary"
-          outlined=""
+          outlined
           @click="onShowSocials(course)"
         />
       </div>
