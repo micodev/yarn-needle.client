@@ -143,6 +143,6 @@ input:focus, textarea:focus {
 
 /* Dark mode active link */
 :root.dark .active-link {
-  background: rgba(59, 0, 209, 0.35) !important; /* --p-primary-900 with low opacity */
+  background: rgba(59, 0, 209, 0.45) !important; /* --p-primary-900 with low opacity */
   color: var(--p-surface-50) !important;
 }
