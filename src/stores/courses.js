@@ -102,7 +102,7 @@ export const useCoursesStore = defineStore('courses', {
 			try {
 				const response = await this.$axios.get('/api/course', {
 					params: {
-						limit:
+						limit: 4
 					}
 				});
 				this.recentCourses = response.data;
