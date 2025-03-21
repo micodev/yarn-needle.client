@@ -52,7 +52,7 @@
       </div>
 
       <!-- Buttons for regular course view -->
-      <div class="flex flex-row gap-1">
+      <div v-if="!course.purchased" class="flex flex-row gap-1">
         <Button
           v-if="!course.purchased && !course.isSubscribtionIncluded"
           label="شراء"
@@ -69,7 +69,6 @@
           @click="onAddCourse(course.id)"
         />
         <Button
-          v-if="course.purchased"
           label="عرض التفاصيل"
           icon="pi pi-eye"
           class="w-full sm:flex-1"
@@ -77,7 +76,6 @@
           @click="onNavigateToDetails(course.id)"
         />
         <Button
-          v-if="course.purchased"
           label="معلومات إضافية"
           icon="pi pi-info-circle"
           class="w-full sm:flex-1"
