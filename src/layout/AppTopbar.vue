@@ -93,6 +93,14 @@ const allMenuItems = [
       router.push('/order-history');
     },
   },
+  {
+    label: 'حول خيط وإبرة',
+    icon: 'pi pi-info-circle',
+    route: '/about',
+    command: () => {
+      router.push('/about');
+    },
+  },
 ];
 
 // Computed property that filters items based on authentication status
