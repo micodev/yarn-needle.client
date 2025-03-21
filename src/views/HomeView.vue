@@ -41,74 +41,76 @@
       <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">أحدث الدورات التدريبية</h2>
       <p class="text-lg text-gray-600 dark:text-gray-400">دورات مصممة لتطوير مهاراتك في مجالات متعددة</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 relative justify-center">
-      <div v-if="coursesStore.isLoading" class="col-span-3 text-center">
-        <i class="pi pi-spin pi-spinner text-4xl"></i>
-      </div>
-      <div v-else-if="coursesStore.error" class="col-span-3 text-center text-red-500">
-        {{ coursesStore.error }}
-      </div>
-      <div v-else v-for="(course) in coursesStore.getRecentCourses" :key="course.title"
-        :class="['card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full', 'bg-slate-50 dark:bg-gray-800' ]">
-        <div class="relative p-3">
-          <img :src="course.image" alt="Course Image" class="w-full rounded" />
-          <div
-            class="relative w-full flex flex-col justify-center items-center rounded-md p-2">
-            <p class="text-xl font-bold mb-2 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
-            <p class="text-gray-700 dark:text-gray-300 mb-4">{{ course.description }}</p>
-          </div>
-          <div class="absolute top-5 left-4 px-2 w-full">
-            <!-- discount badge only -->
-            <div class="flex justify-end">
-              <span v-if="course.discount"
-                class="text-primary font-bold text-center content-center rounded-md px-4 py-1 bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 shadow-sm dark:bg-gray-800 dark:bg-opacity-30 ">{{
-                  course.discount }}% </span>
+    <div class="flex justify-center">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 relative">
+        <div v-if="coursesStore.isLoading" class="col-span-3 text-center">
+          <i class="pi pi-spin pi-spinner text-4xl"></i>
+        </div>
+        <div v-else-if="coursesStore.error" class="col-span-3 text-center text-red-500">
+          {{ coursesStore.error }}
+        </div>
+        <div v-else v-for="(course) in coursesStore.getRecentCourses" :key="course.title"
+          :class="['card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full', 'bg-slate-50 dark:bg-gray-800' ]">
+          <div class="relative p-3">
+            <img :src="course.image" alt="Course Image" class="w-full rounded" />
+            <div
+              class="relative w-full flex flex-col justify-center items-center rounded-md p-2">
+              <p class="text-xl font-bold mb-2 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
+              <p class="text-gray-700 dark:text-gray-300 mb-4">{{ course.description }}</p>
+            </div>
+            <div class="absolute top-5 left-4 px-2 w-full">
+              <!-- discount badge only -->
+              <div class="flex justify-end">
+                <span v-if="course.discount"
+                  class="text-primary font-bold text-center content-center rounded-md px-4 py-1 bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 shadow-sm dark:bg-gray-800 dark:bg-opacity-30 ">{{
+                    course.discount }}% </span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="flex justify-between p-4 flex-col mt-auto">
-          <div class="flex flex-row justify-center mb-2">
-            <p class="text-black dark:text-white font-bold text-base align-middle ml-2" v-if="course.discount">
-              <SARSymbol :value="getDiscountedPrice(course)" />
-            </p>
-            <p class="text-black dark:text-white font-bold text-base" v-if="!course.discount">
-              <SARSymbol :value="course.originalPrice" />
-            </p>
-            <p class="text-gray-500 dark:text-gray-400 line-through ml-2 content-center text-sm" v-if="course.discount">
-              <SARSymbol :value="course.originalPrice" :line-through="true" />
-            </p>
-          </div>
-          <div class="flex flex-row gap-1">
-            <Button
-              v-if="!course.purchased && !course.isSubscribtionIncluded"
-              label="شراء"
-              icon="pi pi-shopping-cart"
-              class="h-8 flex-1"
-              severity="primary"
-              @click="handlePurchaseClick(course.id)"
-            />
-            <Button
-              v-if="course.isSubscribtionIncluded && !course.purchased"
-              label="إضافة للمكتبة"
-              class="h-8 flex-1"
-              severity="success"
-              @click="handleAddCourse(course.id)"
-            />
-            <Button
-              label="فتح الدورة"
-              v-if="course.purchased"
-              class="h-8 flex-1"
-              severity="primary"
-              @click="navigateToDetails(course.id)"
-            />
-            <Button
-              v-if="!course.purchased"
-              label="التفاصيل"
-              class="h-8 flex-1"
-              severity="primary"
-              outlined
-              @click="navigateToDetails(course.id)"
-            />
+          <div class="flex justify-between p-4 flex-col mt-auto">
+            <div class="flex flex-row justify-center mb-2">
+              <p class="text-black dark:text-white font-bold text-base align-middle ml-2" v-if="course.discount">
+                <SARSymbol :value="getDiscountedPrice(course)" />
+              </p>
+              <p class="text-black dark:text-white font-bold text-base" v-if="!course.discount">
+                <SARSymbol :value="course.originalPrice" />
+              </p>
+              <p class="text-gray-500 dark:text-gray-400 line-through ml-2 content-center text-sm" v-if="course.discount">
+                <SARSymbol :value="course.originalPrice" :line-through="true" />
+              </p>
+            </div>
+            <div class="flex flex-row gap-1">
+              <Button
+                v-if="!course.purchased && !course.isSubscribtionIncluded"
+                label="شراء"
+                icon="pi pi-shopping-cart"
+                class="h-8 flex-1"
+                severity="primary"
+                @click="handlePurchaseClick(course.id)"
+              />
+              <Button
+                v-if="course.isSubscribtionIncluded && !course.purchased"
+                label="إضافة للمكتبة"
+                class="h-8 flex-1"
+                severity="success"
+                @click="handleAddCourse(course.id)"
+              />
+              <Button
+                label="فتح الدورة"
+                v-if="course.purchased"
+                class="h-8 flex-1"
+                severity="primary"
+                @click="navigateToDetails(course.id)"
+              />
+              <Button
+                v-if="!course.purchased"
+                label="التفاصيل"
+                class="h-8 flex-1"
+                severity="primary"
+                outlined
+                @click="navigateToDetails(course.id)"
+              />
+            </div>
           </div>
         </div>
       </div>
