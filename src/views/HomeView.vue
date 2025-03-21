@@ -82,6 +82,7 @@
             <Button
               v-if="!course.purchased && !course.isSubscribtionIncluded"
               label="شراء"
+              icon="pi pi-shopping-cart"
               class="h-8 flex-1"
               severity="primary"
               @click="handlePurchaseClick(course.id)"
