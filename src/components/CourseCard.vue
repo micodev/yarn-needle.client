@@ -10,7 +10,7 @@
         <div class="flex items-center gap-2 w-full justify-center mb-2">
           <Rating v-model="localRating" readonly disabled :cancel="false" class="cursor-default rtl-rating" />
           <span class="text-gray-600 dark:text-gray-400 text-sm flex items-center">
-            <i class="pi pi-users mr-2"></i>
+            <i class="pi pi-users ml-2"></i>
             {{ course.students || 0 }}
           </span>
         </div>
