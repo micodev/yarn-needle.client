@@ -7,7 +7,6 @@
         <router-view></router-view>
       </div>
     </div>
-    <app-footer></app-footer>
     <div class="layout-mask animate-fadein"></div>
   </div>
   <Toast />
