@@ -58,9 +58,8 @@
             <p class="text-gray-700 dark:text-gray-300 mb-4">{{ course.description }}</p>
           </div>
           <div class="absolute top-2 px-2 w-full">
-            <!-- flex-row space between items -->
-            <div class="flex justify-between">
-              <Button icon="pi pi-heart" severity="primary" variant="text" />
+            <!-- discount badge only -->
+            <div class="flex justify-end">
               <span v-if="course.discount"
                 class="text-green-500 font-bold text-center content-center rounded-md px-2 bg-primary bg-opacity-50 dark:bg-green-900">{{
                   course.discount }}% </span>
