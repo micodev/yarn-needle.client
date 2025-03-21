@@ -8,8 +8,8 @@
         <p class="text-lg font-bold mb-2 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
         <p class="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">{{ course.description }}</p>
         <!-- Rating component -->
-        <div class="flex items-center gap-2 w-full justify-center mb-2 cursor-pointer">
-          <Rating v-model="localRating" readonly :cancel="false" />
+        <div class="flex items-center gap-2 w-full justify-center mb-2">
+          <Rating v-model="localRating" readonly :cancel="false" class=" cursor-pointer" />
         </div>
       </div>
       <div class="absolute top-5 left-4 px-2 w-full">
