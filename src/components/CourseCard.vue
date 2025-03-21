@@ -100,7 +100,7 @@ const truncatedDescription = computed(() => {
 
   const charLimits = {
     'xs': 200,
-    'sm': 80,
+    'sm': 200,
     'md': 90,
     'lg': 100,
     'xl': 200
