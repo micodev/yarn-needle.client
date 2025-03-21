@@ -72,7 +72,7 @@
 import { Button } from "primevue";
 import SARSymbol from './SARSymbol.vue';
 
-const props = defineProps({
+const { course } = defineProps({
   course: {
     type: Object,
     required: true
