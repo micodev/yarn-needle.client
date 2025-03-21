@@ -10,7 +10,6 @@
         <!-- Rating component -->
         <div class="flex items-center gap-2 w-full justify-center mb-2">
           <Rating v-model="localRating" readonly :cancel="false" />
-          <span class="text-sm text-gray-600 dark:text-gray-400">{{ localRating }}/5</span>
         </div>
       </div>
       <div class="absolute top-5 left-4 px-2 w-full">
