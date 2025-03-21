@@ -75,7 +75,7 @@
               <SARSymbol :value="course.originalPrice" />
             </p>
             <p class="text-gray-500 dark:text-gray-400 line-through ml-2 content-center text-sm" v-if="course.discount">
-              <SARSymbol :value="course.originalPrice" />
+              <SARSymbol :value="course.originalPrice" :line-through="true" />
             </p>
           </div>
           <div class="flex flex-row gap-1">
