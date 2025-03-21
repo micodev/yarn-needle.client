@@ -140,3 +140,9 @@ input:focus, textarea:focus {
   border-radius: 0.375rem;
   color: var(--p-background-color) !important;
 }
+
+/* Dark mode active link */
+:root.dark .active-link {
+  background: var(--p-primary-900) !important;
+  color: var(--p-surface-50) !important;
+}
