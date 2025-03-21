@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="p-4 mt-auto">
-      <div class="flex flex-row justify-center mb-2">
+      <div class="flex flex-row justify-center mb-2" v-if="!course.purchased">
         <p class="text-black dark:text-white font-bold text-base align-middle ml-2" v-if="course.discount">
           <SARSymbol :value="getDiscountedPrice(course)" />
         </p>
