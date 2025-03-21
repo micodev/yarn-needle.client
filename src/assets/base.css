@@ -9,6 +9,18 @@
 body {
   min-height: 100vh;
   font-size: 14px !important;
+  display: flex;
+  flex-direction: column;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }
 
 :root {
