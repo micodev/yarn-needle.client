@@ -14,9 +14,11 @@
             {{ course.students || 0 }}
           </span>
         </div>
-        <p class="text-gray-700 dark:text-gray-300 mb-2 sm:mb-1 line-clamp-3 text-sm sm:text-xs h-[4.5rem] overflow-hidden text-ellipsis">
-          {{ truncatedDescription }}
-        </p>
+        <div class="text-fade-container relative w-full h-[4.5rem] mb-2 sm:mb-1">
+          <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-xs text-ellipsis">
+            {{ truncatedDescription }}
+          </p>
+        </div>
       </div>
       <div class="absolute top-5 left-4 px-2 w-full">
         <!-- discount badge only -->
@@ -171,5 +173,25 @@ const onNavigateToDetails = (courseId) => {
 <style scoped>
 .rtl-rating {
   direction: rtl;
+}
+
+.text-fade-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.text-fade-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2rem;
+  background: linear-gradient(to bottom, transparent, var(--fade-color, rgb(248 250 252 / 0.95)) 90%);
+  pointer-events: none;
+}
+
+:deep(.dark) .text-fade-container::after {
+  --fade-color: rgb(31 41 55 / 0.95);
 }
 </style>
