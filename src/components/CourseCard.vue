@@ -7,7 +7,7 @@
       <div class="relative w-full flex flex-col justify-center items-center rounded-md p-2">
         <p class="text-lg font-bold mb-2 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
         <!-- Rating component - moved above description -->
-        <div class="flex items-center gap-2 w-full justify-start mb-2">
+        <div class="flex items-center gap-2 w-full justify-center mb-2">
           <Rating v-model="localRating" readonly disabled :cancel="false" class="cursor-default rtl-rating" />
         </div>
         <p class="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">{{ course.description }}</p>
