@@ -7,7 +7,7 @@
       <div class="relative w-full flex flex-col justify-center items-center rounded-md p-2 sm:p-1">
         <p class="text-lg sm:text-base font-bold mb-2 sm:mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
         <!-- Rating component - moved above description -->
-        <div v-if="!enrolled" class="flex items-center gap-2 w-full justify-center mb-2 sm:mb-1">
+        <div v-if="!course.purchased" class="flex items-center gap-2 w-full justify-center mb-2 sm:mb-1">
           <Rating v-model="localRating" readonly disabled :cancel="false" class="cursor-default rtl-rating sm:scale-90" />
           <span class="text-gray-600 dark:text-gray-400 text-sm sm:text-xs flex items-center">
             <i class="pi pi-users ml-2"></i>
@@ -15,7 +15,7 @@
           </span>
         </div>
         <!-- Progress information for enrolled courses -->
-        <div v-if="enrolled" class="flex justify-between items-center w-full mb-2 text-xs sm:text-sm">
+        <div v-if="course.purchased" class="flex justify-between items-center w-full mb-2 text-xs sm:text-sm">
           <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.lessonCount }} درس</span>
           <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.duration }} ساعات</span>
         </div>
@@ -29,7 +29,7 @@
         <!-- discount badge only -->
         <div class="flex justify-end">
           <span
-            v-if="course.discount && !enrolled"
+            v-if="course.discount && !course.purchased"
             class="text-white font-bold text-center content-center rounded-md px-4 py-1 sm:px-2 sm:py-0.5 sm:text-sm bg-primary bg-opacity-45 backdrop-blur-md border border-primary border-opacity-50 shadow-md dark:bg-primary dark:bg-opacity-45 dark:text-white"
           >
             {{ course.discount }}%
@@ -39,7 +39,7 @@
     </div>
     <div class="p-4 pt-2 sm:p-2 sm:pt-1">
       <!-- Price section - only for non-enrolled courses -->
-      <div v-if="!enrolled" class="flex flex-row justify-center mb-2 sm:mb-1" :class="{'opacity-0': course.purchased}">
+      <div v-if="!course.purchased" class="flex flex-row justify-center mb-2 sm:mb-1" :class="{'opacity-0': course.purchased}">
         <p class="text-black dark:text-white font-bold text-base sm:text-sm align-middle ml-2" v-if="course.discount">
           <SARSymbol :value="getDiscountedPrice(course)" />
         </p>
@@ -52,7 +52,7 @@
       </div>
 
       <!-- Buttons for regular course view -->
-      <div v-if="!enrolled" class="flex flex-row gap-1">
+      <div v-if="!course.purchased" class="flex flex-row gap-1">
         <Button
           v-if="!course.purchased && !course.isSubscribtionIncluded"
           label="شراء"
@@ -86,7 +86,7 @@
       </div>
 
       <!-- Buttons for enrolled course view -->
-      <div v-if="enrolled" class="flex gap-2 flex-col sm:flex-row">
+      <div v-if="course.purchased" class="flex gap-2 flex-col sm:flex-row">
         <Button
           label="عرض التفاصيل"
           icon="pi pi-eye"
@@ -116,11 +116,8 @@ const props = defineProps({
   course: {
     type: Object,
     required: true
-  },
-  enrolled: {
-    type: Boolean,
-    default: false
   }
+  // Removed enrolled prop since we're now using course.purchased
 });
 
 // Create a local copy of the rating to avoid mutating the prop
