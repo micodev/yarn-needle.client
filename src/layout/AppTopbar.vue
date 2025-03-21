@@ -148,16 +148,5 @@ const toggleDarkMode = () => {
   padding: 0 !important;
 }
 
-/* Active link styling */
-.active-link {
-  background-color: var(--primary-color) !important;
-  color: white !important;
-}
 
-/* Ensure active state persists on hover */
-.p-menuitem-link:hover .active-link,
-.active-link:hover {
-  background-color: var(--primary-color) !important;
-  color: white !important;
-}
 </style>
