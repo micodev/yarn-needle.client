@@ -83,7 +83,7 @@
               v-if="!course.purchased && !course.isSubscribtionIncluded"
               label="شراء"
               class="h-8 flex-1"
-              :severity="index == 1?'contrast':'primary'"
+              severity="primary"
               @click="handlePurchaseClick(course.id)"
             />
             <Button
