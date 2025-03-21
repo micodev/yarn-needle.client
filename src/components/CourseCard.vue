@@ -5,7 +5,7 @@
     <div class="relative p-3 sm:p-2 flex-grow">
       <img :src="course.image" alt="Course Image" class="w-full h-40 sm:h-36 object-cover rounded" />
       <div class="relative w-full flex flex-col justify-center items-center rounded-md p-2 sm:p-1">
-        <p class="text-lg sm:text-base font-bold mb-2 sm:mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
+        <p class=" font-bold mb-2 sm:mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
         <!-- Rating component - moved above description -->
         <div class="flex items-center gap-2 w-full justify-center mb-2 sm:mb-1">
           <Rating v-model="localRating" readonly disabled :cancel="false" class="cursor-default rtl-rating sm:scale-90" />
