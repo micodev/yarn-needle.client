@@ -42,6 +42,11 @@
           <SARSymbol :value="course.originalPrice" :line-through="true" />
         </p>
       </div>
+      <div class="flex flex-row justify-center mb-2 sm:mb-1" v-else>
+        <p class="text-green-600 dark:text-green-400 font-medium text-sm sm:text-xs flex items-center">
+          <i class="pi pi-check-circle mr-1"></i> تم شراء هذه الدورة
+        </p>
+      </div>
       <div class="flex flex-row gap-1">
         <Button
           v-if="!course.purchased && !course.isSubscribtionIncluded"
