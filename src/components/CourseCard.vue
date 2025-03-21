@@ -15,7 +15,7 @@
           </span>
         </div>
         <p class="text-gray-700 dark:text-gray-300 mb-2 sm:mb-1 line-clamp-3 text-sm sm:text-xs h-[4.5rem] overflow-hidden text-ellipsis">
-          {{ course.description ? course.description.substring(0, 150) + (course.description.length > 150 ? '...' : '') : '' }}
+          {{ truncatedDescription }}
         </p>
       </div>
       <div class="absolute top-5 left-4 px-2 w-full">
@@ -81,7 +81,7 @@
 <script setup>
 import { Button, Rating } from "primevue";
 import SARSymbol from './SARSymbol.vue';
-import { ref } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const { course } = defineProps({
   course: {
@@ -92,6 +92,46 @@ const { course } = defineProps({
 
 // Create a local copy of the rating to avoid mutating the prop
 const localRating = ref(course.rating);
+const screenSize = ref('md'); // Default to medium
+
+// Computed property for truncated description based on screen size
+const truncatedDescription = computed(() => {
+  if (!course.description) return '';
+
+  const charLimits = {
+    'xs': 80,
+    'sm': 120,
+    'md': 150,
+    'lg': 180,
+    'xl': 200
+  };
+
+  const limit = charLimits[screenSize.value];
+  return course.description.length > limit
+    ? course.description.substring(0, limit) + '...'
+    : course.description;
+});
+
+// Update screen size based on window width
+const updateScreenSize = () => {
+  const width = window.innerWidth;
+  if (width < 640) screenSize.value = 'xs';
+  else if (width < 768) screenSize.value = 'sm';
+  else if (width < 1024) screenSize.value = 'md';
+  else if (width < 1280) screenSize.value = 'lg';
+  else screenSize.value = 'xl';
+};
+
+// Set up resize listener
+onMounted(() => {
+  updateScreenSize();
+  window.addEventListener('resize', updateScreenSize);
+});
+
+// Clean up resize listener
+onUnmounted(() => {
+  window.removeEventListener('resize', updateScreenSize);
+});
 
 const emit = defineEmits(['purchase', 'add-course', 'navigate-details']);
 
