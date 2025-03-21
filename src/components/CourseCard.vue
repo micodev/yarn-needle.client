@@ -82,7 +82,7 @@
 <script setup>
 import { Button, Rating } from "primevue";
 import SARSymbol from './SARSymbol.vue';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 
 const { course } = defineProps({
   course: {
