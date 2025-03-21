@@ -14,7 +14,10 @@
             {{ course.students || 0 }}
           </span>
         </div>
-        <p class="text-gray-700 dark:text-gray-300 mb-2 sm:mb-1 line-clamp-3 text-sm sm:text-xs">{{ course.description }}</p>
+        <p class="text-gray-700 dark:text-gray-300 mb-2 sm:mb-1 line-clamp-3 text-sm sm:text-xs"
+           :class="{ 'min-h-[4.5rem]': isShortDescription(course.description) }">
+          {{ course.description }}
+        </p>
       </div>
       <div class="absolute top-5 left-4 px-2 w-full">
         <!-- discount badge only -->
@@ -79,7 +82,7 @@
 <script setup>
 import { Button, Rating } from "primevue";
 import SARSymbol from './SARSymbol.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const { course } = defineProps({
   course: {
@@ -122,6 +125,11 @@ const onAddCourse = (courseId) => {
 
 const onNavigateToDetails = (courseId) => {
   emit('navigate-details', courseId);
+};
+
+// Check if description is short (less than ~120 characters which is roughly 3 lines)
+const isShortDescription = (description) => {
+  return description?.length < 120;
 };
 </script>
 
