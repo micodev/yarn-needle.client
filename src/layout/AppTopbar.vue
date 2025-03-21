@@ -47,21 +47,22 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useAuthStore } from '@/stores/auth';
-import { useRouter, useRoute } from 'vue-router'; // Added useRoute
+import { useRouter, useRoute } from 'vue-router';
 import { Menubar, Menu, Avatar, Button, Badge } from "primevue";
 import RegisterForm from "@/components/RegisterForm.vue";
 
 const authStore = useAuthStore();
 const router = useRouter();
-const route = useRoute(); // Get current route
+const route = useRoute();
 
-const items = ref([
-{
+// Define all menu items
+const allMenuItems = [
+  {
     label: 'الرئيسية',
     icon: 'pi pi-home',
-    route: '/', // Add route property
+    route: '/',
     command: () => {
       router.push('/');
     },
@@ -69,7 +70,7 @@ const items = ref([
   {
     label: 'الدورات',
     icon: 'pi pi-home',
-    route: '/courses', // Add route property
+    route: '/courses',
     command: () => {
       router.push('/courses');
     },
@@ -77,7 +78,8 @@ const items = ref([
   {
     label: 'دوراتي',
     icon: 'pi pi-book',
-    route: '/my-courses', // Add route property
+    route: '/my-courses',
+    requiresAuth: true,
     command: () => {
       router.push('/my-courses');
     },
@@ -85,13 +87,19 @@ const items = ref([
   {
     label: 'الطلبات',
     icon: 'pi pi-shopping-cart',
-    route: '/order-history', // Add route property
+    route: '/order-history',
+    requiresAuth: true,
     command: () => {
       router.push('/order-history');
     },
   },
+];
 
-]);
+// Computed property that filters items based on authentication status
+const items = computed(() => {
+  return allMenuItems.filter(item => !item.requiresAuth || authStore.isAuthenticated);
+});
+
 const menu = ref();
 const menuItems = ref([
   {
