@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['card p-0 rounded-lg shadow-md relative flex flex-col min-h-[420px]', 'bg-slate-50 dark:bg-gray-800']"
+    :class="['card p-0 rounded-lg shadow-md relative flex flex-col max-h-[420px]', 'bg-slate-50 dark:bg-gray-800']"
   >
     <div class="relative p-3 flex-grow">
       <img :src="course.image" alt="Course Image" class="w-full h-40 object-cover rounded" />
