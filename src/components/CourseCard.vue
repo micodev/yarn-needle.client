@@ -6,11 +6,11 @@
       <img :src="course.image" alt="Course Image" class="w-full h-40 object-cover rounded" />
       <div class="relative w-full flex flex-col justify-center items-center rounded-md p-2">
         <p class="text-lg font-bold mb-2 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
-        <p class="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">{{ course.description }}</p>
-        <!-- Rating component -->
-        <div class="flex items-center gap-2 w-full justify-center mb-2">
-          <Rating v-model="localRating" readonly disabled  :cancel="false" class="cursor-default" />
+        <!-- Rating component - moved above description -->
+        <div class="flex items-center gap-2 w-full justify-end mb-2">
+          <Rating v-model="localRating" readonly disabled :cancel="false" class="cursor-default rtl-rating" />
         </div>
+        <p class="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">{{ course.description }}</p>
       </div>
       <div class="absolute top-5 left-4 px-2 w-full">
         <!-- discount badge only -->
@@ -120,3 +120,9 @@ const onNavigateToDetails = (courseId) => {
   emit('navigate-details', courseId);
 };
 </script>
+
+<style scoped>
+.rtl-rating {
+  direction: rtl;
+}
+</style>
