@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="p-4 pt-2 sm:p-2 sm:pt-1">
-      <div class="flex flex-row justify-center mb-2 sm:mb-1" :class="{'opacity-50': course.purchased}">
+      <div class="flex flex-row justify-center mb-2 sm:mb-1" :class="{'opacity-0': course.purchased}">
         <p class="text-black dark:text-white font-bold text-base sm:text-sm align-middle ml-2" v-if="course.discount">
           <SARSymbol :value="getDiscountedPrice(course)" />
         </p>
