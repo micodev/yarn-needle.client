@@ -106,6 +106,7 @@
               label="التفاصيل"
               class="h-8 flex-1"
               severity="secondary"
+              outlined
               @click="navigateToDetails(course.id)"
             />
           </div>
