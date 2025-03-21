@@ -138,5 +138,5 @@ input:focus, textarea:focus {
 .active-link {
   background: var(--p-primary-color) !important;
   border-radius: 0.375rem;
-  color: var(--p-primary-contrast-color) !important;
+  color: var(--p-primary-active-color) !important;
 }
