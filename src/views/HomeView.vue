@@ -105,7 +105,7 @@
               v-if="!course.purchased"
               label="التفاصيل"
               class="h-8 flex-1"
-              severity="secondary"
+              severity="primary"
               outlined
               @click="navigateToDetails(course.id)"
             />
