@@ -48,9 +48,6 @@ defineExpose({
     max-width: 300px !important;
   }
 
-  .p-toast .p-toast-message {
-    padding: 0.75rem !important;
-  }
 
   .p-toast .font-bold.text-xl {
     font-size: 1rem !important;
