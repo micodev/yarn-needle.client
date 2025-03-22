@@ -35,7 +35,14 @@
           </div>
           <div class="flex items-center">
             <i class="pi pi-clock ml-2"></i>
-            <p>{{ course.duration / 60 }} ساعات</p>
+            <p>
+              {{ Math.floor(course.duration / 60) }}
+              {{ Math.floor(course.duration / 60) === 1 ? 'ساعة' : 'ساعات' }}
+              <template v-if="course.duration % 60 > 0">
+                و {{ course.duration % 60 }}
+                {{ course.duration % 60 === 1 ? 'دقيقة' : 'دقائق' }}
+              </template>
+            </p>
           </div>
         </div>
         <div class="flex items-center mb-8">
