@@ -203,11 +203,18 @@ const onShowSocials = (course) => {
   left: 0;
   right: 0;
   height: 2rem;
-  background: linear-gradient(to bottom, transparent, var(--fade-color, rgb(248 250 252 / 0.95)) 90%);
+  background: linear-gradient(to bottom, rgba(248, 250, 252, 0) 0%, rgba(248, 250, 252, 0.95) 90%);
   pointer-events: none;
 }
 
-:deep(.dark) .text-fade-container::after {
-  --fade-color: rgb(31 41 55 / 0.95);
+/* Dark mode gradient - using the same selector pattern as in the template */
+:root.dark .text-fade-container::after,
+.dark .text-fade-container::after {
+  background: linear-gradient(to bottom, rgba(31, 41, 55, 0) 0%, rgba(31, 41, 55, 0.95) 90%);
 }
+
+/* Remove the old dark theme selector */
+/* :deep(.dark) .text-fade-container::after {
+  --fade-color: rgb(31 41 55 / 0.95);
+} */
 </style>
