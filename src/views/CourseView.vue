@@ -323,3 +323,8 @@ const formattedDuration = computed(() => {
 });
 </script>
 
+<style scoped>
+.p-fieldset-toggle-button {
+  background-color: var(--primary-color) !important;
+}
+</style>
