@@ -110,52 +110,15 @@
     <div v-if="isLoading && !courses.length" class="text-center p-8">جاري التحميل...</div>
     <div v-else-if="filteredCourses.length > 0"
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-8 relative">
-      <div v-for="(course) in filteredCourses" :key="course.id"
-        class="card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl dark:bg-slate-900">
-        <div class="relative">
-          <img :src="course.image" :alt="course.title" class="w-full h-36 sm:h-48 object-cover rounded" />
-          <div
-            class="absolute inset-0 bg-gradient-to-b from-transparent  dark:via-slate-800 via-70% to-surface-0 to-80% opacity-100 dark:to-gray-900">
-          </div>
-          <div class="relative w-full flex flex-col justify-center items-center rounded-md p-1">
-            <p class="text-lg font-bold mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
-            <p class="text-sm text-gray-700 dark:text-gray-300 mb-2">{{ course.description }}</p>
-            <div class="flex items-center gap-2 mb-2">
-              <Rating :modelValue="course.rating" :readonly="true" :cancel="false" />
-              <span class="text-sm text-gray-600 dark:text-gray-400">({{ course.students }} طالب)</span>
-            </div>
-          </div>
-          <div class="absolute top-2 px-2 w-full">
-            <div class="flex justify-end">
-              <span v-if="course.discount"
-                class="text-green-500 font-bold text-center content-center rounded-md px-2 bg-green-100 bg-opacity-50 dark:bg-green-900">
-                {{ course.discount }}%</span>
-            </div>
-          </div>
-        </div>
-        <div class="flex justify-between p-3 sm:p-4 flex-col mt-auto bg-white dark:bg-gray-900 rounded-b-lg">
-          <div class="flex flex-col items-center mb-2">
-            <p class="text-gray-500 dark:text-gray-400 line-through text-xs mb-1" v-if="course.discount"
-              v-tooltip="'Saudi Riyal'">
-              <SARSymbol :value="course.originalPrice" :size="12" />
-            </p>
-            <p class="text-black dark:text-white font-bold text-sm" v-tooltip="'Saudi Riyal'">
-              <SARSymbol :value="computeDiscountedPrice(course.originalPrice, course.discount)" />
-            </p>
-          </div>
-          <div class="flex flex-row gap-1">
-            <template v-if="course.purchased">
-              <Button label="فتح الدورة" class="h-8 flex-1" @click="navigateToDetails(course.id)" severity="success" />
-            </template>
-            <template v-else>
-              <Button :label="course.isSubscribtionIncluded ? 'إضافة الدورة' : 'شراء'" class="h-8 flex-1"
-                @click="handlePurchaseClick(course.id)" />
-            </template>
-            <Button v-if="!course.purchased" label="تفاصيل" class="h-8 flex-1" severity="secondary"
-              @click="navigateToDetails(course.id)" />
-          </div>
-        </div>
-      </div>
+      <CourseCard
+        v-for="course in filteredCourses"
+        :key="course.id"
+        :course="course"
+        @purchase="handlePurchaseClick"
+        @add-course="handlePurchaseClick"
+        @navigate-details="navigateToDetails"
+        @show-socials="showCourseContactInfo"
+      />
       <div v-if="isLoading" class="col-span-full flex justify-center items-center p-4">
         <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="3" />
       </div>
@@ -199,6 +162,7 @@ import PurchaseConfirmDialog from '../components/PurchaseConfirmDialog.vue'; // 
 import { useCourseStore } from '../stores/course.js';
 import { useToast } from 'primevue/usetoast';
 import SARSymbol from '../components/SARSymbol.vue';
+import CourseCard from '../components/CourseCard.vue'; // Add this import
 const coursesStore = useCoursesStore(); // Use Pinia store
 const { isLoading, courses } = storeToRefs(coursesStore); // Use storeToRefs for reactive state
 
@@ -398,6 +362,14 @@ const computeDiscountedPrice = (originalPrice, discount) => {
   if (!discount) return originalPrice;
   const discountAmount = (originalPrice * discount) / 100;
   return Math.round(originalPrice - discountAmount);
+};
+
+// Add this method to handle social/contact info
+const showCourseContactInfo = (course) => {
+  // Implement the functionality to show course contact information
+  // You might want to add a dialog or tooltip to display this information
+  console.log('Show contact info for course:', course);
+  // Example: You could add a new dialog component or use toast to show this info
 };
 
 onMounted(() => {
