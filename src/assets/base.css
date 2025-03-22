@@ -8,7 +8,7 @@
 
 body {
   min-height: 100vh;
-  font-size: 14px !important;
+  font-size: 12px !important; /* Base font size for small screens */
   display: flex;
   flex-direction: column;
 }
@@ -156,4 +156,58 @@ input:focus, textarea:focus {
 :root.dark .active-link {
   background: rgba(59, 0, 209, 0.45) !important; /* --p-primary-900 with low opacity */
   color: var(--p-surface-50) !important;
+}
+
+/* Responsive Typography */
+@media (min-width: 640px) {
+  body {
+    font-size: 13px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 14px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    font-size: 15px !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  body {
+    font-size: 16px !important;
+  }
+}
+
+/* Font size utility classes */
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-base {
+  font-size: 1rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
 }
