@@ -22,7 +22,7 @@
         </div>
       </template>
     </Toast>
-    <Button @click="showTemplate" label="View" />
+
   </div>
 </template>
 
