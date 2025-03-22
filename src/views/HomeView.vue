@@ -76,7 +76,7 @@
         ]">
         <div>
           <div class="flex items-center mb-4">
-            <i :class="[plan.iconClass, plan.code === 'GOLD' ? 'text-blue-600 dark:text-blue-400' : '']" class="text-lg ml-3"></i>
+            <i :class="[plan.iconClass, plan.code === 'GOLD' ? 'text-primary-600 dark:text-blue-400' : '']" class="text-lg ml-3"></i>
             <h3 :class="['text-2xl font-bold', plan.code === 'GOLD' ? 'text-blue-600 dark:text-blue-300' : 'text-gray-900 dark:text-gray-100']">
               {{ plan.title }}
               <span v-if="plan.code === 'GOLD'" class="text-sm font-normal bg-blue-500 text-white px-2 py-1 rounded-full mr-2">مميز</span>
