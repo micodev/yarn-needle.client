@@ -121,7 +121,7 @@
               <p class="text-lg font-bold mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
               <p class="text-sm text-gray-700 dark:text-gray-300 mb-2">{{ course.description }}</p>
               <div class="flex items-center gap-2 mb-2">
-                <span class="text-yellow-500">{{ course.rating }}⭐</span>
+                <Rating :modelValue="course.rating" :readonly="true" :cancel="false" />
                 <span class="text-sm text-gray-600 dark:text-gray-400">({{ course.students }} طالب)</span>
               </div>
             </div>
@@ -207,7 +207,7 @@
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useRouter } from 'vue-router'; // Add this import
 import { storeToRefs } from 'pinia';
-import { Button, Dialog, Popover, Select, Slider, ProgressSpinner } from "primevue";
+import { Button, Dialog, Popover, Select, Slider, ProgressSpinner, Rating } from "primevue";imevue";
 import { InputText, InputGroup, InputGroupAddon } from "primevue";
 import { useCoursesStore } from '../stores/courses.js';
 import { useLevelOptionsStore } from '../stores/levelOptions.js';
