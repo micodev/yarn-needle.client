@@ -128,7 +128,7 @@
             <div class="absolute top-2 px-2 w-full">
               <div class="flex justify-end">
                 <span v-if="course.discount"
-                  class="text-green-500 font-bold text-center content-center rounded-md px-2">
+                  class="text-green-500 font-bold text-center content-center rounded-md px-2 bg-green-100 bg-opacity-50 dark:bg-green-900">
                   {{ course.discount }}%</span>
               </div>
             </div>
