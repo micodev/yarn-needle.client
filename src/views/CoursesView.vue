@@ -152,7 +152,7 @@
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useRouter } from 'vue-router'; // Add this import
 import { storeToRefs } from 'pinia';
-import { Button, Dialog, Popover, Select, Slider, ProgressSpinner, Rating } from "primevue";
+import { Button, Dialog, Popover, Select, Slider, ProgressSpinner } from "primevue";
 import { InputText, InputGroup, InputGroupAddon } from "primevue";
 import { useCoursesStore } from '../stores/courses.js';
 import { useLevelOptionsStore } from '../stores/levelOptions.js';
@@ -161,7 +161,6 @@ import { useCourseTypeStore } from '../stores/courseType.js';
 import PurchaseConfirmDialog from '../components/PurchaseConfirmDialog.vue'; // Add this import
 import { useCourseStore } from '../stores/course.js';
 import { useToast } from 'primevue/usetoast';
-import SARSymbol from '../components/SARSymbol.vue';
 import CourseCard from '../components/CourseCard.vue'; // Add this import
 const coursesStore = useCoursesStore(); // Use Pinia store
 const { isLoading, courses } = storeToRefs(coursesStore); // Use storeToRefs for reactive state
