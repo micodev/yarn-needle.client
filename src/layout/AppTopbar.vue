@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useAuthStore } from '@/stores/auth';
 import { useRouter, useRoute } from 'vue-router';
 import { Menubar, Menu, Avatar, Button, Badge } from "primevue";
@@ -140,27 +140,27 @@ const isActiveRoute = (itemRoute) => {
 const toggleProfileMenu = (event) => {
   menu.value.toggle(event);
 };
+
 const isDarkMode = ref(false);
-// Initialize dark mode from localStorage or system preference
-const toggleDarkMode = () => {orage.getItem('darkMode') === 'true');
-  isDarkMode.value = !isDarkMode.value;
+
+// Function to apply theme based on current state
+const applyTheme = () => {
   document.documentElement.classList.toggle('dark', isDarkMode.value);
-};Mounted(() => {
-</script>eme();
+};
+
+// Initialize dark mode from localStorage or system preference
+const toggleDarkMode = () => {
+  isDarkMode.value = !isDarkMode.value;
+  localStorage.setItem('darkMode', isDarkMode.value);
+  applyTheme();
+};
+
+onMounted(() => {
+  isDarkMode.value = localStorage.getItem('darkMode') === 'true';
+  applyTheme();
 });
-<style>
-/* add padding padding: 21px; to avatar */
-.p-avatar {e.value = !isDarkMode.value;
-  padding: 21px;etItem('darkMode', isDarkMode.value);
-} applyTheme();
-};
-.p-menu-submenu-label {
-  /* remove padding */he current theme
-  padding: 0 !important; {
-} document.documentElement.classList.toggle('dark', isDarkMode.value);
-};
 </script>
-</style>
+
 <style>
 /* add padding padding: 21px; to avatar */
 .p-avatar {
@@ -171,6 +171,4 @@ const toggleDarkMode = () => {orage.getItem('darkMode') === 'true');
   /* remove padding */
   padding: 0 !important;
 }
-
-
 </style>
