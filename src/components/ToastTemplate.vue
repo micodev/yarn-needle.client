@@ -18,12 +18,12 @@ import { ref, defineExpose } from 'vue';
 const toast = useToast();
 const visible = ref(false);
 
-const showTemplate = (severity = 'error', summary = '', title = '') => {
+const showTemplate = (severity = 'error', summary = '', title = '', timeout = 3000) => {
   if (!visible.value) {
     toast.add({
       severity: severity,
       title: title,
-      timeout: 3000,
+      timeout: timeout,
       summary: summary,
       group: 'bc',
     });
