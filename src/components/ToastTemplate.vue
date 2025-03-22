@@ -3,7 +3,6 @@
     <Toast position="bottom-center" group="bc" @close="onClose">
       <template #message="slotProps">
         <div class="flex flex-col items-start flex-auto">
-          <div class="font-bold text-xl">{{ slotProps.message.title }}</div>
           <div class="font-medium my-3">{{ slotProps.message.summary }}</div>
         </div>
       </template>
@@ -18,12 +17,11 @@ import { ref, defineExpose } from 'vue';
 const toast = useToast();
 const visible = ref(false);
 
-const showTemplate = (severity = 'error', summary = '', title = '', timeout = 3000) => {
+const showTemplate = (severity = 'error', summary = '', timeout = 3000) => {
   if (!visible.value) {
     toast.removeAllGroups();
     toast.add({
       severity: severity,
-      title: title,
       summary: summary,
       group: 'bc',
     });
