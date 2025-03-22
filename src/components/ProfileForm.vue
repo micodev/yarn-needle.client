@@ -281,6 +281,9 @@
     @purchase-success="handlePurchaseSuccess"
   />
 
+  <!-- Add the ToastTemplate component -->
+  <ToastTemplate ref="toast" />
+
 </template>
 
 <script setup>
@@ -291,12 +294,14 @@ import { useCountryStore } from '@/stores/country'; // Add this import
 import { useNationalityStore } from '@/stores/nationality'; // Add this import
 import { useMembershipStore } from '@/stores/membership'; // Add this import
 import { useSocialMediaStore } from '@/stores/socialMedia'; // Add this import
-import { useToast } from 'primevue/usetoast';
+// Remove the useToast import
+// import { useToast } from 'primevue/usetoast';
 import PurchaseConfirmDialog from './PurchaseConfirmDialog.vue';
 import SARSymbol from './SARSymbol.vue';
-const toast = useToast();
+import ToastTemplate from './ToastTemplate.vue'; // Import the ToastTemplate component
 
-
+// Replace Toast with a ref to the ToastTemplate component
+const toast = ref(null);
 
 const collapseContent = ref(null);
 const innerContent = ref(null);
@@ -505,11 +510,8 @@ const handleSubmit = async () => {
     const updatedProfile = await profileStore.submitProfile(dataToSave);
     profileData.value = updatedProfile;
     form.password = ''; // Clear password input
-    toast.add({
-      severity: 'success',
-      summary: 'تم التحديث',
-      detail: 'تم حفظ البيانات بنجاح'
-    });
+    // Replace toast.add with toast.value.showTemplate
+    toast.value.showTemplate('success', 'تم حفظ البيانات بنجاح');
   } catch (error) {
     console.error('Error saving profile:', error);
     alert('حدث خطأ أثناء حفظ البيانات');
@@ -536,12 +538,8 @@ const handleSubscription = async (plan) => {
 };
 
 const handlePurchaseSuccess = () => {
-  toast.add({
-    severity: 'success',
-    summary: 'تم بنجاح',
-    detail: 'تم شراء العضوية بنجاح',
-    life: 3000
-  });
+  // Replace toast.add with toast.value.showTemplate
+  toast.value.showTemplate('success', 'تم شراء العضوية بنجاح');
   // Refresh profile data to show new subscription
   profileStore.fetchProfile();
 };
