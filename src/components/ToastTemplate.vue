@@ -23,6 +23,7 @@ const showTemplate = (severity = 'error', summary = '', title = '') => {
     toast.add({
       severity: severity,
       title: title,
+      timeout: 3000,
       summary: summary,
       group: 'bc',
     });
