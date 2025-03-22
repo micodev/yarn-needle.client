@@ -35,14 +35,7 @@
           </div>
           <div class="flex items-center">
             <i class="pi pi-clock ml-2"></i>
-            <p>
-              {{ Math.floor(course.duration / 60) }}
-              {{ Math.floor(course.duration / 60) === 1 ? 'ساعة' : 'ساعات' }}
-              <template v-if="course.duration % 60 > 0">
-                و {{ course.duration % 60 }}
-                {{ course.duration % 60 === 1 ? 'دقيقة' : 'دقائق' }}
-              </template>
-            </p>
+            <p>{{ formattedDuration }}</p>
           </div>
         </div>
         <div class="flex items-center mb-8">
@@ -298,6 +291,38 @@ const isValidImageUrl = (url) => {
   const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg'];
   return imageExtensions.some(ext => url.toLowerCase().endsWith(ext));
 };
+
+// Function to get the correct Arabic text for minutes based on number
+const getArabicMinutesText = (minutes) => {
+  // In Arabic grammar:
+  // - 1 minute uses singular (دقيقة)
+  // - 2-10 minutes uses plural (دقائق)
+  // - 11 and above has special rules, but for simplicity we'll use singular (دقيقة)
+  if (minutes === 1) {
+    return 'دقيقة';
+  } else if (minutes >= 2 && minutes <= 10) {
+    return 'دقائق';
+  } else {
+    return 'دقيقة';
+  }
+};
+
+// Add a computed property to format the duration
+const formattedDuration = computed(() => {
+  if (!course.value) return '';
+
+  const hours = Math.floor(course.value.duration / 60);
+  const minutes = course.value.duration % 60;
+
+  const hoursText = hours === 1 ? 'ساعة' : 'ساعات';
+
+  if (minutes === 0) {
+    return `${hours} ${hoursText}`;
+  } else {
+    const minutesText = getArabicMinutesText(minutes);
+    return `${hours} ${hoursText} و ${minutes} ${minutesText}`;
+  }
+});
 </script>
 
 <style scoped>
