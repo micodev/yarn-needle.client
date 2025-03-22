@@ -18,8 +18,8 @@
     </div>
     <div class="mt-auto">
       <p :class="['text-lg font-bold mb-4', plan.code === 'GOLD' ? 'text-primary dark:text-primary-300' : 'text-gray-900 dark:text-gray-100']">
-        <template v-if="plan.price === 0">مجاني</template>
-        <SARSymbol v-else :value="plan.price" :showUnit="true" />
+
+        <SARSymbol  :value="plan.price === 0?'مجاني':plan.price" :showUnit="true" />
       </p>
       <Button
         :label="plan.code === 'GOLD' ? 'إشترك الآن (العضوية المميزة)' : 'إشترك الآن'"
