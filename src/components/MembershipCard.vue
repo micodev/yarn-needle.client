@@ -2,7 +2,7 @@
   <div
     :class="[
       'plan-card p-6 rounded-lg shadow-inner flex flex-col justify-between h-full',
-      plan.code === 'GOLD' ? 'gold-membership bg-primary-50  border-2 border-primary' : 'bg-slate-100 dark:bg-gray-800'
+      plan.code === 'GOLD' ? 'gold-membership bg-primary-50 dark:bg-gray-800  border-2 border-primary' : 'bg-slate-100 dark:bg-gray-800'
     ]">
     <div>
       <div class="flex items-center mb-4">
