@@ -325,28 +325,3 @@ const formattedDuration = computed(() => {
 });
 </script>
 
-<style scoped>
-:deep(.text-gray-900) {
-  color: var(--p-text-color);
-}
-
-:deep(.text-gray-700) {
-  color: var(--p-text-muted-color);
-}
-
-:deep(.bg-white) {
-  background-color: var(--p-surface-0);
-}
-
-:deep(.dark\:bg-gray-800) {
-  background-color: var(--p-surface-800);
-}
-
-:deep(.border-gray-200) {
-  border-color: var(--p-content-border-color);
-}
-
-:deep(.dark\:border-gray-700) {
-  border-color: var(--p-content-border-color);
-}
-</style>
