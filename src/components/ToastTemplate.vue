@@ -31,6 +31,7 @@ const showTemplate = (severity = 'error', summary = '', timeout = 3000) => {
     if (timeout !== null) {
       setTimeout(() => {
         console.log("I am here.")
+        toast.removeGroup('bc'); // Add this line to properly remove the toast
         visible.value = false;
       }, timeout);
     }
