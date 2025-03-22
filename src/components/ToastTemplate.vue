@@ -28,6 +28,11 @@ const showTemplate = (severity = 'error', summary = '', title = '', timeout = 30
       group: 'bc',
     });
     visible.value = true;
+
+    // Auto-hide after timeout period
+    setTimeout(() => {
+      visible.value = false;
+    }, timeout);
   }
 };
 
