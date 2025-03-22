@@ -66,7 +66,7 @@
           @click="handleCourseAction" />
       </div>
     </div>
-    <div class="flex flex-col md:flex-row bg-white dark:bg-gray-900 text-black dark:text-white p-4 md:p-8 h-full mt-8">
+    <div class="flex flex-col md:flex-row  p-4 md:p-8 h-full mt-8">
       <div class="w-full md:w-3/4">
         <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">محتوى الدورة</h2>
         <p class="text-gray-700 dark:text-gray-300 mb-4">{{ course.description }}</p>
