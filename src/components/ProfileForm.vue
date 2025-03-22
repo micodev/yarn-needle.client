@@ -507,8 +507,7 @@ const handleSubmit = async () => {
 
     }
 
-    const updatedProfile = await profileStore.submitProfile(dataToSave);
-    profileData.value = updatedProfile;
+    await profileStore.submitProfile(dataToSave);
     form.password = ''; // Clear password input
     // Replace toast.add with toast.value.showTemplate
     toast.value.showTemplate('success', 'تم حفظ البيانات بنجاح');
