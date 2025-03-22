@@ -144,7 +144,6 @@ input, textarea {
 input:focus, textarea:focus {
   border-color: var(--p-primary-color);
   outline: none;
-  box-shadow: 0 0 0 2px var(--p-primary-color);
 }
 
 .active-link {
