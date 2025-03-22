@@ -479,6 +479,7 @@ const handleSubmit = async () => {
     }
     // change birthDate to dateonly only if not null
     if (dataToSave.birthDate) {
+      console.log(dataToSave.birthDate)
       dataToSave.birthDate = dataToSave.birthDate.toISOString().split('T')[0];
     }
     const updatedProfile = await profileStore.submitProfile(dataToSave);
