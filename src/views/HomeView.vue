@@ -12,7 +12,7 @@
       </div>
     </div>
   </div>
-  <div class="features-section py-1 px-4 md:px-16 bg-slate-50 dark:bg-gray-900">
+  <div class="features-section py-1 px-4 md:px-16">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       <div class="feature text-center p-4">
         <i class="pi pi-search text-4xl mb-4 text-primary"></i>
