@@ -30,6 +30,7 @@ const showTemplate = (severity = 'error', summary = '', timeout = 3000) => {
     // Auto-hide after timeout period only if timeout is not null
     if (timeout !== null) {
       setTimeout(() => {
+        console.log("I am here.")
         visible.value = false;
       }, timeout);
     }
