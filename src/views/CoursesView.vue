@@ -1,206 +1,188 @@
 <template>
 
-    <!-- Banner Section -->
-    <div class="relative h-[150px] sm:h-[200px] w-full">
-      <img src="https://images.unsplash.com/photo-1584992236310-6edddc08acff?q=80&w=1200&h=300&fit=crop" alt="Banner"
-        class="w-full h-full object-cover" />
-      <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <div class="text-center text-white p-6 max-w-2xl">
-          <h1 class="text-3xl font-bold mb-2">دورات خيط وإبرة</h1>
-          <p class="text-lg">اكتشف مجموعتنا الواسعة من الدورات التدريبية المتخصصة</p>
-        </div>
+  <!-- Banner Section -->
+  <div class="relative h-[150px] sm:h-[200px] w-full">
+    <img src="https://images.unsplash.com/photo-1584992236310-6edddc08acff?q=80&w=1200&h=300&fit=crop" alt="Banner"
+      class="w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <div class="text-center text-white p-6 max-w-2xl">
+        <h1 class="text-3xl font-bold mb-2">دورات خيط وإبرة</h1>
+        <p class="text-lg">اكتشف مجموعتنا الواسعة من الدورات التدريبية المتخصصة</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters and Search Section -->
+  <div class="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
+    <div class="flex flex-col md:flex-row gap-3 mb-4 sm:mb-8">
+
+      <div class="w-full md:w-1/2">
+        <InputGroup>
+          <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..." type="text" size="small" />
+          <InputGroupAddon class="h-9">
+            <Button icon="pi pi-search" size="small" severity="secondary" variant="text" @click="applyFiltersAndSort" />
+          </InputGroupAddon>
+        </InputGroup>
+      </div>
+      <div class="flex gap-2 overflow-x-auto pb-2 sm:pb-0 w-full md:w-1/2 justify-end">
+        <Button label="فرز" icon="pi pi-filter" @click="showFilterDialog" :class="{
+          'p-button-secondary': !(levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration),
+          'p-button-primary': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration
+        }" class="whitespace-nowrap" />
+        <Dialog v-model:visible="filterDialogVisible" modal header="فرز" :style="{ width: '90vw', maxWidth: '500px' }"
+          :breakpoints="{ '960px': '75vw', '641px': '90vw' }">
+          <div class="flex flex-col gap-4">
+            <div class="flex flex-row gap-2">
+              <div class="w-1/2">
+                <span class="font-medium block mb-2">المجال</span>
+                <Select v-model="categoryFilter" :options="categoryOptions" optionLabel="name" optionValue="code"
+                  placeholder="اختر المجال" class="w-full" :loading="categoryOptionsStore.isLoading" />
+              </div>
+              <div class="w-1/2">
+                <span class="font-medium block mb-2">اختر المستوى</span>
+                <Select v-model="levelFilter" :options="levelOptions" filter optionLabel="name" optionValue="value"
+                  placeholder="جميع المستويات" class="w-full" :loading="isLevelOptionsLoading" />
+              </div>
+            </div>
+
+            <div class="flex flex-row gap-2">
+              <div class="w-1/2">
+                <span class="font-medium block mb-2">عدد الدروس</span>
+                <Select v-model="lessonRangeFilter" :options="lessonRangeOptions" optionLabel="name" optionValue="value"
+                  placeholder="اختر عدد الدروس" class="w-full" />
+              </div>
+              <div class="w-1/2">
+                <span class="font-medium block mb-2">نوع الدورة</span>
+                <Select v-model="courseTypeFilter" :options="courseTypeOptions" optionLabel="name" optionValue="code"
+                  placeholder="اختر نوع الدورة" class="w-full" :loading="courseTypeStore.isLoading" />
+              </div>
+            </div>
+
+            <div>
+              <span class="font-medium block mb-2">مدة الدورة (بالساعات)</span>
+              <div class="flex flex-col gap-2">
+                <Slider v-model="durationRange" range :min="0" :max="maxDuration" class="mt-2" />
+
+                <div class="flex justify-between text-sm text-gray-600">
+                  <span>{{ durationRange[0] }} ساعة</span>
+                  <span>{{ durationRange[1] }} ساعة</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <span class="font-medium block mb-2">نطاق السعر</span>
+              <Select v-model="priceRangeFilter" :options="priceRangeOptions" optionLabel="name" optionValue="value"
+                placeholder="اختر نطاق السعر" class="w-full" />
+            </div>
+
+            <Button
+              v-if="levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration"
+              label="مسح التصفية" icon="pi pi-times" severity="secondary" text class="mt-2 w-full justify-center"
+              @click="clearFilters" />
+          </div>
+          <template #footer>
+            <Button label="تطبيق" icon="pi pi-check" @click="applyFiltersAndClose" autofocus />
+          </template>
+        </Dialog>
+        <Button label="ترتيب" :icon="selectedSort?.icon || 'pi pi-sort'" @click="toggleSort" severity="secondary"
+          :class="{ 'p-button-info': selectedSort }" class="whitespace-nowrap" />
+        <Popover ref="sortPopover" appendTo="body">
+          <div class="flex flex-col gap-2 w-[240px]">
+            <ul class="list-none p-0 m-0 flex flex-col justify-start">
+              <li v-for="option in sortOptions" :key="option.value"
+                class="flex items-center gap-2 h-[48px] px-4 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-lg transition-colors"
+                :class="{ 'bg-primary-50 text-primary-700 dark:bg-primary-900/20 dark:text-primary-400': selectedSort?.value === option.value }"
+                @click="selectSort(option)">
+                <i
+                  :class="[option.icon, 'text-lg', selectedSort?.value === option.value ? 'text-primary-500' : '']"></i>
+                <span class="text-[14px]">{{ option.name }}</span>
+              </li>
+            </ul>
+            <Button v-if="selectedSort" label="مسح الترتيب" icon="pi pi-times" severity="secondary" text
+              class="mt-1 w-full justify-center h-[40px]" @click="selectedSort = null" />
+          </div>
+        </Popover>
       </div>
     </div>
 
-    <!-- Filters and Search Section -->
-    <div class="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
-      <div class="flex flex-col md:flex-row gap-3 mb-4 sm:mb-8">
-
-        <div class="w-full md:w-1/2">
-          <InputGroup>
-            <InputText v-model="searchQuery" placeholder="ابحث عن الدورات..." type="text" size="small" />
-            <InputGroupAddon class="h-9">
-              <Button icon="pi pi-search" size="small" severity="secondary" variant="text" @click="applyFiltersAndSort" />
-            </InputGroupAddon>
-          </InputGroup>
-        </div>
-        <div class="flex gap-2 overflow-x-auto pb-2 sm:pb-0 w-full md:w-1/2 justify-end">
-          <Button label="فرز" icon="pi pi-filter" @click="showFilterDialog" :class="{
-            'p-button-secondary': !(levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration),
-            'p-button-primary': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration
-          }" class="whitespace-nowrap" />
-          <Dialog v-model:visible="filterDialogVisible" modal header="فرز" :style="{ width: '90vw', maxWidth: '500px' }"
-              :breakpoints="{ '960px': '75vw', '641px': '90vw' }">
-            <div class="flex flex-col gap-4">
-              <div class="flex flex-row gap-2">
-                <div class="w-1/2">
-                  <span class="font-medium block mb-2">المجال</span>
-                  <Select v-model="categoryFilter" :options="categoryOptions" optionLabel="name" optionValue="code"
-                    placeholder="اختر المجال" class="w-full" :loading="categoryOptionsStore.isLoading" />
-                </div>
-                <div class="w-1/2">
-                  <span class="font-medium block mb-2">اختر المستوى</span>
-                  <Select v-model="levelFilter" :options="levelOptions" filter optionLabel="name" optionValue="value"
-                    placeholder="جميع المستويات" class="w-full" :loading="isLevelOptionsLoading" />
-                </div>
-              </div>
-
-              <div class="flex flex-row gap-2">
-                <div class="w-1/2">
-                  <span class="font-medium block mb-2">عدد الدروس</span>
-                  <Select v-model="lessonRangeFilter" :options="lessonRangeOptions" optionLabel="name"
-                    optionValue="value" placeholder="اختر عدد الدروس" class="w-full" />
-                </div>
-                <div class="w-1/2">
-                  <span class="font-medium block mb-2">نوع الدورة</span>
-                  <Select v-model="courseTypeFilter" :options="courseTypeOptions" optionLabel="name" optionValue="code"
-                    placeholder="اختر نوع الدورة" class="w-full" :loading="courseTypeStore.isLoading" />
-                </div>
-              </div>
-
-              <div>
-                <span class="font-medium block mb-2">مدة الدورة (بالساعات)</span>
-                <div class="flex flex-col gap-2">
-                  <Slider v-model="durationRange" range :min="0" :max="maxDuration" class="mt-2" />
-
-                  <div class="flex justify-between text-sm text-gray-600">
-                    <span>{{ durationRange[0] }} ساعة</span>
-                    <span>{{ durationRange[1] }} ساعة</span>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <span class="font-medium block mb-2">نطاق السعر</span>
-                <Select v-model="priceRangeFilter" :options="priceRangeOptions" optionLabel="name" optionValue="value"
-                  placeholder="اختر نطاق السعر" class="w-full" />
-              </div>
-
-              <Button
-                v-if="levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration"
-                label="مسح التصفية" icon="pi pi-times" severity="secondary" text class="mt-2 w-full justify-center"
-                @click="clearFilters" />
+    <!-- Course Cards Grid -->
+    <div v-if="isLoading && !courses.length" class="text-center p-8">جاري التحميل...</div>
+    <div v-else-if="filteredCourses.length > 0"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-8 relative">
+      <div v-for="(course) in filteredCourses" :key="course.id"
+        class="card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl dark:bg-slate-900">
+        <div class="relative">
+          <img :src="course.image" :alt="course.title" class="w-full h-36 sm:h-48 object-cover rounded" />
+          <div
+            class="absolute inset-0 bg-gradient-to-b from-transparent  dark:via-slate-800 via-70% to-surface-0 to-80% opacity-100 dark:to-gray-900">
+          </div>
+          <div class="relative w-full flex flex-col justify-center items-center rounded-md p-1">
+            <p class="text-lg font-bold mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
+            <p class="text-sm text-gray-700 dark:text-gray-300 mb-2">{{ course.description }}</p>
+            <div class="flex items-center gap-2 mb-2">
+              <Rating :modelValue="course.rating" :readonly="true" :cancel="false" />
+              <span class="text-sm text-gray-600 dark:text-gray-400">({{ course.students }} طالب)</span>
             </div>
-            <template #footer>
-              <Button label="تطبيق" icon="pi pi-check" @click="applyFiltersAndClose" autofocus />
+          </div>
+          <div class="absolute top-2 px-2 w-full">
+            <div class="flex justify-end">
+              <span v-if="course.discount"
+                class="text-green-500 font-bold text-center content-center rounded-md px-2 bg-green-100 bg-opacity-50 dark:bg-green-900">
+                {{ course.discount }}%</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-between p-3 sm:p-4 flex-col mt-auto bg-white dark:bg-gray-900 rounded-b-lg">
+          <div class="flex flex-col items-center mb-2">
+            <p class="text-gray-500 dark:text-gray-400 line-through text-xs mb-1" v-if="course.discount"
+              v-tooltip="'Saudi Riyal'">
+              <SARSymbol :value="course.originalPrice" :size="12" />
+            </p>
+            <p class="text-black dark:text-white font-bold text-sm" v-tooltip="'Saudi Riyal'">
+              <SARSymbol :value="computeDiscountedPrice(course.originalPrice, course.discount)" />
+            </p>
+          </div>
+          <div class="flex flex-row gap-1">
+            <template v-if="course.purchased">
+              <Button label="فتح الدورة" class="h-8 flex-1" @click="navigateToDetails(course.id)" severity="success" />
             </template>
-          </Dialog>
-          <Button label="ترتيب" :icon="selectedSort?.icon || 'pi pi-sort'" @click="toggleSort" severity="secondary"
-            :class="{ 'p-button-info': selectedSort }" class="whitespace-nowrap" />
-          <Popover ref="sortPopover" appendTo="body">
-            <div class="flex flex-col gap-2 w-[240px]">
-              <ul class="list-none p-0 m-0 flex flex-col justify-start">
-                <li v-for="option in sortOptions" :key="option.value"
-                  class="flex items-center gap-2 h-[48px] px-4 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-lg transition-colors"
-                  :class="{ 'bg-primary-50 text-primary-700 dark:bg-primary-900/20 dark:text-primary-400': selectedSort?.value === option.value }"
-                  @click="selectSort(option)">
-                  <i
-                    :class="[option.icon, 'text-lg', selectedSort?.value === option.value ? 'text-primary-500' : '']"></i>
-                  <span class="text-[14px]">{{ option.name }}</span>
-                </li>
-              </ul>
-              <Button v-if="selectedSort" label="مسح الترتيب" icon="pi pi-times" severity="secondary" text
-                class="mt-1 w-full justify-center h-[40px]" @click="selectedSort = null" />
-            </div>
-          </Popover>
-        </div>
-      </div>
-
-      <!-- Course Cards Grid -->
-      <div v-if="isLoading && !courses.length" class="text-center p-8">جاري التحميل...</div>
-      <div v-else-if="filteredCourses.length > 0"
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-8 relative">
-        <div v-for="(course) in filteredCourses" :key="course.id"
-          class="card p-0 rounded-lg shadow-md relative flex flex-col self-start h-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl dark:bg-slate-900">
-          <div class="relative">
-            <img :src="course.image" :alt="course.title" class="w-full h-36 sm:h-48 object-cover rounded" />
-            <div
-              class="absolute inset-0 bg-gradient-to-b from-transparent  dark:via-slate-800 via-70% to-surface-0 to-80% opacity-100 dark:to-gray-900">
-            </div>
-            <div class="relative w-full flex flex-col justify-center items-center rounded-md p-1">
-              <p class="text-lg font-bold mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
-              <p class="text-sm text-gray-700 dark:text-gray-300 mb-2">{{ course.description }}</p>
-              <div class="flex items-center gap-2 mb-2">
-                <Rating :modelValue="course.rating" :readonly="true" :cancel="false" />
-                <span class="text-sm text-gray-600 dark:text-gray-400">({{ course.students }} طالب)</span>
-              </div>
-            </div>
-            <div class="absolute top-2 px-2 w-full">
-              <div class="flex justify-end">
-                <span v-if="course.discount"
-                  class="text-green-500 font-bold text-center content-center rounded-md px-2 bg-green-100 bg-opacity-50 dark:bg-green-900">
-                  {{ course.discount }}%</span>
-              </div>
-            </div>
-          </div>
-          <div class="flex justify-between p-3 sm:p-4 flex-col mt-auto bg-white dark:bg-gray-900 rounded-b-lg">
-            <div class="flex flex-col items-center mb-2">
-              <p class="text-gray-500 dark:text-gray-400 line-through text-xs mb-1" v-if="course.discount"
-                v-tooltip="'Saudi Riyal'">
-                <SARSymbol :value="course.originalPrice" :size="12" />
-              </p>
-              <p class="text-black dark:text-white font-bold text-sm" v-tooltip="'Saudi Riyal'">
-                <SARSymbol :value="computeDiscountedPrice(course.originalPrice, course.discount)" />
-              </p>
-            </div>
-            <div class="flex flex-row gap-1">
-              <template v-if="course.purchased">
-                <Button
-                  label="فتح الدورة"
-                  class="h-8 flex-1"
-                  @click="navigateToDetails(course.id)"
-                  severity="success"
-                />
-              </template>
-              <template v-else>
-                <Button
-                  :label="course.isSubscribtionIncluded ? 'إضافة الدورة' : 'شراء'"
-                  class="h-8 flex-1"
-                  @click="handlePurchaseClick(course.id)"
-                />
-              </template>
-              <Button
-               v-if="!course.purchased"
-                label="تفاصيل"
-                class="h-8 flex-1"
-                severity="secondary"
-                @click="navigateToDetails(course.id)"
-              />
-            </div>
+            <template v-else>
+              <Button :label="course.isSubscribtionIncluded ? 'إضافة الدورة' : 'شراء'" class="h-8 flex-1"
+                @click="handlePurchaseClick(course.id)" />
+            </template>
+            <Button v-if="!course.purchased" label="تفاصيل" class="h-8 flex-1" severity="secondary"
+              @click="navigateToDetails(course.id)" />
           </div>
         </div>
-        <div v-if="isLoading" class="col-span-full flex justify-center items-center p-4">
-          <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="3" />
-        </div>
       </div>
-
-      <!-- No Results Message -->
-      <div v-else
-        class="flex flex-col items-center justify-center py-8 sm:py-16 px-3 sm:px-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-        <i class="pi pi-search-minus text-4xl mb-4 text-gray-400"></i>
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">لا توجد نتائج</h3>
-        <p class="text-gray-600 dark:text-gray-400 text-center mb-4">
-          لم نتمكن من العثور على أي دورات تطابق معايير البحث الخاصة بك
-        </p>
-        <Button label="مسح جميع الفلاتر" icon="pi pi-filter-slash" severity="secondary" @click="() => {
-          levelFilter = null;
-          categoryFilter = null;
-          lessonRangeFilter = null;
-          priceRangeFilter = null;
-          durationRange = [0, maxDuration];
-          searchQuery = '';
-          applyFiltersAndSort();
-        }" />
+      <div v-if="isLoading" class="col-span-full flex justify-center items-center p-4">
+        <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="3" />
       </div>
     </div>
 
-  <PurchaseConfirmDialog
-    v-if="selectedCourseId"
-    type="course"
-    v-model="showPurchaseDialog"
-    :course-id="selectedCourseId"
-    @purchase-success="handlePurchaseSuccess"
-  />
+    <!-- No Results Message -->
+    <div v-else
+      class="flex flex-col items-center justify-center py-8 sm:py-16 px-3 sm:px-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+      <i class="pi pi-search-minus text-4xl mb-4 text-gray-400"></i>
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">لا توجد نتائج</h3>
+      <p class="text-gray-600 dark:text-gray-400 text-center mb-4">
+        لم نتمكن من العثور على أي دورات تطابق معايير البحث الخاصة بك
+      </p>
+      <Button label="مسح جميع الفلاتر" icon="pi pi-filter-slash" severity="secondary" @click="() => {
+        levelFilter = null;
+        categoryFilter = null;
+        lessonRangeFilter = null;
+        priceRangeFilter = null;
+        durationRange = [0, maxDuration];
+        searchQuery = '';
+        applyFiltersAndSort();
+      }" />
+    </div>
+  </div>
+
+  <PurchaseConfirmDialog v-if="selectedCourseId" type="course" v-model="showPurchaseDialog"
+    :course-id="selectedCourseId" @purchase-success="handlePurchaseSuccess" />
 </template>
 
 <script setup>
@@ -253,18 +235,18 @@ const courseTypeStore = useCourseTypeStore();
 
 // Update computed options to include a default option
 const levelOptions = computed(() => [
-	{ name: 'جميع المستويات', value: null },
-	...levelOptionsStore.getLevels
+  { name: 'جميع المستويات', value: null },
+  ...levelOptionsStore.getLevels
 ]);
 
 const categoryOptions = computed(() => [
-	{ name: 'جميع المجالات', code: null },
-	...categoryOptionsStore.getCategories
+  { name: 'جميع المجالات', code: null },
+  ...categoryOptionsStore.getCategories
 ]);
 
 const courseTypeOptions = computed(() => [
-	{ name: 'جميع الأنواع', code: null },
-	...courseTypeStore.getCourseTypes
+  { name: 'جميع الأنواع', code: null },
+  ...courseTypeStore.getCourseTypes
 ]);
 
 
@@ -370,7 +352,7 @@ const router = useRouter(); // Add this
 
 // Add this function
 const navigateToDetails = (courseId) => {
-  router.push({ name: 'course', params: { id: courseId }});
+  router.push({ name: 'course', params: { id: courseId } });
 };
 
 // Add these refs for purchase dialog
