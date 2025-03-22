@@ -14,33 +14,28 @@
 <script setup>
 import { Toast } from 'primevue';
 import { useToast } from 'primevue/usetoast';
-import { ref, defineExpose } from 'vue';
+import { defineExpose } from 'vue';
 const toast = useToast();
-const visible = ref(false);
 
 const showTemplate = (severity = 'error', summary = '', title = '', timeout = 3000) => {
-  if (!visible.value) {
-    toast.removeAllGroups();
-    toast.add({
-      severity: severity,
-      title: title,
-      timeout: timeout,
-      summary: summary,
-      group: 'bc',
-    });
-    visible.value = true;
+  // Remove any existing toasts first
+  toast.removeAllGroups();
 
-    // Auto-hide after timeout period only if timeout is not null
-    if (timeout !== null) {
-      setTimeout(() => {
-        onClose();
-      }, timeout);
-    }
-  }
+  // Add the new toast
+  toast.add({
+    severity: severity,
+    title: title,
+    timeout: timeout,
+    summary: summary,
+    group: 'bc',
+  });
+
+  // No need to track visibility state manually as PrimeVue handles this
 };
 
 const onClose = () => {
-  visible.value = false;
+  // Simply remove all toasts in the group
+  toast.removeGroup('bc');
 };
 
 // Expose the function to make it accessible from outside
