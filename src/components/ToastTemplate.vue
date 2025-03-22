@@ -39,3 +39,25 @@ defineExpose({
   showTemplate
 });
 </script>
+
+<style>
+@media (max-width: 768px) {
+  /* Make toast smaller on small screens */
+  .p-toast.p-component {
+    width: 90% !important;
+    max-width: 300px !important;
+  }
+
+  .p-toast .p-toast-message {
+    padding: 0.75rem !important;
+  }
+
+  .p-toast .font-bold.text-xl {
+    font-size: 1rem !important;
+  }
+
+  .p-toast .font-medium {
+    font-size: 0.875rem !important;
+  }
+}
+</style>
