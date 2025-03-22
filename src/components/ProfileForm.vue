@@ -510,7 +510,7 @@ const handleSubmit = async () => {
     await profileStore.submitProfile(dataToSave);
     form.password = ''; // Clear password input
     // Replace toast.add with toast.value.showTemplate
-    toast.value.showTemplate('success', 'تم حفظ البيانات بنجاح',"", 3000);
+    toast.value.showTemplate('success', 'تم حفظ البيانات بنجاح', 3000);
   } catch (error) {
     console.error('Error saving profile:', error);
     alert('حدث خطأ أثناء حفظ البيانات');
