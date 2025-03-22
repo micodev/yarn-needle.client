@@ -2,7 +2,7 @@
   <div
     :class="[
       'plan-card p-6 rounded-lg shadow-inner flex flex-col justify-between h-full',
-      IsSpecialMembership ? 'gold-membership bg-primary-50 dark:bg-gray-800  border-2 border-primary' : 'bg-slate-100 dark:bg-gray-800'
+      IsSpecialMembership ? 'special bg-primary-50 dark:bg-gray-800  border-2 border-primary' : 'bg-slate-100 dark:bg-gray-800'
     ]">
     <div>
       <div class="flex items-center mb-4">
@@ -57,13 +57,13 @@ const subscribe = () => {
 </script>
 
 <style scoped>
-.gold-membership {
+.special {
   transform: scale(1.05);
   transition: all 0.3s ease;
   box-shadow: 0 0 15px var(--primary-color, rgba(59, 130, 246, 0.5));
 }
 
-.gold-membership:hover {
+.special:hover {
   transform: scale(1.07);
   box-shadow: 0 0 20px var(--primary-color, rgba(59, 130, 246, 0.7));
 }
