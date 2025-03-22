@@ -477,11 +477,33 @@ const handleSubmit = async () => {
     if (!dataToSave.password) {
       delete dataToSave.password;
     }
-    // change birthDate to dateonly only if not null
+    // Handle date formatting properly
     if (dataToSave.birthDate) {
-      console.log(dataToSave.birthDate)
-      dataToSave.birthDate = dataToSave.birthDate.toISOString().split('T')[0];
+      console.log('Original birthDate:', dataToSave.birthDate);
+
+      // Check if birthDate is a Date object
+      if (dataToSave.birthDate instanceof Date) {
+        dataToSave.birthDate = dataToSave.birthDate.toISOString().split('T')[0];
+      }
+      // Check if it's a string that can be parsed
+      else if (typeof dataToSave.birthDate === 'string') {
+        // Try to keep it as is if it's already in YYYY-MM-DD format
+        if (/^\d{4}-\d{2}-\d{2}$/.test(dataToSave.birthDate)) {
+          // Already in correct format
+        } else {
+          // Try to convert to Date and then format
+          const dateObj = new Date(dataToSave.birthDate);
+          if (!isNaN(dateObj.getTime())) {
+            dataToSave.birthDate = dateObj.toISOString().split('T')[0];
+          }
+        }
+      } else {
+        console.warn('birthDate is in an unexpected format', dataToSave.birthDate);
+      }
+
+      console.log('Formatted birthDate:', dataToSave.birthDate);
     }
+
     const updatedProfile = await profileStore.submitProfile(dataToSave);
     profileData.value = updatedProfile;
     form.password = ''; // Clear password input
