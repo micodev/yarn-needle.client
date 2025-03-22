@@ -12,6 +12,7 @@
 </template>
 
 <script setup>
+import { Toast } from 'primevue';
 import { useToast } from 'primevue/usetoast';
 import { ref, defineExpose } from 'vue';
 const toast = useToast();
