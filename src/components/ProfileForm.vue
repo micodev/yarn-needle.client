@@ -479,8 +479,6 @@ const handleSubmit = async () => {
     }
     // Handle date formatting properly
     if (dataToSave.birthDate) {
-      console.log('Original birthDate:', dataToSave.birthDate);
-
       // Check if birthDate is a Date object
       if (dataToSave.birthDate instanceof Date) {
         dataToSave.birthDate = dataToSave.birthDate.toISOString().split('T')[0];
@@ -501,7 +499,7 @@ const handleSubmit = async () => {
         console.warn('birthDate is in an unexpected format', dataToSave.birthDate);
       }
 
-      console.log('Formatted birthDate:', dataToSave.birthDate);
+
     }
 
     const updatedProfile = await profileStore.submitProfile(dataToSave);
