@@ -28,15 +28,15 @@
 
 <script setup>
 import { useToast } from 'primevue/usetoast';
-import { ref } from 'vue';
+import { ref, defineExpose } from 'vue';
 const toast = useToast();
 const visible = ref(false);
 
-const showTemplate = () => {
+const showTemplate = (severity = 'error', summary = '') => {
   if (!visible.value) {
     toast.add({
-      severity: 'error',
-      summary: 'Can you send me the report?',
+      severity: severity,
+      summary: summary,
       group: 'bc',
     });
     visible.value = true;
@@ -51,4 +51,9 @@ const onReply = () => {
 const onClose = () => {
   visible.value = false;
 };
+
+// Expose the function to make it accessible from outside
+defineExpose({
+  showTemplate
+});
 </script>
