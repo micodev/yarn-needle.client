@@ -31,7 +31,7 @@
                 class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 sm:space-x-reverse">
                 <div
                   class="w-20 h-20 sm:w-24 sm:h-24 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
-                  <i class="pi pi-user text-3xl sm:text-4xl text-gray-600 dark:text-gray-300"></i>
+                  <i class="pi pi-user text-3xl sm:text-3xl text-gray-600 dark:text-gray-300"></i>
                 </div>
                 <div class="text-center sm:text-right">
                   <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">{{ form.firstName }} {{

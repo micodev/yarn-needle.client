@@ -4,7 +4,7 @@
       <img src="https://placehold.co/600x400" alt="Illustrative placeholder" class="w-full" />
     </div>
     <div class="text-center md:text-right md:w-1/2 p-4">
-      <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">منصة خيط وإبرة <span class="block mt-1">نحيك مستقبلك.. بخيوط الموهبة</span></h1>
+      <h1 class="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">منصة خيط وإبرة <span class="block mt-1">نحيك مستقبلك.. بخيوط الموهبة</span></h1>
       <p class="text-xl mb-6 text-gray-700 dark:text-gray-300">اكتشف الدورات المتنوعة وابدأ رحلتك التعليمية معنا</p>
       <div class="flex justify-center md:justify-end gap-1">
         <Button label="استكشف جميع الدورات" class="h-10 mb-6 flex-auto" @click="router.push('/courses')" />
@@ -15,22 +15,22 @@
   <div class="features-section py-1 px-4 md:px-16">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       <div class="feature text-center p-4">
-        <i class="pi pi-search text-4xl mb-4 text-primary"></i>
+        <i class="pi pi-search text-3xl mb-4 text-primary"></i>
         <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">اكتشف</h3>
         <p class="text-gray-700 dark:text-gray-300">استكشف مجموعة متنوعة من الدورات والتخصصات.</p>
       </div>
       <div class="feature text-center p-4">
-        <i class="pi pi-check-circle text-4xl mb-4 text-primary"></i>
+        <i class="pi pi-check-circle text-3xl mb-4 text-primary"></i>
         <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">تحقق</h3>
         <p class="text-gray-700 dark:text-gray-300">تحقق من مهاراتك من خلال التقييمات.</p>
       </div>
       <div class="feature text-center p-4">
-        <i class="pi pi-book text-4xl mb-4 text-primary"></i>
+        <i class="pi pi-book text-3xl mb-4 text-primary"></i>
         <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">تعلّم</h3>
         <p class="text-gray-700 dark:text-gray-300">اكتسب المهارات مع المدربين المؤهلين.</p>
       </div>
       <div class="feature text-center p-4">
-        <i class="pi pi-thumbs-up-fill text-4xl mb-4 text-primary"></i>
+        <i class="pi pi-thumbs-up-fill text-3xl mb-4 text-primary"></i>
         <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">احصل على الشهادة</h3>
         <p class="text-gray-700 dark:text-gray-300">احصل على الشهادات لتعزيز مسيرتك المهنية.</p>
       </div>
@@ -43,7 +43,7 @@
     </div>
     <div class="flex flex-wrap gap-8 mb-12 relative justify-center">
       <div v-if="coursesStore.isLoading" class="w-full text-center">
-        <i class="pi pi-spin pi-spinner text-4xl"></i>
+        <i class="pi pi-spin pi-spinner text-3xl"></i>
       </div>
       <div v-else-if="coursesStore.error" class="w-full text-center text-red-500">
         {{ coursesStore.error }}
@@ -64,7 +64,7 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
       <div v-if="membershipStore.isLoading" class="col-span-4 text-center">
-        <i class="pi pi-spin pi-spinner text-4xl"></i>
+        <i class="pi pi-spin pi-spinner text-3xl"></i>
       </div>
       <div v-else-if="membershipStore.error" class="col-span-4 text-center text-red-500">
         {{ membershipStore.error }}

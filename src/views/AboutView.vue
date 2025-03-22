@@ -4,7 +4,7 @@
       <!-- Hero Section -->
       <div class="hero-section relative py-12 sm:py-20 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto text-center px-4">
-          <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 text-[var(--p-text-color)]">من نحن</h1>
+          <h1 class="text-3xl sm:text-3xl md:text-6xl font-bold mb-4 sm:mb-6 text-[var(--p-text-color)]">من نحن</h1>
           <p class="text-base sm:text-xl md:text-2xl text-[var(--p-text-muted-color)] max-w-4xl mx-auto leading-relaxed px-2">
             منصة تهدف إلى تعزيز المواهب والقدرات الإبداعية وتطوير المهارات الفردية من خلال تقديم فرص تعليمية وتدريبية شاملة.
           </p>
@@ -38,7 +38,7 @@
       <!-- Values Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">قيمنا</h2>
+          <h2 class="text-2xl sm:text-3xl md:text-3xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">قيمنا</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div v-for="(value, index) in values" :key="index"
                  class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:scale-105">
@@ -55,7 +55,7 @@
       <!-- What We Offer Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-          <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">ماذا نقدم؟</h2>
+          <h2 class="text-3xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">ماذا نقدم؟</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div v-for="(offer, index) in offers" :key="index"
                  class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg flex items-start gap-4">
@@ -71,7 +71,7 @@
       <!-- Goals Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-          <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">أهدافنا</h2>
+          <h2 class="text-3xl font-bold text-center mb-12 text-[var(--p-text-color)]">أهدافنا</h2>
           <div class="space-y-4">
             <div v-for="(goal, index) in goals" :key="index"
                  class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg flex items-center gap-4">
@@ -89,7 +89,7 @@
       <!-- Our Fields Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-          <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">مجالاتنا</h2>
+          <h2 class="text-3xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">مجالاتنا</h2>
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             <div v-for="(field, index) in fields" :key="index"
                  class="bg-[var(--p-card-background)] p-6 rounded-xl shadow-lg text-center transform transition-transform duration-300 hover:scale-105">
@@ -105,7 +105,7 @@
       <!-- Forums Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-          <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">نبذة تعريفية عن مواهبنا</h2>
+          <h2 class="text-3xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">نبذة تعريفية عن مواهبنا</h2>
 
           <Tabs value="0" scrollable>
             <TabList>
@@ -149,7 +149,7 @@
       <!-- History Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-          <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">تاريخنا</h2>
+          <h2 class="text-3xl font-bold text-center mb-12 text-[var(--p-text-color)]">تاريخنا</h2>
           <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg">
             <div class="space-y-6">
               <div class="flex gap-4">
@@ -195,7 +195,7 @@
       <!-- Impact & Future Section -->
       <div class="py-12 sm:py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-          <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">أثرنا ومستقبلنا</h2>
+          <h2 class="text-3xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-[var(--p-text-color)]">أثرنا ومستقبلنا</h2>
           <div class="bg-[var(--p-card-background)] p-8 rounded-2xl shadow-lg space-y-8">
             <div>
               <h3 class="text-2xl font-bold mb-4 text-[var(--p-text-color)]">امتداد التأثير</h3>
@@ -224,7 +224,7 @@
       <!-- Organizational Structure Section -->
       <div class="py-16 px-0 sm:px-4">
         <div class="w-full sm:max-w-6xl mx-auto px-4 sm:px-0">
-          <h2 class="text-4xl font-bold text-center mb-12 text-[var(--p-text-color)]">الهيكل التنظيمي</h2>
+          <h2 class="text-3xl font-bold text-center mb-12 text-[var(--p-text-color)]">الهيكل التنظيمي</h2>
           <OrganizationalChart />
         </div>
       </div>

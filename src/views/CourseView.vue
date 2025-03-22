@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="w-full md:flex-1 flex flex-col justify-center mt-4 md:mt-0">
-        <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">{{ course.title }}</h1>
+        <h1 class="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">{{ course.title }}</h1>
         <div class="text-gray-700 dark:text-gray-300 mb-4 flex flex-row space-x-4 gap-x-4">
           <div class="flex items-center">
             <i class="pi pi-book ml-2"></i>

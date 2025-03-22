@@ -16,13 +16,13 @@
     <div class="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
       <!-- Loading State -->
       <div v-if="courseStore.loading" class="text-center py-8">
-        <i class="pi pi-spin pi-spinner text-4xl text-blue-500"></i>
+        <i class="pi pi-spin pi-spinner text-3xl text-blue-500"></i>
         <p class="mt-2 text-gray-600">جاري تحميل الدورات...</p>
       </div>
 
       <!-- Error State -->
       <div v-else-if="courseStore.error" class="text-center py-8">
-        <i class="pi pi-exclamation-circle text-4xl text-red-500"></i>
+        <i class="pi pi-exclamation-circle text-3xl text-red-500"></i>
         <p class="mt-2 text-red-600">{{ courseStore.error }}</p>
         <Button label="إعادة المحاولة" icon="pi pi-refresh" @click="courseStore.fetchMyCourses()" class="mt-4" />
       </div>
@@ -42,7 +42,7 @@
       <!-- No Courses Message -->
       <div v-else
         class="flex flex-col items-center justify-center py-8 sm:py-16 px-3 sm:px-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-        <i class="pi pi-book text-4xl mb-4 text-gray-400"></i>
+        <i class="pi pi-book text-3xl mb-4 text-gray-400"></i>
         <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">لا توجد دورات</h3>
         <p class="text-gray-600 dark:text-gray-400 text-center mb-4">
           لم يتم العثور على أي دورات مسجلة

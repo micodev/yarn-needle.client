@@ -164,7 +164,7 @@
     <!-- No Results Message -->
     <div v-else
       class="flex flex-col items-center justify-center py-8 sm:py-16 px-3 sm:px-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-      <i class="pi pi-search-minus text-4xl mb-4 text-gray-400"></i>
+      <i class="pi pi-search-minus text-3xl mb-4 text-gray-400"></i>
       <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">لا توجد نتائج</h3>
       <p class="text-gray-600 dark:text-gray-400 text-center mb-4">
         لم نتمكن من العثور على أي دورات تطابق معايير البحث الخاصة بك
