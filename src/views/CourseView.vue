@@ -1,7 +1,7 @@
 <template>
   <Toast />
   <div v-if="course">
-    <div class="flex flex-col md:flex-row bg-white dark:bg-gray-900 text-black dark:text-white p-4 md:p-8 h-full">
+    <div class="flex flex-col md:flex-row  p-4 md:p-8 h-full">
       <div class="w-full md:flex-1 flex justify-center items-center md:ml-2 h-auto">
         <div class="relative rounded overflow-hidden w-full">
           <img :src="course.image" alt="Course Thumbnail" class="w-full h-full object-cover rounded">
