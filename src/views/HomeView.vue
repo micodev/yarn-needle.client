@@ -1,5 +1,5 @@
 <template>
-  <div class="hero-section flex flex-col md:flex-row items-center py-16 px-4 md:px-16 bg-slate-50 dark:bg-gray-900">
+  <div class="hero-section flex flex-col md:flex-row items-center py-16 px-4 md:px-16">
     <div class="md:w-1/2 p-4">
       <img src="https://placehold.co/600x400" alt="Illustrative placeholder" class="w-full" />
     </div>
