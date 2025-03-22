@@ -356,12 +356,7 @@ const handlePurchaseSuccess = () => {
   // toast.success('تم الشراء بنجاح');
 };
 
-// Add this function to compute discounted price
-const computeDiscountedPrice = (originalPrice, discount) => {
-  if (!discount) return originalPrice;
-  const discountAmount = (originalPrice * discount) / 100;
-  return Math.round(originalPrice - discountAmount);
-};
+
 
 // Add this method to handle social/contact info
 const showCourseContactInfo = (course) => {
