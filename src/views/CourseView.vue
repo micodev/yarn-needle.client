@@ -17,9 +17,7 @@
               </span>
             </span>
           </div>
-          <!-- <div class="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
-            <Button icon="pi pi-play" class="p-button-rounded"   severity="primary"  raised />
-          </div> -->
+
         </div>
       </div>
       <div class="w-full md:flex-1 flex flex-col justify-center mt-4 md:mt-0">
