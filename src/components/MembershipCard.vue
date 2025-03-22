@@ -2,7 +2,7 @@
   <div
     :class="[
       'plan-card p-6 rounded-lg shadow-inner flex flex-col justify-between h-full',
-      IsSpecialMembership ? 'special bg-primary-50 dark:bg-gray-800  border-2 border-primary' : 'bg-slate-100 dark:bg-gray-800'
+      IsSpecialMembership ? 'bg-primary-50 dark:bg-gray-800 border-2 border-primary scale-105 transition-all duration-300 ease-in-out shadow-lg shadow-primary/50 hover:scale-107 hover:shadow-xl hover:shadow-primary/50' : 'bg-slate-100 dark:bg-gray-800'
     ]">
     <div>
       <div class="flex items-center mb-4">
@@ -55,16 +55,3 @@ const subscribe = () => {
   emit('subscribe', props.plan);
 };
 </script>
-
-<style scoped>
-.special {
-  transform: scale(1.05);
-  transition: all 0.3s ease;
-  box-shadow: 0 0 15px var(--primary-color,--primary-color-600);
-}
-
-.special:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 20px var(--primary-color,--primary-color-600);
-}
-</style>
