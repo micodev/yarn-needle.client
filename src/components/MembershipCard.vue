@@ -2,7 +2,7 @@
   <div
     :class="[
       'plan-card p-6 rounded-lg shadow-inner flex flex-col justify-between h-full',
-      IsSpecialMembership ? 'bg-primary-50 dark:bg-gray-800 border-2 border-primary transition-all duration-300 ease-in-out shadow-lg shadow-primary/50 hover:scale-110 hover:shadow-xl hover:shadow-primary/50' : ' border-primary-500 border-2 dark:bg-gray-800  hover:scale-105  transition-all duration-300 ease-in-out'
+      IsSpecialMembership ? 'bg-primary-50 dark:bg-gray-800 border-2 border-primary transition-all duration-300 ease-in-out shadow-lg shadow-primary/50 hover:scale-110 hover:shadow-xl hover:shadow-primary/50' : ' border-primary-100 border-2 dark:bg-gray-800  hover:scale-105  transition-all duration-300 ease-in-out'
     ]">
     <div>
       <div class="flex items-center mb-4">
