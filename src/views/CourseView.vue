@@ -327,4 +327,7 @@ const formattedDuration = computed(() => {
 .p-fieldset-toggle-button {
   background-color: var(--primary-color) !important;
 }
+.p-fieldset legend {
+  color: var(--primary-color) !important;
+}
 </style>
