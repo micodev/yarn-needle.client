@@ -60,11 +60,11 @@ const subscribe = () => {
 .special {
   transform: scale(1.05);
   transition: all 0.3s ease;
-  box-shadow: 0 0 15px var(--primary-color, rgba(59, 130, 246, 0.5));
+  box-shadow: 0 0 15px var(--primary-color);
 }
 
 .special:hover {
   transform: scale(1.07);
-  box-shadow: 0 0 20px var(--primary-color, rgba(59, 130, 246, 0.7));
+  box-shadow: 0 0 20px var(--primary-color);
 }
 </style>
