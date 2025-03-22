@@ -207,7 +207,7 @@
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useRouter } from 'vue-router'; // Add this import
 import { storeToRefs } from 'pinia';
-import { Button, Dialog, Popover, Select, Slider, ProgressSpinner, Rating } from "primevue";imevue";
+import { Button, Dialog, Popover, Select, Slider, ProgressSpinner, Rating } from "primevue";
 import { InputText, InputGroup, InputGroupAddon } from "primevue";
 import { useCoursesStore } from '../stores/courses.js';
 import { useLevelOptionsStore } from '../stores/levelOptions.js';
