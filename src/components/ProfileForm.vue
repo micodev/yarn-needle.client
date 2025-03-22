@@ -62,7 +62,7 @@
                 </ul>
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4">
                   <span class="text-base sm:text-lg font-bold text-gray-900 dark:text-white">
-                    {{ currentPlan.price ? 
+                    {{ currentPlan.price ?
                       `${currentPlan.price}` : '' }}
                     <SARSymbol v-if="currentPlan.price" :value="null" :showValue="false" :showUnit="true" />
                   </span>
@@ -477,8 +477,10 @@ const handleSubmit = async () => {
     if (!dataToSave.password) {
       delete dataToSave.password;
     }
-    // change birthDate to dateonly
-    dataToSave.birthDate = dataToSave.birthDate.toISOString().split('T')[0];
+    // change birthDate to dateonly only if not null
+    if (dataToSave.birthDate) {
+      dataToSave.birthDate = dataToSave.birthDate.toISOString().split('T')[0];
+    }
     const updatedProfile = await profileStore.submitProfile(dataToSave);
     profileData.value = updatedProfile;
     form.password = ''; // Clear password input
