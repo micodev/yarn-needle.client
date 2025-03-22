@@ -36,12 +36,12 @@
             <p>{{ formattedDuration }}</p>
           </div>
         </div>
-        <div class="flex items-center mb-8">
+        <div class="flex items-center mb-2">
           <img :src="course.instructorImage" alt="Instructor" class="rounded-full w-12 h-12 ml-2">
           <p class="text-lg text-gray-900 dark:text-gray-100">تقديم {{ course.instructor }}</p>
         </div>
         <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">سجل بهذه الدورة واحصل على:</h2>
-        <ul class="list-disc list-inside mb-8 text-gray-900 dark:text-gray-100">
+        <ul class="list-disc list-inside mb-2 text-gray-900 dark:text-gray-100">
           <li v-for="award in course.awards" :key="award">{{ award }}</li>
         </ul>
 
@@ -69,17 +69,17 @@
         <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">محتوى الدورة</h2>
         <p class="text-gray-700 dark:text-gray-300 mb-4">{{ course.description }}</p>
         <Fieldset legend="محاور الدورة" :toggleable="true" :collapsed="true" class="mb-4">
-          <ul class="list-disc list-inside mb-8 text-gray-900 dark:text-gray-100">
+          <ul class="list-disc list-inside mb-2 text-gray-900 dark:text-gray-100">
             <li v-for="topic in course.topics" :key="topic">{{ topic }}</li>
           </ul>
         </Fieldset>
         <Fieldset legend="نتائج الدورة" :toggleable="true" :collapsed="true" class="mb-4">
-          <ul class="list-disc list-inside mb-8 text-gray-900 dark:text-gray-100">
+          <ul class="list-disc list-inside mb-2 text-gray-900 dark:text-gray-100">
             <li v-for="result in course.results" :key="result">{{ result }}</li>
           </ul>
         </Fieldset>
         <Fieldset legend="الفئة المستهدفة" :toggleable="true" :collapsed="true" class="mb-4">
-          <ul class="list-disc list-inside mb-8 text-gray-900 dark:text-gray-100">
+          <ul class="list-disc list-inside mb-2 text-gray-900 dark:text-gray-100">
             <li v-for="audience in course.targetAudience" :key="audience">{{ audience }}</li>
           </ul>
         </Fieldset>
