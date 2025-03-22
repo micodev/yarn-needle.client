@@ -328,6 +328,6 @@ const formattedDuration = computed(() => {
   background-color: var(--primary-color) !important;
 }
 .p-fieldset {
-  color: var(--primary-color) !important;
+  background-color: var(--primary-color) !important;
 }
 </style>
