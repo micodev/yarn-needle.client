@@ -5,12 +5,6 @@
         <div class="flex flex-col items-start flex-auto">
           <div class="font-bold text-xl">{{ slotProps.message.title }}</div>
           <div class="font-medium my-3">{{ slotProps.message.summary }}</div>
-          <Button
-            size="small"
-            label="Reply"
-            severity="success"
-            @click="onReply()"
-          ></Button>
         </div>
       </template>
     </Toast>
@@ -18,13 +12,12 @@
 </template>
 
 <script setup>
-import { Toast, Button } from 'primevue';
 import { useToast } from 'primevue/usetoast';
 import { ref, defineExpose } from 'vue';
 const toast = useToast();
 const visible = ref(false);
 
-const showTemplate = (severity = 'error', summary = '', detail = '') => {
+const showTemplate = (severity = 'error', summary = '', title = '') => {
   if (!visible.value) {
     toast.add({
       severity: severity,
@@ -34,11 +27,6 @@ const showTemplate = (severity = 'error', summary = '', detail = '') => {
     });
     visible.value = true;
   }
-};
-
-const onReply = () => {
-  toast.removeGroup('bc');
-  visible.value = false;
 };
 
 const onClose = () => {
