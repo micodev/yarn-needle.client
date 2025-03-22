@@ -3,12 +3,7 @@
     <Menubar :model="items">
       <template #start>
         <img src="@/../public/favicon.svg" alt="شعار" class="h-10" />
-        <!-- <InputGroup class="w-64 mr-2 hidden sm:flex">
-          <InputGroupAddon class="h-9">
-            <i class="pi pi-search"></i>
-          </InputGroupAddon>
-          <InputText placeholder="إسم الدورة" size="small" class="h-9" />
-        </InputGroup> -->
+
       </template>
 
       <template #item="{ item, props, hasSubmenu, root }">
