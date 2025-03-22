@@ -11,6 +11,7 @@ import axiosInstance from '../plugins/axios.plugin'
 import Tooltip from 'primevue/tooltip';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { OhVueIcon, addIcons } from "oh-vue-icons";
+import ToastTemplate from './components/ToastTemplate.vue';
 import {
   LaFacebook,
   LaTwitter,
@@ -54,6 +55,7 @@ app.use(pinia);  // Make sure this line exists
 app.use(router)
 // eslint-disable-next-line vue/multi-word-component-names
 app.component('Toast', Toast)
+app.component('ToastTemplate',ToastTemplate)
 app.use(ToastService)
 app.use(PrimeVue, {
   theme: 'none',
