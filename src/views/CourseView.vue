@@ -68,22 +68,22 @@
       <div class="w-full md:w-3/4">
         <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">محتوى الدورة</h2>
         <p class="text-gray-700 dark:text-gray-300 mb-4">{{ course.description }}</p>
-        <Fieldset legend="محاور الدورة" :toggleable="true" :collapsed="true" class="mb-4">
+        <Fieldset legend="محاور الدورة" :toggleable="true" :collapsed="true" class="mb-4 transparent-fieldset">
           <ul class="list-disc list-inside mb-8 text-gray-900 dark:text-gray-100">
             <li v-for="topic in course.topics" :key="topic">{{ topic }}</li>
           </ul>
         </Fieldset>
-        <Fieldset legend="نتائج الدورة" :toggleable="true" :collapsed="true" class="mb-4">
+        <Fieldset legend="نتائج الدورة" :toggleable="true" :collapsed="true" class="mb-4 transparent-fieldset">
           <ul class="list-disc list-inside mb-8 text-gray-900 dark:text-gray-100">
             <li v-for="result in course.results" :key="result">{{ result }}</li>
           </ul>
         </Fieldset>
-        <Fieldset legend="الفئة المستهدفة" :toggleable="true" :collapsed="true" class="mb-4">
+        <Fieldset legend="الفئة المستهدفة" :toggleable="true" :collapsed="true" class="mb-4 transparent-fieldset">
           <ul class="list-disc list-inside mb-8 text-gray-900 dark:text-gray-100">
             <li v-for="audience in course.targetAudience" :key="audience">{{ audience }}</li>
           </ul>
         </Fieldset>
-        <Fieldset legend="التقييمات والتعليقات" :toggleable="true" :collapsed="true">
+        <Fieldset legend="التقييمات والتعليقات" :toggleable="true" :collapsed="true" class="transparent-fieldset">
           <div v-for="comment in displayedComments" :key="comment.id" class="mb-4">
             <div class="flex items-center mb-2">
               <img v-if="isValidImageUrl(comment.avatar)" :src="comment.avatar" alt="User Avatar" class="rounded-full w-8 h-8 ml-2">
@@ -322,4 +322,14 @@ const formattedDuration = computed(() => {
   }
 });
 </script>
+
+<style scoped>
+.transparent-fieldset :deep(.p-fieldset) {
+  background: transparent;
+}
+
+.transparent-fieldset :deep(.p-fieldset-legend) {
+  background: inherit;
+}
+</style>
 
