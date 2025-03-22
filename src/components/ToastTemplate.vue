@@ -20,6 +20,7 @@ const visible = ref(false);
 
 const showTemplate = (severity = 'error', summary = '', title = '', timeout = 3000) => {
   if (!visible.value) {
+    toast.removeAllGroups();
     toast.add({
       severity: severity,
       title: title,
