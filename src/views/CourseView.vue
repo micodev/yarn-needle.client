@@ -144,7 +144,7 @@
       </div>
     </div>
   </div>
-  <div v-else class="flex justify-center items-center h-screen  dark:bg-gray-900">
+  <div v-else class="flex justify-center items-center h-screen">
     <ProgressSpinner />
   </div>
 
