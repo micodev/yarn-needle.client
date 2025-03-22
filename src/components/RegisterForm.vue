@@ -66,6 +66,7 @@
       </form>
     </Dialog>
     <ForgetPassword ref="forgetPasswordRef" />
+    <ToastTemplate ref="toast" />
   </div>
 </template>
 
@@ -74,10 +75,10 @@ import { ref } from 'vue';
 import { Button, Dialog, InputText, Password, IftaLabel } from 'primevue';
 import ForgetPassword from './ForgetPassword.vue';
 import { useAuthStore } from '@/stores/auth';
-import { useToast } from 'primevue/usetoast';
+import ToastTemplate from './ToastTemplate.vue';
 
 const authStore = useAuthStore();
-const toast = useToast();
+const toast = ref(null);
 const loading = ref(false);
 
 const showDialog = ref(false);
@@ -104,10 +105,10 @@ const handleSubmit = async () => {
       // toast.add({ severity: 'success', summary: 'نجاح', detail: 'تم تسجيل الدخول بنجاح' });
       showDialog.value = false;
     } else {
-      toast.add({ severity: 'error', summary: 'خطأ', detail: result.errors || 'فشل تسجيل الدخول' });
+      toast.value.showTemplate('error', 'خطأ: ' + (result.errors || 'فشل تسجيل الدخول'));
     }
   } catch  {
-    toast.add({ severity: 'error', summary: 'خطأ', detail: 'حدث خطأ غير متوقع' });
+    toast.value.showTemplate('error', 'خطأ: حدث خطأ غير متوقع');
   } finally {
     loading.value = false;
   }
@@ -123,17 +124,17 @@ const handleRegister = async () => {
     });
 
     if (result.success) {
-      toast.add({ severity: 'success', summary: 'نجاح', detail: 'تم إنشاء الحساب بنجاح' });
+      toast.value.showTemplate('success', 'نجاح: تم إنشاء الحساب بنجاح');
       showRegisterForm.value = false;
       email.value = registerEmail.value;
       password.value = registerPassword.value;
       // Automatically login after successful registration
       await handleSubmit();
     } else {
-      toast.add({ severity: 'error', summary: 'خطأ', detail: result.errors || 'فشل إنشاء الحساب' });
+      toast.value.showTemplate('error', 'خطأ: ' + (result.errors || 'فشل إنشاء الحساب'));
     }
   } catch  {
-    toast.add({ severity: 'error', summary: 'خطأ', detail: 'حدث خطأ غير متوقع' });
+    toast.value.showTemplate('error', 'خطأ: حدث خطأ غير متوقع');
   } finally {
     loading.value = false;
   }
@@ -152,12 +153,12 @@ const showForgetPassword = async () => {
     try {
       const result = await authStore.forgotPassword(email.value);
       if (result.success) {
-        toast.add({ severity: 'success', summary: 'نجاح', detail: 'تم إرسال رابط إعادة تعيين كلمة المرور' });
+        toast.value.showTemplate('success', 'نجاح: تم إرسال رابط إعادة تعيين كلمة المرور');
       } else {
-        toast.add({ severity: 'error', summary: 'خطأ', detail: result.errors || 'فشل إرسال رابط إعادة تعيين كلمة المرور' });
+        toast.value.showTemplate('error', 'خطأ: ' + (result.errors || 'فشل إرسال رابط إعادة تعيين كلمة المرور'));
       }
     } catch  {
-      toast.add({ severity: 'error', summary: 'خطأ', detail: 'حدث خطأ غير متوقع' });
+      toast.value.showTemplate('error', 'خطأ: حدث خطأ غير متوقع');
     }
   }
   forgetPasswordRef.value.showForgetPassword();
