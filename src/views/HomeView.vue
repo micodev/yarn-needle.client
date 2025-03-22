@@ -70,24 +70,31 @@
         {{ membershipStore.error }}
       </div>
       <div v-else v-for="plan in membershipStore.getMemberships" :key="plan.id"
-        class="plan-card p-6 rounded-lg  shadow-inner bg-slate-100 dark:bg-gray-800 flex flex-col justify-between h-full">
+        :class="[
+          'plan-card p-6 rounded-lg shadow-inner flex flex-col justify-between h-full',
+          plan.code === 'GOLD' ? 'gold-membership bg-blue-100 dark:bg-blue-900 border-2 border-blue-500' : 'bg-slate-100 dark:bg-gray-800'
+        ]">
         <div>
           <div class="flex items-center mb-4">
-            <i :class="plan.iconClass" class="text-lg ml-3"></i>
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ plan.title }}</h3>
+            <i :class="[plan.iconClass, plan.code === 'GOLD' ? 'text-blue-600 dark:text-blue-400' : '']" class="text-lg ml-3"></i>
+            <h3 :class="['text-2xl font-bold', plan.code === 'GOLD' ? 'text-blue-600 dark:text-blue-300' : 'text-gray-900 dark:text-gray-100']">
+              {{ plan.title }}
+              <span v-if="plan.code === 'GOLD'" class="text-sm font-normal bg-blue-500 text-white px-2 py-1 rounded-full mr-2">مميز</span>
+            </h3>
           </div>
           <ul class="text-gray-700 dark:text-gray-300 mb-4 list-disc list-inside">
             <li v-for="(point, index) in plan.features" :key="index">{{ point }}</li>
           </ul>
         </div>
         <div class="mt-auto">
-          <p class="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">
+          <p :class="['text-lg font-bold mb-4', plan.code === 'GOLD' ? 'text-blue-600 dark:text-blue-300' : 'text-gray-900 dark:text-gray-100']">
             <SARSymbol :value="plan.price" :showUnit="true" />
           </p>
           <Button
-            label="إشترك الآن"
+            :label="plan.code === 'GOLD' ? 'إشترك الآن (العضوية المميزة)' : 'إشترك الآن'"
             icon="pi pi-arrow-left"
-            class="h-10 w-full"
+            :class="['h-10 w-full', plan.code === 'GOLD' ? 'p-button-primary' : '']"
+            :severity="plan.code === 'GOLD' ? 'info' : 'primary'"
             @click="handleSubscription(plan)"
           />
         </div>
@@ -186,3 +193,16 @@ onMounted(async () => {
   ]);
 });
 </script>
+
+<style scoped>
+.gold-membership {
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+.gold-membership:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.7);
+}
+</style>
