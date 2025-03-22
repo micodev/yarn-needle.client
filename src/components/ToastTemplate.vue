@@ -29,10 +29,12 @@ const showTemplate = (severity = 'error', summary = '', title = '', timeout = 30
     });
     visible.value = true;
 
-    // Auto-hide after timeout period
-    setTimeout(() => {
-      visible.value = false;
-    }, timeout);
+    // Auto-hide after timeout period only if timeout is not null
+    if (timeout !== null) {
+      setTimeout(() => {
+        visible.value = false;
+      }, timeout);
+    }
   }
 };
 
