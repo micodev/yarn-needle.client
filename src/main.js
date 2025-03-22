@@ -41,6 +41,26 @@ addIcons(
   FaChalkboardTeacher,
   FaComments
 );
+
+// Initialize dark mode based on localStorage or system preference
+const initializeTheme = () => {
+  const savedTheme = localStorage.getItem('darkMode');
+
+  // If user has a saved preference, use that
+  if (savedTheme !== null) {
+    document.documentElement.classList.toggle('dark', savedTheme === 'true');
+  }
+  // Otherwise check for system preference
+  else {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.classList.toggle('dark', prefersDark);
+    localStorage.setItem('darkMode', prefersDark);
+  }
+};
+
+// Apply theme before app mount
+initializeTheme();
+
 const app = createApp(App)
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate)

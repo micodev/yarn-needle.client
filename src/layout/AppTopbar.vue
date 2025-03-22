@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";from "vue";
 import { useAuthStore } from '@/stores/auth';
 import { useRouter, useRoute } from 'vue-router';
 import { Menubar, Menu, Avatar, Button, Badge } from "primevue";
@@ -141,13 +141,26 @@ const toggleProfileMenu = (event) => {
   menu.value.toggle(event);
 };
 const isDarkMode = ref(false);
-
-const toggleDarkMode = () => {
+// Initialize dark mode from localStorage or system preference
+const toggleDarkMode = () => {orage.getItem('darkMode') === 'true');
   isDarkMode.value = !isDarkMode.value;
   document.documentElement.classList.toggle('dark', isDarkMode.value);
+};Mounted(() => {
+</script>eme();
+});
+<style>
+/* add padding padding: 21px; to avatar */
+.p-avatar {e.value = !isDarkMode.value;
+  padding: 21px;etItem('darkMode', isDarkMode.value);
+} applyTheme();
+};
+.p-menu-submenu-label {
+  /* remove padding */he current theme
+  padding: 0 !important; {
+} document.documentElement.classList.toggle('dark', isDarkMode.value);
 };
 </script>
-
+</style>
 <style>
 /* add padding padding: 21px; to avatar */
 .p-avatar {
