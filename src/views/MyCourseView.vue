@@ -78,24 +78,4 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-:deep(.text-gray-900) {
-  color: var(--p-text-color);
-}
 
-:deep(.text-gray-700) {
-  color: var(--p-text-muted-color);
-}
-
-:deep(.text-gray-600) {
-  color: var(--p-text-muted-color);
-}
-
-:deep(.bg-white) {
-  background-color: var(--p-surface-0);
-}
-
-:deep(.dark) {
-  background-color: var(--p-surface-800);
-}
-</style>
