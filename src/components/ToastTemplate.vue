@@ -33,7 +33,7 @@ const showTemplate = (severity = 'error', summary = '', title = '', timeout = 30
     // Auto-hide after timeout period only if timeout is not null
     if (timeout !== null) {
       setTimeout(() => {
-        visible.value = false;
+        onClose();
       }, timeout);
     }
   }
