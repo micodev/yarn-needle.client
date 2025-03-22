@@ -84,7 +84,7 @@
           </ul>
         </Fieldset>
         <Fieldset legend="التقييمات والتعليقات" :toggleable="true" :collapsed="true">
-          <div v-for="comment in displayedComments" :key="comment.id" class="mb-4 bg-primary-50 dark:border-2 dark:bg-transparent p-2 rounded">
+          <div v-for="comment in displayedComments" :key="comment.id" class="mb-4 bg-primary-50 dark:border-2 dark:bg-transparent dark:border-primary-950 p-2 rounded">
             <div class="flex items-center mb-2">
               <img v-if="isValidImageUrl(comment.avatar)" :src="comment.avatar" alt="User Avatar" class="rounded-full w-8 h-8 ml-2">
               <i v-else class="pi pi-user rounded-full ml-2 flex items-center justify-center "></i>
