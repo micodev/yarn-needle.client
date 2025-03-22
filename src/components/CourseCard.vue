@@ -213,8 +213,22 @@ const onShowSocials = (course) => {
   background: linear-gradient(to bottom, rgba(31, 41, 55, 0) 0%, rgba(31, 41, 55, 0.95) 90%);
 }
 
-/* Remove the old dark theme selector */
-/* :deep(.dark) .text-fade-container::after {
-  --fade-color: rgb(31 41 55 / 0.95);
-} */
+/* Add hover scale effect */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-origin: center;
+  will-change: transform;
+  z-index: 1;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  z-index: 2;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark mode hover effect adjustment */
+.dark .card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+}
 </style>
