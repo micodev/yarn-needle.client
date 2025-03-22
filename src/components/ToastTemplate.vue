@@ -17,7 +17,7 @@ import { ref, defineExpose } from 'vue';
 const toast = useToast();
 const visible = ref(false);
 
-const showTemplate = (severity = 'error', summary = '', timeout = 3000) => {
+const showTemplate = (severity = 'error', summary = '', timeout = 1000) => {
   if (!visible.value) {
     toast.removeAllGroups();
     toast.add({
@@ -30,7 +30,6 @@ const showTemplate = (severity = 'error', summary = '', timeout = 3000) => {
     // Auto-hide after timeout period only if timeout is not null
     if (timeout !== null) {
       setTimeout(() => {
-        console.log("I am here.")
         toast.removeGroup('bc'); // Add this line to properly remove the toast
         visible.value = false;
       }, timeout);
