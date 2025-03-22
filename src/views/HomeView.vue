@@ -71,9 +71,10 @@
       </div>
       <MembershipCard
         v-else
-        v-for="plan in membershipStore.getMemberships"
+        v-for="(plan,index) in membershipStore.getMemberships"
         :key="plan.id"
         :plan="plan"
+        :IsSpecialMembership="index == 1"
         @subscribe="handleSubscription"
       />
     </div>
