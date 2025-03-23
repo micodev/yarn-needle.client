@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['card p-0 rounded-lg relative flex flex-col h-full', 'border-2 shadow-inner border-primary-100 dark:border-2 dark:border-zinc-700 dark:bg-gray-800']"
+    :class="['card p-0 rounded-lg relative flex flex-col h-full transition-transform duration-300 ease-in-out transform-gpu origin-center hover:scale-105 hover:z-10 hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30', 'border-2 shadow-inner border-primary-100 dark:border-2 dark:border-zinc-700 dark:bg-gray-800']"
   >
     <div class="relative p-3 sm:p-2 flex-grow">
       <img :src="course.image" alt="Course Image" class="w-full h-40 sm:h-36 object-cover rounded" />
@@ -8,7 +8,7 @@
         <p class="text-lg sm:text-base font-bold mb-2 sm:mb-1 text-right text-gray-900 dark:text-gray-100">{{ course.title }}</p>
         <!-- Rating component - moved above description -->
         <div v-if="!course.purchased" class="flex items-center gap-2 w-full justify-center mb-2 sm:mb-1">
-          <Rating v-model="localRating" readonly disabled :cancel="false" class="cursor-default rtl-rating sm:scale-90" />
+          <Rating v-model="localRating" readonly disabled :cancel="false" class="cursor-default direction-rtl sm:scale-90" />
           <span class="text-gray-600 dark:text-gray-400 text-sm sm:text-xs flex items-center">
             <i class="pi pi-users ml-2"></i>
             {{ course.students || 0 }}
@@ -19,10 +19,11 @@
           <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.lessonCount }} درس</span>
           <span class="text-sm text-gray-600 dark:text-gray-400">{{ formattedDuration }}</span>
         </div>
-        <div class="text-fade-container relative w-full h-[4.5rem] mb-2 sm:mb-1">
+        <div class="relative w-full h-[4.5rem] mb-2 sm:mb-1 overflow-hidden">
           <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-xs text-ellipsis">
             {{ truncatedDescription }}
           </p>
+          <div class="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-b from-transparent to-white dark:to-gray-800"></div>
         </div>
       </div>
       <div class="absolute top-5 left-4 px-2 w-full">
@@ -81,7 +82,6 @@
         />
         <Button
           label="معلومات الاتصال"
-
           class="h-8 sm:h-7 flex-1 text-sm sm:text-xs"
           severity="primary"
           outlined
@@ -217,50 +217,3 @@ const formattedDuration = computed(() => {
   }
 });
 </script>
-
-<style scoped>
-.rtl-rating {
-  direction: rtl;
-}
-
-.text-fade-container {
-  position: relative;
-  overflow: hidden;
-}
-
-.text-fade-container::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2rem;
-  background: linear-gradient(to bottom, rgba(248, 250, 252, 0) 0%, rgba(248, 250, 252, 0.95) 90%);
-  pointer-events: none;
-}
-
-/* Dark mode gradient - using the same selector pattern as in the template */
-:root.dark .text-fade-container::after,
-.dark .text-fade-container::after {
-  background: linear-gradient(to bottom, rgba(31, 41, 55, 0) 0%, rgba(31, 41, 55, 0.95) 90%);
-}
-
-/* Add hover scale effect */
-.card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  transform-origin: center;
-  will-change: transform;
-  z-index: 1;
-}
-
-.card:hover {
-  transform: scale(1.03);
-  z-index: 2;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
-/* Dark mode hover effect adjustment */
-.dark .card:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-}
-</style>
