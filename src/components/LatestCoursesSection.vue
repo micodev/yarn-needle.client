@@ -13,7 +13,7 @@
           {{ coursesStore.error }}
         </div>
         <div v-else v-for="(course) in coursesStore.getRecentCourses" :key="course.title"
-          class=" w-4/5 flex-shrink-0 md:flex-shrink md:w-[calc(33%-1rem)] lg:w-[calc(20%-1.5rem)]">
+          class=" w-4/5 flex-shrink-0 md:flex-shrink md:w-[calc(45%-1rem)] lg:w-[calc(20%-1.5rem)]">
           <CourseCard
             :course="course"
             @purchase="handlePurchaseClick"
