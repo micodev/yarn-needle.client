@@ -1,10 +1,10 @@
 <template>
-  <div class="membership-section py-8 pr-2 overflow-x-auto">
+  <div class="membership-section py-8 pr-2">
     <div class="text-center">
       <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">إشتراكات العضوية</h2>
       <p class="text-md text-gray-600 dark:text-gray-400">إشترك بعضويتك الآن وأحصل على وصول غير محدود</p>
     </div>
-    <div class="mobile-memberships-container pb-4 mt-12">
+    <div class="mobile-memberships-container pb-4 mt-12 overflow-x-auto">
       <div class="flex md:flex-wrap md:gap-4 gap-4 relative md:justify-center nowrap">
         <div v-if="membershipStore.isLoading" class="w-full text-center">
           <i class="pi pi-spin pi-spinner text-3xl"></i>
