@@ -22,6 +22,13 @@
     </div>
   </div>
 
+  <PurchaseConfirmDialog
+      v-if="selectedCourseId"
+      v-model="showPurchaseDialog"
+      :course-id="selectedCourseId"
+      :type="purchaseType"
+      @purchase-success="handlePurchaseSuccess"
+    />
 </template>
 
 <script setup>
@@ -30,6 +37,7 @@ import { useToast } from 'primevue/usetoast';
 import { useMembershipStore } from '@/stores/membership';
 import { useAuthStore } from '@/stores/auth';
 import MembershipCard from './MembershipCard.vue';
+import PurchaseConfirmDialog from './PurchaseConfirmDialog.vue';
 
 const membershipStore = useMembershipStore();
 const authStore = useAuthStore();
@@ -54,6 +62,9 @@ const handleSubscription = (plan) => {
   purchaseType.value = 'membership';
 };
 
+const handlePurchaseSuccess = () => {
+  // You can add success notification or refresh membership data if needed
+};
 
 onMounted(async () => {
   await membershipStore.fetchMemberships();
