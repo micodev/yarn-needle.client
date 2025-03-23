@@ -101,7 +101,7 @@ import { useRouter } from 'vue-router';
 import PurchaseConfirmDialog from '../components/PurchaseConfirmDialog.vue';
 import CourseCard from '../components/CourseCard.vue';
 import MembershipCard from '../components/MembershipCard.vue';
-
+import VirtualScroller from "primevue";
 const membershipStore = useMembershipStore();
 const coursesStore = useCoursesStore();
 const authStore = useAuthStore();
