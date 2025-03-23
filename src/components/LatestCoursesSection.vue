@@ -64,11 +64,7 @@ const navigateToDetails = (courseId) => {
   router.push({ name: 'course', params: { id: courseId }});
 };
 
-const handleSubscription = (plan) => {
-  selectedCourseId.value = plan.code;
-  showPurchaseDialog.value = true;
-  purchaseType.value = 'membership';
-};
+
 
 const handleAddCourse = async (courseId) => {
   try {
