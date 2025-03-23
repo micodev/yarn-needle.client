@@ -14,21 +14,13 @@
     </div>
   </div>
   <div class="features-section py-1 px-4 md:px-16 w-100">
-    <VirtualScroller
-      :items="features"
-      :scroll-width="100"
-      orientation="horizontal"
-      class="border-none"
-      :itemSize="250"
-      scrollHeight="220px">
-      <template #item="{ item }">
-        <div class="feature text-center p-4 min-w-[220px]">
-          <i :class="item.icon + ' text-3xl mb-4 text-primary'"></i>
-          <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">{{ item.title }}</h3>
-          <p class="text-gray-700 dark:text-gray-300">{{ item.description }}</p>
-        </div>
-      </template>
-    </VirtualScroller>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <div v-for="(item, index) in features" :key="index" class="feature text-center p-4">
+        <i :class="item.icon + ' text-3xl mb-4 text-primary'"></i>
+        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">{{ item.title }}</h3>
+        <p class="text-gray-700 dark:text-gray-300">{{ item.description }}</p>
+      </div>
+    </div>
   </div>
   <div class="latest-courses-section py-16 px-4 md:px-16">
     <div class="text-center mb-12">
@@ -95,7 +87,6 @@ import { useRouter } from 'vue-router';
 import PurchaseConfirmDialog from '../components/PurchaseConfirmDialog.vue';
 import CourseCard from '../components/CourseCard.vue';
 import MembershipCard from '../components/MembershipCard.vue';
-import VirtualScroller from 'primevue/virtualscroller';
 
 const membershipStore = useMembershipStore();
 const coursesStore = useCoursesStore();
