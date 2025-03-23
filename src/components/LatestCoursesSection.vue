@@ -4,7 +4,7 @@
       <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">أحدث الدورات التدريبية</h2>
       <p class="text-md text-gray-600 dark:text-gray-400">دورات مصممة لتطوير مهاراتك في مجالات متعددة</p>
     </div>
-    <div class="mobile-courses-container md:overflow-x-auto pb-4">
+    <div class="mobile-courses-container pb-4">
       <div class="flex md:flex-wrap md:gap-8 gap-4 relative md:justify-center nowrap">
         <div v-if="coursesStore.isLoading" class="w-full text-center">
           <i class="pi pi-spin pi-spinner text-3xl"></i>
