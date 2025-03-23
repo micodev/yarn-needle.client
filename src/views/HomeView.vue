@@ -15,7 +15,7 @@
   </div>
   <FeaturesSection />
   <LatestCoursesSection />
-  <MembershipSection @subscribe="handleSubscription" />
+  <MembershipSection />
 </template>
 
 <script setup>
