@@ -5,6 +5,7 @@ export const APP_ENV = import.meta.env.VITE_APP_ENV || 'development'
 
 const axiosInstance = axios.create({
     baseURL: API_URL,
+    rejectUnauthorized: false,
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json'
