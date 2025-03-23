@@ -1,11 +1,5 @@
 <template>
-  <div class="card flex justify-center">
-        <VirtualScroller :items="items" :itemSize="50" orientation="horizontal" class="border border-surface-200 dark:border-surface-700 rounded" style="width: 200px; height: 200px" :pt="{ content: 'flex flex-row' }">
-            <template v-slot:item="{ item, options }">
-                <div :class="['flex items-center p-2', { 'bg-surface-100 dark:bg-surface-700': options.odd }]" style="width: 50px; writing-mode: vertical-lr;">{{ item }}</div>
-            </template>
-        </VirtualScroller>
-    </div>
+
   <div class="hero-section flex flex-col md:flex-row items-center py-16 px-4 md:px-16">
     <div class="md:w-1/2 p-4">
       <img src="https://placehold.co/600x400" alt="Illustrative placeholder" class="w-full" />
@@ -91,8 +85,6 @@
 </template>
 
 <script setup>
-
-const items = ref(Array.from({ length: 100000 }).map((_, i) => `Item #${i}`));
 import { onMounted, ref } from "vue";
 import { Button } from "primevue";
 import { useToast } from 'primevue/usetoast';
