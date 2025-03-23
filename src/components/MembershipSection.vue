@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted,ref } from "vue";
 import { useToast } from 'primevue/usetoast';
 import { useMembershipStore } from '@/stores/membership';
 import { useAuthStore } from '@/stores/auth';
@@ -34,8 +34,9 @@ import MembershipCard from './MembershipCard.vue';
 const membershipStore = useMembershipStore();
 const authStore = useAuthStore();
 const toast = useToast();
-
-const emit = defineEmits(['subscribe']);
+const selectedCourseId = ref(null);
+const showPurchaseDialog = ref(false);
+const purchaseType = ref('membership');
 
 const handleSubscription = (plan) => {
   if (!authStore.hasProfile) {
@@ -48,8 +49,11 @@ const handleSubscription = (plan) => {
     return;
   }
 
-  emit('subscribe', plan);
+  selectedCourseId.value = plan.code;
+  showPurchaseDialog.value = true;
+  purchaseType.value = 'membership';
 };
+
 
 onMounted(async () => {
   await membershipStore.fetchMemberships();
