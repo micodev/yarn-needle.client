@@ -1,5 +1,5 @@
 <template>
-  <div class="membership-section py-8">
+  <div class="membership-section py-8  pr-2">
     <div class="text-center">
       <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">إشتراكات العضوية</h2>
       <p class="text-lg text-gray-600 dark:text-gray-400">إشترك بعضويتك الآن وأحصل على وصول غير محدود</p>
