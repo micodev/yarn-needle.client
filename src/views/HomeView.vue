@@ -15,6 +15,7 @@
   </div>
   <FeaturesSection />
   <LatestCoursesSection />
+  <MembershipSection @subscribe="handleSubscription" />
 </template>
 
 <script setup>
@@ -22,7 +23,7 @@ import { Button } from "primevue";
 import { useRouter } from 'vue-router';
 import FeaturesSection from '../components/FeaturesSection.vue';
 import LatestCoursesSection from '../components/LatestCoursesSection.vue';
-
+import MembershipSection from '../components/MembershipSection.vue';
 const router = useRouter();
 </script>
 
