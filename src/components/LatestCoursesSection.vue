@@ -2,7 +2,7 @@
   <div class="latest-courses-section py-16 md:px-16 pr-2">
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">أحدث الدورات التدريبية</h2>
-      <p class="text-lg text-gray-600 dark:text-gray-400">دورات مصممة لتطوير مهاراتك في مجالات متعددة</p>
+      <p class="text-md text-gray-600 dark:text-gray-400">دورات مصممة لتطوير مهاراتك في مجالات متعددة</p>
     </div>
     <div class="mobile-courses-container overflow-x-auto pb-4">
       <div class="flex md:flex-wrap md:gap-8 gap-4 relative md:justify-center nowrap">
