@@ -4,21 +4,23 @@
       <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">إشتراكات العضوية</h2>
       <p class="text-lg text-gray-600 dark:text-gray-400">إشترك بعضويتك الآن وأحصل على وصول غير محدود</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-      <div v-if="membershipStore.isLoading" class="col-span-4 text-center">
-        <i class="pi pi-spin pi-spinner text-3xl"></i>
+    <div class="mobile-memberships-container overflow-x-auto pb-4 mt-12">
+      <div class="flex md:flex-wrap md:gap-8 gap-4 relative md:justify-center nowrap">
+        <div v-if="membershipStore.isLoading" class="w-full text-center">
+          <i class="pi pi-spin pi-spinner text-3xl"></i>
+        </div>
+        <div v-else-if="membershipStore.error" class="w-full text-center text-red-500">
+          {{ membershipStore.error }}
+        </div>
+        <div v-else v-for="(plan, index) in membershipStore.getMemberships" :key="plan.id"
+          class="w-4/5 flex-shrink-0 md:flex-shrink md:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)]">
+          <MembershipCard
+            :plan="plan"
+            :IsSpecialMembership="index == 1"
+            @subscribe="handleSubscription"
+          />
+        </div>
       </div>
-      <div v-else-if="membershipStore.error" class="col-span-4 text-center text-red-500">
-        {{ membershipStore.error }}
-      </div>
-      <MembershipCard
-        v-else
-        v-for="(plan,index) in membershipStore.getMemberships"
-        :key="plan.id"
-        :plan="plan"
-        :IsSpecialMembership="index == 1"
-        @subscribe="handleSubscription"
-      />
     </div>
   </div>
 
@@ -70,3 +72,20 @@ onMounted(async () => {
   await membershipStore.fetchMemberships();
 });
 </script>
+
+<style scoped>
+.mobile-memberships-container {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+.mobile-memberships-container::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+@media (max-width: 768px) {
+  .nowrap {
+    flex-wrap: nowrap;
+  }
+}
+</style>
