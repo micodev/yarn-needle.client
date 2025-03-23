@@ -73,7 +73,7 @@
       <!-- Buttons for enrolled course view -->
       <div v-if="course.purchased" class="flex gap-2 flex-col sm:flex-row">
         <Button
-          label="فتح التفاصيل"
+          label="التفاصيل"
           icon="pi pi-eye"
           class="h-8 sm:h-7 flex-1 text-sm sm:text-xs"
           severity="primary"
