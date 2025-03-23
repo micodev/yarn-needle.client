@@ -5,7 +5,7 @@
       <p class="text-md text-gray-600 dark:text-gray-400">إشترك بعضويتك الآن وأحصل على وصول غير محدود</p>
     </div>
     <div class="mobile-memberships-container pb-4 mt-12">
-      <div class="flex md:grid md:grid-cols-2 md:grid-rows-2 md:gap-8 gap-4 relative md:justify-center nowrap">
+      <div class="flex md:flex-wrap md:gap-4 gap-4 relative md:justify-center nowrap">
         <div v-if="membershipStore.isLoading" class="w-full text-center">
           <i class="pi pi-spin pi-spinner text-3xl"></i>
         </div>
@@ -13,7 +13,7 @@
           {{ membershipStore.error }}
         </div>
         <div v-else v-for="(plan, index) in membershipStore.getMemberships" :key="plan.id"
-          class="w-4/5 flex-shrink-0 md:flex-shrink md:w-full lg:w-[calc(25%-1.5rem)] lg:flex-1">
+          class="w-4/5 flex-shrink-0 md:flex-shrink md:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)]">
           <MembershipCard
             :plan="plan"
             :IsSpecialMembership="index == 1"
