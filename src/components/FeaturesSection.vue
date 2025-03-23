@@ -1,7 +1,7 @@
 <template>
   <div class="features-section py-1 px-4 md:px-16 w-100">
     <!-- Desktop view: grid layout -->
-    <div class="hidden sm:grid sm:grid-cols-2 md:grid-cols-4 gap-6 mt-2">
+    <div class="hidden sm:grid sm:grid-cols-2 md:grid-cols-4 gap-6 mt-3">
       <div v-for="(item, index) in features" :key="`desktop-${index}`" class="feature text-center p-4">
         <i :class="item.icon + ' text-3xl mb-4 text-primary'"></i>
         <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">{{ item.title }}</h3>
