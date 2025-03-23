@@ -39,7 +39,6 @@ import { useCoursesStore } from '@/stores/courses';
 import { useRouter } from 'vue-router';
 import PurchaseConfirmDialog from './PurchaseConfirmDialog.vue';
 import CourseCard from './CourseCard.vue';
-import MembershipSection from './MembershipSection.vue';
 
 const coursesStore = useCoursesStore();
 const router = useRouter();
