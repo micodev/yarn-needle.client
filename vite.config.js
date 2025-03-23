@@ -12,7 +12,7 @@ import process from 'process';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    //mkcert(),
+    mkcert(),
     vue(),
     vueJsx(),
     vueDevTools(),
