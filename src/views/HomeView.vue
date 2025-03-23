@@ -13,28 +13,20 @@
     </div>
   </div>
   <div class="features-section py-1 px-4 md:px-16">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      <div class="feature text-center p-4">
-        <i class="pi pi-search text-3xl mb-4 text-primary"></i>
-        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">اكتشف</h3>
-        <p class="text-gray-700 dark:text-gray-300">استكشف مجموعة متنوعة من الدورات والتخصصات.</p>
-      </div>
-      <div class="feature text-center p-4">
-        <i class="pi pi-check-circle text-3xl mb-4 text-primary"></i>
-        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">تحقق</h3>
-        <p class="text-gray-700 dark:text-gray-300">تحقق من مهاراتك من خلال التقييمات.</p>
-      </div>
-      <div class="feature text-center p-4">
-        <i class="pi pi-book text-3xl mb-4 text-primary"></i>
-        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">تعلّم</h3>
-        <p class="text-gray-700 dark:text-gray-300">اكتسب المهارات مع المدربين المؤهلين.</p>
-      </div>
-      <div class="feature text-center p-4">
-        <i class="pi pi-thumbs-up-fill text-3xl mb-4 text-primary"></i>
-        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">احصل على الشهادة</h3>
-        <p class="text-gray-700 dark:text-gray-300">احصل على الشهادات لتعزيز مسيرتك المهنية.</p>
-      </div>
-    </div>
+    <VirtualScroller
+      :items="features"
+      orientation="horizontal"
+      class="border-none"
+      :itemSize="250"
+      scrollHeight="220px">
+      <template #item="{ item }">
+        <div class="feature text-center p-4 min-w-[220px]">
+          <i :class="item.icon + ' text-3xl mb-4 text-primary'"></i>
+          <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">{{ item.title }}</h3>
+          <p class="text-gray-700 dark:text-gray-300">{{ item.description }}</p>
+        </div>
+      </template>
+    </VirtualScroller>
   </div>
   <div class="latest-courses-section py-16 px-4 md:px-16">
     <div class="text-center mb-12">
@@ -101,7 +93,8 @@ import { useRouter } from 'vue-router';
 import PurchaseConfirmDialog from '../components/PurchaseConfirmDialog.vue';
 import CourseCard from '../components/CourseCard.vue';
 import MembershipCard from '../components/MembershipCard.vue';
-import VirtualScroller from "primevue";
+import { VirtualScroller } from "primevue/virtualscroller";
+
 const membershipStore = useMembershipStore();
 const coursesStore = useCoursesStore();
 const authStore = useAuthStore();
@@ -109,6 +102,29 @@ const router = useRouter();
 const toast = useToast();
 const purchaseType = ref('course');
 
+// Define features data
+const features = ref([
+  {
+    icon: "pi pi-search",
+    title: "اكتشف",
+    description: "استكشف مجموعة متنوعة من الدورات والتخصصات."
+  },
+  {
+    icon: "pi pi-check-circle",
+    title: "تحقق",
+    description: "تحقق من مهاراتك من خلال التقييمات."
+  },
+  {
+    icon: "pi pi-book",
+    title: "تعلّم",
+    description: "اكتسب المهارات مع المدربين المؤهلين."
+  },
+  {
+    icon: "pi pi-thumbs-up-fill",
+    title: "احصل على الشهادة",
+    description: "احصل على الشهادات لتعزيز مسيرتك المهنية."
+  }
+]);
 
 // Add these refs for purchase dialog
 const showPurchaseDialog = ref(false);
