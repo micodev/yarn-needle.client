@@ -12,7 +12,7 @@
       </div>
     </div>
   </div>
-  <div class="features-section py-1 px-4 md:px-16">
+  <div class="features-section py-1 px-4 md:px-16 w-100">
     <VirtualScroller
       :items="features"
       orientation="horizontal"
