@@ -81,7 +81,7 @@
         />
         <Button
           label="معلومات الاتصال"
-          icon="pi pi-info-circle"
+
           class="h-8 sm:h-7 flex-1 text-sm sm:text-xs"
           severity="primary"
           outlined
