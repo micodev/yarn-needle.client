@@ -1,16 +1,11 @@
 import axios from 'axios'
-// Replace require with dynamic import or use a browser-compatible approach
-import https from 'https'
+
 export const API_URL = import.meta.env.VITE_API_URL
 export const APP_ENV = import.meta.env.VITE_APP_ENV || 'development'
 
 const axiosInstance = axios.create({
     baseURL: API_URL,
-    // Using a browser-compatible approach for HTTPS configuration
-    // In a browser environment, we need to handle this differently than in Node
-    httpsAgent: new https.Agent({
-      rejectUnauthorized: false
-    }),
+    rejectUnauthorized: false,
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json'
