@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['card p-0 rounded-lg relative flex flex-col h-full transition-transform duration-300 ease-in-out transform-gpu origin-center hover:scale-105 hover:z-10 hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30', 'border-2 shadow-inner border-primary-100 dark:border-2 dark:border-zinc-700 dark:bg-gray-800']"
+    :class="['card p-0 rounded-lg relative flex flex-col h-full transition-transform duration-300 ease-in-out transform-gpu origin-center md:hover:scale-105 hover:z-10 hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30', 'border-2 shadow-inner border-primary-100 dark:border-2 dark:border-zinc-700 dark:bg-gray-800']"
   >
     <div class="relative p-3 sm:p-2 flex-grow">
       <img :src="course.image" alt="Course Image" class="w-full h-40 sm:h-36 object-cover rounded" />
