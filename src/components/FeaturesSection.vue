@@ -19,11 +19,11 @@
         </div>
       </transition>
 
-      <!-- Navigation dots -->
+      <!-- Navigation pills -->
       <div class="flex justify-center mt-4">
         <button v-for="(_, index) in features" :key="index"
                 @click="activeFeatureIndex = index"
-                class="mx-1 w-3 h-3 rounded-full transition-colors"
+                class="mx-1 w-8 h-3 rounded-lg transition-colors duration-300"
                 :class="index === activeFeatureIndex ? 'bg-primary' : 'bg-gray-300'">
         </button>
       </div>
