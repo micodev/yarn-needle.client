@@ -17,7 +17,7 @@
         <!-- Progress information for enrolled courses -->
         <div v-if="course.purchased" class="flex justify-between items-center w-full mb-2 text-xs sm:text-sm">
           <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.lessonCount }} درس</span>
-          <span class="text-sm text-gray-600 dark:text-gray-400">{{ course.duration }} ساعات</span>
+          <span class="text-sm text-gray-600 dark:text-gray-400">{{ formattedDuration }}</span>
         </div>
         <div class="text-fade-container relative w-full h-[4.5rem] mb-2 sm:mb-1">
           <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-xs text-ellipsis">
@@ -184,6 +184,38 @@ const onNavigateToDetails = (courseId) => {
 const onShowSocials = (course) => {
   emit('show-socials', course);
 };
+
+// Function to get the correct Arabic text for minutes based on number
+const getArabicMinutesText = (minutes) => {
+  // In Arabic grammar:
+  // - 1 minute uses singular (دقيقة)
+  // - 2-10 minutes uses plural (دقائق)
+  // - 11 and above has special rules, but for simplicity we'll use singular (دقيقة)
+  if (minutes === 1) {
+    return 'دقيقة';
+  } else if (minutes >= 2 && minutes <= 10) {
+    return 'دقائق';
+  } else {
+    return 'دقيقة';
+  }
+};
+
+// Add a computed property to format the duration
+const formattedDuration = computed(() => {
+  if (!props.course.duration) return '';
+
+  const hours = Math.floor(props.course.duration / 60);
+  const minutes = props.course.duration % 60;
+
+  const hoursText = hours === 1 ? 'ساعة' : 'ساعات';
+
+  if (minutes === 0) {
+    return `${hours} ${hoursText}`;
+  } else {
+    const minutesText = getArabicMinutesText(minutes);
+    return `${hours} ${hoursText} و ${minutes} ${minutesText}`;
+  }
+});
 </script>
 
 <style scoped>
