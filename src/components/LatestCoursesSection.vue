@@ -21,9 +21,6 @@
         />
       </div>
     </div>
-
-    <MembershipSection @subscribe="handleSubscription" />
-
   </div>
 
   <PurchaseConfirmDialog
@@ -39,14 +36,12 @@
 import { onMounted, ref } from "vue";
 import { useToast } from 'primevue/usetoast';
 import { useCoursesStore } from '@/stores/courses';
-import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
 import PurchaseConfirmDialog from './PurchaseConfirmDialog.vue';
 import CourseCard from './CourseCard.vue';
 import MembershipSection from './MembershipSection.vue';
 
 const coursesStore = useCoursesStore();
-const authStore = useAuthStore();
 const router = useRouter();
 const toast = useToast();
 const purchaseType = ref('course');
