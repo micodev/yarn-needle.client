@@ -4,21 +4,23 @@
       <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">أحدث الدورات التدريبية</h2>
       <p class="text-lg text-gray-600 dark:text-gray-400">دورات مصممة لتطوير مهاراتك في مجالات متعددة</p>
     </div>
-    <div class="flex flex-wrap gap-8 mb-12 relative justify-center">
-      <div v-if="coursesStore.isLoading" class="w-full text-center">
-        <i class="pi pi-spin pi-spinner text-3xl"></i>
-      </div>
-      <div v-else-if="coursesStore.error" class="w-full text-center text-red-500">
-        {{ coursesStore.error }}
-      </div>
-      <div v-else v-for="(course) in coursesStore.getRecentCourses" :key="course.title"
-        class="w-full md:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)]">
-        <CourseCard
-          :course="course"
-          @purchase="handlePurchaseClick"
-          @add-course="handleAddCourse"
-          @navigate-details="navigateToDetails"
-        />
+    <div class="mobile-courses-container overflow-x-auto pb-4">
+      <div class="flex md:flex-wrap md:gap-8 gap-4 mb-12 relative md:justify-center nowrap">
+        <div v-if="coursesStore.isLoading" class="w-full text-center">
+          <i class="pi pi-spin pi-spinner text-3xl"></i>
+        </div>
+        <div v-else-if="coursesStore.error" class="w-full text-center text-red-500">
+          {{ coursesStore.error }}
+        </div>
+        <div v-else v-for="(course) in coursesStore.getRecentCourses" :key="course.title"
+          class="min-w-[280px] flex-shrink-0 md:flex-shrink md:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)]">
+          <CourseCard
+            :course="course"
+            @purchase="handlePurchaseClick"
+            @add-course="handleAddCourse"
+            @navigate-details="navigateToDetails"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -89,3 +91,20 @@ onMounted(async () => {
   await coursesStore.fetchRecentCourses();
 });
 </script>
+
+<style scoped>
+.mobile-courses-container {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+.mobile-courses-container::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+@media (max-width: 768px) {
+  .nowrap {
+    flex-wrap: nowrap;
+  }
+}
+</style>
