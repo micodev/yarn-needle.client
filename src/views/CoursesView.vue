@@ -26,8 +26,8 @@
       </div>
       <div class="flex gap-2 overflow-x-auto pb-2 sm:pb-0 w-full md:w-1/2 justify-end">
         <Button label="فرز" icon="pi pi-filter" @click="showFilterDialog" :class="{
-          'p-button-secondary': !(levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration),
-          'p-button-primary': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration
+          'p-button-secondary': !(levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationMin > 0 || durationMax < maxDuration),
+          'p-button-primary': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationMin > 0 || durationMax < maxDuration
         }" class="whitespace-nowrap" />
         <Dialog v-model:visible="filterDialogVisible" modal header="فرز" :style="{ width: '90vw', maxWidth: '500px' }"
           :breakpoints="{ '960px': '75vw', '641px': '90vw' }">
@@ -60,12 +60,14 @@
 
             <div>
               <span class="font-medium block mb-2">مدة الدورة (بالساعات)</span>
-              <div class="flex flex-col gap-2">
-                <Slider v-model="durationRange" range :min="0" :max="maxDuration" class="mt-2" />
-
-                <div class="flex justify-between text-sm text-gray-600">
-                  <span>{{ durationRange[1] }} ساعة</span>
-                  <span>{{ durationRange[0] }} ساعة</span>
+              <div class="flex flex-row gap-3 items-center">
+                <div class="w-1/2">
+                  <label class="text-sm text-gray-600 block mb-1">الحد الأدنى</label>
+                  <InputNumber v-model="durationMin" :min="0" :max="maxDuration" class="w-full" :step="1" suffix=" ساعة" />
+                </div>
+                <div class="w-1/2">
+                  <label class="text-sm text-gray-600 block mb-1">الحد الأقصى</label>
+                  <InputNumber v-model="durationMax" :min="0" :max="maxDuration" class="w-full" :step="1" suffix=" ساعة" />
                 </div>
               </div>
             </div>
@@ -77,7 +79,7 @@
             </div>
 
             <Button
-              v-if="levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration"
+              v-if="levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationMin > 0 || durationMax < maxDuration"
               label="مسح التصفية" icon="pi pi-times" severity="secondary" text class="mt-2 w-full justify-center"
               @click="clearFilters" />
           </div>
@@ -137,7 +139,8 @@
         categoryFilter = null;
         lessonRangeFilter = null;
         priceRangeFilter = null;
-        durationRange = [0, maxDuration];
+        durationMin = 0;
+        durationMax = maxDuration;
         searchQuery = '';
         applyFiltersAndSort();
       }" />
@@ -152,7 +155,7 @@
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useRouter } from 'vue-router'; // Add this import
 import { storeToRefs } from 'pinia';
-import { Button, Dialog, Popover, Select, Slider, ProgressSpinner } from "primevue";
+import { Button, Dialog, Popover, Select, InputNumber, ProgressSpinner } from "primevue";
 import { InputText, InputGroup, InputGroupAddon } from "primevue";
 import { useCoursesStore } from '../stores/courses.js';
 import { useLevelOptionsStore } from '../stores/levelOptions.js';
@@ -214,8 +217,9 @@ const courseTypeOptions = computed(() => [
 
 
 
-// Add duration filter state
-const durationRange = ref([0, 50]);
+// Replace durationRange with separate min and max values
+const durationMin = ref(0);
+const durationMax = ref(50);
 const maxDuration = 60; // Maximum course duration in hours
 
 const lessonRangeFilter = ref(null);
@@ -272,8 +276,8 @@ const applyFiltersAndSort = () => {
     courseType: courseTypeFilter.value,
     lessonRange: lessonRangeFilter.value,
     priceRange: priceRangeFilter.value,
-    durationMin: durationRange.value[0],
-    durationMax: durationRange.value[1]
+    durationMin: durationMin.value,
+    durationMax: durationMax.value
   });
 };
 
@@ -289,7 +293,8 @@ const clearFilters = () => {
   courseTypeFilter.value = null;
   lessonRangeFilter.value = null;
   priceRangeFilter.value = null;
-  durationRange.value = [0, maxDuration];
+  durationMin.value = 0;
+  durationMax.value = maxDuration;
   applyFiltersAndSort();
 };
 
@@ -497,5 +502,15 @@ onUnmounted(() => {
 :deep(.p-progress-spinner-circle) {
   stroke: var(--primary-color);
   stroke-width: 3;
+}
+
+/* Add these styles for InputNumber components */
+:deep(.p-inputnumber) {
+  width: 100%;
+  direction: rtl;
+}
+
+:deep(.p-inputnumber-input) {
+  text-align: center;
 }
 </style>
