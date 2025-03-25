@@ -66,6 +66,6 @@
 }
 
 .dark .parallax > use {
-  fill: rgba(255, 255, 255, 0.05);
+  fill: rgb(212, 18, 18);
 }
 </style>
