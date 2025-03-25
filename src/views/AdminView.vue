@@ -1,5 +1,5 @@
 <template>
-  <div class="p-8 bg-gray-50 min-h-screen font-['Tajawal']" dir="rtl">
+  <div class="p-8 min-h-screen font-['Tajawal']" dir="rtl">
     <div class="mb-10 text-right border-r-4 border-indigo-600 pr-5">
       <h1 class="mb-2 text-3xl font-bold text-indigo-600">لوحة التحكم الإدارية</h1>
       <p class="text-gray-600 text-lg">أهلاً بك في نظام إدارة المنصة</p>
@@ -7,8 +7,8 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <router-link to="/admin/users" class="no-underline">
-        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
-          <div class="bg-gradient-to-r from-indigo-400 to-indigo-600 text-white w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
+        <div class="rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
+          <div class="text-white w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
             <v-icon name="fa-users" class="w-7 h-7" />
           </div>
           <div class="w-full">
@@ -19,8 +19,8 @@
       </router-link>
 
       <router-link to="/admin/courses" class="no-underline">
-        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
-          <div class="bg-gradient-to-r from-indigo-400 to-indigo-600 text-white w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
+        <div class="rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
+          <div class="text-white w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
             <v-icon name="fa-book" class="w-7 h-7" />
           </div>
           <div class="w-full">
@@ -31,8 +31,8 @@
       </router-link>
 
       <router-link to="/admin/orders" class="no-underline">
-        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
-          <div class="bg-gradient-to-r from-indigo-400 to-indigo-600 text-white w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
+        <div class="rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
+          <div class="text-white w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
             <v-icon name="fa-shopping-cart" class="w-7 h-7" />
           </div>
           <div class="w-full">
@@ -43,8 +43,8 @@
       </router-link>
 
       <router-link to="/admin/lecturers" class="no-underline">
-        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
-          <div class="bg-gradient-to-r from-indigo-400 to-indigo-600 text-white w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
+        <div class="rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
+          <div class="text-white w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
             <v-icon name="fa-chalkboard-teacher" class="w-7 h-7" />
           </div>
           <div class="w-full">
@@ -55,8 +55,8 @@
       </router-link>
 
       <router-link to="/admin/comments" class="no-underline">
-        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
-          <div class="bg-gradient-to-r from-indigo-400 to-indigo-600 text-white w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
+        <div class="rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
+          <div class="text-white w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
             <v-icon name="fa-comments" class="w-7 h-7" />
           </div>
           <div class="w-full">
@@ -67,8 +67,8 @@
       </router-link>
 
       <router-link to="/admin/organization" class="no-underline">
-        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
-          <div class="bg-gradient-to-r from-indigo-400 to-indigo-600 text-white w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
+        <div class="rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
+          <div class="text-white w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
             <v-icon name="fa-building" class="w-7 h-7" />
           </div>
           <div class="w-full">
