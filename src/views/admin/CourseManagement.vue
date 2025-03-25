@@ -46,12 +46,16 @@
 
               <div>
                 <span class="font-medium block mb-2">مدة الدورة (بالساعات)</span>
-                <div class="flex flex-col gap-2">
-                  <Slider v-model="durationRange" range :min="0" :max="maxDuration" class="mt-2" />
-
-                  <div class="flex justify-between text-sm text-gray-600">
-                    <span>{{ durationRange[0] }} ساعة</span>
-                    <span>{{ durationRange[1] }} ساعة</span>
+                <div class="flex flex-row gap-3 items-center">
+                  <div class="w-1/2">
+                    <label class="text-sm text-gray-600 block mb-1">الحد الأدنى</label>
+                    <InputNumber v-model="durationMin" showButtons :min="0" :max="durationMax" class="w-full" :step="1" suffix=" ساعة"
+                      @input="onDurationMinChange" />
+                  </div>
+                  <div class="w-1/2">
+                    <label class="text-sm text-gray-600 block mb-1">الحد الأقصى</label>
+                    <InputNumber v-model="durationMax" showButtons :min="durationMin + 1" :max="maxDuration" class="w-full" :step="1" suffix=" ساعة"
+                      @input="onDurationMaxChange" />
                   </div>
                 </div>
               </div>
