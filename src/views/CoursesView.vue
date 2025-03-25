@@ -63,11 +63,13 @@
               <div class="flex flex-row gap-3 items-center">
                 <div class="w-1/2">
                   <label class="text-sm text-gray-600 block mb-1">الحد الأدنى</label>
-                  <InputNumber v-model="durationMin" showButtons  :min="0" :max="maxDuration" class="w-full" :step="1" suffix=" ساعة" />
+                  <InputNumber v-model="durationMin" showButtons :min="0" :max="durationMax" class="w-full" :step="1" suffix=" ساعة"
+                    @input="onDurationMinChange" />
                 </div>
                 <div class="w-1/2">
                   <label class="text-sm text-gray-600 block mb-1">الحد الأقصى</label>
-                  <InputNumber v-model="durationMax" showButtons  :min="0" :max="maxDuration" class="w-full" :step="1" suffix=" ساعة" />
+                  <InputNumber v-model="durationMax" showButtons :min="durationMin + 1" :max="maxDuration" class="w-full" :step="1" suffix=" ساعة"
+                    @input="onDurationMaxChange" />
                 </div>
               </div>
             </div>
@@ -379,6 +381,21 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 });
+
+// Add these methods in the script section after other event handlers
+const onDurationMinChange = (event) => {
+  // If the minimum duration becomes greater than or equal to the maximum, increase the maximum
+  if (durationMin.value >= durationMax.value) {
+    durationMax.value = Math.min(durationMin.value + 1, maxDuration);
+  }
+};
+
+const onDurationMaxChange = (event) => {
+  // This is a safety check - the min attribute should already enforce this
+  if (durationMax.value <= durationMin.value) {
+    durationMax.value = durationMin.value + 1;
+  }
+};
 </script>
 
 <style scoped>
