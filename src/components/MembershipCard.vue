@@ -26,6 +26,7 @@
         icon="pi pi-arrow-left"
         :class="['h-10 w-full', IsSpecialMembership ? 'p-button-primary' : '']"
         :severity="IsSpecialMembership ? 'primary' : 'primary'"
+        :disabled="isCurrentPlan"
         @click="subscribe"
       />
     </div>
@@ -42,6 +43,10 @@ const props = defineProps({
     required: true
   },
   IsSpecialMembership: {
+    type: Boolean,
+    default: false
+  },
+  isCurrentPlan: {
     type: Boolean,
     default: false
   }
