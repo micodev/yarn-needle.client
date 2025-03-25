@@ -19,7 +19,7 @@
       </router-link>
 
       <router-link to="/admin/courses" class="no-underline">
-        <div class="rounded-xl dark:bg-gray-800 p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
+        <div class="rounded-xl dark:bg-gray-800 p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600 bg-white dark:bg-blend-darken">
           <div class=" w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
             <v-icon name="fa-book" class="w-7 h-7" />
           </div>
@@ -31,7 +31,7 @@
       </router-link>
 
       <router-link to="/admin/orders" class="no-underline">
-        <div class="rounded-xl dark:bg-gray-800 p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
+        <div class="rounded-xl dark:bg-gray-800 p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600 bg-white dark:bg-blend-darken">
           <div class=" w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
             <v-icon name="fa-shopping-cart" class="w-7 h-7" />
           </div>
@@ -43,7 +43,7 @@
       </router-link>
 
       <router-link to="/admin/lecturers" class="no-underline">
-        <div class="rounded-xl dark:bg-gray-800 p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
+        <div class="rounded-xl dark:bg-gray-800 p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600 bg-white dark:bg-blend-darken">
           <div class=" w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
             <v-icon name="fa-chalkboard-teacher" class="w-7 h-7" />
           </div>
@@ -55,7 +55,7 @@
       </router-link>
 
       <router-link to="/admin/comments" class="no-underline">
-        <div class="rounded-xl dark:bg-gray-800 p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
+        <div class="rounded-xl dark:bg-gray-800 p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600 bg-white dark:bg-blend-darken">
           <div class=" w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
             <v-icon name="fa-comments" class="w-7 h-7" />
           </div>
@@ -67,7 +67,7 @@
       </router-link>
 
       <router-link to="/admin/organization" class="no-underline">
-        <div class="rounded-xl dark:bg-gray-800 p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600">
+        <div class="rounded-xl dark:bg-gray-800 p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600 bg-white dark:bg-blend-darken">
           <div class=" w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
             <v-icon name="fa-building" class="w-7 h-7" />
           </div>
