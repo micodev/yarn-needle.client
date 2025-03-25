@@ -305,11 +305,13 @@ import { useCountryStore } from '@/stores/country'; // Add this import
 import { useNationalityStore } from '@/stores/nationality'; // Add this import
 import { useMembershipStore } from '@/stores/membership'; // Add this import
 import { useSocialMediaStore } from '@/stores/socialMedia'; // Add this import
+import { useOrderStore } from '@/stores/orderStore';
 // Remove the useToast import
 // import { useToast } from 'primevue/usetoast';
 import PurchaseConfirmDialog from './PurchaseConfirmDialog.vue';
 import SARSymbol from './SARSymbol.vue';
 import ToastTemplate from './ToastTemplate.vue'; // Import the ToastTemplate component
+const orderStore = useOrderStore();
 
 // Replace Toast with a ref to the ToastTemplate component
 const toast = ref(null);
@@ -570,6 +572,15 @@ const selectedItemId = ref(null);
 const purchaseType = ref('membership');
 
 const handleSubscription = async (plan) => {
+  if (plan.price == 0) {
+    try {
+      await orderStore.linkFreeMembership(plan.code);
+      toast.value.showTemplate( 'success','تم الاشتراك بالعضوية المجانية بنجاح', 3000);
+    } catch  {
+      toast.value.showTemplate( 'error', orderStore.error || 'حدث خطأ أثناء الاشتراك', 3000);
+    }
+    return;
+  }
   selectedItemId.value = plan.code;
   showPurchaseDialog.value = true;
   purchaseType.value = 'membership';
