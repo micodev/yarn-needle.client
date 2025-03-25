@@ -218,13 +218,7 @@ import ProgressSpinner from 'primevue/progressspinner'
 import Popover from 'primevue/popover'
 import Rating from 'primevue/rating'
 import Tag from 'primevue/tag'
-// removed: import Textarea from 'primevue/textarea'
-// removed: import InputNumber from 'primevue/inputnumber'
-// removed: import MultiSelect from 'primevue/multiselect'
-// removed: import Checkbox from 'primevue/checkbox'
-// removed: import Chips from 'primevue/chips'
 import Toast from 'primevue/toast'
-// removed: import FileUpload from 'primevue/fileupload'
 import CourseForm from './CourseForm.vue'
 
 const courseAdminStore = useCourseAdminStore()
