@@ -8,7 +8,6 @@
         <use href="#wave" x="48" y="1" class="wave1" />
         <use href="#wave" x="48" y="2" class="wave2" />
         <use href="#wave" x="48" y="3" class="wave3" />
-        <use href="#wave" x="48" y="4" class="wave4" />
       </g>
     </svg>
   </div>
