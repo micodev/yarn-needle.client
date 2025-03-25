@@ -35,7 +35,7 @@
 
 .parallax > use {
   animation: move-forever 35s cubic-bezier(.55,.5,.45,.5) infinite;
-  fill: var(--p-primary-200);
+  fill: var(--p-primary-300);
 }
 
 .parallax > use:nth-child(1) {
