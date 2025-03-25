@@ -38,6 +38,7 @@ import { onMounted,ref } from "vue";
 import { useToast } from 'primevue/usetoast';
 import { useMembershipStore } from '@/stores/membership';
 import { useAuthStore } from '@/stores/auth';
+import { useOrderStore } from '@/stores/orderStore';
 import MembershipCard from './MembershipCard.vue';
 import PurchaseConfirmDialog from './PurchaseConfirmDialog.vue';
 
@@ -47,8 +48,9 @@ const toast = useToast();
 const selectedCourseId = ref(null);
 const showPurchaseDialog = ref(false);
 const purchaseType = ref('membership');
+const orderStore = useOrderStore();
 
-const handleSubscription = (plan) => {
+const handleSubscription = async (plan) => {
   if (!authStore.hasProfile) {
     toast.add({
       severity: 'warn',
@@ -56,6 +58,26 @@ const handleSubscription = (plan) => {
       detail: 'يجب إكمال معلومات حسابك الشخصي قبل الاشتراك',
       life: 3000
     });
+    return;
+  }
+ console.log(plan.price, plan.price ==0)
+  if (plan.price == 0) {
+    try {
+      await orderStore.linkFreeMembership(plan.code);
+      toast.add({
+        severity: 'success',
+        summary: 'نجاح',
+        detail: 'تم الاشتراك بالعضوية المجانية بنجاح',
+        life: 3000
+      });
+    } catch  {
+      toast.add({
+        severity: 'error',
+        summary: 'خطأ',
+        detail: orderStore.error || 'حدث خطأ أثناء الاشتراك',
+        life: 3000
+      });
+    }
     return;
   }
 
