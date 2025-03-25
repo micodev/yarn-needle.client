@@ -1,7 +1,7 @@
 <template>
   <div class="p-5">
     <h1 class="text-2xl font-bold mb-5">إدارة المستخدمين</h1>
-    <div class="bg-white rounded-lg shadow-md p-5 relative">
+    <div class=" rounded-lg shadow-md p-5 relative">
       <div class="flex gap-3 mb-5">
         <InputText
           v-model="searchQuery"
