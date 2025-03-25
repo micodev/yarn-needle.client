@@ -383,14 +383,14 @@ onUnmounted(() => {
 });
 
 // Add these methods in the script section after other event handlers
-const onDurationMinChange = (event) => {
+const onDurationMinChange = () => {
   // If the minimum duration becomes greater than or equal to the maximum, increase the maximum
   if (durationMin.value >= durationMax.value) {
     durationMax.value = Math.min(durationMin.value + 1, maxDuration);
   }
 };
 
-const onDurationMaxChange = (event) => {
+const onDurationMaxChange = () => {
   // This is a safety check - the min attribute should already enforce this
   if (durationMax.value <= durationMin.value) {
     durationMax.value = durationMin.value + 1;
