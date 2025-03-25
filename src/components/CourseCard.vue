@@ -74,6 +74,7 @@
           icon="pi pi-eye"
           class="h-8 sm:h-7 flex-1 text-sm sm:text-xs"
           severity="primary"
+          outlined
           @click="onNavigateToDetails(course.id)"
         />
       </div>
