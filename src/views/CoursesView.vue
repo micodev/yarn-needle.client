@@ -63,7 +63,7 @@
               <div class="flex flex-row gap-3 items-center">
                 <div class="w-1/2">
                   <label class="text-sm text-gray-600 block mb-1">الحد الأدنى</label>
-                  <InputNumber v-model="durationMin" showButtons  :min="0" :max="maxDuration" class="w-full" :step="1" suffix=" ساعة" />
+                  <InputNumber v-model="durationMin" showButtons readonly  :min="0" :max="maxDuration" class="w-full" :step="1" suffix=" ساعة" />
                 </div>
                 <div class="w-1/2">
                   <label class="text-sm text-gray-600 block mb-1">الحد الأقصى</label>
