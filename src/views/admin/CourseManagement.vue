@@ -1,7 +1,7 @@
 <template>
   <div class="p-5">
     <h1 class=" text-3xl font-bold  mb-3">إدارة الدورات</h1>
-    <div class="bg-white rounded-lg shadow-md p-5">
+    <div class=" rounded-lg shadow-md p-5">
       <div class="flex justify-between mb-5">
         <Button @click="addNewCourse" icon="pi pi-plus" label="إضافة دورة جديدة" severity="success" />
         <div class="flex gap-2.5">
