@@ -6,13 +6,13 @@
         <p class="text-center mb-4">تسجيل الدخول للمتابعة</p>
         <div class="flex flex-col w-full mb-4">
           <IftaLabel class="w-full">
-            <InputText id="email" v-model="email" placeholder="example@example.com" required class="w-full"
+            <InputText id="email" v-model="email" placeholder="example@example.com أو اسم المستخدم" required class="w-full"
                       :class="{'p-invalid': emailError}">
               <template #prefix>
                 <i class="pi pi-user"></i>
               </template>
             </InputText>
-            <label for="email">البريد الإلكتروني</label>
+            <label for="email">البريد الإلكتروني أو اسم المستخدم</label>
           </IftaLabel>
           <small class="p-error" v-if="emailError">{{ emailError }}</small>
         </div>
@@ -115,21 +115,29 @@ const validateUsername = () => {
   }
 };
 
-// Email validation
+// Validate email or username for login
 const validateEmail = (field = 'register') => {
-  const emailToValidate = field === 'register' ? registerEmail.value : email.value;
-  const errorRef = field === 'register' ? registerEmailError : emailError;
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailToValidate) {
-    errorRef.value = 'البريد الإلكتروني مطلوب';
-    return false;
-  } else if (!emailRegex.test(emailToValidate)) {
-    errorRef.value = 'يرجى إدخال بريد إلكتروني صالح';
-    return false;
+  if (field === 'register') {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!registerEmail.value) {
+      registerEmailError.value = 'البريد الإلكتروني مطلوب';
+      return false;
+    } else if (!emailRegex.test(registerEmail.value)) {
+      registerEmailError.value = 'يرجى إدخال بريد إلكتروني صالح';
+      return false;
+    } else {
+      registerEmailError.value = '';
+      return true;
+    }
   } else {
-    errorRef.value = '';
-    return true;
+    // Login validation - allow email or username
+    if (!email.value) {
+      emailError.value = 'البريد الإلكتروني أو اسم المستخدم مطلوب';
+      return false;
+    } else {
+      emailError.value = '';
+      return true;
+    }
   }
 };
 
@@ -137,7 +145,7 @@ const validateEmail = (field = 'register') => {
 defineExpose({ showDialog });
 
 const handleSubmit = async () => {
-  // Validate email before login
+  // Validate email/username before login
   if (!validateEmail('login')) {
     return;
   }
@@ -146,17 +154,16 @@ const handleSubmit = async () => {
   try {
     const result = await authStore.login({
       email: email.value,
-      username: email.value,
+      username: email.value, // Send the same value for both fields
       password: password.value
     });
 
     if (result.success) {
-      // toast.add({ severity: 'success', summary: 'نجاح', detail: 'تم تسجيل الدخول بنجاح' });
       showDialog.value = false;
     } else {
       toast.value.showTemplate('error', 'خطأ: ' + (result.errors || 'فشل تسجيل الدخول'));
     }
-  } catch  {
+  } catch {
     toast.value.showTemplate('error', 'خطأ: حدث خطأ غير متوقع');
   } finally {
     loading.value = false;
