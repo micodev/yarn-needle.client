@@ -235,8 +235,9 @@ const categoryFilter = ref(null)
 const courseTypeFilter = ref(null)
 const lessonRangeFilter = ref(null)
 const priceRangeFilter = ref(null)
-const durationRange = ref([0, 50])
-const maxDuration = 60 // Maximum course duration in hours
+const durationMin = ref(0);
+const durationMax = ref(50);
+const maxDuration = 60; // Maximum course duration in hours
 const filterDialogVisible = ref(false)
 const sortPopover = ref()
 const selectedSort = ref(null)
@@ -429,9 +430,9 @@ const buildQueryParams = () => {
   }
 
   // Duration range filter
-  if (durationRange.value[0] > 0 || durationRange.value[1] < maxDuration) {
-    params.durationMin = durationRange.value[0] * 60 // Convert hours to minutes
-    params.durationMax = durationRange.value[1] * 60 // Convert hours to minutes
+  if (durationMin.value > 0 || durationMax.value < maxDuration) {
+    params.durationMin = durationMin.value * 60 // Convert hours to minutes
+    params.durationMax = durationMax.value * 60 // Convert hours to minutes
   }
 
   // Sorting
@@ -465,6 +466,21 @@ const courseDialogVisible = ref(false)
 function onCourseSubmitted() {
   applyFiltersAndSort()
 }
+
+// Add these methods for duration changes
+const onDurationMinChange = () => {
+  // If the minimum duration becomes greater than or equal to the maximum, increase the maximum
+  if (durationMin.value >= durationMax.value) {
+    durationMax.value = Math.min(durationMin.value + 1, maxDuration);
+  }
+};
+
+const onDurationMaxChange = () => {
+  // This is a safety check - the min attribute should already enforce this
+  if (durationMax.value <= durationMin.value) {
+    durationMax.value = durationMin.value + 1;
+  }
+};
 </script>
 
 <style>
