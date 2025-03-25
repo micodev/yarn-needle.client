@@ -2,7 +2,7 @@
   <div class="p-8 min-h-screen font-['Tajawal']" dir="rtl">
     <div class="mb-10 text-right border-r-4 border-indigo-600 pr-5">
       <h1 class="mb-2 text-3xl font-bold text-indigo-600">لوحة التحكم الإدارية</h1>
-      <p class="text-primary-600 text-lg">أهلاً بك في نظام إدارة المنصة</p>
+      <p class="text-secondary-600 text-lg">أهلاً بك في نظام إدارة المنصة</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -13,7 +13,7 @@
           </div>
           <div class="w-full">
             <h2 class="text-xl font-semibold mb-3">إدارة المستخدمين</h2>
-            <p class="text-primary-600">إدارة المستخدمين والصلاحيات</p>
+            <p class="text-secondary-600">إدارة المستخدمين والصلاحيات</p>
           </div>
         </div>
       </router-link>
@@ -25,7 +25,7 @@
           </div>
           <div class="w-full">
             <h2 class="text-xl font-semibold mb-3">إدارة الدورات</h2>
-            <p class="text-primary-600">إنشاء وتعديل وحذف الدورات التدريبية</p>
+            <p class="text-secondary-600">إنشاء وتعديل وحذف الدورات التدريبية</p>
           </div>
         </div>
       </router-link>
@@ -37,7 +37,7 @@
           </div>
           <div class="w-full">
             <h2 class="text-xl font-semibold mb-3">إدارة الطلبات</h2>
-            <p class="text-primary-600">مراجعة ومعالجة طلبات الشراء</p>
+            <p class="text-secondary-600">مراجعة ومعالجة طلبات الشراء</p>
           </div>
         </div>
       </router-link>
@@ -49,7 +49,7 @@
           </div>
           <div class="w-full">
             <h2 class="text-xl font-semibold mb-3">إدارة المحاضرين</h2>
-            <p class="text-primary-600">إدارة محاضرين ومدربي الدورات</p>
+            <p class="text-secondary-600">إدارة محاضرين ومدربي الدورات</p>
           </div>
         </div>
       </router-link>
@@ -61,7 +61,7 @@
           </div>
           <div class="w-full">
             <h2 class="text-xl font-semibold mb-3">إدارة التعليقات</h2>
-            <p class="text-primary-600">مراقبة وإدارة تعليقات المستخدمين</p>
+            <p class="text-secondary-600">مراقبة وإدارة تعليقات المستخدمين</p>
           </div>
         </div>
       </router-link>
@@ -73,7 +73,7 @@
           </div>
           <div class="w-full">
             <h2 class="text-xl font-semibold mb-3">إدارة المؤسسات</h2>
-            <p class="text-primary-600">إدارة معلومات المؤسسات الراعية للدورات</p>
+            <p class="text-secondary-600">إدارة معلومات المؤسسات الراعية للدورات</p>
           </div>
         </div>
       </router-link>
