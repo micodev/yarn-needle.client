@@ -2,7 +2,7 @@
 
   <div class="layout-wrapper bg-zinc-50 dark:bg-zinc-900 text-gray-900 dark:text-gray-100 relative">
     <wave-background />
-    <app-topbar class=" absolute z-10"></app-topbar>
+    <app-topbar class="relative z-10"></app-topbar>
     <app-sidebar></app-sidebar>
     <div class="layout-main-container md:px-12 lg:px-20">
       <div class="layout-main">
