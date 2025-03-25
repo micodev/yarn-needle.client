@@ -2,13 +2,13 @@
   <div class="wave-container">
     <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
       <defs>
-        <path id="wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        <path id="wave" d="M-160 44c30 0 58-10 88-10s 58 10 88 10 58-10 88-10 58 10 88 10 v44h-352z" />
       </defs>
       <g class="parallax">
-        <use href="#wave" x="48" y="0" class="wave1" />
-        <use href="#wave" x="48" y="3" class="wave2" />
-        <use href="#wave" x="48" y="5" class="wave3" />
-        <use href="#wave" x="48" y="7" class="wave4" />
+        <use href="#wave" x="48" y="1" class="wave1" />
+        <use href="#wave" x="48" y="2" class="wave2" />
+        <use href="#wave" x="48" y="3" class="wave3" />
+        <use href="#wave" x="48" y="4" class="wave4" />
       </g>
     </svg>
   </div>
@@ -42,27 +42,27 @@
 .parallax > use:nth-child(1) {
   animation-delay: -2s;
   animation-duration: 7s;
-  opacity: 0.15;
+  opacity: 0.08;
 }
 .parallax > use:nth-child(2) {
   animation-delay: -3s;
   animation-duration: 10s;
-  opacity: 0.1;
+  opacity: 0.06;
 }
 .parallax > use:nth-child(3) {
   animation-delay: -4s;
   animation-duration: 13s;
-  opacity: 0.07;
+  opacity: 0.04;
 }
 .parallax > use:nth-child(4) {
   animation-delay: -5s;
   animation-duration: 20s;
-  opacity: 0.05;
+  opacity: 0.02;
 }
 
 @keyframes move-forever {
-  0% { transform: translate3d(-90px,0,0); }
-  100% { transform: translate3d(85px,0,0); }
+  0% { transform: translate3d(-45px,0,0); }
+  100% { transform: translate3d(45px,0,0); }
 }
 
 .dark .parallax > use {
