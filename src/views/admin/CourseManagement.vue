@@ -220,6 +220,7 @@ import Rating from 'primevue/rating'
 import Tag from 'primevue/tag'
 import Toast from 'primevue/toast'
 import CourseForm from './CourseForm.vue'
+import { InputNumber } from 'primevue'
 
 const courseAdminStore = useCourseAdminStore()
 const router = useRouter() // Initialize router
