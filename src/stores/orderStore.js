@@ -86,22 +86,9 @@ export const useOrderStore = defineStore('order', {
       this.redirectUrl = null
 
       try {
-        const response = await this.$axios.post('/api/auth/link-free-membership', {
+        await this.$axios.post('/api/auth/link-free-membership', {
           membershipCode: membershipCode,
         })
-
-        const { success, message, data, single, errors } = response.data
-        console.log(success, message, data, single, errors)
-        if (!success) {
-          throw new Error(errors[0] || message || 'فشل في الاشتراك بالعضوية')
-        }
-
-        if (single?.paymentUrl) {
-          this.redirectUrl = single.paymentUrl
-          return single
-        }
-
-        throw new Error('تنسيق الاستجابة غير صالح')
       } catch (error) {
         if (error.response) {
           this.error = error.response.data.errors.join('\n') || 'فشل في الاشتراك بالعضوية'
