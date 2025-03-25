@@ -35,29 +35,29 @@
 }
 
 .parallax > use {
-  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+  animation: move-forever 35s cubic-bezier(.55,.5,.45,.5) infinite;
   fill: var(--p-primary-200);
 }
 
 .parallax > use:nth-child(1) {
   animation-delay: -2s;
-  animation-duration: 7s;
-  opacity: 0.08;
+  animation-duration: 10s;
+  opacity: 0.04;
 }
 .parallax > use:nth-child(2) {
   animation-delay: -3s;
-  animation-duration: 10s;
-  opacity: 0.06;
+  animation-duration: 15s;
+  opacity: 0.03;
 }
 .parallax > use:nth-child(3) {
   animation-delay: -4s;
-  animation-duration: 13s;
-  opacity: 0.04;
+  animation-duration: 20s;
+  opacity: 0.02;
 }
 .parallax > use:nth-child(4) {
   animation-delay: -5s;
-  animation-duration: 20s;
-  opacity: 0.02;
+  animation-duration: 25s;
+  opacity: 0.01;
 }
 
 @keyframes move-forever {
