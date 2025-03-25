@@ -12,7 +12,7 @@
             <v-icon name="fa-users" class="w-7 h-7" />
           </div>
           <div class="w-full">
-            <h2 class="text-xl font-semibold text-gray-800 mb-3">إدارة المستخدمين</h2>
+            <h2 class="text-xl font-semibold mb-3">إدارة المستخدمين</h2>
             <p class="text-gray-600">إدارة المستخدمين والصلاحيات</p>
           </div>
         </div>
@@ -24,7 +24,7 @@
             <v-icon name="fa-book" class="w-7 h-7" />
           </div>
           <div class="w-full">
-            <h2 class="text-xl font-semibold text-gray-800 mb-3">إدارة الدورات</h2>
+            <h2 class="text-xl font-semibold mb-3">إدارة الدورات</h2>
             <p class="text-gray-600">إنشاء وتعديل وحذف الدورات التدريبية</p>
           </div>
         </div>
@@ -36,7 +36,7 @@
             <v-icon name="fa-shopping-cart" class="w-7 h-7" />
           </div>
           <div class="w-full">
-            <h2 class="text-xl font-semibold text-gray-800 mb-3">إدارة الطلبات</h2>
+            <h2 class="text-xl font-semibold mb-3">إدارة الطلبات</h2>
             <p class="text-gray-600">مراجعة ومعالجة طلبات الشراء</p>
           </div>
         </div>
@@ -48,7 +48,7 @@
             <v-icon name="fa-chalkboard-teacher" class="w-7 h-7" />
           </div>
           <div class="w-full">
-            <h2 class="text-xl font-semibold text-gray-800 mb-3">إدارة المحاضرين</h2>
+            <h2 class="text-xl font-semibold mb-3">إدارة المحاضرين</h2>
             <p class="text-gray-600">إدارة محاضرين ومدربي الدورات</p>
           </div>
         </div>
@@ -60,7 +60,7 @@
             <v-icon name="fa-comments" class="w-7 h-7" />
           </div>
           <div class="w-full">
-            <h2 class="text-xl font-semibold text-gray-800 mb-3">إدارة التعليقات</h2>
+            <h2 class="text-xl font-semibold mb-3">إدارة التعليقات</h2>
             <p class="text-gray-600">مراقبة وإدارة تعليقات المستخدمين</p>
           </div>
         </div>
@@ -72,7 +72,7 @@
             <v-icon name="fa-building" class="w-7 h-7" />
           </div>
           <div class="w-full">
-            <h2 class="text-xl font-semibold text-gray-800 mb-3">إدارة المؤسسات</h2>
+            <h2 class="text-xl font-semibold mb-3">إدارة المؤسسات</h2>
             <p class="text-gray-600">إدارة معلومات المؤسسات الراعية للدورات</p>
           </div>
         </div>
