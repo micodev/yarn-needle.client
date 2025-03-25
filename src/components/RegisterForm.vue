@@ -6,13 +6,15 @@
         <p class="text-center mb-4">تسجيل الدخول للمتابعة</p>
         <div class="flex flex-col w-full mb-4">
           <IftaLabel class="w-full">
-            <InputText id="email" v-model="email" placeholder="example@example.com" required class="w-full">
+            <InputText id="email" v-model="email" placeholder="example@example.com" required class="w-full"
+                      :class="{'p-invalid': emailError}">
               <template #prefix>
                 <i class="pi pi-user"></i>
               </template>
             </InputText>
             <label for="email">البريد الإلكتروني</label>
           </IftaLabel>
+          <small class="p-error" v-if="emailError">{{ emailError }}</small>
         </div>
         <div class="flex flex-col w-full mb-4">
           <IftaLabel class="w-full">
@@ -34,23 +36,27 @@
         <p class="text-center mb-4">إنشاء حساب جديد للمتابعة</p>
         <div class="flex flex-col w-full mb-4">
           <IftaLabel class="w-full">
-            <InputText id="registerUsername" v-model="registerUsername" placeholder="exampleuser" required class="w-full">
+            <InputText id="registerUsername" v-model="registerUsername" placeholder="exampleuser" required class="w-full"
+                      :class="{'p-invalid': usernameError}" @blur="validateUsername">
               <template #prefix>
                 <i class="pi pi-user"></i>
               </template>
             </InputText>
             <label for="registerUsername">اسم المستخدم</label>
           </IftaLabel>
+          <small class="p-error" v-if="usernameError">{{ usernameError }}</small>
         </div>
         <div class="flex flex-col w-full mb-4">
           <IftaLabel class="w-full">
-            <InputText id="registerEmail" v-model="registerEmail" placeholder="example@example.com" required class="w-full">
+            <InputText id="registerEmail" v-model="registerEmail" placeholder="example@example.com" required class="w-full"
+                      :class="{'p-invalid': registerEmailError}" @blur="validateEmail">
               <template #prefix>
                 <i class="pi pi-envelope"></i>
               </template>
             </InputText>
             <label for="registerEmail">البريد الإلكتروني</label>
           </IftaLabel>
+          <small class="p-error" v-if="registerEmailError">{{ registerEmailError }}</small>
         </div>
         <div class="flex flex-col w-full mb-4">
           <IftaLabel class="w-full">
@@ -89,10 +95,53 @@ const registerUsername = ref('');
 const registerEmail = ref('');
 const registerPassword = ref('');
 
+// Add validation error states
+const emailError = ref('');
+const usernameError = ref('');
+const registerEmailError = ref('');
+
+// Instagram-like username validation (letters, numbers, periods, and underscores)
+const validateUsername = () => {
+  const usernameRegex = /^[a-zA-Z0-9_.]{1,30}$/;
+  if (!registerUsername.value) {
+    usernameError.value = 'اسم المستخدم مطلوب';
+    return false;
+  } else if (!usernameRegex.test(registerUsername.value)) {
+    usernameError.value = 'اسم المستخدم يجب أن يحتوي على أحرف، أرقام، نقاط أو شرطات سفلية فقط';
+    return false;
+  } else {
+    usernameError.value = '';
+    return true;
+  }
+};
+
+// Email validation
+const validateEmail = (field = 'register') => {
+  const emailToValidate = field === 'register' ? registerEmail.value : email.value;
+  const errorRef = field === 'register' ? registerEmailError : emailError;
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailToValidate) {
+    errorRef.value = 'البريد الإلكتروني مطلوب';
+    return false;
+  } else if (!emailRegex.test(emailToValidate)) {
+    errorRef.value = 'يرجى إدخال بريد إلكتروني صالح';
+    return false;
+  } else {
+    errorRef.value = '';
+    return true;
+  }
+};
+
 // Expose showDialog to parent components
 defineExpose({ showDialog });
 
 const handleSubmit = async () => {
+  // Validate email before login
+  if (!validateEmail('login')) {
+    return;
+  }
+
   loading.value = true;
   try {
     const result = await authStore.login({
@@ -115,6 +164,14 @@ const handleSubmit = async () => {
 };
 
 const handleRegister = async () => {
+  // Validate before registration
+  const isUsernameValid = validateUsername();
+  const isEmailValid = validateEmail('register');
+
+  if (!isUsernameValid || !isEmailValid) {
+    return;
+  }
+
   loading.value = true;
   try {
     const result = await authStore.register({
@@ -169,5 +226,9 @@ const showForgetPassword = async () => {
 <style scoped>
 .p-field {
   margin-bottom: 1rem;
+}
+
+.p-invalid {
+  border-color: #f44336 !important;
 }
 </style>
