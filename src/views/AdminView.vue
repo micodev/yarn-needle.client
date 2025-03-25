@@ -7,7 +7,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <router-link to="/admin/users" class="no-underline">
-        <div class="rounded-xl dark:bg-gray-800 p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600 bg-white">
+        <div class="rounded-xl dark:bg-gray-800 p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center border-t-4 border-transparent hover:border-indigo-600 bg-white dark:bg-blend-darken">
           <div class=" w-16 h-16 rounded-full flex items-center justify-center mb-5 shadow-md">
             <v-icon name="fa-users" class="w-7 h-7" />
           </div>
