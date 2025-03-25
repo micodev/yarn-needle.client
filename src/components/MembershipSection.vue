@@ -60,7 +60,6 @@ const handleSubscription = async (plan) => {
     });
     return;
   }
- console.log(plan.price, plan.price ==0)
   if (plan.price == 0) {
     try {
       await orderStore.linkFreeMembership(plan.code);
