@@ -1,5 +1,5 @@
 <template>
-<wave-background />
+  <wave-background />
   <div class="layout-wrapper bg-zinc-50 dark:bg-zinc-900 text-gray-900 dark:text-gray-100">
 
     <app-topbar></app-topbar>
