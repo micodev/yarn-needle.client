@@ -80,7 +80,7 @@ export const useOrderStore = defineStore('order', {
       }
     },
 
-    async linkFreeMembership(membershipCode, note = null) {
+    async linkFreeMembership(membershipCode) {
       this.isLoading = true
       this.error = null
       this.redirectUrl = null
@@ -111,6 +111,8 @@ export const useOrderStore = defineStore('order', {
         throw error
       } finally {
         this.isLoading = false
+      }
+    }
   },
 
   persist: true
