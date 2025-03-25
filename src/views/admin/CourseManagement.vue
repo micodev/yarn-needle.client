@@ -12,8 +12,8 @@
             </InputGroupAddon>
           </InputGroup>
           <Button label="فرز" icon="pi pi-filter" @click="showFilterDialog" :class="{
-            'p-button-secondary': !(levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration),
-            'p-button-primary': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration
+            'p-button-secondary': !(levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationMin > 0 || durationMax < maxDuration),
+            'p-button-primary': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationMin > 0 || durationMax < maxDuration
           }" class="whitespace-nowrap" />
           <Dialog v-model:visible="filterDialogVisible" modal header="فرز" :style="{ width: '90vw', maxWidth: '500px' }"
               :breakpoints="{ '960px': '75vw', '641px': '90vw' }">
@@ -67,7 +67,7 @@
               </div>
 
               <Button
-                v-if="levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationRange[0] > 0 || durationRange[1] < maxDuration"
+                v-if="levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationMin > 0 || durationMax < maxDuration"
                 label="مسح التصفية" icon="pi pi-times" severity="secondary" text class="mt-2 w-full justify-center"
                 @click="clearFilters" />
             </div>
@@ -377,7 +377,8 @@ const resetFilters = () => {
   courseTypeFilter.value = null
   lessonRangeFilter.value = null
   priceRangeFilter.value = null
-  durationRange.value = [0, maxDuration]
+  durationMin.value = 0
+  durationMax.value = maxDuration
   searchQuery.value = ''
   selectedSort.value = null
 }
