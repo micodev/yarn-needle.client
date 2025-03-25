@@ -12,7 +12,7 @@
     <div class="layout-mask animate-fadein"></div>
   </div>
 
-  <Toast class="relative z-10" />
+  <Toast class="relative z-12" />
 </template>
 
 <script setup>
