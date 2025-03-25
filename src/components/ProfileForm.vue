@@ -155,9 +155,19 @@
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
-            <InputText type="text" id="phoneNumber" v-model="form.phoneNumber" class="w-full" required />
+            <InputText
+              type="text"
+              id="phoneNumber"
+              v-model="form.phoneNumber"
+              class="w-full"
+              required
+              @input="validatePhoneNumber"
+              @keypress="onlyAllowNumbers"
+              :class="{ 'p-invalid': phoneNumberError }"
+            />
             <label>رقم الهاتف <span class="text-red-500">*</span></label>
           </IftaLabel>
+          <small v-if="phoneNumberError" class="text-red-500 block mt-1">{{ phoneNumberError }}</small>
         </div>
         <div class="w-full sm:w-1/2 px-2 mb-4">
           <IftaLabel>
@@ -438,6 +448,28 @@ const civilianIdError = ref('');
 
 const validationError = ref(false);
 
+const phoneNumberError = ref('');
+
+const validatePhoneNumber = () => {
+  // Remove any non-numeric characters
+  form.phoneNumber = form.phoneNumber.replace(/[^0-9]/g, '');
+
+  // Validate phone number (optional: add specific validation rules)
+  if (form.phoneNumber && !/^\d+$/.test(form.phoneNumber)) {
+    phoneNumberError.value = 'يجب أن يحتوي رقم الهاتف على أرقام فقط';
+  } else {
+    phoneNumberError.value = '';
+  }
+};
+
+const onlyAllowNumbers = (event) => {
+  // Only allow number keys (0-9)
+  const charCode = event.charCode || event.keyCode;
+  if (charCode < 48 || charCode > 57) {
+    event.preventDefault();
+  }
+};
+
 const handleSubmit = async () => {
   // Validate nationality
   if (!form.nationalities.length) {
@@ -445,6 +477,12 @@ const handleSubmit = async () => {
     return;
   }
   validationError.value = false;
+
+  // Validate phone number again
+  validatePhoneNumber();
+  if (phoneNumberError.value) {
+    return;
+  }
 
   const missingFields = [];
   if (!form.firstName) missingFields.push('الاسم الأول');
