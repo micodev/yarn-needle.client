@@ -271,7 +271,8 @@
                     @click="addSocialMedia"
                     icon="pi pi-plus"
                     label="إضافة وسيلة تواصل"
-                    class="p-button-outlined" />
+                    class="p-button-outlined"
+                    :disabled="!canAddSocialMedia" />
           </div>
         </div>
 
@@ -583,12 +584,28 @@ const handlePurchaseSuccess = () => {
 
 // Add new methods
 const addSocialMedia = () => {
-  form.socialMedia.push({});
+  // Only add if all existing entries are valid
+  if (canAddSocialMedia.value) {
+    form.socialMedia.push({});
+  }
 };
 
 const removeSocialMedia = (index) => {
   form.socialMedia.splice(index, 1);
 };
+
+// New computed property to check if we can add more social media entries
+const canAddSocialMedia = computed(() => {
+  // If there are no entries, we can add one
+  if (form.socialMedia.length === 0) return true;
+
+  // Check if all existing entries have both socialMediaCode and username
+  return form.socialMedia.every(social =>
+    social.socialMediaCode && social.username &&
+    social.socialMediaCode.trim() !== '' &&
+    social.username.trim() !== ''
+  );
+});
 </script>
 
 <style scoped>
