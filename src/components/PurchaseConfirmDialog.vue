@@ -7,6 +7,7 @@
     :style="{ width: currentStep === 'payment' ? '100vw' : 'auto' }"
     :closable="false"
     position="center"
+    :breakpoints="{ '960px': '100vw' }"
     class="max-w-[90vw] sm:max-w-[500px] [&_.p-dialog-header]:bg-gray-50 [&_.p-dialog-header]:dark:bg-gray-800 [&_.p-dialog-header]:border-b [&_.p-dialog-header]:border-gray-200 [&_.p-dialog-header]:dark:border-gray-700 [&_.p-dialog-header]:px-4 [&_.p-dialog-header]:py-3 [&_.p-dialog-header]:rtl [&_.p-dialog-header-text]:text-xl [&_.p-dialog-header-text]:font-semibold [&_.p-dialog-header-text]:text-gray-800 [&_.p-dialog-header-text]:dark:text-gray-100 [&_.p-dialog]:rounded-xl [&_.p-dialog]:shadow-lg [&_.p-dialog]:bg-white [&_.p-dialog]:dark:bg-gray-900 [&_.p-dialog-content]:p-0"
   >
     <!-- Confirmation Step -->
