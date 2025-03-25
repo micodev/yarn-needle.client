@@ -64,8 +64,8 @@
                 <Slider v-model="durationRange" range :min="0" :max="maxDuration" class="mt-2" />
 
                 <div class="flex justify-between text-sm text-gray-600">
-                  <span>{{ durationRange[0] }} ساعة</span>
                   <span>{{ durationRange[1] }} ساعة</span>
+                  <span>{{ durationRange[0] }} ساعة</span>
                 </div>
               </div>
             </div>
