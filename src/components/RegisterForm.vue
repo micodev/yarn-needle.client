@@ -60,7 +60,7 @@
         </div>
         <div class="flex flex-col w-full mb-4">
           <IftaLabel class="w-full">
-            <Password id="registerPassword" toggleMask v-model="registerPassword" placeholder="********" required fluid>
+            <Password id="registerPassword" :feedback="false"  toggleMask v-model="registerPassword" placeholder="********" required fluid>
               <template #prefix>
                 <i class="pi pi-lock"></i>
               </template>
