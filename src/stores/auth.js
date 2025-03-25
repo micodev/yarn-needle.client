@@ -145,10 +145,8 @@ export const useAuthStore = defineStore('auth', {
       // Clear storage
       localStorage.removeItem('token');
 
-      // Optional: Use router to redirect (if router is available)
-      if (window.location.pathname !== '/') {
-        window.location.href = '/';
-      }
+      // Always redirect to home page after logout
+      router.push('/');
     },
 
     checkAuthStatus() {
