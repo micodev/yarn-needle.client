@@ -36,28 +36,28 @@
 
 .parallax > use {
   animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
-  fill: rgb(223, 118, 118);
+  fill: var(--p-primary-200);
 }
 
 .parallax > use:nth-child(1) {
   animation-delay: -2s;
   animation-duration: 7s;
-  opacity: 0.7;
+  opacity: 0.15;
 }
 .parallax > use:nth-child(2) {
   animation-delay: -3s;
   animation-duration: 10s;
-  opacity: 0.5;
+  opacity: 0.1;
 }
 .parallax > use:nth-child(3) {
   animation-delay: -4s;
   animation-duration: 13s;
-  opacity: 0.3;
+  opacity: 0.07;
 }
 .parallax > use:nth-child(4) {
   animation-delay: -5s;
   animation-duration: 20s;
-  opacity: 0.2;
+  opacity: 0.05;
 }
 
 @keyframes move-forever {
@@ -66,6 +66,6 @@
 }
 
 .dark .parallax > use {
-  fill: rgb(212, 18, 18);
+  fill: var(--p-primary-800);
 }
 </style>
