@@ -446,7 +446,7 @@ onMounted(async () => {
   form.socialMedia = (form.socialMedia || []).map(sm => ({
     ...sm,
     socialMediaCode: sm.socialMediaCode?.[0] || '',
-    value: sm.username || ''
+    username: sm.value || ''
   }));
 });
 
