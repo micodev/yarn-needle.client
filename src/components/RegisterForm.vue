@@ -30,7 +30,7 @@
         <Button label="تسجيل الدخول" type="submit" class="w-full text-white rounded" :loading="loading" />
 
         <GoogleLogin :callback="registerWithGoogleCallback" popup-type="TOKEN">
-          <Button disabled label="التسجيل باستخدام Google" icon="pi pi-google" class="w-full mt-4" />
+          <Button :disabled="import.meta.env.VITE_APP_ENV == 'production'" label="التسجيل باستخدام Google" icon="pi pi-google" class="w-full mt-4" />
         </GoogleLogin>
         <p class="text-center mt-4">ليس لديك حساب؟ <Button variant="text" class="cursor-pointer" @click="openRegisterDialog">حساب جديد</Button></p>
       </form>
