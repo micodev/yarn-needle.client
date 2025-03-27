@@ -106,7 +106,7 @@ const emailError = ref('');
 const usernameError = ref('');
 const registerEmailError = ref('');
 
-const isProduction = import.meta.env.VITE_APP_ENV === 'production';
+const isProduction = !(import.meta.env.VITE_APP_ENV === 'production');
 
 // Instagram-like username validation (letters, numbers, periods, and underscores)
 const validateUsername = () => {
