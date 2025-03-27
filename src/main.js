@@ -45,9 +45,7 @@ addIcons(
   FaChalkboardTeacher,
   FaComments
 );
-app.use(vue3GoogleLogin, {
-  clientId: '540046837569-3pkv7u7rqjo71br8bnoi971l10mragaf.apps.googleusercontent.com'
-})
+
 // Initialize dark mode based on localStorage or system preference
 const initializeTheme = () => {
   const savedTheme = localStorage.getItem('darkMode');
@@ -68,6 +66,9 @@ const initializeTheme = () => {
 initializeTheme();
 
 const app = createApp(App)
+app.use(vue3GoogleLogin, {
+  clientId: '540046837569-3pkv7u7rqjo71br8bnoi971l10mragaf.apps.googleusercontent.com'
+})
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate)
 
