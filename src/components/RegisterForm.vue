@@ -215,9 +215,6 @@ const registerWithGoogleCallback = async (response) => {
   if (import.meta.env.MODE === 'production') {
     toast.value.showTemplate('error', 'خطأ: تسجيل الدخول باستخدام Google غير مفعل في بيئة الإنتاج');
     return;
-  }else {
-    toast.value.showTemplate('success', 'نجاح: تم تسجيل الدخول بنجاح باستخدام Google');
-    return;
   }
   loading.value = true;
   try {
