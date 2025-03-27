@@ -73,7 +73,9 @@
           </IftaLabel>
         </div>
         <Button label="إنشاء حساب" type="submit" class="w-full text-white rounded" :loading="loading" />
-        <Button label="التسجيل باستخدام Google" icon="pi pi-google" class="w-full mt-4" />
+        <GoogleLogin :callback="callback">
+          <Button label="التسجيل باستخدام Google" icon="pi pi-google" class="w-full mt-4" />
+        </GoogleLogin>
       </form>
     </Dialog>
     <ForgetPassword ref="forgetPasswordRef" />
