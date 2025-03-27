@@ -206,10 +206,10 @@ const handleRegister = async () => {
   }
 };
 
-const registerWithGoogleCallback =  () => {
+const registerWithGoogleCallback =  async () => {
 
-  googleAuthCodeLogin().then(async (response) => {
-    loading.value = true;
+  var response = await googleAuthCodeLogin()
+  loading.value = true;
   try {
     const result = await authStore.googleSignIn(response);
     if (result.success) {
@@ -223,10 +223,6 @@ const registerWithGoogleCallback =  () => {
   } finally {
     loading.value = false;
   }
-  }).catch((error) => {
-    toast.value.showTemplate('error', 'خطأ: ' + error.message);
-  });
-
 }
 
 
