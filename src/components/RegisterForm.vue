@@ -84,7 +84,7 @@ import { Button, Dialog, InputText, Password, IftaLabel } from 'primevue';
 import ForgetPassword from './ForgetPassword.vue';
 import { useAuthStore } from '@/stores/auth';
 import ToastTemplate from './ToastTemplate.vue';
-import { googleAuthCodeLogin } from "vue3-google-login"
+import { googleAuthCodeLogin, googleSdkLoaded } from "vue3-google-login"
 const authStore = useAuthStore();
 const toast = ref(null);
 const loading = ref(false);
@@ -208,21 +208,30 @@ const handleRegister = async () => {
 
 const registerWithGoogleCallback =  async () => {
 
-  var response = await googleAuthCodeLogin()
-  loading.value = true;
-  try {
-    const result = await authStore.googleSignIn(response);
-    if (result.success) {
-      toast.value.showTemplate('success', 'نجاح: تم تسجيل الدخول بنجاح');
-      showDialog.value = false;
-    } else {
-      toast.value.showTemplate('error', 'خطأ: ' + (result.errors || 'فشل تسجيل الدخول باستخدام Google'));
-    }
-  } catch {
-    toast.value.showTemplate('error', 'خطأ: حدث خطأ غير متوقع');
-  } finally {
-    loading.value = false;
-  }
+  googleSdkLoaded((google) => {
+    google.accounts.oauth2.initCodeClient({
+      clientId: '540046837569-3pkv7u7rqjo71br8bnoi971l10mragaf.apps.googleusercontent.com',
+      scope: 'email profile openid',
+      callback: (response) => {
+        console.log("Handle the response", response)
+      }
+    }).requestCode()
+  })
+  // var response = await googleAuthCodeLogin()
+  // loading.value = true;
+  // try {
+  //   const result = await authStore.googleSignIn(response);
+  //   if (result.success) {
+  //     toast.value.showTemplate('success', 'نجاح: تم تسجيل الدخول بنجاح');
+  //     showDialog.value = false;
+  //   } else {
+  //     toast.value.showTemplate('error', 'خطأ: ' + (result.errors || 'فشل تسجيل الدخول باستخدام Google'));
+  //   }
+  // } catch {
+  //   toast.value.showTemplate('error', 'خطأ: حدث خطأ غير متوقع');
+  // } finally {
+  //   loading.value = false;
+  // }
 }
 
 
