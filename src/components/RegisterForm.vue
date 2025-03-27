@@ -70,7 +70,7 @@
           </IftaLabel>
         </div>
         <Button label="إنشاء حساب" type="submit" class="w-full text-white rounded" :loading="loading" />
-        <Button label="التسجيل باستخدام Google" icon="pi pi-google" class="w-full mt-4" @click="registerWithGoogleCallback" />
+        <!-- <Button label="التسجيل باستخدام Google" icon="pi pi-google" class="w-full mt-4" @click="registerWithGoogleCallback" /> -->
       </form>
     </Dialog>
     <ForgetPassword ref="forgetPasswordRef" />
@@ -206,7 +206,7 @@ const handleRegister = async () => {
   }
 };
 
-const callback =  () => {
+const registerWithGoogleCallback =  () => {
 
   googleAuthCodeLogin().then(async (response) => {
     loading.value = true;
@@ -229,23 +229,6 @@ const callback =  () => {
 
 }
 
-const registerWithGoogleCallback = async () => {
-  var response = await googleAuthCodeLogin();
-  loading.value = true;
-  try {
-    const result = await authStore.googleRegister(response);
-    if (result.success) {
-      toast.value.showTemplate('success', 'نجاح: تم إنشاء الحساب وتسجيل الدخول بنجاح');
-      showRegisterForm.value = false;
-    } else {
-      toast.value.showTemplate('error', 'خطأ: ' + (result.errors || 'فشل إنشاء الحساب باستخدام Google'));
-    }
-  } catch {
-    toast.value.showTemplate('error', 'خطأ: حدث خطأ غير متوقع');
-  } finally {
-    loading.value = false;
-  }
-};
 
 const openRegisterDialog = () => {
   showDialog.value = false;
