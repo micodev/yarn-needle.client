@@ -442,7 +442,11 @@ onMounted(async () => {
   await socialMediaStore.fetchSocialMedia();
   console.log('Profile Data:', availableSocialMedia.value);
   Object.assign(form, profileStore.getProfile || {});
-
+  // Ensure socialMediaCode is treated as a single value
+  form.socialMedia = (form.socialMedia || []).map(sm => ({
+    ...sm,
+    socialMediaCode: sm.socialMediaCode?.[0] || ''
+  }));
 });
 
 const civilianIdError = ref('');
