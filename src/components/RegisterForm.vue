@@ -211,8 +211,7 @@ const handleRegister = async () => {
   }
 };
 
-const registerWithGoogleCallback = async () => {
-  var response = await googleAuthCodeLogin();
+const registerWithGoogleCallback = async (response) => {
   loading.value = true;
   try {
     const result = await authStore.googleSignIn(response);
