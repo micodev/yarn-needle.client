@@ -12,6 +12,8 @@ import Tooltip from 'primevue/tooltip';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { OhVueIcon, addIcons } from "oh-vue-icons";
 import ToastTemplate from './components/ToastTemplate.vue';
+import vue3GoogleLogin from 'vue3-google-login'
+
 import {
   LaFacebook,
   LaTwitter,
@@ -27,6 +29,8 @@ import {
   FaBuilding
 } from "oh-vue-icons/icons";
 
+
+
 addIcons(
   LaFacebook,
   LaTwitter,
@@ -41,7 +45,9 @@ addIcons(
   FaChalkboardTeacher,
   FaComments
 );
-
+app.use(vue3GoogleLogin, {
+  clientId: '540046837569-3pkv7u7rqjo71br8bnoi971l10mragaf.apps.googleusercontent.com'
+})
 // Initialize dark mode based on localStorage or system preference
 const initializeTheme = () => {
   const savedTheme = localStorage.getItem('darkMode');
