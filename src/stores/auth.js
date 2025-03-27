@@ -135,19 +135,6 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    async signInWithGoogle() {
-      try {
-        const response = await this.$axios.post('/api/Auth/ExternalLogin?provider=Google'); // Placeholder endpoint
-        this.token = response.data.token;
-        localStorage.setItem('token', response.data.token);
-        this.isAuthenticated = true;
-        await this.getMe();
-        return { success: true };
-      } catch (error) {
-        return { success: false, errors: error.response?.data || 'فشل تسجيل الدخول باستخدام Google' };
-      }
-    },
-
     logout() {
       // Clear all auth-related state
       this.user = null;
