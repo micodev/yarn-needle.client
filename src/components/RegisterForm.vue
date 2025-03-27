@@ -70,6 +70,7 @@
           </IftaLabel>
         </div>
         <Button label="إنشاء حساب" type="submit" class="w-full text-white rounded" :loading="loading" />
+
       </form>
     </Dialog>
     <ForgetPassword ref="forgetPasswordRef" />
