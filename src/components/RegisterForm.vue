@@ -83,7 +83,7 @@ import { Button, Dialog, InputText, Password, IftaLabel } from 'primevue';
 import ForgetPassword from './ForgetPassword.vue';
 import { useAuthStore } from '@/stores/auth';
 import ToastTemplate from './ToastTemplate.vue';
-
+import { googleAuthCodeLogin } from "vue3-google-login"
 const authStore = useAuthStore();
 const toast = ref(null);
 const loading = ref(false);
@@ -205,7 +205,8 @@ const handleRegister = async () => {
   }
 };
 
-const callback = async (response) => {
+const callback = async () => {
+  var response = await googleAuthCodeLogin();
   loading.value = true;
   try {
     const result = await authStore.googleSignIn(response);
