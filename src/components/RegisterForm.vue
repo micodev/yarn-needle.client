@@ -27,8 +27,8 @@
           </IftaLabel>
         </div>
         <p class="text-center text-primary mb-4 cursor-pointer" @click="showForgetPassword">هل نسيت كلمة المرور؟</p>
-        <GoogleLogin :callback="callback"/>
         <Button label="تسجيل الدخول" type="submit" class="w-full text-white rounded" :loading="loading" />
+        <GoogleLogin :callback="callback" class="mt-4" />
         <p class="text-center mt-4">ليس لديك حساب؟ <Button variant="text" class="cursor-pointer" @click="openRegisterDialog">حساب جديد</Button></p>
       </form>
     </Dialog>
