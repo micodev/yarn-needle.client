@@ -137,7 +137,7 @@ export const useAuthStore = defineStore('auth', {
 
     async signInWithGoogle() {
       try {
-        const response = await this.$axios.get('/api/Auth/google-signin'); // Placeholder endpoint
+        const response = await this.$axios.post('/api/Auth/ExternalLogin?provider=Google'); // Placeholder endpoint
         this.token = response.data.token;
         localStorage.setItem('token', response.data.token);
         this.isAuthenticated = true;
