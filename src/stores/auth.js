@@ -75,6 +75,21 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
+    async googleSignIn(googleResponse) {
+      try {
+        const response = await this.$axios.post('/api/Auth/google-signin', googleResponse);
+        this.token = response.data.token;
+        localStorage.setItem('token', response.data.token);
+        this.refreshToken = response.data.refreshToken;
+        this.isAuthenticated = true;
+        await this.getMe(); // Fetch user data after successful login
+        return { success: true };
+      } catch (error) {
+        console.log(error.response);
+        return { success: false, errors: error.response?.data || 'فشل تسجيل الدخول باستخدام Google' };
+      }
+    },
+
     async getMe() {
       try {
         const response = await this.$axios.post('/api/Auth/me', {}, {
