@@ -27,7 +27,7 @@
           </IftaLabel>
         </div>
         <p class="text-center text-primary mb-4 cursor-pointer" @click="showForgetPassword">هل نسيت كلمة المرور؟</p>
-        <Button label="تسجيل الدخول باستخدام Google" class="w-full text-white rounded bg-red-500 mb-4" @click="signInWithGoogle" />
+        <GoogleLogin :callback="callback"/>
         <Button label="تسجيل الدخول" type="submit" class="w-full text-white rounded" :loading="loading" />
         <p class="text-center mt-4">ليس لديك حساب؟ <Button variant="text" class="cursor-pointer" @click="openRegisterDialog">حساب جديد</Button></p>
       </form>
@@ -205,18 +205,12 @@ const handleRegister = async () => {
   }
 };
 
-const signInWithGoogle = async () => {
-  try {
-    const result = await authStore.signInWithGoogle();
-    if (result.success) {
-      showDialog.value = false;
-    } else {
-      toast.value.showTemplate('error', 'خطأ: ' + (result.errors || 'فشل تسجيل الدخول باستخدام Google'));
-    }
-  } catch {
-    toast.value.showTemplate('error', 'خطأ: حدث خطأ غير متوقع');
-  }
-};
+const callback = (response) => {
+  // This callback will be triggered when user click on the One Tap prompt
+  // This callback will be also triggered when user click on login button
+  // and selects or login to his Google account from the popup
+  console.log("Handle the response", response)
+}
 
 const openRegisterDialog = () => {
   showDialog.value = false;
