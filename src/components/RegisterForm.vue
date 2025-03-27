@@ -212,7 +212,7 @@ const handleRegister = async () => {
 
 const registerWithGoogleCallback = async (response) => {
   // if enviroment is production, check if the response is valid
-  if (import.meta.env.VITE_APP_ENV === 'production') {
+  if (import.meta.env.VITE_APP_ENV == 'production') {
     toast.value.showTemplate('error', 'خطأ: تسجيل الدخول باستخدام Google غير مفعل في بيئة الإنتاج');
     return;
   }
