@@ -29,8 +29,8 @@
         <p class="text-center text-primary mb-4 cursor-pointer" @click="showForgetPassword">هل نسيت كلمة المرور؟</p>
         <Button label="تسجيل الدخول" type="submit" class="w-full text-white rounded" :loading="loading" />
 
-        <GoogleLogin :callback="registerWithGoogleCallback" popup-type="TOKEN">
-          <Button :disabled="import.meta.env.VITE_APP_ENV == 'production'" label="التسجيل باستخدام Google" icon="pi pi-google" class="w-full mt-4" />
+        <GoogleLogin :callback="registerWithGoogleCallback" popup-type="TOKEN" v-if="!isProduction">
+          <Button label="التسجيل باستخدام Google" icon="pi pi-google" class="w-full mt-4" />
         </GoogleLogin>
         <p class="text-center mt-4">ليس لديك حساب؟ <Button variant="text" class="cursor-pointer" @click="openRegisterDialog">حساب جديد</Button></p>
       </form>
@@ -73,7 +73,7 @@
           </IftaLabel>
         </div>
         <Button label="إنشاء حساب" type="submit" class="w-full text-white rounded" :loading="loading" />
-        <GoogleLogin :callback="registerWithGoogleCallback" popup-type="TOKEN">
+        <GoogleLogin :callback="registerWithGoogleCallback" popup-type="TOKEN" v-if="!isProduction">
           <Button label="التسجيل باستخدام Google" icon="pi pi-google" class="w-full mt-4" />
         </GoogleLogin>
       </form>
@@ -105,6 +105,8 @@ const registerPassword = ref('');
 const emailError = ref('');
 const usernameError = ref('');
 const registerEmailError = ref('');
+
+const isProduction = import.meta.env.VITE_APP_ENV === 'production';
 
 // Instagram-like username validation (letters, numbers, periods, and underscores)
 const validateUsername = () => {
