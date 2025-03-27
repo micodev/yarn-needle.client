@@ -28,7 +28,10 @@
         </div>
         <p class="text-center text-primary mb-4 cursor-pointer" @click="showForgetPassword">هل نسيت كلمة المرور؟</p>
         <Button label="تسجيل الدخول" type="submit" class="w-full text-white rounded" :loading="loading" />
-        <Button label="التسجيل باستخدام Google" icon="pi pi-google" class="w-full mt-4" @click="registerWithGoogleCallback" />
+
+        <GoogleLogin :callback="callback">
+          <Button label="التسجيل باستخدام Google" icon="pi pi-google" class="w-full mt-4" />
+        </GoogleLogin>
         <p class="text-center mt-4">ليس لديك حساب؟ <Button variant="text" class="cursor-pointer" @click="openRegisterDialog">حساب جديد</Button></p>
       </form>
     </Dialog>
@@ -70,7 +73,7 @@
           </IftaLabel>
         </div>
         <Button label="إنشاء حساب" type="submit" class="w-full text-white rounded" :loading="loading" />
-        <Button label="التسجيل باستخدام Google" icon="pi pi-google" class="w-full mt-4" @click="registerWithGoogleCallback" />
+        <Button label="التسجيل باستخدام Google" icon="pi pi-google" class="w-full mt-4" />
       </form>
     </Dialog>
     <ForgetPassword ref="forgetPasswordRef" />
@@ -84,7 +87,7 @@ import { Button, Dialog, InputText, Password, IftaLabel } from 'primevue';
 import ForgetPassword from './ForgetPassword.vue';
 import { useAuthStore } from '@/stores/auth';
 import ToastTemplate from './ToastTemplate.vue';
-import { googleAuthCodeLogin, googleSdkLoaded } from "vue3-google-login"
+import { googleAuthCodeLogin } from "vue3-google-login"
 const authStore = useAuthStore();
 const toast = ref(null);
 const loading = ref(false);
@@ -206,33 +209,27 @@ const handleRegister = async () => {
   }
 };
 
-const registerWithGoogleCallback =  async () => {
+const registerWithGoogleCallback =  () => {
 
-  googleSdkLoaded((google) => {
-    google.accounts.oauth2.initCodeClient({
-      client_id: '540046837569-3pkv7u7rqjo71br8bnoi971l10mragaf.apps.googleusercontent.com',
-      clientId:  '540046837569-3pkv7u7rqjo71br8bnoi971l10mragaf.apps.googleusercontent.com',
-      scope: 'email profile openid',
-      callback: (response) => {
-        console.log("Handle the response", response)
-      }
-    }).requestCode()
-  })
-  // var response = await googleAuthCodeLogin()
-  // loading.value = true;
-  // try {
-  //   const result = await authStore.googleSignIn(response);
-  //   if (result.success) {
-  //     toast.value.showTemplate('success', 'نجاح: تم تسجيل الدخول بنجاح');
-  //     showDialog.value = false;
-  //   } else {
-  //     toast.value.showTemplate('error', 'خطأ: ' + (result.errors || 'فشل تسجيل الدخول باستخدام Google'));
-  //   }
-  // } catch {
-  //   toast.value.showTemplate('error', 'خطأ: حدث خطأ غير متوقع');
-  // } finally {
-  //   loading.value = false;
-  // }
+  googleAuthCodeLogin().then(async (response) => {
+    loading.value = true;
+  try {
+    const result = await authStore.googleSignIn(response);
+    if (result.success) {
+      toast.value.showTemplate('success', 'نجاح: تم تسجيل الدخول بنجاح');
+      showDialog.value = false;
+    } else {
+      toast.value.showTemplate('error', 'خطأ: ' + (result.errors || 'فشل تسجيل الدخول باستخدام Google'));
+    }
+  } catch {
+    toast.value.showTemplate('error', 'خطأ: حدث خطأ غير متوقع');
+  } finally {
+    loading.value = false;
+  }
+  }).catch((error) => {
+    toast.value.showTemplate('error', 'خطأ: ' + error.message);
+  });
+
 }
 
 
