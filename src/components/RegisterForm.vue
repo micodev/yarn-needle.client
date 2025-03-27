@@ -205,11 +205,21 @@ const handleRegister = async () => {
   }
 };
 
-const callback = (response) => {
-  // This callback will be triggered when user click on the One Tap prompt
-  // This callback will be also triggered when user click on login button
-  // and selects or login to his Google account from the popup
-  console.log("Handle the response", response)
+const callback = async (response) => {
+  loading.value = true;
+  try {
+    const result = await authStore.googleSignIn(response);
+    if (result.success) {
+      toast.value.showTemplate('success', 'نجاح: تم تسجيل الدخول بنجاح');
+      showDialog.value = false;
+    } else {
+      toast.value.showTemplate('error', 'خطأ: ' + (result.errors || 'فشل تسجيل الدخول باستخدام Google'));
+    }
+  } catch {
+    toast.value.showTemplate('error', 'خطأ: حدث خطأ غير متوقع');
+  } finally {
+    loading.value = false;
+  }
 }
 
 const openRegisterDialog = () => {
