@@ -432,7 +432,10 @@ const availablePlans = computed(() => {
 const socialMediaStore = useSocialMediaStore(); // Add this line
 
 // Add new computed property
-const availableSocialMedia = computed(() => socialMediaStore.getSocialMedia);
+const availableSocialMedia = computed(() => socialMediaStore.getSocialMedia.map(item => ({
+  ...item,
+  socialMediaCode: Array.isArray(item.socialMediaCode) ? item.socialMediaCode[0] : item.socialMediaCode
+})));
 
 onMounted(async () => {
   await countryStore.fetchCountries();
