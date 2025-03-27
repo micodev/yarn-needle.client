@@ -445,7 +445,8 @@ onMounted(async () => {
   // Ensure socialMediaCode is treated as a single value
   form.socialMedia = (form.socialMedia || []).map(sm => ({
     ...sm,
-    socialMediaCode: sm.socialMediaCode?.[0] || ''
+    socialMediaCode: sm.socialMediaCode?.[0] || '',
+    value: sm.username || ''
   }));
 });
 
