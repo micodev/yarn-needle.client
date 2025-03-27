@@ -12,7 +12,7 @@ import Tooltip from 'primevue/tooltip';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { OhVueIcon, addIcons } from "oh-vue-icons";
 import ToastTemplate from './components/ToastTemplate.vue';
-import vue3GoogleLogin from 'vue3-google-login'
+// import vue3GoogleLogin from 'vue3-google-login'
 
 import {
   LaFacebook,
@@ -66,9 +66,9 @@ const initializeTheme = () => {
 initializeTheme();
 
 const app = createApp(App)
-app.use(vue3GoogleLogin, {
-  clientId: '540046837569-3pkv7u7rqjo71br8bnoi971l10mragaf.apps.googleusercontent.com'
-})
+// app.use(vue3GoogleLogin, {
+//   clientId: '540046837569-3pkv7u7rqjo71br8bnoi971l10mragaf.apps.googleusercontent.com'
+// })
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate)
 
