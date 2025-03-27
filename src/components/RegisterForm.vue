@@ -211,7 +211,7 @@ const registerWithGoogleCallback =  async () => {
   googleSdkLoaded((google) => {
     google.accounts.oauth2.initCodeClient({
       client_id: '540046837569-3pkv7u7rqjo71br8bnoi971l10mragaf.apps.googleusercontent.com',
-      clientId: '540046837569-3pkv7u7rqjo71br8bnoi971l10mragaf.apps.googleusercontent.com',
+      clientId:  '540046837569-3pkv7u7rqjo71br8bnoi971l10mragaf.apps.googleusercontent.com',
       scope: 'email profile openid',
       callback: (response) => {
         console.log("Handle the response", response)
