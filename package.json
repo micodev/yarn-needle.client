@@ -23,7 +23,8 @@
     "tailwind-variants": "^0.3.1",
     "tailwindcss-primeui": "^0.3.4",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.5.0",
+    "vue3-google-login": "^2.0.33"
   },
   "devDependencies": {
     "@eslint/js": "^9.14.0",
