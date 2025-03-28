@@ -170,7 +170,6 @@ const updateScreenSize = () => {
 // Set up resize listener
 onMounted(() => {
   updateScreenSize();
-  selectedCourseId.value = props.course.id; // Set the selected course ID on mount
   window.addEventListener('resize', updateScreenSize);
 });
 
@@ -179,7 +178,6 @@ onUnmounted(() => {
   window.removeEventListener('resize', updateScreenSize);
 });
 
-const emit = defineEmits(['purchase']);
 
 const getDiscountedPrice = (course) => {
   if (!course.discount) return course.originalPrice;
@@ -201,7 +199,9 @@ const getDiscountedPrice = (course) => {
 };
 
 const onPurchaseClick = (courseId) => {
-  emit('purchase', courseId);
+  selectedCourseId.value = courseId; // Set the selected course ID
+  showPurchaseDialog.value = true;
+  purchaseType.value = 'course';
 };
 
 const onAddCourse = async (courseId) => {
