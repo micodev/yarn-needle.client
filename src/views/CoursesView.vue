@@ -29,7 +29,6 @@
         :key="course.id"
         :course="course"
         @purchase="handlePurchaseClick"
-        @add-course="handlePurchaseClick"
 
       />
       <div v-if="isLoading" class="col-span-full flex justify-center items-center p-4">
