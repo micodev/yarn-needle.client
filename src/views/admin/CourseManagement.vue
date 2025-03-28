@@ -1,100 +1,17 @@
 <template>
   <div class="p-5">
-    <h1 class=" text-3xl font-bold  mb-3">إدارة الدورات</h1>
-    <div class=" rounded-lg shadow-md p-5">
-      <div class="flex justify-between mb-5">
-        <Button @click="addNewCourse" icon="pi pi-plus" label="إضافة دورة جديدة" severity="success" />
-        <div class="flex gap-2.5">
-          <InputGroup>
-            <InputText  class="h-12" v-model="searchQuery" placeholder="ابحث عن الدورات..." type="text" size="small" />
-            <InputGroupAddon class="h-12">
-              <Button icon="pi pi-search" size="small" severity="secondary" variant="text" @click="applyFiltersAndSort" />
-            </InputGroupAddon>
-          </InputGroup>
-          <Button label="فرز" icon="pi pi-filter" @click="showFilterDialog" :class="{
-            'p-button-secondary': !(levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationMin > 0 || durationMax < maxDuration),
-            'p-button-primary': levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationMin > 0 || durationMax < maxDuration
-          }" class="whitespace-nowrap" />
-          <Dialog v-model:visible="filterDialogVisible" modal header="فرز" :style="{ width: '90vw', maxWidth: '500px' }"
-              :breakpoints="{ '960px': '75vw', '641px': '90vw' }">
-            <div class="flex flex-col gap-4">
-              <div class="flex flex-row gap-2">
-                <div class="w-1/2">
-                  <span class="font-medium block mb-2">المجال</span>
-                  <Select v-model="categoryFilter" :options="categoryOptions" optionLabel="name" optionValue="code"
-                    placeholder="اختر المجال" class="w-full" :loading="categoryOptionsStore.isLoading" />
-                </div>
-                <div class="w-1/2">
-                  <span class="font-medium block mb-2">اختر المستوى</span>
-                  <Select v-model="levelFilter" :options="levelOptions" filter optionLabel="name" optionValue="value"
-                    placeholder="جميع المستويات" class="w-full" :loading="isLevelOptionsLoading" />
-                </div>
-              </div>
-
-              <div class="flex flex-row gap-2">
-                <div class="w-1/2">
-                  <span class="font-medium block mb-2">عدد الدروس</span>
-                  <Select v-model="lessonRangeFilter" :options="lessonRangeOptions" optionLabel="name"
-                    optionValue="value" placeholder="اختر عدد الدروس" class="w-full" />
-                </div>
-                <div class="w-1/2">
-                  <span class="font-medium block mb-2">نوع الدورة</span>
-                  <Select v-model="courseTypeFilter" :options="courseTypeOptions" optionLabel="name" optionValue="code"
-                    placeholder="اختر نوع الدورة" class="w-full" :loading="courseTypeStore.isLoading" />
-                </div>
-              </div>
-
-              <div>
-                <span class="font-medium block mb-2">مدة الدورة (بالساعات)</span>
-                <div class="flex flex-row gap-3 items-center">
-                  <div class="w-1/2">
-                    <label class="text-sm text-gray-600 block mb-1">الحد الأدنى</label>
-                    <InputNumber v-model="durationMin" showButtons :min="0" :max="durationMax" class="w-full" :step="1" suffix=" ساعة"
-                      @input="onDurationMinChange" />
-                  </div>
-                  <div class="w-1/2">
-                    <label class="text-sm text-gray-600 block mb-1">الحد الأقصى</label>
-                    <InputNumber v-model="durationMax" showButtons :min="durationMin + 1" :max="maxDuration" class="w-full" :step="1" suffix=" ساعة"
-                      @input="onDurationMaxChange" />
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <span class="font-medium block mb-2">نطاق السعر</span>
-                <Select v-model="priceRangeFilter" :options="priceRangeOptions" optionLabel="name" optionValue="value"
-                  placeholder="اختر نطاق السعر" class="w-full" />
-              </div>
-
-              <Button
-                v-if="levelFilter || categoryFilter || courseTypeFilter || lessonRangeFilter || priceRangeFilter || durationMin > 0 || durationMax < maxDuration"
-                label="مسح التصفية" icon="pi pi-times" severity="secondary" text class="mt-2 w-full justify-center"
-                @click="clearFilters" />
-            </div>
-            <template #footer>
-              <Button label="تطبيق" icon="pi pi-check" @click="applyFiltersAndClose" autofocus />
-            </template>
-          </Dialog>
-          <Button label="ترتيب" :icon="selectedSort?.icon || 'pi pi-sort'" @click="toggleSort" severity="secondary"
-            :class="{ 'p-button-info': selectedSort }" class="whitespace-nowrap" />
-          <Popover ref="sortPopover" appendTo="body">
-            <div class="flex flex-col gap-2 w-[240px]">
-              <ul class="list-none p-0 m-0 flex flex-col justify-start">
-                <li v-for="option in sortOptions" :key="option.value"
-                  class="flex items-center gap-2 h-[48px] px-4 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-lg transition-colors"
-                  :class="{ 'bg-primary-50 text-primary-700 dark:bg-primary-900/20 dark:text-primary-400': selectedSort?.value === option.value }"
-                  @click="selectSort(option)">
-                  <i
-                    :class="[option.icon, 'text-lg', selectedSort?.value === option.value ? 'text-primary-500' : '']"></i>
-                  <span class="text-[14px]">{{ option.name }}</span>
-                </li>
-              </ul>
-              <Button v-if="selectedSort" label="مسح الترتيب" icon="pi pi-times" severity="secondary" text
-                class="mt-1 w-full justify-center h-[40px]" @click="selectedSort = null" />
-            </div>
-          </Popover>
-        </div>
-      </div>
+    <h1 class="text-3xl font-bold mb-3">إدارة الدورات</h1>
+    <div class="rounded-lg shadow-md p-5">
+      <!-- Use shared filter component with admin configuration -->
+      <CourseFilterBar
+        :admin-mode="true"
+        @apply-filters="handleFilterChange"
+        @clear-filters="clearFilters"
+      >
+        <template #beforeFilters>
+          <Button @click="addNewCourse" icon="pi pi-plus" label="إضافة دورة جديدة" severity="success" />
+        </template>
+      </CourseFilterBar>
 
       <div v-if="courseAdminStore.loading" class="flex justify-center items-center min-h-[300px] w-full">
         <ProgressSpinner />
@@ -142,7 +59,6 @@
             <template #body="slotProps">
               <Button v-if="slotProps.data.subscriptionIncludedNames && slotProps.data.subscriptionIncludedNames.length > 0"
                 icon="pi pi-eye"
-
                 @click="showSubscriptionDialog(slotProps.data.subscriptionIncludedNames)"
                 size="small" />
               <span v-else class="text-gray-500">غير متصل بعضوية</span>
@@ -151,7 +67,7 @@
           <Column header="الحالة">
             <template #body="slotProps">
               <Tag :severity="slotProps.data.isActive ? 'info' : 'danger'"
-                  :value="slotProps.data.isActive ? 'نشط' : 'غير نشط'" />
+                   :value="slotProps.data.isActive ? 'نشط' : 'غير نشط'" />
             </template>
           </Column>
           <Column header="الإجراءات">
@@ -172,7 +88,7 @@
         <p class="text-gray-600 dark:text-gray-400 text-center mb-4">
           لم نتمكن من العثور على أي دورات تطابق معايير البحث الخاصة بك
         </p>
-        <Button label="مسح جميع الفلاتر" icon="pi pi-filter-slash" severity="secondary" @click="clearFilters" />
+        <Button label="مسح جميع الفلاتر" icon="pi pi-filter-slash" severity="secondary" @click="clearAllFilters" />
       </div>
     </div>
 
@@ -199,288 +115,102 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue' // removed: reactive
-import { useCourseAdminStore } from '@/stores/courseManagementStore'
-import { useLevelOptionsStore } from '@/stores/levelOptions.js'
-import { useCategoryOptionsStore } from '@/stores/categoryOptions.js'
-import { useCourseTypeStore } from '@/stores/courseType.js'
-import { useRouter } from 'vue-router' // Add router import
-// removed: import { useToast } from 'primevue/usetoast'
-import Button from 'primevue/button'
-import InputText from 'primevue/inputtext'
-import InputGroup from 'primevue/inputgroup'
-import InputGroupAddon from 'primevue/inputgroupaddon'
-import Select from 'primevue/select'
-import DataTable from 'primevue/datatable'
-import Column from 'primevue/column'
-import Dialog from 'primevue/dialog'
-import ProgressSpinner from 'primevue/progressspinner'
-import Popover from 'primevue/popover'
-import Rating from 'primevue/rating'
-import Tag from 'primevue/tag'
-import Toast from 'primevue/toast'
-import CourseForm from './CourseForm.vue'
-import { InputNumber } from 'primevue'
+import { ref, computed, onMounted } from 'vue';
+import { useCourseStore } from '@/stores/courseStore'; // Use unified store
+import { useRouter } from 'vue-router';
+import Button from 'primevue/button';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import Dialog from 'primevue/dialog';
+import ProgressSpinner from 'primevue/progressspinner';
+import Rating from 'primevue/rating';
+import Tag from 'primevue/tag';
+import Toast from 'primevue/toast';
+import CourseForm from './CourseForm.vue';
+import CourseFilterBar from '@/components/CourseFilterBar.vue';
 
-const courseAdminStore = useCourseAdminStore()
-const router = useRouter() // Initialize router
-const searchQuery = ref('')
-const categoryDialogVisible = ref(false)
-const selectedCategories = ref([])
-const subscriptionDialogVisible = ref(false)
-const selectedSubscriptions = ref([])
+const courseStore = useCourseStore();
+const router = useRouter();
 
-// Initialize filter states
-const levelFilter = ref(null)
-const categoryFilter = ref(null)
-const courseTypeFilter = ref(null)
-const lessonRangeFilter = ref(null)
-const priceRangeFilter = ref(null)
-const durationMin = ref(0);
-const durationMax = ref(50);
-const maxDuration = 60; // Maximum course duration in hours
-const filterDialogVisible = ref(false)
-const sortPopover = ref()
-const selectedSort = ref(null)
-const isLevelOptionsLoading = ref(false)
+const categoryDialogVisible = ref(false);
+const selectedCategories = ref([]);
+const subscriptionDialogVisible = ref(false);
+const selectedSubscriptions = ref([]);
+const courseDialogVisible = ref(false);
 
-// Initialize stores
-const levelOptionsStore = useLevelOptionsStore()
-const categoryOptionsStore = useCategoryOptionsStore()
-const courseTypeStore = useCourseTypeStore()
-
-// Update computed options to include a default option
-const levelOptions = computed(() => [
-  { name: 'جميع المستويات', value: null },
-  ...levelOptionsStore.getLevels
-])
-
-const categoryOptions = computed(() => [
-  { name: 'جميع المجالات', code: null },
-  ...categoryOptionsStore.getCategories
-])
-
-const courseTypeOptions = computed(() => [
-  { name: 'جميع الأنواع', code: null },
-  ...courseTypeStore.getCourseTypes
-])
-
-const sortOptions = ref([
-  { name: 'الأحدث', value: 'newest', icon: 'pi pi-clock' },
-  { name: 'الأكثر شعبية', value: 'popular', icon: 'pi pi-hashtag' },
-  { name: 'الأعلى تقييماً', value: 'top-rated', icon: 'pi pi-star' }
-])
-
-const lessonRangeOptions = ref([
-  { name: 'جميع الدروس', value: null },
-  { name: '1-5 دروس', value: 'range1', min: 1, max: 5 },
-  { name: '6-10 دروس', value: 'range2', min: 6, max: 10 },
-  { name: '11-15 درس', value: 'range3', min: 11, max: 15 },
-  { name: 'أكثر من 15 درس', value: 'range4', min: 16, max: Infinity }
-])
-
-const priceRangeOptions = ref([
-  { name: 'جميع الأسعار', value: null },
-  { name: 'مجاني', value: 'free', min: 0, max: 0 },
-  { name: 'أقل من 75 ريال', value: 'under75', min: 1, max: 75 },
-  { name: '75-200 ريال', value: 'mid', min: 75, max: 200 },
-  { name: 'أكثر من 200 ريال', value: 'above200', min: 200, max: Infinity }
-])
-
-// Modified to simply return courses from the store instead of filtering locally
-const filteredCourses = computed(() => {
-  return courseAdminStore.courses
-})
-
+// Make sure to set admin mode in the store
 onMounted(async () => {
-  await Promise.all([
-    levelOptionsStore.fetchLevels(),
-    categoryOptionsStore.fetchCategories(),
-    courseTypeStore.fetchCourseTypes()
-  ])
+  courseStore.setAdminMode(true);
+  await courseStore.fetchAllAdminCourses({});
+});
 
-  // Initial fetch of courses with no filters
-  applyFiltersAndSort()
-})
-
-// Watch for changes in filters and automatically apply them
-watch([searchQuery, selectedSort], () => {
-  applyFiltersAndSort()
-})
+// Use the filtered courses directly from the store
+const filteredCourses = computed(() => courseStore.courses);
 
 function parseCategoryJson(categoryStr) {
-  if (!categoryStr) return []
+  if (!categoryStr) return [];
   try {
-    // Handle the JSON string array format: "[ \"category1\", \"category2\" ]"
-    return JSON.parse(categoryStr)
+    return JSON.parse(categoryStr);
   } catch (e) {
-    console.error('Error parsing category JSON:', e)
-    return []
+    console.error('Error parsing category JSON:', e);
+    return [];
   }
 }
 
 function addNewCourse() {
-  courseDialogVisible.value = true
+  courseDialogVisible.value = true;
 }
-
-
 
 function viewDetails(courseId) {
-  router.push({ name: 'course', params: { id: courseId }})
+  router.push({ name: 'course', params: { id: courseId }});
 }
 
-
-
-// New deactivate method
 async function deactivateCourse(courseId) {
-  await courseAdminStore.deleteCourse(courseId)
+  await courseStore.deleteCourse(courseId);
+  // Refresh the courses list
+  handleFilterChange({});
 }
 
 function showCategoryDialog(categories) {
-  selectedCategories.value = categories.map(cat => ({ id: Date.now() + Math.random(), name: cat }))
-  categoryDialogVisible.value = true
+  selectedCategories.value = categories.map(cat => ({ id: Date.now() + Math.random(), name: cat }));
+  categoryDialogVisible.value = true;
 }
 
 function showSubscriptionDialog(subscriptions) {
-  selectedSubscriptions.value = subscriptions || []
-  subscriptionDialogVisible.value = true
+  selectedSubscriptions.value = subscriptions || [];
+  subscriptionDialogVisible.value = true;
 }
 
 function formatDuration(minutes) {
-  if (!minutes) return '0 دقيقة'
+  if (!minutes) return '0 دقيقة';
 
-  const hours = Math.floor(minutes / 60)
-  const remainingMinutes = minutes % 60
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
 
   if (hours === 0) {
-    return `${remainingMinutes} دقيقة`
+    return `${remainingMinutes} دقيقة`;
   } else if (remainingMinutes === 0) {
-    return `${hours} ساعة`
+    return `${hours} ساعة`;
   } else {
-    return `${hours} ساعة ${remainingMinutes} دقيقة`
+    return `${hours} ساعة ${remainingMinutes} دقيقة`;
   }
 }
 
-// Filter methods
-const showFilterDialog = () => {
-  filterDialogVisible.value = true
+// Handler for filter component changes
+function handleFilterChange(queryParams) {
+  courseStore.fetchAllAdminCourses(queryParams);
 }
 
-const applyFiltersAndClose = () => {
-  filterDialogVisible.value = false
-  applyFiltersAndSort()
+function clearFilters() {
+  // This will be called when the filter component clears its filters
+  courseStore.fetchAllAdminCourses({});
 }
 
-// New helper to reset filters
-const resetFilters = () => {
-  levelFilter.value = null
-  categoryFilter.value = null
-  courseTypeFilter.value = null
-  lessonRangeFilter.value = null
-  priceRangeFilter.value = null
-  durationMin.value = 0
-  durationMax.value = maxDuration
-  searchQuery.value = ''
-  selectedSort.value = null
+function clearAllFilters() {
+  clearFilters();
 }
 
-const clearFilters = () => {
-  resetFilters()
-  applyFiltersAndSort()
-}
-
-// Build query parameters from current filters
-const buildQueryParams = () => {
-  const params = {}
-
-  // Search query
-  if (searchQuery.value) {
-    params.search = searchQuery.value
-  }
-
-  // Level filter
-  if (levelFilter.value) {
-    params.level = levelFilter.value
-  }
-
-  // Category filter
-  if (categoryFilter.value) {
-    params.category = categoryFilter.value
-  }
-
-  // Course type filter
-  if (courseTypeFilter.value) {
-    params.type = courseTypeFilter.value
-  }
-
-  // Lesson range filter
-  if (lessonRangeFilter.value) {
-    const option = lessonRangeOptions.value.find(opt => opt.value === lessonRangeFilter.value)
-    if (option) {
-      params.lessonsMin = option.min
-      params.lessonsMax = option.max !== Infinity ? option.max : undefined
-    }
-  }
-
-  // Price range filter
-  if (priceRangeFilter.value) {
-    const option = priceRangeOptions.value.find(opt => opt.value === priceRangeFilter.value)
-    if (option) {
-      params.priceMin = option.min
-      params.priceMax = option.max !== Infinity ? option.max : undefined
-    }
-  }
-
-  // Duration range filter
-  if (durationMin.value > 0 || durationMax.value < maxDuration) {
-    params.durationMin = durationMin.value * 60 // Convert hours to minutes
-    params.durationMax = durationMax.value * 60 // Convert hours to minutes
-  }
-
-  // Sorting
-  if (selectedSort.value) {
-    params.sortBy = selectedSort.value.value
-  }
-
-  return params
-}
-
-// Sorting methods
-const toggleSort = (event) => {
-  sortPopover.value.toggle(event)
-}
-
-const selectSort = (option) => {
-  selectedSort.value = option
-  sortPopover.value.hide()
-  applyFiltersAndSort()
-}
-
-const applyFiltersAndSort = async () => {
-  const queryParams = buildQueryParams()
-  await courseAdminStore.fetchAllCourses(queryParams)
-}
-
-// Keep courseDialogVisible to control the dialog from this parent
-const courseDialogVisible = ref(false)
-
-// Example handler for when a course is successfully submitted:
 function onCourseSubmitted() {
-  applyFiltersAndSort()
+  handleFilterChange({});
 }
-
-// Add these methods for duration changes
-const onDurationMinChange = () => {
-  // If the minimum duration becomes greater than or equal to the maximum, increase the maximum
-  if (durationMin.value >= durationMax.value) {
-    durationMax.value = Math.min(durationMin.value + 1, maxDuration);
-  }
-};
-
-const onDurationMaxChange = () => {
-  // This is a safety check - the min attribute should already enforce this
-  if (durationMax.value <= durationMin.value) {
-    durationMax.value = durationMin.value + 1;
-  }
-};
 </script>
