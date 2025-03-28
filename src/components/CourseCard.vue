@@ -106,6 +106,8 @@ import { Button, Rating } from "primevue";
 import SARSymbol from './SARSymbol.vue';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import SocialMediaDialog from './SocialMediaDialog.vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 const isDialogVisible = ref(false);
 const selectedCourse = ref(null);
 
@@ -190,7 +192,7 @@ const onAddCourse = (courseId) => {
 };
 
 const onNavigateToDetails = (courseId) => {
-  emit('navigate-details', courseId);
+  router.push({ name: 'course', params: { id: courseId } });
 };
 
 const onShowSocials = (course) => {
