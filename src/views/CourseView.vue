@@ -187,7 +187,7 @@ const toast = useToast();
 // Fetch course and comments when component is mounted and watch for route changes
 const fetchCourseAndComments = async (id) => {
   if (id) {
-    await courseStore.fetchCourseById(id);
+    await courseStore.fetchCourse(id);
 
     if (authStore.isAuthenticated) {
       await commentsStore.fetchComments(id);
