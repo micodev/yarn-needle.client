@@ -92,6 +92,7 @@ onUnmounted(() => {
 
 // Handler for the filter component's filter changes
 function handleFilterChange(queryParams) {
+  console.log('Filter applied with params:', queryParams);
   courseStore.resetPagination();
   courseStore.fetchFilteredCourses(queryParams);
 }
