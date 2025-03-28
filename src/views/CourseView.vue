@@ -163,7 +163,7 @@ import { computed, watch, onUnmounted, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { Button, Fieldset, Rating, Textarea, ProgressSpinner, Toast } from 'primevue';
 import { useToast } from 'primevue/usetoast';
-import { useCourseStore } from '@/stores/course';
+import { useCourseStore } from '@/stores/courseStore';
 import { useCommentsStore } from '@/stores/comments';
 import { useAuthStore } from '@/stores/auth';
 import SocialMediaDialog from '@/components/SocialMediaDialog.vue';
