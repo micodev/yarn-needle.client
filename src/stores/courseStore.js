@@ -67,6 +67,7 @@ export const useCourseStore = defineStore('course', {
       }
     },
 
+
     async fetchFilteredCourses({ search, sort, level, category, courseType, lessonRange, priceRange, durationMin, durationMax, page = 1 }) {
       if (page === 1) {
         this.resetPagination();
