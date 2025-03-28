@@ -35,7 +35,7 @@
           :key="course.id"
           :course="course"
           @navigate-details="$router.push(`/course/${$event}`)"
-          @show-socials="showSocialsDialog"
+
         />
       </div>
 
