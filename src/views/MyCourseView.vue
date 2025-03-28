@@ -34,7 +34,7 @@
           v-for="course in courseStore.courses"
           :key="course.id"
           :course="course"
-          @navigate-details="$router.push(`/course/${$event}`)"
+
 
         />
       </div>
