@@ -36,7 +36,7 @@ export const useCourseStore = defineStore('courseStore', {
       this.loading = true;
       try {
         const response = await this.$axios.post(`/api/course/enroll/${courseId}`);
-        //await this.fetchCourseById(courseId); // Refresh course data after enrollment
+        await this.fetchCourseById(courseId); // Refresh course data after enrollment
         return response.data;
       } catch (error) {
         console.error('Error enrolling in course:', error);
