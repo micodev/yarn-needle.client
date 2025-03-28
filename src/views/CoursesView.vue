@@ -30,7 +30,7 @@
         :course="course"
         @purchase="handlePurchaseClick"
         @add-course="handlePurchaseClick"
-        @navigate-details="navigateToDetails"
+
       />
       <div v-if="isLoading" class="col-span-full flex justify-center items-center p-4">
         <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="3" />
@@ -114,9 +114,6 @@ const handleScroll = () => {
   }
 };
 
-const navigateToDetails = (courseId) => {
-  router.push({ name: 'course', params: { id: courseId } });
-};
 
 // Methods for purchase handling
 const handlePurchaseClick = async (courseId) => {
