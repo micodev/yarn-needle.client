@@ -18,7 +18,6 @@
             :course="course"
             @purchase="handlePurchaseClick"
             @add-course="handleAddCourse"
-            @navigate-details="navigateToDetails"
           />
         </div>
       </div>
@@ -38,12 +37,10 @@
 import { onMounted, ref } from "vue";
 import { useToast } from 'primevue/usetoast';
 import { useCoursesStore } from '@/stores/courses';
-import { useRouter } from 'vue-router';
 import PurchaseConfirmDialog from './PurchaseConfirmDialog.vue';
 import CourseCard from './CourseCard.vue';
 
 const coursesStore = useCoursesStore();
-const router = useRouter();
 const toast = useToast();
 const purchaseType = ref('course');
 
@@ -62,9 +59,6 @@ const handlePurchaseSuccess = () => {
   // You can add success notification or refresh course data if needed
 };
 
-const navigateToDetails = (courseId) => {
-  router.push({ name: 'course', params: { id: courseId }});
-};
 
 
 
