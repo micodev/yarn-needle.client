@@ -105,7 +105,7 @@
 import { Button, Rating } from "primevue";
 import SARSymbol from './SARSymbol.vue';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-
+import SocialMediaDialog from './SocialMediaDialog.vue';
 const isDialogVisible = ref(false);
 const selectedCourse = ref(null);
 
