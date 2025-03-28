@@ -28,8 +28,6 @@
         v-for="course in filteredCourses"
         :key="course.id"
         :course="course"
-        @purchase="handlePurchaseClick"
-
       />
       <div v-if="isLoading" class="col-span-full flex justify-center items-center p-4">
         <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="3" />
@@ -49,7 +47,7 @@
   </div>
 
   <PurchaseConfirmDialog v-if="selectedCourseId" type="course" v-model="showPurchaseDialog"
-    :course-id="selectedCourseId" @purchase-success="handlePurchaseSuccess" />
+    :course-id="selectedCourseId"  />
 </template>
 
 <script setup>
@@ -114,31 +112,6 @@ const handleScroll = () => {
 };
 
 
-// Methods for purchase handling
-const handlePurchaseClick = async (courseId) => {
-  try {
-    const course = courses.value.find(c => c.id === courseId);
-    if (course?.isSubscribtionIncluded) {
-      await courseStore.enrollCourse(courseId);
-      router.push({ name: 'my-courses' });
-      toast.add({
-        severity: 'success',
-        summary: 'تم بنجاح',
-        detail: 'تم إضافة الدورة إلى مكتبتك',
-        life: 3000
-      });
-    } else {
-      selectedCourseId.value = courseId;
-      showPurchaseDialog.value = true;
-    }
-  } catch (error) {
-    console.error('Error handling course action:', error);
-  }
-};
-
-const handlePurchaseSuccess = () => {
-  // Handle success notification
-};
 
 
 </script>
