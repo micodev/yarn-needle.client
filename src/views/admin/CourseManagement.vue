@@ -13,7 +13,7 @@
         </template>
       </CourseFilterBar>
 
-      <div v-if="courseAdminStore.loading" class="flex justify-center items-center min-h-[300px] w-full">
+      <div v-if="courseStore.loading" class="flex justify-center items-center min-h-[300px] w-full">
         <ProgressSpinner />
       </div>
       <div v-else-if="filteredCourses.length > 0">
