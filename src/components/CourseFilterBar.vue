@@ -287,20 +287,12 @@ const buildQueryParams = () => {
 
   // Lesson range filter
   if (lessonRangeFilter.value) {
-    const option = lessonRangeOptions.value.find(opt => opt.value === lessonRangeFilter.value);
-    if (option) {
-      params.lessonsMin = option.min;
-      params.lessonsMax = option.max !== Infinity ? option.max : undefined;
-    }
+    params.lessonRange = lessonRangeFilter.value;
   }
 
   // Price range filter
   if (priceRangeFilter.value) {
-    const option = priceRangeOptions.value.find(opt => opt.value === priceRangeFilter.value);
-    if (option) {
-      params.priceMin = option.min;
-      params.priceMax = option.max !== Infinity ? option.max : undefined;
-    }
+    params.priceRange = priceRangeFilter.value;
   }
 
   // Duration range filter
