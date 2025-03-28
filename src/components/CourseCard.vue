@@ -97,9 +97,10 @@
         />
       </div>
     </div>
-  </div>
-  <SocialMediaDialog v-model="isDialogVisible" :courseData="selectedCourse" />
+    <SocialMediaDialog v-model="isDialogVisible" :courseData="selectedCourse" />
   <ToastTemplate ref="toastRef" />
+  </div>
+
 </template>
 
 <script setup>
