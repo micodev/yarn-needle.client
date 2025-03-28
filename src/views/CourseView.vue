@@ -267,8 +267,7 @@ const handleCourseAction = async () => {
         detail: 'تم إضافة الدورة إلى مكتبتك',
         life: 3000
       });
-      // Refresh course data
-      await courseStore.fetchCourse(route.params.id);
+
     } catch  {
       toast.add({
         severity: 'error',
