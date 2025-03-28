@@ -98,7 +98,7 @@
       </div>
     </div>
     <SocialMediaDialog v-model="isDialogVisible" :courseData="selectedCourse" />
-  <ToastTemplate ref="toastRef" />
+    <ToastTemplate ref="toastRef" />
   </div>
 
 </template>
