@@ -207,7 +207,7 @@ watch(
 
 // Clear course data and reset comments when component is unmounted
 onUnmounted(() => {
-  courseStore.reset();
+  courseStore.clearCourse();
 });
 
 // Modify addComment to include user info
