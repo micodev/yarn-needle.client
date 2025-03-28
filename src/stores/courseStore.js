@@ -253,7 +253,7 @@ export const useCourseStore = defineStore('courseStore', {
     },
 
     // Reset store state
-    reset() {
+    clearCourse() {
       this.courses = [];
       this.course = null;
       this.error = null;
