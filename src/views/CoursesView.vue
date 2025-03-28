@@ -52,19 +52,15 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { Button, ProgressSpinner } from "primevue";
 import { useCourseStore } from '@/stores/courseStore'; // Use unified store
 import PurchaseConfirmDialog from '../components/PurchaseConfirmDialog.vue';
-import { useToast } from 'primevue/usetoast';
 import CourseCard from '../components/CourseCard.vue';
 import CourseFilterBar from '@/components/CourseFilterBar.vue';
 
 const courseStore = useCourseStore();
 const { loading: isLoading, courses } = storeToRefs(courseStore);
-const router = useRouter();
-const toast = useToast();
 
 // Add these refs for purchase dialog
 const showPurchaseDialog = ref(false);
