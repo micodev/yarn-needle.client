@@ -98,12 +98,16 @@
       </div>
     </div>
   </div>
+  <SocialMediaDialog v-model="isDialogVisible" :courseData="selectedCourse" />
 </template>
 
 <script setup>
 import { Button, Rating } from "primevue";
 import SARSymbol from './SARSymbol.vue';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
+
+const isDialogVisible = ref(false);
+const selectedCourse = ref(null);
 
 const props = defineProps({
   course: {
@@ -190,7 +194,8 @@ const onNavigateToDetails = (courseId) => {
 };
 
 const onShowSocials = (course) => {
-  emit('show-socials', course);
+  selectedCourse.value = course;
+  isDialogVisible.value = true;
 };
 
 // Function to get the correct Arabic text for minutes based on number
