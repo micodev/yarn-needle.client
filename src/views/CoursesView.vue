@@ -31,7 +31,6 @@
         @purchase="handlePurchaseClick"
         @add-course="handlePurchaseClick"
         @navigate-details="navigateToDetails"
-        @show-socials="showCourseContactInfo"
       />
       <div v-if="isLoading" class="col-span-full flex justify-center items-center p-4">
         <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="3" />
@@ -145,9 +144,7 @@ const handlePurchaseSuccess = () => {
   // Handle success notification
 };
 
-const showCourseContactInfo = (course) => {
-  console.log('Show contact info for course:', course);
-};
+
 </script>
 
 <style scoped>

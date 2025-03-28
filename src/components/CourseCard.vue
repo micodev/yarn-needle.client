@@ -160,7 +160,7 @@ onUnmounted(() => {
   window.removeEventListener('resize', updateScreenSize);
 });
 
-const emit = defineEmits(['purchase', 'add-course', 'navigate-details', 'show-socials']);
+const emit = defineEmits(['purchase', 'add-course', 'navigate-details']);
 
 const getDiscountedPrice = (course) => {
   if (!course.discount) return course.originalPrice;

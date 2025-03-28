@@ -57,7 +57,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import { onMounted } from 'vue';
 import { Button } from 'primevue';
 import { useMyCourseStore } from '@/stores/myCourses';
@@ -65,13 +64,7 @@ import SocialMediaDialog from '@/components/SocialMediaDialog.vue';
 import CourseCard from '@/components/CourseCard.vue';
 
 const courseStore = useMyCourseStore();
-const isDialogVisible = ref(false);
-const selectedCourse = ref(null);
 
-const showSocialsDialog = (course) => {
-  selectedCourse.value = course;
-  isDialogVisible.value = true;
-};
 
 onMounted(() => {
   courseStore.fetchMyCourses();
