@@ -31,6 +31,24 @@ export const useCourseStore = defineStore('courseStore', {
   },
 
   actions: {
+
+    async enrollCourse(courseId) {
+      this.loading = true;
+      try {
+        const response = await this.$axios.post(`/api/course/enroll/${courseId}`);
+        // Update the course data with the new enrollment status
+        if (this.course && this.course.id === courseId) {
+          this.course = response.data;
+        }
+        return response.data;
+      } catch (error) {
+        this.error = error.message;
+        console.error('Error enrolling in course:', error);
+        throw error;
+      } finally {
+        this.loading = false;
+      }
+    },
     // Course listing actions (user-facing)
     resetPagination() {
       this.pagination.currentPage = 1;
