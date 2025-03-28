@@ -268,7 +268,8 @@ const handleCourseAction = async () => {
         life: 3000
       });
 
-    } catch  {
+    } catch (error) {
+      console.error('Error adding course:', error);
       toast.add({
         severity: 'error',
         summary: 'خطأ',
