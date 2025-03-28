@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-export const useCourseStore = defineStore('course', {
+export const useCourseStore = defineStore('courseStore', {
   state: () => ({
     // Course data
     course: null,        // Single course details
