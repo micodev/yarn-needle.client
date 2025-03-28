@@ -99,6 +99,12 @@
     </div>
     <SocialMediaDialog v-model="isDialogVisible" :courseData="selectedCourse" />
     <ToastTemplate ref="toastRef" />
+    <PurchaseConfirmDialog
+      v-if="selectedCourseId"
+      v-model="showPurchaseDialog"
+      :course-id="selectedCourseId"
+      :type="purchaseType"
+    />
   </div>
 
 </template>
@@ -111,12 +117,16 @@ import SocialMediaDialog from './SocialMediaDialog.vue';
 import ToastTemplate from './ToastTemplate.vue';
 import { useRouter } from 'vue-router';
 import { useCoursesStore } from '@/stores/courses';
+import PurchaseConfirmDialog from './PurchaseConfirmDialog.vue';
 const router = useRouter();
 const coursesStore = useCoursesStore();
 const isDialogVisible = ref(false);
 const selectedCourse = ref(null);
 const toastRef = ref(null);
+const showPurchaseDialog = ref(false);
+const selectedCourseId = ref(null);
 
+const purchaseType = ref('course');
 const props = defineProps({
   course: {
     type: Object,
@@ -160,6 +170,7 @@ const updateScreenSize = () => {
 // Set up resize listener
 onMounted(() => {
   updateScreenSize();
+  selectedCourseId.value = props.course.id; // Set the selected course ID on mount
   window.addEventListener('resize', updateScreenSize);
 });
 
