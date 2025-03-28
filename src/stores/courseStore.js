@@ -161,7 +161,6 @@ export const useCourseStore = defineStore('courseStore', {
       });
     },
 
-    // Course admin actions
     async fetchCourseById(id) {
       this.loading = true;
       this.error = null;
