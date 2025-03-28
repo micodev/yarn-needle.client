@@ -166,23 +166,11 @@ export const useCourseStore = defineStore('courseStore', {
       this.loading = true;
       this.error = null;
       try {
-        const url = this.isAdminMode
-          ? `/api/CourseAdminstrator/${id}`
-          : `/api/course/${id}`;
-
-        const response = await this.$axios.get(url);
-
-        if (this.isAdminMode) {
-          if (response.data && response.data.success) {
-            this.course = response.data.data[0];
-          } else {
-            this.error = response.data.message || 'Error fetching course';
-          }
-        } else {
-          this.course = response.data;
-        }
-      } catch (err) {
-        this.error = err.message;
+        const response = await this.$axios.get(`/api/course/${id}`);
+        this.course = response.data;
+      } catch (error) {
+        this.error = error.message;
+        console.error('Error fetching course:', error);
       } finally {
         this.loading = false;
       }
