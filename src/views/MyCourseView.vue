@@ -52,15 +52,13 @@
     </div>
 
 
-  <!-- Social Media Dialog Component -->
-  <SocialMediaDialog v-model="isDialogVisible" :courseData="selectedCourse" />
+
 </template>
 
 <script setup>
 import { onMounted } from 'vue';
 import { Button } from 'primevue';
 import { useMyCourseStore } from '@/stores/myCourses';
-import SocialMediaDialog from '@/components/SocialMediaDialog.vue';
 import CourseCard from '@/components/CourseCard.vue';
 
 const courseStore = useMyCourseStore();
