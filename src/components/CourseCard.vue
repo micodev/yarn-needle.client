@@ -99,6 +99,7 @@
     </div>
   </div>
   <SocialMediaDialog v-model="isDialogVisible" :courseData="selectedCourse" />
+  <ToastTemplate ref="toastRef" />
 </template>
 
 <script setup>
@@ -106,10 +107,14 @@ import { Button, Rating } from "primevue";
 import SARSymbol from './SARSymbol.vue';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import SocialMediaDialog from './SocialMediaDialog.vue';
+import ToastTemplate from './ToastTemplate.vue';
 import { useRouter } from 'vue-router';
+import { useCoursesStore } from '@/stores/courses';
 const router = useRouter();
+const coursesStore = useCoursesStore();
 const isDialogVisible = ref(false);
 const selectedCourse = ref(null);
+const toastRef = ref(null);
 
 const props = defineProps({
   course: {
@@ -187,8 +192,13 @@ const onPurchaseClick = (courseId) => {
   emit('purchase', courseId);
 };
 
-const onAddCourse = (courseId) => {
-  emit('add-course', courseId);
+const onAddCourse = async (courseId) => {
+  try {
+    await coursesStore.enrollCourse(courseId);
+    toastRef.value.showTemplate('success', 'تم إضافة الدورة إلى مكتبتك', 3000);
+  } catch  {
+    toastRef.value.showTemplate('error', 'حدث خطأ أثناء إضافة الدورة', 3000);
+  }
 };
 
 const onNavigateToDetails = (courseId) => {
