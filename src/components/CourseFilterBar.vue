@@ -282,7 +282,7 @@ const buildQueryParams = () => {
 
   // Course type filter
   if (courseTypeFilter.value) {
-    params.type = courseTypeFilter.value;
+    params.courseType = courseTypeFilter.value;
   }
 
   // Lesson range filter
