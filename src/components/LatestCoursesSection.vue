@@ -16,8 +16,6 @@
           class=" w-4/5 flex-shrink-0 md:flex-shrink md:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)]">
           <CourseCard
             :course="course"
-            @purchase="handlePurchaseClick"
-
           />
         </div>
       </div>
@@ -29,7 +27,6 @@
       v-model="showPurchaseDialog"
       :course-id="selectedCourseId"
       :type="purchaseType"
-      @purchase-success="handlePurchaseSuccess"
     />
 </template>
 
@@ -45,17 +42,6 @@ const purchaseType = ref('course');
 // Add these refs for purchase dialog
 const showPurchaseDialog = ref(false);
 const selectedCourseId = ref(null);
-
-// Add these methods for handling purchase and navigation
-const handlePurchaseClick = (courseId) => {
-  selectedCourseId.value = courseId;
-  showPurchaseDialog.value = true;
-  purchaseType.value = 'course';
-};
-
-const handlePurchaseSuccess = () => {
-  // You can add success notification or refresh course data if needed
-};
 
 
 
