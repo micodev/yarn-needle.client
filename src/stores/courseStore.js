@@ -39,8 +39,8 @@ export const useCourseStore = defineStore('courseStore', {
         //await this.fetchCourseById(courseId); // Refresh course data after enrollment
         return response.data;
       } catch (error) {
-        this.error = error.message;
         console.error('Error enrolling in course:', error);
+        this.error = error.message;
         throw error;
       } finally {
         this.loading = false;
