@@ -17,7 +17,7 @@
           <CourseCard
             :course="course"
             @purchase="handlePurchaseClick"
-            @add-course="handleAddCourse"
+
           />
         </div>
       </div>
@@ -35,13 +35,11 @@
 
 <script setup>
 import { onMounted, ref } from "vue";
-import { useToast } from 'primevue/usetoast';
 import { useCoursesStore } from '@/stores/courses';
 import PurchaseConfirmDialog from './PurchaseConfirmDialog.vue';
 import CourseCard from './CourseCard.vue';
 
 const coursesStore = useCoursesStore();
-const toast = useToast();
 const purchaseType = ref('course');
 
 // Add these refs for purchase dialog
@@ -62,24 +60,7 @@ const handlePurchaseSuccess = () => {
 
 
 
-const handleAddCourse = async (courseId) => {
-  try {
-    await coursesStore.enrollCourse(courseId);
-    toast.add({
-      severity: 'success',
-      summary: 'تم بنجاح',
-      detail: 'تم إضافة الدورة إلى مكتبتك',
-      life: 3000
-    });
-  } catch  {
-    toast.add({
-      severity: 'error',
-      summary: 'خطأ',
-      detail: 'حدث خطأ أثناء إضافة الدورة',
-      life: 3000
-    });
-  }
-};
+
 
 onMounted(async () => {
   await coursesStore.fetchRecentCourses();
