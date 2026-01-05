@@ -1,6 +1,15 @@
 import { defineStore } from 'pinia'
 
 /**
+ * Capitalizes the first letter of a string
+ * @param {string} str - String to capitalize
+ * @returns {string} - Capitalized string
+ */
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+/**
  * Factory function to create metadata stores with common functionality
  * @param {string} storeName - Name of the store (e.g., 'country', 'nationality')
  * @param {Object} config - Configuration object
@@ -33,20 +42,20 @@ export function createMetaStore(storeName, config) {
     }),
 
     getters: {
-      [`get${itemNamePlural.charAt(0).toUpperCase() + itemNamePlural.slice(1)}`]: (state) => 
+      [`get${capitalize(itemNamePlural)}`]: (state) => 
         state[itemNamePlural],
       
-      [`get${itemName.charAt(0).toUpperCase() + itemName.slice(1)}ById`]: (state) => (id) =>
+      [`get${capitalize(itemName)}ById`]: (state) => (id) =>
         state[itemNamePlural].find(item => item.id === id),
       
-      [`get${itemName.charAt(0).toUpperCase() + itemName.slice(1)}ByCode`]: (state) => (code) =>
+      [`get${capitalize(itemName)}ByCode`]: (state) => (code) =>
         state[itemNamePlural].find(item => item.code === code),
       
       ...additionalGetters
     },
 
     actions: {
-      async [`fetch${itemNamePlural.charAt(0).toUpperCase() + itemNamePlural.slice(1)}`]() {
+      async [`fetch${capitalize(itemNamePlural)}`]() {
         this.isLoading = true
         this.error = null
 
@@ -65,9 +74,15 @@ export function createMetaStore(storeName, config) {
         this[itemNamePlural] = []
         this.error = null
         this.isLoading = false
-        // Reset additional state
+        // Reset additional state - use JSON parse/stringify for deep cloning of objects/arrays
         Object.keys(additionalState).forEach(key => {
-          this[key] = additionalState[key]
+          const value = additionalState[key]
+          // Deep clone objects and arrays to avoid shared state
+          if (value !== null && typeof value === 'object') {
+            this[key] = JSON.parse(JSON.stringify(value))
+          } else {
+            this[key] = value
+          }
         })
       },
 
