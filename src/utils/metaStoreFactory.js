@@ -74,12 +74,15 @@ export function createMetaStore(storeName, config) {
         this[itemNamePlural] = []
         this.error = null
         this.isLoading = false
-        // Reset additional state - use JSON parse/stringify for deep cloning of objects/arrays
+        // Reset additional state - use structuredClone for deep cloning of objects/arrays
         Object.keys(additionalState).forEach(key => {
           const value = additionalState[key]
           // Deep clone objects and arrays to avoid shared state
           if (value !== null && typeof value === 'object') {
-            this[key] = JSON.parse(JSON.stringify(value))
+            // Use structuredClone if available (modern browsers/Node 17+), otherwise fallback to JSON
+            this[key] = typeof structuredClone !== 'undefined' 
+              ? structuredClone(value)
+              : JSON.parse(JSON.stringify(value))
           } else {
             this[key] = value
           }
