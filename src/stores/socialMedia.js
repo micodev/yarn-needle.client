@@ -1,41 +1,22 @@
-import { defineStore } from 'pinia'
+import { createMetaStore } from '../utils/metaStoreFactory'
 
-export const useSocialMediaStore = defineStore('socialMedia', {
-  state: () => ({
-    socialMedia: [],
-    userSocialMedia: [],
-    isLoading: false,
-    error: null
+export const useSocialMediaStore = createMetaStore('socialMedia', {
+  apiEndpoint: '/api/meta/socialmedia',
+  itemName: 'socialMedia',
+  itemNamePlural: 'socialMedia',
+  mapResponse: (social) => ({
+    id: social.id,
+    name: social.name,
+    code: social.code,
+    icon: social.icon || 'la-globe-africa-solid'
   }),
-
-  getters: {
-    getSocialMedia: (state) => state.socialMedia,
-    getSocialMediaById: (state) => (id) => state.socialMedia.find(sm => sm.id === id),
+  additionalState: {
+    userSocialMedia: []
+  },
+  additionalGetters: {
     getUserSocialMedia: (state) => state.userSocialMedia
   },
-
-  actions: {
-    async fetchSocialMedia() {
-      this.isLoading = true
-      this.error = null
-
-      try {
-        const response = await this.$axios.get('/api/meta/socialmedia')
-        this.socialMedia = response.data.map(social => ({
-          id: social.id,
-          name: social.name,
-          code: social.code,
-          icon: social.icon || 'la-globe-africa-solid',
-          // isActive: social.isActive
-        }))
-      } catch (error) {
-        this.error = error.message || 'Failed to fetch social media links'
-        console.error('Error fetching social media:', error)
-      } finally {
-        this.isLoading = false
-      }
-    },
-
+  additionalActions: {
     async fetchUserSocialMedia() {
       this.isLoading = true
       this.error = null
@@ -50,12 +31,6 @@ export const useSocialMediaStore = defineStore('socialMedia', {
       } finally {
         this.isLoading = false
       }
-    },
-
-    reset() {
-      this.socialMedia = []
-      this.error = null
-      this.isLoading = false
     }
   }
 })
